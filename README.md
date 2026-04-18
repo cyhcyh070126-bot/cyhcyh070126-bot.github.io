@@ -1,6 +1,6 @@
 # Yang Haochen Homepage
 
-Source code for the personal website at [yanghaochen.github.io](https://yanghaochen.github.io).
+Source code for the personal website at [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io).
 
 ## Overview
 
@@ -25,6 +25,6 @@ This repository contains the Jekyll-based source for Yang Haochen's homepage. Th
 
 The production site is intended to be served from:
 
-- `https://yanghaochen.github.io`
+- `https://cyhcyh070126-bot.github.io`
 
-To make the custom domain work, GitHub Pages settings and DNS still need to point to this repository.
+This site is intended to be deployed as the GitHub Pages user site for the `cyhcyh070126-bot` account.

@@ -36,4 +36,4 @@ Contact
 
 You can reach me at [cyhcyh070126@gmail.com](mailto:cyhcyh070126@gmail.com) or visit my GitHub profile at [cyhcyh070126-bot](https://github.com/cyhcyh070126-bot).
 
-This site is intended to be published at [yanghaochen.github.io](https://yanghaochen.github.io).
+This site is intended to be published at [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io).

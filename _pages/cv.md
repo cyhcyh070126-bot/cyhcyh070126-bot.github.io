@@ -45,7 +45,7 @@ Contact
 ======
 
 - Email: [cyhcyh070126@gmail.com](mailto:cyhcyh070126@gmail.com)
-- Website: [yanghaochen.github.io](https://yanghaochen.github.io)
+- Website: [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io)
 - GitHub: [cyhcyh070126-bot](https://github.com/cyhcyh070126-bot)
 
 Publications

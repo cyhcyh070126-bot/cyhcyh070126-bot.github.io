@@ -1,10 +1,10 @@
 {
-  "name": "yanghaochen-github-io",
+  "name": "cyhcyh070126-bot-github-io",
   "version": "0.8.1.1",
   "description": "Build scripts for Yang Haochen's personal website",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cyhcyh070126-bot/yanghaochen.github.io"
+    "url": "https://github.com/cyhcyh070126-bot/cyhcyh070126-bot.github.io"
   },
   "keywords": [
     "jekyll",
@@ -17,9 +17,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cyhcyh070126-bot/yanghaochen.github.io/issues"
+    "url": "https://github.com/cyhcyh070126-bot/cyhcyh070126-bot.github.io/issues"
   },
-  "homepage": "https://yanghaochen.github.io",
+  "homepage": "https://cyhcyh070126-bot.github.io",
   "engines": {
     "node": ">= 0.10.0"
   },

@@ -13,9 +13,9 @@ title                    : "Yang Haochen"
 title_separator          : "-"
 name                     : &name "Yang Haochen"
 description              : &description "Personal homepage of Yang Haochen"
-url                      : https://yanghaochen.github.io
+url                      : https://cyhcyh070126-bot.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "cyhcyh070126-bot/yanghaochen.github.io"
+repository               : "cyhcyh070126-bot/cyhcyh070126-bot.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -28,7 +28,7 @@ author:
   bio              : "Computational mechanics, finite elements, and scientific machine learning."
   location         : "China"
   employer         :
-  uri              : "https://yanghaochen.github.io"
+  uri              : "https://cyhcyh070126-bot.github.io"
   email            : "cyhcyh070126@gmail.com"
 
   # Academic websites
