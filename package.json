@@ -1,10 +1,10 @@
 {
-  "name": "academic-pages",
+  "name": "yanghaochen-github-io",
   "version": "0.8.1.1",
-  "description": "Academic Pages Mistakes Jekyll theme npm build scripts",
+  "description": "Build scripts for Yang Haochen's personal website",
   "repository": {
     "type": "git",
-    "url": "https://github.com/academicpages/academicpages.github.io"
+    "url": "https://github.com/cyhcyh070126-bot/yanghaochen.github.io"
   },
   "keywords": [
     "jekyll",
@@ -17,9 +17,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/academicpages/academicpages.github.io/issues"
+    "url": "https://github.com/cyhcyh070126-bot/yanghaochen.github.io/issues"
   },
-  "homepage": "https://github.com/academicpages/academicpages.github.io",
+  "homepage": "https://yanghaochen.github.io",
   "engines": {
     "node": ">= 0.10.0"
   },
