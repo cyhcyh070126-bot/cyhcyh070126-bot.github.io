@@ -1,10 +1,10 @@
-# Yang Haochen Homepage
+# Yanghao Chen Homepage
 
 Source code for the personal website at [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io).
 
 ## Overview
 
-This repository contains the Jekyll-based source for Yang Haochen's homepage. The site is used to present research interests, projects, publications, and professional updates.
+This repository contains the Jekyll-based source for Yanghao Chen's homepage. The site is used to present research interests, projects, publications, and professional updates.
 
 ## Main Files
 

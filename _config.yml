@@ -9,10 +9,10 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
-title                    : "Yang Haochen"
+title                    : "Yanghao Chen"
 title_separator          : "-"
-name                     : &name "Yang Haochen"
-description              : &description "Personal homepage of Yang Haochen"
+name                     : &name "Yanghao Chen"
+description              : &description "Personal homepage of Yanghao Chen"
 url                      : https://cyhcyh070126-bot.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "cyhcyh070126-bot/cyhcyh070126-bot.github.io"
@@ -23,7 +23,7 @@ repository               : "cyhcyh070126-bot/cyhcyh070126-bot.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Yang Haochen"
+  name             : "Yanghao Chen"
   pronouns         : # example: "she/her"  
   bio              : "Computational mechanics, finite elements, and scientific machine learning."
   location         : "China"

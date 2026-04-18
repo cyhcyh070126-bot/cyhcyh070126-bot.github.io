@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Yang Haochen"
+title: "Yanghao Chen"
 author_profile: true
 redirect_from:
   - /about/
@@ -9,7 +9,7 @@ redirect_from:
 
 Welcome to my personal website.
 
-I am **Yang Haochen**, and my current interests are around computational mechanics, finite element methods, and scientific machine learning. I use this site to organize my research profile, share project updates, and collect materials related to simulation, operator learning, and data-driven mechanics.
+I am **Yanghao Chen**, and my current interests are around computational mechanics, finite element methods, and scientific machine learning. I use this site to organize my research profile, share project updates, and collect materials related to simulation, operator learning, and data-driven mechanics.
 
 Research Interests
 ======
