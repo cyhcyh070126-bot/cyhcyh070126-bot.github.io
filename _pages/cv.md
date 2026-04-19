@@ -57,10 +57,10 @@ Research Experience
   </div>
 </div>
 
-- **Operator Learning Objective:** Training a Transolver-based neural operator to predict full nodal displacement fields under varying internal-hole shapes, boundary displacement functions, material parameters, and hole positions on the plate.
-- **Dataset and Supervision Pipeline:** Building a mechanics data factory that generates GRF/circle/square hole geometries, assigns boundary-function libraries, and uses FEniCSx to produce displacement-field ground truth for supervised learning.
-- **FEM-Node Point Cloud Representation:** Using the actual FEM nodes extracted from the Gmsh mesh as point-cloud inputs instead of uniformly sampled points, which keeps the learning representation aligned with the finite element discretization.
-- **Mechanics-Oriented Efficiency:** Preserving FEM consistency so that once displacement is predicted, later FEM-style post-processing can still be applied efficiently for strain and stress recovery rather than learning every derived quantity separately.
+- **Operator Learning Objective:** Developed a Transolver-based local neural operator for predicting nodal displacement fields under varying hole geometries, boundary conditions, material parameters, and hole locations.
+- **FEniCSx Supervision Pipeline:** Constructed a FEM-consistent data factory that generates GRF/circle/square hole geometries, assigns boundary-function libraries, and produces displacement-field ground truth with FEniCSx.
+- **FEM-Node Point Cloud Representation:** Used actual Gmsh/FEM nodes rather than uniformly sampled points so that the learning representation remains aligned with the finite-element discretization.
+- **FEM-Consistent Post-Processing:** Preserved displacement-based FEM consistency so that strain and stress fields can be recovered efficiently through downstream finite-element post-processing.
 
 <div class="research-gallery">
   <figure class="research-card">
@@ -115,10 +115,10 @@ Research Experience
   </div>
 </div>
 
-- **Dataset Generation Pipeline:** Built an end-to-end MATLAB and COMSOL workflow to generate randomized polycrystalline battery-particle microstructures together with transient concentration and stress field sequences.
-- **ConvLSTM Surrogate Modeling:** Reproduced and extended a ConvLSTM-based surrogate model that uses concentration history, grain-orientation information, and C-rate conditions as multi-channel inputs.
-- **Training Strategy:** Trained the model with MSE and SSIM losses and adopted a scheduled sampling strategy to improve multi-step autoregressive rollout stability.
-- **Evaluation and Visualization:** Evaluated prediction quality on unseen samples through concentration/stress animations and frame-by-frame summary visualizations.
+- **Synthetic Data Generation:** Built an end-to-end MATLAB-COMSOL pipeline for randomized polycrystalline battery-particle microstructures and transient concentration/stress field sequences.
+- **ConvLSTM Surrogate Modeling:** Reproduced and extended a ConvLSTM-based surrogate model using concentration history, grain orientation, and C-rate information as multi-channel inputs.
+- **Autoregressive Training Strategy:** Combined MSE and SSIM objectives with scheduled sampling to improve long-horizon rollout stability.
+- **Model Evaluation:** Assessed predictive performance on unseen samples through field animations, rollout summaries, and frame-wise error visualization.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
@@ -194,9 +194,9 @@ Research Experience
 </div>
 
 - **Project Objective:** Developed a domain-specific AI teaching assistant for Mechanics of Materials based on the Qwen 2.5 7B foundation model.
-- **Instruction Dataset Curation:** Built a custom Mechanics-of-Materials instruction dataset covering concept explanations, formula-based questions, and worked examples, and published the dataset on [Hugging Face](https://huggingface.co/CYHcyh66).
-- **LoRA Fine-Tuning Workflow:** Performed LoRA-based fine-tuning of Qwen 2.5 7B on Google Colab using a lightweight supervised adaptation pipeline for domain-specific educational question answering.
-- **Model Improvement and Evaluation:** Improved the model's ability to generate clearer formula notation, more structured explanations, and more discipline-specific answers for Mechanics-of-Materials learning scenarios.
+- **Instruction Dataset Curation:** Built and published a custom Mechanics-of-Materials instruction dataset on [Hugging Face](https://huggingface.co/CYHcyh66), covering concept explanations, formula-based questions, and worked examples.
+- **LoRA Fine-Tuning:** Performed LoRA-based domain adaptation on Google Colab to align the base model with educational question answering in mechanics.
+- **Model Improvement:** Improved formula rendering, explanation structure, and domain-specific response quality for Mechanics-of-Materials learning scenarios.
 
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
@@ -221,10 +221,10 @@ Research Experience
   </div>
 </div>
 
-- **Project Objective:** Investigated physics-informed neural network methods for one-dimensional shock-dominated conservation laws, with experiments on Burgers and Buckley-Leverett-type transport problems.
-- **Baseline and Comparative Study:** Implemented and compared multiple PINN variants, including Vanilla PINN, Gradient-Weighted PINN, Weak PINN, XPINNs, and relaxation-based PINN formulations.
-- **Shock-Stabilization Strategies:** Explored residual-based weighting, global and adaptive artificial viscosity, domain decomposition, weak-form constraints, and relaxation systems to reduce solution smearing near discontinuities.
-- **Evaluation and Visualization:** Analyzed training convergence and shock-profile reconstruction through solution plots, zoomed shock-region comparisons, and method-by-method visual diagnostics.
+- **Problem Setting:** Investigated PINN methods for one-dimensional shock-dominated conservation laws, with experiments on Burgers and Buckley-Leverett-type transport problems.
+- **Comparative PINN Study:** Implemented and benchmarked multiple PINN variants, including Vanilla PINN, Gradient-Weighted PINN, Weak PINN, XPINNs, and relaxation-based formulations.
+- **Shock-Stabilization Strategies:** Explored residual weighting, artificial viscosity, weak-form constraints, domain decomposition, and relaxation systems to reduce shock smearing.
+- **Evaluation:** Compared training convergence and local shock reconstruction through solution plots, zoomed discontinuity regions, and method-wise visual diagnostics.
 
 Profile Summary
 ======
