@@ -188,7 +188,7 @@ Research Experience
 </div>
 
 - **Project Objective:** Developed a domain-specific AI teaching assistant for Mechanics of Materials based on the Qwen 2.5 7B foundation model.
-- **Instruction Dataset Curation:** Built a custom Mechanics-of-Materials instruction dataset covering concept explanations, formula-based questions, and worked examples, and published the dataset on Hugging Face.
+- **Instruction Dataset Curation:** Built a custom Mechanics-of-Materials instruction dataset covering concept explanations, formula-based questions, and worked examples, and published the dataset on [Hugging Face](https://huggingface.co/CYHcyh66).
 - **LoRA Fine-Tuning Workflow:** Performed LoRA-based fine-tuning of Qwen 2.5 7B on Google Colab using a lightweight supervised adaptation pipeline for domain-specific educational question answering.
 - **Model Improvement and Evaluation:** Improved the model's ability to generate clearer formula notation, more structured explanations, and more discipline-specific answers for Mechanics-of-Materials learning scenarios.
 
