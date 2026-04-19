@@ -228,8 +228,8 @@ Research Experience
 
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
-    <a href="/images/research/pinn_workflow_v1.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/pinn_workflow_v1.png" alt="Workflow diagram showing the shock problem, Vanilla PINN smearing, PINN architecture, stabilization strategies, and sharper shock reconstruction." />
+    <a href="/images/research/pinn_workflow_v2.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/pinn_workflow_v2.png" alt="Workflow diagram showing the shock problem, Vanilla PINN smearing, PINN architecture, stabilization strategies, and sharper shock reconstruction." />
     </a>
     <figcaption>
       <strong>PINN Shock-Capturing Workflow</strong><br>
