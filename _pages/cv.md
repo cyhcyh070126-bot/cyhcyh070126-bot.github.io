@@ -216,7 +216,7 @@ Research Experience
     <div class="cv-project__term">Mar 2025 - Sep 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project, ADVISED BY Xianyang (Tom) Chen</em></span>
+    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=9gEwvDAAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Xianyang (Tom) Chen</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
