@@ -46,6 +46,11 @@
   margin: 0.35rem 0 1rem;
 }
 
+.research-gallery + .cv-project,
+ul + .cv-project {
+  margin-top: 1.6rem;
+}
+
 .cv-project__header,
 .cv-project__meta {
   display: flex;
