@@ -14,8 +14,7 @@ Education
 
 Tongji University, Shanghai, China
 
-- Bachelor of Engineering in Engineering Mechanics
-- School of Aerospace Engineering and Applied Mechanics
+- Bachelor of Engineering in Engineering Mechanics, School of Aerospace Engineering and Applied Mechanics
 - Full-time 4-year undergraduate program
 - Sept 2023 - Present (Expected Jun 30, 2027)
 - GPA: 86/100 (3.3/4.0)
