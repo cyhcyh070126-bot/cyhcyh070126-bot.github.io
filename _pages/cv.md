@@ -12,7 +12,11 @@ redirect_from:
 Education
 ======
 
-Detailed education information will be added here as this page is expanded.
+Tongji University, Shanghai, China
+
+- Bachelor of Engineering in Engineering Mechanics
+- Sept 2023 - Present (Expected Jun 2027)
+- GPA: 86/100 (3.3/4.0)
 
 Research Interests
 ======
