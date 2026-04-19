@@ -192,6 +192,22 @@ Research Experience
 - **LoRA Fine-Tuning Workflow:** Performed LoRA-based fine-tuning of Qwen 2.5 7B on Google Colab using a lightweight supervised adaptation pipeline for domain-specific educational question answering.
 - **Model Improvement and Evaluation:** Improved the model's ability to generate clearer formula notation, more structured explanations, and more discipline-specific answers for Mechanics-of-Materials learning scenarios.
 
+<div class="cv-project">
+  <div class="cv-project__header">
+    <div class="cv-project__title">4. PINN Methods for Shock-Dominated Conservation Laws</div>
+    <div class="cv-project__term">Previous</div>
+  </div>
+  <div class="cv-project__meta">
+    <span><em>Undergraduate Research Project</em></span>
+    <span><em>Tongji University</em></span>
+  </div>
+</div>
+
+- **Project Objective:** Investigated physics-informed neural network methods for one-dimensional shock-dominated conservation laws, with experiments on Burgers and Buckley-Leverett-type transport problems.
+- **Baseline and Comparative Study:** Implemented and compared multiple PINN variants, including Vanilla PINN, Gradient-Weighted PINN, Weak PINN, XPINNs, and relaxation-based PINN formulations.
+- **Shock-Stabilization Strategies:** Explored residual-based weighting, global and adaptive artificial viscosity, domain decomposition, weak-form constraints, and relaxation systems to reduce solution smearing near discontinuities.
+- **Evaluation and Visualization:** Analyzed training convergence and shock-profile reconstruction through solution plots, zoomed shock-region comparisons, and method-by-method visual diagnostics.
+
 Profile Summary
 ======
 
