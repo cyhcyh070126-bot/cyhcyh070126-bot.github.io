@@ -111,9 +111,11 @@ Skills
 ======
 
 - **Programming:** Python, MATLAB, Linux
-- **Deep Learning:** JAX, PyTorch, Neural Operators, Transolver
-- **Scientific Computing:** FEniCSx, Gmsh, Finite Element Methods, Computational Mechanics
-- **Visualization:** Matplotlib, Scientific Visualization, Field Visualization
+- **Machine Learning Frameworks:** JAX, PyTorch
+- **Computational Mechanics:** Finite Element Methods, Computational Mechanics
+- **Scientific Computing Tools:** FEniCSx, Gmsh
+- **Scientific Machine Learning:** Neural Operators, Operator Learning
+- **Visualization:** Matplotlib
 - **Languages:** Chinese, English
 
 Contact
