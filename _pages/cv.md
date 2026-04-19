@@ -49,11 +49,11 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">1. FEniCSx-Supervised Local Operator Learning for Single-Hole Domains</div>
-    <div class="cv-project__term">Current</div>
+    <div class="cv-project__term">Jan 2026 - Current</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project</em></span>
-    <span><em>Tongji University</em></span>
+    <span><em>Undergraduate Research Project, ADVISED BY Somdatta Goswami</em></span>
+    <span><em>Johns Hopkins University</em></span>
   </div>
 </div>
 
