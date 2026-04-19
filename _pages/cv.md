@@ -107,10 +107,10 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">2. Deep-Learning-Based Prediction of Chemo-Mechanical Evolution in Battery Active Materials</div>
-    <div class="cv-project__term">Current</div>
+    <div class="cv-project__term">Sept 2025 - Mar 2026</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project</em></span>
+    <span><em>Undergraduate Research Project, ADVISED BY Ying Zhao</em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
