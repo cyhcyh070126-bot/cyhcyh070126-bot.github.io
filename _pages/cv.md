@@ -47,10 +47,10 @@ Research Experience
   </div>
 </div>
 
-- Operator Learning Objective: Training a Transolver-based neural operator to predict full nodal displacement fields under varying internal-hole shapes, boundary displacement functions, material parameters, and hole positions on the plate.
-- Dataset and Supervision Pipeline: Building a mechanics data factory that generates GRF/circle/square hole geometries, assigns boundary-function libraries, and uses FEniCSx to produce displacement-field ground truth for supervised learning.
-- FEM-Node Point Cloud Representation: Using the actual FEM nodes extracted from the Gmsh mesh as point-cloud inputs instead of uniformly sampled points, which keeps the learning representation aligned with the finite element discretization.
-- Mechanics-Oriented Efficiency: Preserving FEM consistency so that once displacement is predicted, later FEM-style post-processing can still be applied efficiently for strain and stress recovery rather than learning every derived quantity separately.
+- **Operator Learning Objective:** Training a Transolver-based neural operator to predict full nodal displacement fields under varying internal-hole shapes, boundary displacement functions, material parameters, and hole positions on the plate.
+- **Dataset and Supervision Pipeline:** Building a mechanics data factory that generates GRF/circle/square hole geometries, assigns boundary-function libraries, and uses FEniCSx to produce displacement-field ground truth for supervised learning.
+- **FEM-Node Point Cloud Representation:** Using the actual FEM nodes extracted from the Gmsh mesh as point-cloud inputs instead of uniformly sampled points, which keeps the learning representation aligned with the finite element discretization.
+- **Mechanics-Oriented Efficiency:** Preserving FEM consistency so that once displacement is predicted, later FEM-style post-processing can still be applied efficiently for strain and stress recovery rather than learning every derived quantity separately.
 
 <div class="research-gallery">
   <figure class="research-card">
