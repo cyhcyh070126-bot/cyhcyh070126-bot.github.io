@@ -113,7 +113,7 @@ Skills
 - **Programming:** Python, MATLAB, Linux
 - **Machine Learning Frameworks:** JAX, PyTorch
 - **Computational Mechanics:** Finite Element Methods, Computational Mechanics
-- **Scientific Computing Tools:** FEniCSx, Gmsh
+- **Scientific Computing Tools:** FEniCSx, Gmsh, COMSOL Multiphysics, MATLAB LiveLink, ABAQUS
 - **Scientific Machine Learning:** Neural Operators, Operator Learning
 - **Visualization:** Matplotlib
 - **Languages:** Chinese, English
