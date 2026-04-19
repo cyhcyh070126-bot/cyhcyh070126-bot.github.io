@@ -12,7 +12,7 @@ site_theme               : "default" # The available themes options are "default
 title                    : "Yanghao Chen"
 title_separator          : "-"
 name                     : &name "Yanghao Chen"
-description              : &description "Personal homepage of Yanghao Chen"
+description              : &description "Yanghao Chen | Computational mechanics, finite elements, and scientific machine learning"
 url                      : https://cyhcyh070126-bot.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "cyhcyh070126-bot/cyhcyh070126-bot.github.io"
@@ -25,11 +25,11 @@ author:
   avatar           : "profile.png"
   name             : "Yanghao Chen"
   pronouns         : # example: "she/her"  
-  bio              : "Computational mechanics, finite elements, and scientific machine learning."
-  location         : "China"
-  employer         :
+  bio              : "Undergraduate student at Tongji University working on computational mechanics, finite element methods, and scientific machine learning."
+  location         : "Shanghai, China"
+  employer         : "Tongji University"
   uri              : "https://cyhcyh070126-bot.github.io"
-  email            : "cyhcyh070126@gmail.com"
+  email            : "2350083@tongji.edu.cn"
 
   # Academic websites
   academia         : # URL
@@ -65,7 +65,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "yanghao-chen-830677399"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username

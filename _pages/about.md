@@ -9,7 +9,20 @@ redirect_from:
 
 Welcome to my personal website.
 
-I am **Yanghao Chen**, and my current interests are around computational mechanics, finite element methods, and scientific machine learning. I use this site to organize my research profile, share project updates, and collect materials related to simulation, operator learning, and data-driven mechanics.
+I am **Yanghao Chen**. My work focuses on computational mechanics, finite element methods, and scientific machine learning, with a particular interest in combining physics-based simulation and learning-based models for engineering problems.
+
+I am currently an undergraduate student at **Tongji University** in Shanghai.
+
+About
+======
+
+This site serves as a research-facing homepage where I collect:
+
+- a concise professional profile
+- research interests and current directions
+- project notes and code-related work
+- publications, talks, and academic updates
+- a maintained CV
 
 Research Interests
 ======
@@ -20,20 +33,27 @@ Research Interests
 - Neural operators and surrogate modeling
 - Data-driven modeling for engineering systems
 
-Current Website Scope
+Current Focus
 ======
 
-This homepage is being set up as a clean research-facing profile. It will gradually include:
+I am especially interested in building reliable learning pipelines for mechanics problems, including simulation data generation, operator learning, surrogate modeling, and reproducible scientific computing workflows.
 
-- a concise biography
-- project summaries and code links
-- publications and presentations
-- notes on current research directions
-- a maintained CV page
+This website will continue to grow as I organize more material from ongoing projects and research work.
+
+Quick Links
+======
+
+- [CV](/cv/)
+- [GitHub](https://github.com/cyhcyh070126-bot)
+- [LinkedIn](https://www.linkedin.com/in/yanghao-chen-830677399/)
+- [Tongji Email](mailto:2350083@tongji.edu.cn)
+- [Gmail](mailto:cyhcyh070126@gmail.com)
 
 Contact
 ======
 
-You can reach me at [cyhcyh070126@gmail.com](mailto:cyhcyh070126@gmail.com) or visit my GitHub profile at [cyhcyh070126-bot](https://github.com/cyhcyh070126-bot).
+You can reach me at [2350083@tongji.edu.cn](mailto:2350083@tongji.edu.cn).
 
-This site is intended to be published at [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io).
+My LinkedIn profile is [linkedin.com/in/yanghao-chen-830677399](https://www.linkedin.com/in/yanghao-chen-830677399/).
+
+The site is published at [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io).
