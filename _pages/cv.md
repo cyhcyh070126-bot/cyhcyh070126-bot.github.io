@@ -98,10 +98,6 @@ Research Experience
   </figure>
 </div>
 
-Current direction:
-
-I am continuing to improve the full pipeline, including dataset generation, operator training, evaluation, and presentation. A major focus is making the whole workflow both mechanically faithful and easy to generalize to richer domain decompositions and future coupled simulations.
-
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">2. Deep-Learning-Based Prediction of Chemo-Mechanical Evolution in Battery Active Materials</div>
