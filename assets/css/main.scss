@@ -94,6 +94,13 @@ ul + .cv-project {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.research-gallery--single .research-card img {
+  height: auto;
+  max-height: none;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
 .research-card {
   margin: 0;
   padding: 0.9rem;
