@@ -176,6 +176,22 @@ Research Experience
   </figure>
 </div>
 
+<div class="cv-project">
+  <div class="cv-project__header">
+    <div class="cv-project__title">3. LLM Fine-Tuning for a Mechanics-of-Materials AI Teaching Assistant</div>
+    <div class="cv-project__term">Current</div>
+  </div>
+  <div class="cv-project__meta">
+    <span><em>Undergraduate Research Project</em></span>
+    <span><em>Tongji University</em></span>
+  </div>
+</div>
+
+- **Project Objective:** Developed a domain-specific AI teaching assistant for Mechanics of Materials based on the Qwen 2.5 7B foundation model.
+- **Instruction Dataset Curation:** Built a custom Mechanics-of-Materials instruction dataset covering concept explanations, formula-based questions, and worked examples, and published the dataset on Hugging Face.
+- **LoRA Fine-Tuning Workflow:** Performed LoRA-based fine-tuning of Qwen 2.5 7B on Google Colab using a lightweight supervised adaptation pipeline for domain-specific educational question answering.
+- **Model Improvement and Evaluation:** Improved the model's ability to generate clearer formula notation, more structured explanations, and more discipline-specific answers for Mechanics-of-Materials learning scenarios.
+
 Profile Summary
 ======
 
