@@ -29,6 +29,13 @@ I am especially interested in building reliable learning pipelines for mechanics
 
 This website will continue to grow as I organize more material from ongoing projects and research work.
 
+Current Research
+======
+
+I am currently developing a **FEniCSx-supervised local operator learning pipeline** for single-hole mechanics domains. The project combines irregular hole generation, FEM-consistent meshing, displacement-field supervision, and neural operator training in order to study reliable surrogate modeling for computational mechanics.
+
+[View the Research Experience page](/research-experience/).
+
 Quick Links
 ======
 

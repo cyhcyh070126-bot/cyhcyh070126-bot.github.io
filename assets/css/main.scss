@@ -41,3 +41,38 @@
     "vendor/font-awesome/solid",
     "vendor/font-awesome/brands"
 ;
+
+.research-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.research-card {
+  margin: 0;
+  padding: 0.9rem;
+  border: 1px solid var(--global-border-color);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.research-card a {
+  display: block;
+}
+
+.research-card img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--global-border-color);
+}
+
+.research-card figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}

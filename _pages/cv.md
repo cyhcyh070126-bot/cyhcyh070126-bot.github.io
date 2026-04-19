@@ -12,7 +12,7 @@ redirect_from:
 Education
 ======
 
-Detailed education information will be added here.
+Detailed education information will be added here as this page is expanded.
 
 Research Interests
 ======
@@ -30,6 +30,25 @@ Current Focus
 - FEM-consistent data generation and supervision
 - Surrogate models for displacement and stress recovery
 - Reproducible scientific computing workflows
+
+Research Experience
+======
+
+### FEniCSx-Supervised Local Operator Learning for Single-Hole Domains
+
+I am currently building a mechanics learning pipeline that uses GRF-based internal hole generation, Gmsh finite element meshes, and FEniCSx ground-truth supervision to train neural operators for nodal displacement prediction. The central idea is to use FEM nodes directly as point-cloud inputs, so that predicted displacements remain consistent with later stress and strain recovery.
+
+- Geometry families: GRF, circle, square
+- Solver supervision: FEniCSx
+- Learning target: nodal displacement field
+- Main tools: Python, JAX, FEniCSx, Gmsh
+
+Project page: [Research Experience](/research-experience/)
+
+Profile Summary
+======
+
+I work at the intersection of mechanics, numerical simulation, and machine learning. My current interests include operator learning for PDE-governed systems, data generation pipelines based on finite element simulations, and robust surrogate models for scientific applications.
 
 Skills
 ======
