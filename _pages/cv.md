@@ -58,7 +58,7 @@ Research Experience
       <img src="/images/research/grf_hole_extraction_preview.png" alt="Preview of GRF-based hole extraction and placement." />
     </a>
     <figcaption>
-      GRF Hole Generation<br>
+      <strong>GRF Hole Generation</strong><br>
       A GRF field is windowed, thresholded, and converted into a smooth internal hole before placement on the plate.
     </figcaption>
   </figure>
@@ -68,7 +68,7 @@ Research Experience
       <img src="/images/research/plate_partition_preview.png" alt="Preview of plate partition and subdomain finite element mesh." />
     </a>
     <figcaption>
-      FEM-Consistent Meshing<br>
+      <strong>FEM-Consistent Meshing</strong><br>
       The local subdomain is extracted from the whole plate mesh while preserving a mechanics-consistent finite element discretization.
     </figcaption>
   </figure>
@@ -78,7 +78,7 @@ Research Experience
       <img src="/images/research/plate_mesh_point_cloud_preview.png" alt="Preview showing the FE mesh and the Transolver input point cloud extracted from FEM nodes." />
     </a>
     <figcaption>
-      FEM Node Point Cloud<br>
+      <strong>FEM Node Point Cloud</strong><br>
       The Transolver input point cloud is built directly from FEM mesh nodes, which keeps learning and later FEM-based post-processing tightly aligned.
     </figcaption>
   </figure>
@@ -88,7 +88,7 @@ Research Experience
       <img src="/images/research/prediction_preview.png" alt="Prediction comparison between ground truth, prediction, and error fields." />
     </a>
     <figcaption>
-      Transolver Operator Prediction<br>
+      <strong>Transolver Operator Prediction</strong><br>
       A Transolver-based neural operator predicts displacement fields across varying hole shapes, boundary displacement functions, materials, and positions, and is evaluated against FEniCSx reference solutions.
     </figcaption>
   </figure>
