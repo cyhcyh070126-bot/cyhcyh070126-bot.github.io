@@ -110,19 +110,11 @@ I work at the intersection of mechanics, numerical simulation, and machine learn
 Skills
 ======
 
-- Python
-- MATLAB
-- Linux
-- JAX
-- PyTorch
-- FEniCSx
-- Gmsh
-- Finite Element Methods
-- Computational Mechanics
-- Neural Operators
-- Scientific Visualization
-- Chinese
-- English
+- **Programming:** Python, MATLAB, Linux
+- **Deep Learning:** JAX, PyTorch, Neural Operators, Transolver
+- **Scientific Computing:** FEniCSx, Gmsh, Finite Element Methods, Computational Mechanics
+- **Visualization:** Matplotlib, Scientific Visualization, Field Visualization
+- **Languages:** Chinese, English
 
 Contact
 ======
