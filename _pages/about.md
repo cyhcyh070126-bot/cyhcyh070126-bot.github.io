@@ -13,17 +13,6 @@ I am **Yanghao Chen**. My work focuses on computational mechanics, finite elemen
 
 I am currently an undergraduate student at **Tongji University** in Shanghai.
 
-About
-======
-
-This site serves as a research-facing homepage where I collect:
-
-- a concise professional profile
-- research interests and current directions
-- project notes and code-related work
-- publications, talks, and academic updates
-- a maintained CV
-
 Research Interests
 ======
 
