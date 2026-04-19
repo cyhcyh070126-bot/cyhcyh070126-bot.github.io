@@ -146,8 +146,8 @@ Research Experience
   </figure>
 
   <figure class="research-card">
-    <a href="/images/research/battery_convlstm_cell.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_convlstm_cell.png" alt="Internal structure of the ConvLSTM cell used in the model." />
+    <a href="/images/research/battery_convlstm_cell_clean.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/battery_convlstm_cell_clean.png" alt="Internal structure of the ConvLSTM cell used in the model." />
     </a>
     <figcaption>
       <strong>ConvLSTM Cell Design</strong><br>
