@@ -223,7 +223,7 @@ Skills
 - **Computational Mechanics:** Finite Element Methods, Computational Mechanics
 - **Scientific Computing Tools:** FEniCSx, Gmsh, COMSOL Multiphysics, MATLAB LiveLink, ABAQUS
 - **Scientific Machine Learning:** Neural Operators, Operator Learning, Physics-Informed Neural Networks (PINNs), DeepONet
-- **Visualization:** Matplotlib
+- **Visualization:** Matplotlib, Origin, RStudio
 - **Languages:** Chinese, English
 
 Contact
