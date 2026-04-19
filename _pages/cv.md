@@ -134,7 +134,7 @@ I am continuing to improve the full pipeline, including dataset generation, oper
       <img src="/images/research/battery_von_mises.gif" alt="Animated von Mises stress evolution under the same microstructure and loading condition." />
     </a>
     <figcaption>
-      <strong>von Mises Stress GIF</strong><br>
+      <strong>Von&nbsp;Mises&nbsp;Stress&nbsp;GIF</strong><br>
       Time-dependent von Mises stress response under the same microstructure and loading condition.
     </figcaption>
   </figure>
