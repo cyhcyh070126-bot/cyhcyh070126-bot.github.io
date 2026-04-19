@@ -234,7 +234,7 @@ I work at the intersection of mechanics, numerical simulation, and machine learn
 Skills
 ======
 
-- **Programming:** Python, MATLAB, Linux
+- **Programming:** Python, MATLAB, Linux, Git, GitHub
 - **Machine Learning Frameworks:** JAX, PyTorch, Hugging Face
 - **Deep Learning:** Neural Networks, ConvLSTM, Sequence Modeling
 - **Large Language Models:** Instruction Dataset Curation, LoRA Fine-Tuning, Instruction Tuning, Google Colab
