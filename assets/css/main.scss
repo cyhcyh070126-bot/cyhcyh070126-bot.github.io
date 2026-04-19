@@ -81,6 +81,10 @@
   margin: 1.5rem 0 2rem;
 }
 
+.research-gallery--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .research-card {
   margin: 0;
   padding: 0.9rem;

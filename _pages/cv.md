@@ -42,7 +42,7 @@ Research Experience
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">FEniCSx-Supervised Local Operator Learning for Single-Hole Domains</div>
+    <div class="cv-project__title">1. FEniCSx-Supervised Local Operator Learning for Single-Hole Domains</div>
     <div class="cv-project__term">Current</div>
   </div>
   <div class="cv-project__meta">
@@ -101,6 +101,84 @@ Research Experience
 Current direction:
 
 I am continuing to improve the full pipeline, including dataset generation, operator training, evaluation, and presentation. A major focus is making the whole workflow both mechanically faithful and easy to generalize to richer domain decompositions and future coupled simulations.
+
+<div class="cv-project">
+  <div class="cv-project__header">
+    <div class="cv-project__title">2. Deep-Learning-Based Prediction of Chemo-Mechanical Evolution in Battery Active Materials</div>
+    <div class="cv-project__term">Current</div>
+  </div>
+  <div class="cv-project__meta">
+    <span><em>Undergraduate Research Project</em></span>
+    <span><em>Tongji University</em></span>
+  </div>
+</div>
+
+- Built an end-to-end MATLAB and COMSOL pipeline to generate randomized polycrystalline battery-particle microstructures together with transient concentration and stress field sequences.
+- Reproduced and extended a ConvLSTM-based surrogate model that uses concentration history, grain-orientation information, and C-rate conditions as multi-channel inputs.
+- Trained the model with MSE and SSIM losses and adopted a scheduled sampling strategy to improve multi-step autoregressive rollout stability.
+- Evaluated prediction quality on unseen samples through concentration/stress animations and frame-by-frame summary visualizations.
+
+<div class="research-gallery research-gallery--three">
+  <figure class="research-card">
+    <a href="/images/research/battery_concentration.gif" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/battery_concentration.gif" alt="Animated concentration evolution from the COMSOL-based dataset." />
+    </a>
+    <figcaption>
+      <strong>Concentration GIF</strong><br>
+      Transient concentration evolution generated from the COMSOL-based dataset.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/battery_von_mises.gif" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/battery_von_mises.gif" alt="Animated von Mises stress evolution under the same microstructure and loading condition." />
+    </a>
+    <figcaption>
+      <strong>von Mises Stress GIF</strong><br>
+      Time-dependent von Mises stress response under the same microstructure and loading condition.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/battery_convlstm_pipeline.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/battery_convlstm_pipeline.png" alt="ConvLSTM prediction pipeline with concentration, grain orientation, and C-rate inputs." />
+    </a>
+    <figcaption>
+      <strong>ConvLSTM Prediction Pipeline</strong><br>
+      Multi-channel inputs are stacked and processed by a ConvLSTM network for future field prediction.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/battery_convlstm_cell.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/battery_convlstm_cell.png" alt="Internal structure of the ConvLSTM cell used in the model." />
+    </a>
+    <figcaption>
+      <strong>ConvLSTM Cell Design</strong><br>
+      The internal gating structure of the ConvLSTM cell used for spatiotemporal feature propagation.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/battery_scheduled_sampling.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/battery_scheduled_sampling.png" alt="Scheduled sampling strategy for autoregressive sequence training." />
+    </a>
+    <figcaption>
+      <strong>Scheduled Sampling</strong><br>
+      A scheduled sampling strategy is used during training to reduce error accumulation in autoregressive prediction.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/battery_prediction_summary.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/battery_prediction_summary.png" alt="Prediction summary comparing ground truth, model prediction, and error heatmaps across multiple frames." />
+    </a>
+    <figcaption>
+      <strong>Prediction Summary</strong><br>
+      Representative rollout results comparing ground truth, model prediction, and error heatmaps over multiple future frames.
+    </figcaption>
+  </figure>
+</div>
 
 Profile Summary
 ======
