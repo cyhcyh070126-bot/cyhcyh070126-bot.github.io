@@ -218,10 +218,11 @@ Skills
 
 - **Programming:** Python, MATLAB, Linux
 - **Machine Learning Frameworks:** JAX, PyTorch, Hugging Face
-- **Large Language Models:** Instruction Dataset Curation, LoRA Fine-Tuning, Google Colab
+- **Deep Learning:** Neural Networks, ConvLSTM, Sequence Modeling
+- **Large Language Models:** Instruction Dataset Curation, LoRA Fine-Tuning, Instruction Tuning, Google Colab
 - **Computational Mechanics:** Finite Element Methods, Computational Mechanics
 - **Scientific Computing Tools:** FEniCSx, Gmsh, COMSOL Multiphysics, MATLAB LiveLink, ABAQUS
-- **Scientific Machine Learning:** Neural Operators, Operator Learning
+- **Scientific Machine Learning:** Neural Operators, Operator Learning, Physics-Informed Neural Networks (PINNs), DeepONet
 - **Visualization:** Matplotlib
 - **Languages:** Chinese, English
 
