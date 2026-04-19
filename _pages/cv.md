@@ -52,7 +52,7 @@ Research Experience
     <div class="cv-project__term">Jan 2026 - Current</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project, ADVISED BY Somdatta Goswami</em></span>
+    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=GaKrpSkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Somdatta Goswami</a></em></span>
     <span><em>Johns Hopkins University</em></span>
   </div>
 </div>
