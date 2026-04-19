@@ -241,7 +241,7 @@ Skills
 Contact
 ======
 
-- Email: [cyhcyh070126@gmail.com](mailto:cyhcyh070126@gmail.com)
+- Email: [2350083@tongji.edu.cn](mailto:2350083@tongji.edu.cn)
 - Website: [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io)
 - GitHub: [cyhcyh070126-bot](https://github.com/cyhcyh070126-bot)
 
