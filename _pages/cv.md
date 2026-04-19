@@ -110,7 +110,7 @@ Research Experience
     <div class="cv-project__term">Sep 2025 - Jan 2026</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project, ADVISED BY Ying Zhao</em></span>
+    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=tWFKjSwAAAAJ&amp;hl=de" target="_blank" rel="noopener noreferrer">Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
@@ -188,7 +188,7 @@ Research Experience
     <div class="cv-project__term">Dec 2024 - Mar 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project, ADVISED BY Ying Zhao</em></span>
+    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=tWFKjSwAAAAJ&amp;hl=de" target="_blank" rel="noopener noreferrer">Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
