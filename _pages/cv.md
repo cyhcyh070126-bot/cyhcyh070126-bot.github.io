@@ -18,6 +18,12 @@ Tongji University, Shanghai, China
 - Sept 2023 - Present (Expected Jun 2027)
 - GPA: 86/100 (3.3/4.0)
 
+Johns Hopkins University, Baltimore, MD, USA
+
+- Incoming Visiting Undergraduate Scholar, Department of Civil and Systems Engineering
+- July 2026 - September 2026
+- Research focus: Transolver framework and physics-informed neural operators for PDEs
+
 Research Interests
 ======
 
