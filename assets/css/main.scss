@@ -94,11 +94,22 @@ ul + .cv-project {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.research-gallery--single .research-card {
+  padding: 0.75rem;
+}
+
+.research-gallery--single .research-card a {
+  width: 100%;
+}
+
 .research-gallery--single .research-card img {
-  height: auto;
-  max-height: none;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: none !important;
   aspect-ratio: auto;
-  object-fit: contain;
+  object-fit: fill;
+  border-radius: 10px;
 }
 
 .research-card {
