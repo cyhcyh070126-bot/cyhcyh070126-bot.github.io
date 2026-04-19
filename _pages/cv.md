@@ -200,8 +200,8 @@ Research Experience
 
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
-    <a href="/images/research/llm_finetuning_workflow.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/llm_finetuning_workflow.png" alt="Workflow diagram showing mechanics dataset construction, Hugging Face publication, Qwen2.5 7B LoRA fine-tuning on Google Colab, and the final AI teaching assistant." />
+    <a href="/images/research/llm_finetuning_workflow_v2.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/llm_finetuning_workflow_v2.png" alt="Workflow diagram showing self-built mechanics dataset construction, Hugging Face dataset publication, Qwen2.5 7B LoRA fine-tuning on Google Colab, fine-tuned model publication, and the final AI teaching assistant." />
     </a>
     <figcaption>
       <strong>LLM Fine-Tuning Workflow</strong><br>
