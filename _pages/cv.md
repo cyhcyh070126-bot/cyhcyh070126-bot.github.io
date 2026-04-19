@@ -226,6 +226,18 @@ Research Experience
 - **Shock-Stabilization Strategies:** Explored residual weighting, artificial viscosity, weak-form constraints, domain decomposition, and relaxation systems to reduce shock smearing.
 - **Evaluation:** Compared training convergence and local shock reconstruction through solution plots, zoomed discontinuity regions, and method-wise visual diagnostics.
 
+<div class="research-gallery research-gallery--single">
+  <figure class="research-card">
+    <a href="/images/research/pinn_workflow_v1.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/pinn_workflow_v1.png" alt="Workflow diagram showing the shock problem, Vanilla PINN smearing, PINN architecture, stabilization strategies, and sharper shock reconstruction." />
+    </a>
+    <figcaption>
+      <strong>PINN Shock-Capturing Workflow</strong><br>
+      A method-oriented overview from shock-dominated conservation-law problems and Vanilla PINN smearing to PINN architectures, stabilization strategies, and sharper local shock reconstruction.
+    </figcaption>
+  </figure>
+</div>
+
 Profile Summary
 ======
 
