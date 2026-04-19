@@ -113,10 +113,10 @@ I am continuing to improve the full pipeline, including dataset generation, oper
   </div>
 </div>
 
-- Built an end-to-end MATLAB and COMSOL pipeline to generate randomized polycrystalline battery-particle microstructures together with transient concentration and stress field sequences.
-- Reproduced and extended a ConvLSTM-based surrogate model that uses concentration history, grain-orientation information, and C-rate conditions as multi-channel inputs.
-- Trained the model with MSE and SSIM losses and adopted a scheduled sampling strategy to improve multi-step autoregressive rollout stability.
-- Evaluated prediction quality on unseen samples through concentration/stress animations and frame-by-frame summary visualizations.
+- **Dataset Generation Pipeline:** Built an end-to-end MATLAB and COMSOL workflow to generate randomized polycrystalline battery-particle microstructures together with transient concentration and stress field sequences.
+- **ConvLSTM Surrogate Modeling:** Reproduced and extended a ConvLSTM-based surrogate model that uses concentration history, grain-orientation information, and C-rate conditions as multi-channel inputs.
+- **Training Strategy:** Trained the model with MSE and SSIM losses and adopted a scheduled sampling strategy to improve multi-step autoregressive rollout stability.
+- **Evaluation and Visualization:** Evaluated prediction quality on unseen samples through concentration/stress animations and frame-by-frame summary visualizations.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
