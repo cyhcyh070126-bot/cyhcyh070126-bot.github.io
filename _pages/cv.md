@@ -213,10 +213,10 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">4. PINN Methods for Shock-Dominated Conservation Laws</div>
-    <div class="cv-project__term">Previous</div>
+    <div class="cv-project__term">Mar 2025 - Sep 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project</em></span>
+    <span><em>Undergraduate Research Project, ADVISED BY Xianyang (Tom) Chen</em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
