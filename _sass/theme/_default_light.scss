@@ -29,11 +29,11 @@ $sidebar-screen-min-width   : 1024px;
 /* Default light theme for the site */
 :root {
     --global-base-color                 : #{$primary-color};
-    --global-bg-color                   : #f6efe3;
-    --global-footer-bg-color            : #ebdfcf;
-    --global-border-color               : #ddcfbe;
-    --global-dark-border-color          : #c6b39f;
-    --global-code-background-color      : #f3e8dc;
+    --global-bg-color                   : #f2e3cf;
+    --global-footer-bg-color            : #e6d1b6;
+    --global-border-color               : #d4baa0;
+    --global-dark-border-color          : #bb9c7d;
+    --global-code-background-color      : #efddca;
     --global-code-text-color            : #{$darker-gray};
     --global-fig-caption-color          : mix(#fff,  #{$dark-gray}, 25%);
     --global-link-color                 : #52adc8;
