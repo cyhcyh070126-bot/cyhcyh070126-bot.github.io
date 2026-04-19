@@ -148,6 +148,10 @@ ul + .cv-project {
   border: 1px solid var(--global-border-color);
 }
 
+.research-card--grf img {
+  height: 280px;
+}
+
 .research-card figcaption {
   margin-top: 0.8rem;
   font-size: 0.92rem;
@@ -164,5 +168,9 @@ ul + .cv-project {
 
   .research-gallery {
     grid-template-columns: 1fr;
+  }
+
+  .research-card--grf img {
+    height: 240px;
   }
 }

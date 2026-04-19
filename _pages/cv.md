@@ -63,7 +63,7 @@ Research Experience
 - **FEM-Consistent Post-Processing:** Preserved displacement-based FEM consistency so that strain and stress fields can be recovered efficiently through downstream finite-element post-processing.
 
 <div class="research-gallery">
-  <figure class="research-card">
+  <figure class="research-card research-card--grf">
     <a href="/files/research/grf_hole_extraction_preview.pdf" target="_blank" rel="noopener noreferrer">
       <img src="/images/research/grf_hole_extraction_preview.png" alt="Preview of GRF-based hole extraction and placement." />
     </a>
