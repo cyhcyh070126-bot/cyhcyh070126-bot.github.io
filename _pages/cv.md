@@ -47,10 +47,10 @@ Research Experience
   </div>
 </div>
 
-- **Operator Learning Objective:** Training a **Transolver-based neural operator** to predict full nodal displacement fields under varying internal-hole shapes, boundary displacement functions, material parameters, and hole positions on the plate.
-- **Dataset and Supervision Pipeline:** Building a mechanics data factory that generates GRF/circle/square hole geometries, assigns boundary-function libraries, and uses **FEniCSx** to produce displacement-field ground truth for supervised learning.
-- **FEM-Node Point Cloud Representation:** Using the **actual FEM nodes extracted from the Gmsh mesh** as point-cloud inputs instead of uniformly sampled points, which keeps the learning representation aligned with the finite element discretization.
-- **Mechanics-Oriented Efficiency:** Preserving FEM consistency so that once displacement is predicted, later **FEM-style post-processing** can still be applied efficiently for strain and stress recovery rather than learning every derived quantity separately.
+- Operator Learning Objective: Training a Transolver-based neural operator to predict full nodal displacement fields under varying internal-hole shapes, boundary displacement functions, material parameters, and hole positions on the plate.
+- Dataset and Supervision Pipeline: Building a mechanics data factory that generates GRF/circle/square hole geometries, assigns boundary-function libraries, and uses FEniCSx to produce displacement-field ground truth for supervised learning.
+- FEM-Node Point Cloud Representation: Using the actual FEM nodes extracted from the Gmsh mesh as point-cloud inputs instead of uniformly sampled points, which keeps the learning representation aligned with the finite element discretization.
+- Mechanics-Oriented Efficiency: Preserving FEM consistency so that once displacement is predicted, later FEM-style post-processing can still be applied efficiently for strain and stress recovery rather than learning every derived quantity separately.
 
 <div class="research-gallery">
   <figure class="research-card">
@@ -58,7 +58,7 @@ Research Experience
       <img src="/images/research/grf_hole_extraction_preview.png" alt="Preview of GRF-based hole extraction and placement." />
     </a>
     <figcaption>
-      <strong>GRF Hole Generation</strong><br>
+      GRF Hole Generation<br>
       A GRF field is windowed, thresholded, and converted into a smooth internal hole before placement on the plate.
     </figcaption>
   </figure>
@@ -68,7 +68,7 @@ Research Experience
       <img src="/images/research/plate_partition_preview.png" alt="Preview of plate partition and subdomain finite element mesh." />
     </a>
     <figcaption>
-      <strong>FEM-Consistent Meshing</strong><br>
+      FEM-Consistent Meshing<br>
       The local subdomain is extracted from the whole plate mesh while preserving a mechanics-consistent finite element discretization.
     </figcaption>
   </figure>
@@ -78,7 +78,7 @@ Research Experience
       <img src="/images/research/plate_mesh_point_cloud_preview.png" alt="Preview showing the FE mesh and the Transolver input point cloud extracted from FEM nodes." />
     </a>
     <figcaption>
-      <strong>FEM Node Point Cloud</strong><br>
+      FEM Node Point Cloud<br>
       The Transolver input point cloud is built directly from FEM mesh nodes, which keeps learning and later FEM-based post-processing tightly aligned.
     </figcaption>
   </figure>
@@ -88,7 +88,7 @@ Research Experience
       <img src="/images/research/prediction_preview.png" alt="Prediction comparison between ground truth, prediction, and error fields." />
     </a>
     <figcaption>
-      <strong>Transolver Operator Prediction</strong><br>
+      Transolver Operator Prediction<br>
       A Transolver-based neural operator predicts displacement fields across varying hole shapes, boundary displacement functions, materials, and positions, and is evaluated against FEniCSx reference solutions.
     </figcaption>
   </figure>
@@ -96,7 +96,7 @@ Research Experience
 
 Current direction:
 
-I am continuing to improve the full pipeline, including dataset generation, operator training, evaluation, and presentation. A major focus is making the whole workflow both **mechanically faithful** and **easy to generalize** to richer domain decompositions and future coupled simulations.
+I am continuing to improve the full pipeline, including dataset generation, operator training, evaluation, and presentation. A major focus is making the whole workflow both mechanically faithful and easy to generalize to richer domain decompositions and future coupled simulations.
 
 Profile Summary
 ======
