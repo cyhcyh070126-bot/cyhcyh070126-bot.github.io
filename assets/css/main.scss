@@ -74,6 +74,25 @@
   margin-bottom: 0.7rem;
 }
 
+.cv-skill-table {
+  margin: 0.4rem 0 1.4rem;
+}
+
+.cv-skill-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1.2rem;
+  margin-bottom: 0.55rem;
+}
+
+.cv-skill-label {
+  font-weight: 700;
+}
+
+.cv-skill-value {
+  line-height: 1.7;
+}
+
 .research-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -114,6 +133,11 @@
   .cv-project__meta {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .cv-skill-row {
+    grid-template-columns: 1fr;
     gap: 0.15rem;
   }
 

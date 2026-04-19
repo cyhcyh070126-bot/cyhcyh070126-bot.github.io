@@ -106,12 +106,28 @@ I work at the intersection of mechanics, numerical simulation, and machine learn
 Skills
 ======
 
-- Python
-- JAX
-- FEniCSx
-- Gmsh
-- Numerical simulation
-- Scientific visualization
+<div class="cv-skill-table">
+  <div class="cv-skill-row">
+    <div class="cv-skill-label">Programming</div>
+    <div class="cv-skill-value">Python, MATLAB, Linux</div>
+  </div>
+  <div class="cv-skill-row">
+    <div class="cv-skill-label">Deep Learning</div>
+    <div class="cv-skill-value">JAX, PyTorch, Neural Operators, Transolver</div>
+  </div>
+  <div class="cv-skill-row">
+    <div class="cv-skill-label">Scientific Computing</div>
+    <div class="cv-skill-value">FEniCSx, Gmsh, Finite Element Methods, Computational Mechanics</div>
+  </div>
+  <div class="cv-skill-row">
+    <div class="cv-skill-label">Visualization</div>
+    <div class="cv-skill-value">Matplotlib, Scientific Visualization, Field Visualization</div>
+  </div>
+  <div class="cv-skill-row">
+    <div class="cv-skill-label">Languages</div>
+    <div class="cv-skill-value">Chinese, English</div>
+  </div>
+</div>
 
 Contact
 ======
