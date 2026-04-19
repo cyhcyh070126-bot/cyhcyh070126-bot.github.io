@@ -90,6 +90,10 @@ ul + .cv-project {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.research-gallery--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .research-card {
   margin: 0;
   padding: 0.9rem;

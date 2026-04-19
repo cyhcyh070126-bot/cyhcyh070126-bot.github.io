@@ -192,6 +192,18 @@ Research Experience
 - **LoRA Fine-Tuning Workflow:** Performed LoRA-based fine-tuning of Qwen 2.5 7B on Google Colab using a lightweight supervised adaptation pipeline for domain-specific educational question answering.
 - **Model Improvement and Evaluation:** Improved the model's ability to generate clearer formula notation, more structured explanations, and more discipline-specific answers for Mechanics-of-Materials learning scenarios.
 
+<div class="research-gallery research-gallery--single">
+  <figure class="research-card">
+    <a href="/images/research/llm_finetuning_workflow.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/llm_finetuning_workflow.png" alt="Workflow diagram showing mechanics dataset construction, Hugging Face publication, Qwen2.5 7B LoRA fine-tuning on Google Colab, and the final AI teaching assistant." />
+    </a>
+    <figcaption>
+      <strong>LLM Fine-Tuning Workflow</strong><br>
+      A domain-specific workflow from custom Mechanics-of-Materials dataset curation and Hugging Face publication to Qwen2.5 7B LoRA fine-tuning on Google Colab and the final AI teaching assistant.
+    </figcaption>
+  </figure>
+</div>
+
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">4. PINN Methods for Shock-Dominated Conservation Laws</div>
