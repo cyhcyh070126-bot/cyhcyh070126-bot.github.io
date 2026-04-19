@@ -4,8 +4,5 @@ main:
   - title: "Home"
     url: /
 
-  - title: "Research Experience"
-    url: /research-experience/
-
   - title: "CV"
     url: /cv/

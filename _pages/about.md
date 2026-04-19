@@ -34,7 +34,7 @@ Current Research
 
 I am currently developing a **FEniCSx-supervised Transolver-based local operator learning pipeline** for single-hole mechanics domains. The project combines irregular hole generation, FEM-consistent meshing, FEM-node point clouds, displacement-field supervision, and neural operator training in order to study reliable surrogate modeling across varying geometry, boundary displacement functions, materials, and hole positions.
 
-[View the Research Experience page](/research-experience/).
+[View Research Experience in CV](/cv/#research-experience).
 
 Quick Links
 ======
