@@ -42,9 +42,41 @@
     "vendor/font-awesome/brands"
 ;
 
+.cv-project {
+  margin: 0.35rem 0 1rem;
+}
+
+.cv-project__header,
+.cv-project__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.cv-project__header {
+  margin-bottom: 0.15rem;
+}
+
+.cv-project__title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.cv-project__term,
+.cv-project__meta {
+  font-size: 0.98rem;
+}
+
+.cv-project__meta {
+  color: var(--global-text-color);
+  margin-bottom: 0.7rem;
+}
+
 .research-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
   margin: 1.5rem 0 2rem;
 }
@@ -75,4 +107,17 @@
   margin-top: 0.8rem;
   font-size: 0.92rem;
   line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .cv-project__header,
+  .cv-project__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .research-gallery {
+    grid-template-columns: 1fr;
+  }
 }

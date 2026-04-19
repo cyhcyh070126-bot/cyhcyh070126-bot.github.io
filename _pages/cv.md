@@ -36,42 +36,21 @@ Current Focus
 Research Experience
 ======
 
-### FEniCSx-Supervised Local Operator Learning for Single-Hole Domains
+<div class="cv-project">
+  <div class="cv-project__header">
+    <div class="cv-project__title">FEniCSx-Supervised Local Operator Learning for Single-Hole Domains</div>
+    <div class="cv-project__term">Current</div>
+  </div>
+  <div class="cv-project__meta">
+    <span><em>Undergraduate Research Project</em></span>
+    <span><em>Tongji University</em></span>
+  </div>
+</div>
 
-I am currently building a mechanics learning pipeline centered on **single-hole local operator learning**. The goal is to train a **Transolver-based neural operator** that can generalize across different internal-hole shapes, boundary displacement functions, material parameters, and hole locations, and later serve as a reusable local building block for more complex perforated structures and coupled simulations.
-
-This project studies how to learn the mapping from **geometry, boundary displacement excitation, material parameters, and hole position** to the **full nodal displacement field** on a local mechanics domain containing a single internal hole. Here, *single-hole* does not mean that the final engineering structure must contain only one hole. Instead, it defines the **local closed computational unit** used to train the operator.
-
-The current workflow is built around four main ideas:
-
-- generate diverse hole geometries, including GRF-based irregular holes as well as standard circular and square holes
-- vary boundary displacement functions, material branches, and hole positions so the operator is trained under multiple mechanics conditions
-- mesh the domain with **Gmsh**, then directly use the **finite element nodes extracted from the mesh as point-cloud inputs**
-- supervise the model with **FEniCSx ground-truth displacement fields**, so that strain and stress can later be recovered from the predicted displacement using finite element shape functions rather than being supervised separately
-
-What I am doing:
-
-- Building a dataset factory that creates mechanics samples across different stages, geometry families, material modes, and hole-position settings.
-- Using GRF-based geometry generation to produce smooth irregular internal holes without sharp artificial corners.
-- Meshing each domain with FEM-consistent discretization and extracting the resulting FEM nodes as the operator input point cloud.
-- Applying boundary function libraries and solving the resulting PDEs with FEniCSx to generate displacement-field supervision.
-- Training a JAX-based Transolver neural operator that predicts nodal displacement fields under varying geometry, boundary displacement functions, material settings, and hole positions on the plate.
-- Evaluating whether displacement prediction alone is sufficient for later recovery of strain and stress quantities in a mechanically meaningful way.
-
-Why this representation:
-
-Instead of uniformly sprinkling points inside the domain, this project uses the **actual FEM nodes extracted from the Gmsh mesh** as the point set. This gives two advantages:
-
-1. the point cloud is already consistent with the finite element discretization used for the solver
-2. once displacement is predicted on these nodes, standard FEM post-processing machinery can be reused directly to reconstruct derived mechanics quantities such as strain and stress efficiently
-
-This makes the learning problem more physically grounded, keeps the representation aligned with the numerical solver, and is helpful for efficient downstream processing because later FEM-style operations can still be applied on top of the predicted field.
-
-- Geometry families: GRF, circle, square
-- Solver supervision: FEniCSx
-- Model: Transolver neural operator
-- Learning target: nodal displacement field
-- Main tools: Python, JAX, FEniCSx, Gmsh
+- **Operator Learning Objective:** Training a **Transolver-based neural operator** to predict full nodal displacement fields under varying internal-hole shapes, boundary displacement functions, material parameters, and hole positions on the plate.
+- **Dataset and Supervision Pipeline:** Building a mechanics data factory that generates GRF/circle/square hole geometries, assigns boundary-function libraries, and uses **FEniCSx** to produce displacement-field ground truth for supervised learning.
+- **FEM-Node Point Cloud Representation:** Using the **actual FEM nodes extracted from the Gmsh mesh** as point-cloud inputs instead of uniformly sampled points, which keeps the learning representation aligned with the finite element discretization.
+- **Mechanics-Oriented Efficiency:** Preserving FEM consistency so that once displacement is predicted, later **FEM-style post-processing** can still be applied efficiently for strain and stress recovery rather than learning every derived quantity separately.
 
 <div class="research-gallery">
   <figure class="research-card">
