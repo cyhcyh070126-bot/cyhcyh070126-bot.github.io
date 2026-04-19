@@ -36,10 +36,11 @@ Research Experience
 
 ### FEniCSx-Supervised Local Operator Learning for Single-Hole Domains
 
-I am currently building a mechanics learning pipeline that uses GRF-based internal hole generation, Gmsh finite element meshes, and FEniCSx ground-truth supervision to train neural operators for nodal displacement prediction. The central idea is to use FEM nodes directly as point-cloud inputs, so that predicted displacements remain consistent with later stress and strain recovery.
+I am currently building a mechanics learning pipeline that uses GRF-based internal hole generation, Gmsh finite element meshes, FEM-node point clouds, and FEniCSx ground-truth supervision to train a Transolver-based neural operator for nodal displacement prediction under varying geometry, boundary displacement functions, materials, and hole positions. The central idea is to use FEM nodes directly as point-cloud inputs so that predicted displacements remain consistent with later FEM-style stress and strain recovery.
 
 - Geometry families: GRF, circle, square
 - Solver supervision: FEniCSx
+- Model: Transolver neural operator
 - Learning target: nodal displacement field
 - Main tools: Python, JAX, FEniCSx, Gmsh
 
