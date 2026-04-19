@@ -79,17 +79,19 @@
 }
 
 .cv-skill-row {
-  display: grid;
-  grid-template-columns: 180px 1fr;
+  display: flex;
+  align-items: flex-start;
   gap: 1.2rem;
   margin-bottom: 0.55rem;
 }
 
 .cv-skill-label {
+  flex: 0 0 180px;
   font-weight: 700;
 }
 
 .cv-skill-value {
+  flex: 1 1 auto;
   line-height: 1.7;
 }
 
@@ -137,7 +139,7 @@
   }
 
   .cv-skill-row {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 0.15rem;
   }
 
