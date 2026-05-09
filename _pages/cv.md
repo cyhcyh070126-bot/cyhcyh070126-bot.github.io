@@ -12,13 +12,13 @@ redirect_from:
 Education
 ======
 
-Tongji University, Shanghai, China
+<div class="cv-school">Tongji University, Shanghai, China</div>
 
 - Bachelor of Engineering in Engineering Mechanics, School of Aerospace Engineering and Applied Mechanics
 - Sept 2023 - Present (Expected Jun 30, 2027)
 - GPA: 86/100 (3.3/4.0)
 
-Johns Hopkins University, Baltimore, MD, USA
+<div class="cv-school">Johns Hopkins University, Baltimore, MD, USA</div>
 
 - Incoming Visiting Undergraduate Scholar, Department of Civil and Systems Engineering
 - July 3, 2026 - September 25, 2026

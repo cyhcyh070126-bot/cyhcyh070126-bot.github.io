@@ -79,6 +79,12 @@ ul + .cv-project {
   flex: 0 0 auto;
 }
 
+.cv-school {
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin: 0.2rem 0 0.45rem;
+}
+
 .cv-project__meta {
   color: var(--global-text-color);
   margin-bottom: 0.7rem;
