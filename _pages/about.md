@@ -13,14 +13,37 @@ I am **Yanghao Chen**. My work focuses on computational mechanics, finite elemen
 
 I am currently an undergraduate student at **Tongji University** in Shanghai.
 
-Research Interests
+News
 ======
 
-- Computational mechanics
-- Finite element methods
-- Scientific machine learning
-- Neural operators and surrogate modeling
-- Data-driven modeling for engineering systems
+<div class="home-news">
+  <div class="home-news__list">
+    <article class="home-news__item">
+      <div class="home-news__date">May 2026</div>
+      <div class="home-news__content">Updated the website with new GRF geometry, meshing, and Transolver evaluation figures from the single-hole operator learning pipeline.</div>
+    </article>
+    <article class="home-news__item">
+      <div class="home-news__date">Mar 2026</div>
+      <div class="home-news__content">Prepared the CV research section with a combined summary of mechanics, FEM, and operator-learning work.</div>
+    </article>
+    <article class="home-news__item">
+      <div class="home-news__date">Jan 2026</div>
+      <div class="home-news__content">Started the FEniCSx-supervised Transolver-based local operator learning project for single-hole mechanics domains.</div>
+    </article>
+    <article class="home-news__item">
+      <div class="home-news__date">Sep 2025</div>
+      <div class="home-news__content">Began research on deep-learning-based prediction of chemo-mechanical evolution in battery active materials.</div>
+    </article>
+    <article class="home-news__item">
+      <div class="home-news__date">Mar 2025</div>
+      <div class="home-news__content">Worked on PINN methods for shock-dominated conservation laws and compared multiple stabilization strategies.</div>
+    </article>
+    <article class="home-news__item">
+      <div class="home-news__date">Dec 2024</div>
+      <div class="home-news__content">Launched the LLM fine-tuning project for a Mechanics-of-Materials AI teaching assistant.</div>
+    </article>
+  </div>
+</div>
 
 Current Focus
 ======

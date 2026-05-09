@@ -31,7 +31,7 @@ Research Interests
 - Finite element methods
 - Scientific machine learning
 - Neural operators and surrogate modeling
-- Data-driven simulation
+- Data-driven simulation and modeling for engineering systems
 
 Current Focus
 ======
