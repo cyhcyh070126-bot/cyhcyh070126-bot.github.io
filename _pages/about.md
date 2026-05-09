@@ -45,17 +45,12 @@ News
   </div>
 </div>
 
-Current Focus
-======
-
-I am especially interested in building reliable learning pipelines for mechanics problems, including simulation data generation, operator learning, surrogate modeling, and reproducible scientific computing workflows.
-
-This website will continue to grow as I organize more material from ongoing projects and research work.
-
 Current Research
 ======
 
-I am currently developing a **FEniCSx-supervised Transolver-based local operator learning pipeline** for single-hole mechanics domains. The project combines irregular hole generation, FEM-consistent meshing, FEM-node point clouds, displacement-field supervision, and neural operator training in order to study reliable surrogate modeling across varying geometry, boundary displacement functions, materials, and hole positions.
+I am currently focused on building reliable learning pipelines for mechanics problems, including simulation data generation, operator learning, surrogate modeling, and reproducible scientific computing workflows.
+
+My current research centers on a **FEniCSx-supervised Transolver-based local operator learning pipeline** for single-hole mechanics domains. The project combines irregular hole generation, FEM-consistent meshing, FEM-node point clouds, displacement-field supervision, and neural operator training in order to study reliable surrogate modeling across varying geometry, boundary displacement functions, materials, and hole positions.
 
 [View Research Experience in CV](/cv/#research-experience).
 
