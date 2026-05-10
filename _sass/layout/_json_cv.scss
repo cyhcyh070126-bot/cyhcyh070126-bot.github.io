@@ -137,6 +137,12 @@
   font-weight: 700;
 }
 
+.cv-skill-label {
+  color: var(--global-heading-color, var(--global-text-color));
+  font-weight: 700;
+  font-size: 1.03em;
+}
+
 .cv-skill-keywords {
   display: flex;
   flex-wrap: wrap;
