@@ -35,7 +35,7 @@ Research Interests
 Current Research
 ======
 
-- Learning-based operators for mechanics problems
+- Data-driven operators for mechanics problems
 - FEM-consistent data generation and supervision
 - Surrogate models for displacement and stress recovery
 - Reproducible scientific computing workflows
