@@ -246,12 +246,12 @@ Skills
 ======
 
 - <span class="cv-skill-label">Programming:</span> Python, MATLAB, Linux, Git
-- <span class="cv-skill-label">Machine Learning Frameworks:</span> JAX, PyTorch, Hugging Face
+- <span class="cv-skill-label">Machine Learning Frameworks:</span> JAX, PyTorch
 - <span class="cv-skill-label">Scientific Machine Learning:</span> Neural Operators, DeepONet, Transolver, PINNs, CNN, ConvLSTM
 - <span class="cv-skill-label">Computational Mechanics:</span> Finite Element Methods, FEniCSx, Gmsh, COMSOL, ABAQUS
 - <span class="cv-skill-label">LLM / NLP:</span> Instruction Tuning, LoRA Fine-Tuning, Dataset Curation
 - <span class="cv-skill-label">Visualization:</span> Matplotlib, Origin
-- <span class="cv-skill-label">Languages:</span> Chinese, English
+- <span class="cv-skill-label">Languages:</span> Chinese, English, Cantonese
 
 Current Research
 ======
@@ -467,13 +467,13 @@ Skills
 ======
 
 - **Programming:** Python, MATLAB, Linux, Git, GitHub
-- **Machine Learning Frameworks:** JAX, PyTorch, Hugging Face
+- **Machine Learning Frameworks:** JAX, PyTorch
 - **Scientific Machine Learning:** Neural Operators, DeepONet, Transolver, PINNs, CNN, ConvLSTM
 - **Deep Learning:** Neural Networks, ConvLSTM, Sequence Modeling
 - **Large Language Models:** Instruction Dataset Curation, LoRA Fine-Tuning, Instruction Tuning, Google Colab
 - **Computational Mechanics:** Finite Element Methods, FEniCSx, Gmsh, COMSOL Multiphysics, MATLAB LiveLink, ABAQUS
 - **Visualization:** Matplotlib, Origin, RStudio
-- **Languages:** Chinese, English
+- **Languages:** Chinese, English, Cantonese
 
 Contact
 ======
