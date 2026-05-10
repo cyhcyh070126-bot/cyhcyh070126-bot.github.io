@@ -245,13 +245,13 @@ I work at the intersection of mechanics, numerical simulation, and machine learn
 Skills
 ======
 
-- <span class="cv-skill-label">Programming:</span> Python, MATLAB, Linux, Git
-- <span class="cv-skill-label">Machine Learning Frameworks:</span> JAX, PyTorch
-- <span class="cv-skill-label">Scientific Machine Learning:</span> Neural Operators, DeepONet, Transolver, PINNs, CNN, ConvLSTM
-- <span class="cv-skill-label">Computational Mechanics:</span> Finite Element Methods, FEniCSx, Gmsh, COMSOL, ABAQUS
-- <span class="cv-skill-label">LLM / NLP:</span> Instruction Tuning, LoRA Fine-Tuning, Dataset Curation
-- <span class="cv-skill-label">Visualization:</span> Matplotlib, Origin
-- <span class="cv-skill-label">Languages:</span> Chinese, English, Cantonese
+- <strong class="cv-skill-label">Programming:</strong> Python, MATLAB, Linux, Git
+- <strong class="cv-skill-label">Machine Learning Frameworks:</strong> JAX, PyTorch
+- <strong class="cv-skill-label">Scientific Machine Learning:</strong> Neural Operators, DeepONet, Transolver, PINNs, CNN, ConvLSTM
+- <strong class="cv-skill-label">Computational Mechanics:</strong> Finite Element Methods, FEniCSx, Gmsh, COMSOL, ABAQUS
+- <strong class="cv-skill-label">LLM / NLP:</strong> Instruction Tuning, LoRA Fine-Tuning, Dataset Curation
+- <strong class="cv-skill-label">Visualization:</strong> Matplotlib, Origin
+- <strong class="cv-skill-label">Languages:</strong> Chinese, English, Cantonese
 
 Current Research
 ======
