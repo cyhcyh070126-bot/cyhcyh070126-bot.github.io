@@ -32,7 +32,7 @@ Research Interests
 - Scientific machine learning
 - Neural operators and surrogate modeling
 
-Current Focus
+Current Research
 ======
 
 - Learning-based operators for mechanics problems
