@@ -35,7 +35,7 @@ Research Interests
 Current Research
 ======
 
-- Data-driven operators for mechanics problems
+- Surrogate models for displacement and stress prediction
 - FEM-consistent data generation and supervision
 - Surrogate models for displacement and stress recovery
 - Reproducible scientific computing workflows
