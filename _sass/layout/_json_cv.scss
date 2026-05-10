@@ -132,7 +132,9 @@
 
 .cv-skill-category h3 {
   margin-bottom: 0.5rem;
-  color: var(--global-text-color);
+  color: var(--global-heading-color, var(--global-text-color));
+  font-size: 1.08rem;
+  font-weight: 700;
 }
 
 .cv-skill-keywords {
