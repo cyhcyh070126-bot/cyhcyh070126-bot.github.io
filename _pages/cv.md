@@ -249,7 +249,7 @@ Skills
 - **Machine Learning Frameworks:** JAX, PyTorch
 - **Scientific Machine Learning:** Neural Operators, DeepONet, Transolver, PINNs, CNN, ConvLSTM
 - **Computational Mechanics:** Finite Element Methods, FEniCSx, Gmsh, COMSOL, MATLAB, ABAQUS
-- **LLM / NLP:** Instruction Tuning, LoRA Fine-Tuning, Dataset Curation
+- **LLM:** LoRA Fine-Tuning, Dataset Curation
 - **Visualization:** Matplotlib, Origin
 - **Languages:** Chinese, English, Cantonese
 
