@@ -20,7 +20,7 @@ Education
 
 <div class="cv-school">Johns Hopkins University, Baltimore, MD, USA</div>
 
-- Incoming Visiting Undergraduate Scholar, Department of Civil and Systems Engineering
+- Visiting Undergraduate Research Intern, Department of Civil and Systems Engineering
 - July 3, 2026 - September 25, 2026
 - Research focus: Transolver framework and physics-informed neural operators for PDEs
 
