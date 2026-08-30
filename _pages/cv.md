@@ -48,7 +48,7 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">1. FEniCSx-Supervised Local Operator Learning for Single-Hole Domains</div>
-    <div class="cv-project__term">Jan 2026 - Current</div>
+    <div class="cv-project__term">Jul 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
     <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=GaKrpSkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Somdatta Goswami</a></em></span>
@@ -184,7 +184,7 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">3. LLM Fine-Tuning for a Mechanics-of-Materials AI Teaching Assistant</div>
-    <div class="cv-project__term">Dec 2024 - Mar 2025</div>
+    <div class="cv-project__term">Dec 2024 - Jun 2025</div>
   </div>
   <div class="cv-project__meta">
     <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=tWFKjSwAAAAJ&amp;hl=de" target="_blank" rel="noopener noreferrer">Ying Zhao</a></em></span>
@@ -212,7 +212,7 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">4. PINN Methods for Shock-Dominated Conservation Laws</div>
-    <div class="cv-project__term">Mar 2025 - Sep 2025</div>
+    <div class="cv-project__term">Jan 2026 - Jun 2026</div>
   </div>
   <div class="cv-project__meta">
     <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=9gEwvDAAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Xianyang (Tom) Chen</a></em></span>
