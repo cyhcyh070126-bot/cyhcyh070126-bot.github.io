@@ -68,6 +68,14 @@ html[data-theme="dark"] .home-news {
   color: #f3f3f3;
 }
 
+html[data-theme="dark"] .research-card figcaption {
+  color: #f3f3f3;
+}
+
+html[data-theme="dark"] .research-card figcaption strong {
+  color: #ffffff;
+}
+
 .cv-page > h1:not(.page__title),
 .home-page > h1 {
   color: var(--cv-section-heading-color);
