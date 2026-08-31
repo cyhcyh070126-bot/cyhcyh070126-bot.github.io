@@ -189,6 +189,34 @@ ul + .cv-project {
   border-radius: 10px;
 }
 
+.research-gallery--prototype {
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+}
+
+.research-gallery--prototype .research-card:nth-child(1) {
+  grid-column: span 4;
+}
+
+.research-gallery--prototype .research-card:nth-child(2) {
+  grid-column: span 10;
+}
+
+.research-gallery--prototype .research-card:nth-child(3) {
+  grid-column: span 9;
+}
+
+.research-gallery--prototype .research-card:nth-child(4) {
+  grid-column: span 5;
+}
+
+.research-gallery--prototype .research-card img {
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain;
+}
+
 .research-card {
   margin: 0;
   padding: 0.9rem;
@@ -201,11 +229,7 @@ ul + .cv-project {
 
 .research-card a {
   display: block;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 8px;
   cursor: zoom-in;
-  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease;
 }
 
 .research-card img {
@@ -214,8 +238,9 @@ ul + .cv-project {
   height: 220px;
   object-fit: contain;
   background: #fff;
-  border: 0;
-  border-radius: 7px;
+  border: 1px solid var(--global-border-color);
+  border-radius: 8px;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease, border-color 180ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -225,21 +250,22 @@ ul + .cv-project {
     box-shadow: var(--research-card-hover-shadow);
   }
 
-  .research-card:hover a,
-  .research-card:focus-within a {
+  .research-card:hover img,
+  .research-card:focus-within img {
     transform: translateY(-3px) scale(1.012);
+    border-color: var(--research-card-hover-border);
     box-shadow: var(--research-image-hover-shadow);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .research-card,
-  .research-card a {
+  .research-card img {
     transition: none;
   }
 
-  .research-card:hover a,
-  .research-card:focus-within a {
+  .research-card:hover img,
+  .research-card:focus-within img {
     transform: none;
   }
 }
@@ -306,6 +332,14 @@ ul + .cv-project {
 
   .research-card--grf img {
     height: 240px;
+  }
+
+  .research-gallery--prototype .research-card {
+    grid-column: 1;
+  }
+
+  .research-gallery--prototype .research-card img {
+    height: auto !important;
   }
 
   .home-news__item {

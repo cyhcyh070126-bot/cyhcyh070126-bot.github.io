@@ -62,7 +62,7 @@ Research Experience
 
 **Earlier Single-Hole Prototype:** The figures below document an earlier FEniCSx-supervised prototype that established the geometry, meshing, FEM-node representation, and Transolver evaluation workflow leading into the multi-subdomain framework.
 
-<div class="research-gallery">
+<div class="research-gallery research-gallery--prototype">
   <figure class="research-card research-card--grf">
     <a href="/files/research/grf_hole_extraction_preview.pdf" target="_blank" rel="noopener noreferrer">
       <img src="/images/research/grf_hole_extraction_preview.png" alt="Preview of GRF-based hole extraction and placement." />
