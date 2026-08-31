@@ -91,6 +91,16 @@ html[data-theme="dark"] .research-card figcaption strong {
   color: var(--cv-section-heading-color);
 }
 
+.masthead__menu-item--lg > a,
+.masthead__menu-item--lg.selected > a,
+.masthead__menu-item--lg.selected > a:hover {
+  color: var(--cv-section-heading-color);
+}
+
+.masthead__menu-item--lg.selected > a {
+  border-bottom-color: var(--cv-section-rule-color);
+}
+
 .research-gallery + .cv-project,
 ul + .cv-project {
   margin-top: 1.6rem;
