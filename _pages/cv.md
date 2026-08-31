@@ -103,37 +103,9 @@ Research Experience
   </figure>
 </div>
 
-<div class="cv-project">
-  <div class="cv-project__header">
-    <div class="cv-project__title">2. PINNs for Shock Capturing in Nonlinear Conservation Laws</div>
-    <div class="cv-project__term">Nov. 2025 - Mar. 2026</div>
-  </div>
-  <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm" target="_blank" rel="noopener noreferrer">Prof. Xianyang (Tom) Chen</a></em></span>
-    <span><em>Tongji University</em></span>
-  </div>
-</div>
-
-- **Problem Formulation:** Created PyTorch benchmarks for inviscid Burgers and Buckley-Leverett equations, with reference solutions and diagnostics focused on discontinuities and local shock errors.
-- **Comparative PINN Study:** Implemented and compared Vanilla, gradient-weighted, weak-form, XPINN, relaxation, and global/adaptive artificial-viscosity PINNs.
-- **Shock-Stabilization Strategies:** Examined residual reweighting, viscosity regularization, weak constraints, and domain decomposition, including Rankine-Hugoniot interface conditions in the XPINN formulation.
-- **Evaluation and Diagnostics:** Assessed each method through convergence histories, field profiles, and local reconstruction errors to distinguish global accuracy from shock-region performance.
-
-<div class="research-gallery research-gallery--single">
-  <figure class="research-card">
-    <a href="/images/research/pinn_workflow_v2.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/pinn_workflow_v2.png" alt="Workflow diagram showing the shock problem, Vanilla PINN smearing, PINN architecture, stabilization strategies, and sharper shock reconstruction." />
-    </a>
-    <figcaption>
-      <strong>PINN Shock-Capturing Workflow</strong><br>
-      A method-oriented overview from shock-dominated conservation-law problems and Vanilla PINN smearing to PINN architectures, stabilization strategies, and sharper local shock reconstruction.
-    </figcaption>
-  </figure>
-</div>
-
 <div class="cv-project cv-project--battery">
   <div class="cv-project__header">
-    <div class="cv-project__title">3. ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials</div>
+    <div class="cv-project__title">2. ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials</div>
     <div class="cv-project__term">Jun. 2025 - Oct. 2025</div>
   </div>
   <div class="cv-project__meta">
@@ -205,6 +177,34 @@ Research Experience
     <figcaption>
       <strong>Prediction Summary</strong><br>
       Representative rollout results comparing ground truth, model prediction, and error heatmaps over multiple future frames.
+    </figcaption>
+  </figure>
+</div>
+
+<div class="cv-project">
+  <div class="cv-project__header">
+    <div class="cv-project__title">3. PINNs for Shock Capturing in Nonlinear Conservation Laws</div>
+    <div class="cv-project__term">Nov. 2025 - Mar. 2026</div>
+  </div>
+  <div class="cv-project__meta">
+    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm" target="_blank" rel="noopener noreferrer">Prof. Xianyang (Tom) Chen</a></em></span>
+    <span><em>Tongji University</em></span>
+  </div>
+</div>
+
+- **Problem Formulation:** Created PyTorch benchmarks for inviscid Burgers and Buckley-Leverett equations, with reference solutions and diagnostics focused on discontinuities and local shock errors.
+- **Comparative PINN Study:** Implemented and compared Vanilla, gradient-weighted, weak-form, XPINN, relaxation, and global/adaptive artificial-viscosity PINNs.
+- **Shock-Stabilization Strategies:** Examined residual reweighting, viscosity regularization, weak constraints, and domain decomposition, including Rankine-Hugoniot interface conditions in the XPINN formulation.
+- **Evaluation and Diagnostics:** Assessed each method through convergence histories, field profiles, and local reconstruction errors to distinguish global accuracy from shock-region performance.
+
+<div class="research-gallery research-gallery--single">
+  <figure class="research-card">
+    <a href="/images/research/pinn_workflow_v2.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/pinn_workflow_v2.png" alt="Workflow diagram showing the shock problem, Vanilla PINN smearing, PINN architecture, stabilization strategies, and sharper shock reconstruction." />
+    </a>
+    <figcaption>
+      <strong>PINN Shock-Capturing Workflow</strong><br>
+      A method-oriented overview from shock-dominated conservation-law problems and Vanilla PINN smearing to PINN architectures, stabilization strategies, and sharper local shock reconstruction.
     </figcaption>
   </figure>
 </div>
