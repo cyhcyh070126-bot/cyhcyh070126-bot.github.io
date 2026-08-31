@@ -35,19 +35,17 @@ Research Interests
 Current Research
 ======
 
-- Data-driven operators for mechanics problems
-- FEM-consistent data generation and supervision
-- Surrogate models for displacement and stress prediction
-- Reproducible scientific computing workflows
-
-<div id="research-experience"></div>
+- GPU-accelerated JAX-FEM data generation for mechanics
+- Physics-Attention Transolver subdomain operators
+- Boundary-to-field learning for multi-subdomain problems
+- FEM-consistent displacement, strain, and interface-reaction supervision
 
 Research Experience
 ======
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">1. FEniCSx-Supervised Local Operator Learning for Single-Hole Domains</div>
+    <div class="cv-project__title">1. GPU-Accelerated Neural Operator Framework for Multi-Subdomain Mechanics</div>
     <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
@@ -56,10 +54,12 @@ Research Experience
   </div>
 </div>
 
-- **Operator Learning Objective:** Developed a Transolver-based local neural operator for predicting nodal displacement fields under varying hole geometries, boundary conditions, material parameters, and hole locations.
-- **FEniCSx Supervision Pipeline:** Constructed a FEM-consistent data factory that generates GRF/circle/square hole geometries, assigns boundary-function libraries, and produces displacement-field ground truth with FEniCSx.
-- **FEM-Node Point Cloud Representation:** Used actual Gmsh/FEM nodes rather than uniformly sampled points so that the learning representation remains aligned with the finite-element discretization.
-- **FEM-Consistent Post-Processing:** Preserved displacement-based FEM consistency so that strain and stress fields can be recovered efficiently through downstream finite-element post-processing.
+- **Multi-Subdomain Framework:** Built a non-overlapping domain-decomposition framework for 2D cylinder, 3D bracket, and multi-fiber mechanics, integrating GPU-accelerated JAX-FEM simulations with Physics-Attention Transolver training.
+- **FEM Data and Interface Representation:** Generated displacement, strain, and interface-reaction fields with JAX-FEM and organized boundary and interface conditions as inputs for subdomain operator learning.
+- **Boundary-to-Field Operator Learning:** Trained local neural operators to infer full displacement fields from interface conditions while retaining the reaction information required for coupling with surrounding FEM domains.
+- **FEM-Consistent Coupling:** Combined displacement, strain, and interface-reaction supervision to support full-field recovery and neural-operator/FEM coupling across multiple subdomains.
+
+**Earlier Single-Hole Prototype:** The figures below document an earlier FEniCSx-supervised prototype that established the geometry, meshing, FEM-node representation, and Transolver evaluation workflow leading into the multi-subdomain framework.
 
 <div class="research-gallery">
   <figure class="research-card research-card--grf">
@@ -103,9 +103,37 @@ Research Experience
   </figure>
 </div>
 
+<div class="cv-project">
+  <div class="cv-project__header">
+    <div class="cv-project__title">2. PINNs for Shock Capturing in Nonlinear Conservation Laws</div>
+    <div class="cv-project__term">Nov. 2025 - Mar. 2026</div>
+  </div>
+  <div class="cv-project__meta">
+    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm" target="_blank" rel="noopener noreferrer">Prof. Xianyang (Tom) Chen</a></em></span>
+    <span><em>Tongji University</em></span>
+  </div>
+</div>
+
+- **Problem Formulation:** Created PyTorch benchmarks for inviscid Burgers and Buckley-Leverett equations, with reference solutions and diagnostics focused on discontinuities and local shock errors.
+- **Comparative PINN Study:** Implemented and compared Vanilla, gradient-weighted, weak-form, XPINN, relaxation, and global/adaptive artificial-viscosity PINNs.
+- **Shock-Stabilization Strategies:** Examined residual reweighting, viscosity regularization, weak constraints, and domain decomposition, including Rankine-Hugoniot interface conditions in the XPINN formulation.
+- **Evaluation and Diagnostics:** Assessed each method through convergence histories, field profiles, and local reconstruction errors to distinguish global accuracy from shock-region performance.
+
+<div class="research-gallery research-gallery--single">
+  <figure class="research-card">
+    <a href="/images/research/pinn_workflow_v2.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/pinn_workflow_v2.png" alt="Workflow diagram showing the shock problem, Vanilla PINN smearing, PINN architecture, stabilization strategies, and sharper shock reconstruction." />
+    </a>
+    <figcaption>
+      <strong>PINN Shock-Capturing Workflow</strong><br>
+      A method-oriented overview from shock-dominated conservation-law problems and Vanilla PINN smearing to PINN architectures, stabilization strategies, and sharper local shock reconstruction.
+    </figcaption>
+  </figure>
+</div>
+
 <div class="cv-project cv-project--battery">
   <div class="cv-project__header">
-    <div class="cv-project__title">2. ConvLSTM Modeling of Chemo-Mechanical Fields and Damage in Battery Materials</div>
+    <div class="cv-project__title">3. ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials</div>
     <div class="cv-project__term">Jun. 2025 - Oct. 2025</div>
   </div>
   <div class="cv-project__meta">
@@ -114,10 +142,10 @@ Research Experience
   </div>
 </div>
 
-- **Synthetic Data Generation:** Developed a MATLAB-COMSOL LiveLink workflow for statistically distributed polycrystalline NMC microstructures and electro-chemo-mechanical simulation sequences of lithium concentration and von Mises stress.
-- **Conditional ConvLSTM Surrogate:** Implemented a three-layer ConvLSTM model, conditioning autoregressive predictions of two-dimensional concentration and stress fields on grain orientation and C-rate information.
-- **Training Pipeline:** Combined MSE-SSIM hybrid loss, scheduled sampling, and patch-based training to improve structural fidelity and reduce long-horizon error accumulation.
-- **Damage Evolution:** Evaluated predictions against finite-element reference sequences and used microcrack-density post-processing to infer damage evolution from predicted stress fields.
+- **Simulation Data Generation:** Automated statistically distributed polycrystalline NMC microstructure generation and electro-chemo-mechanical simulation through MATLAB-COMSOL LiveLink, producing aligned lithium-concentration and von Mises stress sequences.
+- **Conditional ConvLSTM Surrogate:** Trained a three-layer ConvLSTM that conditions autoregressive two-dimensional concentration- and stress-field predictions on grain-orientation and C-rate information.
+- **Long-Horizon Training:** Combined an MSE-SSIM hybrid loss, scheduled sampling, and patch-based training to preserve spatial structure and limit error accumulation over multi-step rollouts.
+- **Field Prediction Evaluation:** Compared predicted concentration and stress sequences with COMSOL reference fields through frame-wise visualizations and spatial error maps.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
@@ -183,7 +211,7 @@ Research Experience
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">3. LLM Fine-Tuning for a Mechanics-of-Materials AI Teaching Assistant</div>
+    <div class="cv-project__title">4. Domain-Specific LLM Fine-Tuning for Materials Mechanics</div>
     <div class="cv-project__term">Sep. 2024 - Apr. 2025</div>
   </div>
   <div class="cv-project__meta">
@@ -192,10 +220,10 @@ Research Experience
   </div>
 </div>
 
-- **Project Objective:** Developed a domain-specific AI teaching assistant for Mechanics of Materials based on the Qwen 2.5 7B foundation model.
-- **Instruction Dataset Curation:** Built and published two Mechanics-of-Materials instruction datasets on Hugging Face: [Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge).
-- **LoRA Fine-Tuning:** Published the [LoRA-adapted checkpoint](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and [merged model](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged) after domain adaptation on Google Colab.
-- **Model Improvement:** Improved formula rendering, explanation structure, and domain-specific response quality for Mechanics-of-Materials learning scenarios.
+- **Project Objective:** Adapted the Qwen2.5-7B foundation model for materials-mechanics question answering and structured explanations of engineering concepts.
+- **Instruction Dataset Curation:** Curated and published two instruction datasets covering stress analysis, constitutive laws, and failure theories: [Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge).
+- **Parameter-Efficient Fine-Tuning:** Applied LoRA-based fine-tuning on Google Colab to specialize Qwen2.5-7B while retaining a compact adaptation workflow.
+- **Open-Source Publication:** Released both the [LoRA-adapted checkpoint](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and the [merged model](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged) on Hugging Face.
 
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
@@ -205,33 +233,6 @@ Research Experience
     <figcaption>
       <strong>LLM Fine-Tuning Workflow</strong><br>
       A domain-specific workflow from custom Mechanics-of-Materials dataset curation and Hugging Face publication to Qwen2.5 7B LoRA fine-tuning on Google Colab and the final AI teaching assistant.
-    </figcaption>
-  </figure>
-</div>
-
-<div class="cv-project">
-  <div class="cv-project__header">
-    <div class="cv-project__title">4. Physics-Informed Neural Networks for Shock Capturing in Nonlinear Conservation Laws</div>
-    <div class="cv-project__term">Nov. 2025 - Mar. 2026</div>
-  </div>
-  <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm" target="_blank" rel="noopener noreferrer">Prof. Xianyang (Tom) Chen</a></em></span>
-    <span><em>Tongji University</em></span>
-  </div>
-</div>
-
-- **Problem Setting:** Developed PyTorch benchmarks for inviscid Burgers and Buckley-Leverett conservation laws, with shock-focused solution and local-error diagnostics.
-- **Comparative PINN Study:** Implemented and compared Vanilla, Gradient-Weighted, Weak, XPINN, relaxation, and global/adaptive artificial-viscosity PINNs; enforced Rankine-Hugoniot interface conditions in the XPINN formulation.
-- **Evaluation:** Assessed residual reweighting, viscosity regularization, weak constraints, and domain decomposition through training convergence, shock profiles, and local reconstruction errors.
-
-<div class="research-gallery research-gallery--single">
-  <figure class="research-card">
-    <a href="/images/research/pinn_workflow_v2.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/pinn_workflow_v2.png" alt="Workflow diagram showing the shock problem, Vanilla PINN smearing, PINN architecture, stabilization strategies, and sharper shock reconstruction." />
-    </a>
-    <figcaption>
-      <strong>PINN Shock-Capturing Workflow</strong><br>
-      A method-oriented overview from shock-dominated conservation-law problems and Vanilla PINN smearing to PINN architectures, stabilization strategies, and sharper local shock reconstruction.
     </figcaption>
   </figure>
 </div>

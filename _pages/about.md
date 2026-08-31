@@ -28,7 +28,7 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jan 2026</div>
-      <div class="home-news__content">Started the FEniCSx-supervised Transolver-based local operator learning project for single-hole mechanics domains.</div>
+      <div class="home-news__content">Started a GPU-accelerated neural-operator framework for multi-subdomain mechanics using JAX-FEM and Physics-Attention Transolver.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Nov 2025</div>
@@ -48,7 +48,7 @@ News
 Current Research
 ======
 
-My current research focuses on building reliable learning pipelines for mechanics problems through a **FEniCSx-supervised Transolver-based local operator learning pipeline** for single-hole domains. This work integrates simulation data generation, irregular hole construction, FEM-consistent meshing, FEM-node point clouds, displacement-field supervision, and neural operator training to study surrogate modeling across varying geometry, boundary displacement functions, materials, and hole positions, with an emphasis on reproducible scientific computing workflows.
+My current research focuses on a **GPU-accelerated neural-operator framework for multi-subdomain mechanics**. This work integrates JAX-FEM data generation, Physics-Attention Transolver training, boundary-to-field operator learning, and FEM-consistent coupling through displacement, strain, and interface-reaction supervision across 2D, 3D, and multi-fiber mechanics problems.
 
 [View Research Experience in CV](/cv/#research-experience).
 
