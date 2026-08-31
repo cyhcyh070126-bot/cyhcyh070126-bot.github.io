@@ -245,13 +245,12 @@ I work at the intersection of mechanics, numerical simulation, and machine learn
 Skills
 ======
 
-- **Programming:** Python, MATLAB, Linux, Git
-- **Machine Learning Frameworks:** JAX, PyTorch
-- **Scientific Machine Learning:** Neural Operators, DeepONet, Transolver, PINNs, CNN, ConvLSTM
-- **Computational Mechanics:** Finite Element Methods, FEniCSx, Gmsh, COMSOL, MATLAB, ABAQUS
-- **Large Language Model:** LoRA Fine-Tuning, Dataset Curation
+- **Scientific Machine Learning:** PyTorch, JAX, Neural Operators (Transolver, DeepONet), PINNs, ConvLSTM
+- **Computational Mechanics:** Finite Element Methods, FEniCSx, Gmsh, COMSOL Multiphysics, ABAQUS
+- **Scientific Computing & Tools:** Python, MATLAB, Linux, Git/GitHub, MATLAB LiveLink
+- **Domain LLM Development:** Qwen2.5, LoRA/PEFT Fine-Tuning, Instruction Dataset Curation
 - **Visualization:** Matplotlib, Origin
-- **Languages:** Chinese, English, Cantonese
+- **Languages:** Chinese (native), Cantonese, English
 
 Contact
 ======
