@@ -13,13 +13,19 @@ redirect_from:
 Education
 ======
 
-<div class="cv-school">Tongji University, Shanghai, China</div>
+<div class="cv-school">
+  <img class="cv-school__seal" src="{{ '/images/schools/tongji-university-seal.png' | relative_url }}" alt="Tongji University seal">
+  <span>Tongji University, Shanghai, China</span>
+</div>
 
 - Bachelor of Engineering in Engineering Mechanics, School of Aerospace Engineering and Applied Mechanics
 - Sep. 2023 - Present (Expected Jun. 2027)
 - GPA: 87/100
 
-<div class="cv-school">Johns Hopkins University, Baltimore, MD, USA</div>
+<div class="cv-school">
+  <img class="cv-school__seal" src="{{ '/images/schools/johns-hopkins-university-seal.png' | relative_url }}" alt="Johns Hopkins University seal">
+  <span>Johns Hopkins University, Baltimore, MD, USA</span>
+</div>
 
 - Visiting Undergraduate Research Intern, Department of Civil and Systems Engineering
 - Jul. 2026 - Oct. 2026
