@@ -87,6 +87,10 @@ html[data-theme="dark"] .research-card figcaption strong {
   color: var(--cv-section-heading-color);
 }
 
+.sidebar .author__name {
+  color: var(--cv-section-heading-color);
+}
+
 .research-gallery + .cv-project,
 ul + .cv-project {
   margin-top: 1.6rem;
