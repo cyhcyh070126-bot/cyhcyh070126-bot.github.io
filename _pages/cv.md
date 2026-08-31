@@ -211,7 +211,7 @@ Research Experience
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">4. PINN Methods for Shock-Dominated Conservation Laws</div>
+    <div class="cv-project__title">4. Physics-Informed Neural Networks for Shock Capturing in Nonlinear Conservation Laws</div>
     <div class="cv-project__term">Jan 2026 - Jun 2026</div>
   </div>
   <div class="cv-project__meta">
@@ -220,10 +220,9 @@ Research Experience
   </div>
 </div>
 
-- **Problem Setting:** Investigated PINN methods for one-dimensional shock-dominated conservation laws, with experiments on Burgers and Buckley-Leverett-type transport problems.
-- **Comparative PINN Study:** Implemented and benchmarked multiple PINN variants, including Vanilla PINN, Gradient-Weighted PINN, Weak PINN, XPINNs, and relaxation-based formulations.
-- **Shock-Stabilization Strategies:** Explored residual weighting, artificial viscosity, weak-form constraints, domain decomposition, and relaxation systems to reduce shock smearing.
-- **Evaluation:** Compared training convergence and local shock reconstruction through solution plots, zoomed discontinuity regions, and method-wise visual diagnostics.
+- **Problem Setting:** Developed PyTorch benchmarks for inviscid Burgers and Buckley-Leverett conservation laws, with shock-focused solution and local-error diagnostics.
+- **Comparative PINN Study:** Implemented and compared Vanilla, Gradient-Weighted, Weak, XPINN, relaxation, and global/adaptive artificial-viscosity PINNs; enforced Rankine-Hugoniot interface conditions in the XPINN formulation.
+- **Evaluation:** Assessed residual reweighting, viscosity regularization, weak constraints, and domain decomposition through training convergence, shock profiles, and local reconstruction errors.
 
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
