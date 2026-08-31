@@ -68,7 +68,8 @@ html[data-theme="dark"] .home-news {
   color: #f3f3f3;
 }
 
-.cv-page > h1:not(.page__title) {
+.cv-page > h1:not(.page__title),
+.home-page > h1 {
   color: var(--cv-section-heading-color);
   padding-bottom: 0.18em;
   border-bottom: 1px solid var(--cv-section-rule-color);
