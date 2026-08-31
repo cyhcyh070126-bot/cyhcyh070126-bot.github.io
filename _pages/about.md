@@ -11,7 +11,6 @@ redirect_from:
 Welcome to my personal website.
 
 I am **Yanghao Chen**, an undergraduate student in Engineering Mechanics at **Tongji University**. My research lies at the intersection of computational mechanics and scientific machine learning, with a particular focus on integrating GPU-accelerated finite-element simulation with neural operators for PDE-governed engineering systems.
-{: .home-intro}
 
 News
 ======
