@@ -238,11 +238,6 @@ Research Experience
   </figure>
 </div>
 
-Research Profile
-======
-
-My research focuses on computational mechanics and scientific machine learning. I combine GPU-accelerated finite-element simulation with neural operators for PDE-governed engineering systems, emphasizing mechanics-consistent learning, scalable simulation data generation, and reliable surrogate modeling.
-
 Skills
 ======
 
