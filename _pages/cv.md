@@ -16,7 +16,7 @@ Education
 
 - Bachelor of Engineering in Engineering Mechanics, School of Aerospace Engineering and Applied Mechanics
 - Sept 2023 - Present (Expected Jun 30, 2027)
-- GPA: 87.05/100 (3.48/4.00)
+- GPA: 87/100
 
 <div class="cv-school">Johns Hopkins University, Baltimore, MD, USA</div>
 
