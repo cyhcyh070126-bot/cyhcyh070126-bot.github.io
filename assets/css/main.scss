@@ -203,10 +203,9 @@ ul + .cv-project {
   display: block;
   overflow: hidden;
   background: #fff;
-  border: 1px solid var(--global-border-color);
   border-radius: 8px;
   cursor: zoom-in;
-  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease, border-color 180ms ease;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease;
 }
 
 .research-card img {
@@ -229,7 +228,6 @@ ul + .cv-project {
   .research-card:hover a,
   .research-card:focus-within a {
     transform: translateY(-3px) scale(1.012);
-    border-color: var(--research-card-hover-border);
     box-shadow: var(--research-image-hover-shadow);
   }
 }
