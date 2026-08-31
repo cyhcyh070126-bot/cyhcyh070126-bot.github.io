@@ -9,9 +9,7 @@ redirect_from:
 
 Welcome to my personal website.
 
-I am **Yanghao Chen**. My work focuses on computational mechanics, finite element methods, and scientific machine learning, with a particular interest in combining physics-based simulation and learning-based models for engineering problems.
-
-I am currently an undergraduate student at **Tongji University** in Shanghai.
+I am **Yanghao Chen**, an undergraduate student in Engineering Mechanics at **Tongji University**. My research lies at the intersection of computational mechanics and scientific machine learning, with a particular focus on integrating GPU-accelerated finite-element simulation with neural operators for PDE-governed engineering systems.
 
 News
 ======
@@ -48,7 +46,7 @@ News
 Current Research
 ======
 
-My current research focuses on a **GPU-accelerated neural-operator framework for multi-subdomain mechanics**. This work integrates JAX-FEM data generation, Physics-Attention Transolver training, boundary-to-field operator learning, and FEM-consistent coupling through displacement, strain, and interface-reaction supervision across 2D, 3D, and multi-fiber mechanics problems.
+My current research focuses on GPU-accelerated numerical methods and scientific machine learning for computational mechanics. I am particularly interested in integrating finite-element simulation with neural operators to improve the efficiency and scalability of solving complex engineering problems.
 
 [View Research Experience in CV](/cv/#research-experience).
 
