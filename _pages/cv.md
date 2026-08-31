@@ -105,19 +105,19 @@ Research Experience
 
 <div class="cv-project cv-project--battery">
   <div class="cv-project__header">
-    <div class="cv-project__title">2. Reproduction of a ConvLSTM Surrogate for Battery Chemo-Mechanics and Damage</div>
+    <div class="cv-project__title">2. ConvLSTM Modeling of Chemo-Mechanical Fields and Damage in Battery Materials</div>
     <div class="cv-project__term">Sep 2025 - Jan 2026</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project — Paper Reproduction, ADVISED BY <a href="https://scholar.google.com/citations?user=tWFKjSwAAAAJ&amp;hl=de" target="_blank" rel="noopener noreferrer">Ying Zhao</a></em></span>
+    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=tWFKjSwAAAAJ&amp;hl=de" target="_blank" rel="noopener noreferrer">Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
 
-- **Reproduction Scope:** Reproduced the published MATLAB-COMSOL LiveLink workflow for statistically distributed polycrystalline NMC microstructures and electro-chemo-mechanical simulation sequences of lithium concentration and von Mises stress.
-- **Conditional ConvLSTM Surrogate:** Implemented the paper's three-layer ConvLSTM model, conditioning autoregressive predictions of two-dimensional concentration and stress fields on grain orientation and C-rate information.
-- **Training Pipeline:** Reproduced the MSE-SSIM hybrid loss, scheduled sampling, and patch-based training pipeline to improve structural fidelity and reduce long-horizon error accumulation.
-- **Damage Evolution:** Reproduced microcrack-density post-processing to infer damage evolution from predicted stress fields and evaluated results against finite-element reference sequences.
+- **Synthetic Data Generation:** Developed a MATLAB-COMSOL LiveLink workflow for statistically distributed polycrystalline NMC microstructures and electro-chemo-mechanical simulation sequences of lithium concentration and von Mises stress.
+- **Conditional ConvLSTM Surrogate:** Implemented a three-layer ConvLSTM model, conditioning autoregressive predictions of two-dimensional concentration and stress fields on grain orientation and C-rate information.
+- **Training Pipeline:** Combined MSE-SSIM hybrid loss, scheduled sampling, and patch-based training to improve structural fidelity and reduce long-horizon error accumulation.
+- **Damage Evolution:** Evaluated predictions against finite-element reference sequences and used microcrack-density post-processing to infer damage evolution from predicted stress fields.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
