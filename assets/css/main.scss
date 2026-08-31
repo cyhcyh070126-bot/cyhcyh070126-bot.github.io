@@ -52,6 +52,8 @@
   --research-panel-background: rgba(255, 255, 255, 0.72);
   --research-panel-text: var(--global-text-color);
   --research-panel-divider: rgba(15, 23, 42, 0.08);
+  --research-card-hover-border: rgba(154, 100, 30, 0.4);
+  --research-card-hover-shadow: 0 18px 36px rgba(15, 23, 42, 0.14);
 }
 
 html[data-theme="dark"] {
@@ -60,6 +62,8 @@ html[data-theme="dark"] {
   --research-panel-background: rgba(255, 255, 255, 0.08);
   --research-panel-text: #f3f3f3;
   --research-panel-divider: rgba(255, 255, 255, 0.14);
+  --research-card-hover-border: rgba(230, 184, 103, 0.5);
+  --research-card-hover-shadow: 0 18px 36px rgba(0, 0, 0, 0.4);
 }
 
 html[data-theme="dark"] .research-card,
@@ -184,16 +188,22 @@ ul + .cv-project {
 }
 
 .research-card {
+  position: relative;
+  z-index: 0;
   margin: 0;
   padding: 0.9rem;
   border: 1px solid var(--global-border-color);
   border-radius: 12px;
   background: var(--research-panel-background);
   color: var(--research-panel-text);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
 
 .research-card a {
   display: block;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: zoom-in;
 }
 
 .research-card img {
@@ -204,6 +214,36 @@ ul + .cv-project {
   background: #fff;
   border-radius: 8px;
   border: 1px solid var(--global-border-color);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .research-card:hover,
+  .research-card:focus-within {
+    z-index: 2;
+    transform: translateY(-6px) scale(1.012);
+    border-color: var(--research-card-hover-border);
+    box-shadow: var(--research-card-hover-shadow);
+  }
+
+  .research-card:hover img,
+  .research-card:focus-within img {
+    transform: scale(1.035);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .research-card,
+  .research-card img {
+    transition: none;
+  }
+
+  .research-card:hover,
+  .research-card:focus-within,
+  .research-card:hover img,
+  .research-card:focus-within img {
+    transform: none;
+  }
 }
 
 .research-card--grf img {
