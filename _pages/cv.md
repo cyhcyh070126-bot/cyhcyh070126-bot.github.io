@@ -238,10 +238,10 @@ Research Experience
   </figure>
 </div>
 
-Profile Summary
+Research Profile
 ======
 
-I work at the intersection of mechanics, numerical simulation, and machine learning. My current interests include operator learning for PDE-governed systems, data generation pipelines based on finite element simulations, and robust surrogate models for scientific applications.
+My research focuses on computational mechanics and scientific machine learning. I combine GPU-accelerated finite-element simulation with neural operators for PDE-governed engineering systems, emphasizing mechanics-consistent learning, scalable simulation data generation, and reliable surrogate modeling.
 
 Skills
 ======
