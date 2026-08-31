@@ -31,15 +31,15 @@ News
       <div class="home-news__content">Started the FEniCSx-supervised Transolver-based local operator learning project for single-hole mechanics domains.</div>
     </article>
     <article class="home-news__item">
-      <div class="home-news__date">Sep 2025</div>
-      <div class="home-news__content">Began research on deep-learning-based prediction of chemo-mechanical evolution in battery active materials.</div>
-    </article>
-    <article class="home-news__item">
-      <div class="home-news__date">Jan 2026</div>
+      <div class="home-news__date">Nov 2025</div>
       <div class="home-news__content">Worked on PINN methods for shock-dominated conservation laws and compared multiple stabilization strategies.</div>
     </article>
     <article class="home-news__item">
-      <div class="home-news__date">Dec 2024</div>
+      <div class="home-news__date">Jun 2025</div>
+      <div class="home-news__content">Began research on deep-learning-based prediction of chemo-mechanical evolution in battery active materials.</div>
+    </article>
+    <article class="home-news__item">
+      <div class="home-news__date">Sep 2024</div>
       <div class="home-news__content">Launched the LLM fine-tuning project for a Mechanics-of-Materials AI teaching assistant.</div>
     </article>
   </div>

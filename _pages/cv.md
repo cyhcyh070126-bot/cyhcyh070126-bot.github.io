@@ -106,7 +106,7 @@ Research Experience
 <div class="cv-project cv-project--battery">
   <div class="cv-project__header">
     <div class="cv-project__title">2. ConvLSTM Modeling of Chemo-Mechanical Fields and Damage in Battery Materials</div>
-    <div class="cv-project__term">Sep. 2025 - Dec. 2025</div>
+    <div class="cv-project__term">Jun. 2025 - Oct. 2025</div>
   </div>
   <div class="cv-project__meta">
     <span><em>Undergraduate Researcher; Advisor: <a href="http://www.yingzhaotj.cn/col.jsp?id=106" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
@@ -184,7 +184,7 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">3. LLM Fine-Tuning for a Mechanics-of-Materials AI Teaching Assistant</div>
-    <div class="cv-project__term">Dec. 2024 - Jun. 2025</div>
+    <div class="cv-project__term">Sep. 2024 - Apr. 2025</div>
   </div>
   <div class="cv-project__meta">
     <span><em>Undergraduate Researcher; Advisor: <a href="http://www.yingzhaotj.cn/col.jsp?id=106" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
@@ -212,7 +212,7 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">4. Physics-Informed Neural Networks for Shock Capturing in Nonlinear Conservation Laws</div>
-    <div class="cv-project__term">Jan. 2026 - Mar. 2026</div>
+    <div class="cv-project__term">Nov. 2025 - Mar. 2026</div>
   </div>
   <div class="cv-project__meta">
     <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm" target="_blank" rel="noopener noreferrer">Prof. Xianyang (Tom) Chen</a></em></span>
