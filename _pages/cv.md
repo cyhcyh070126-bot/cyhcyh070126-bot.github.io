@@ -15,13 +15,13 @@ Education
 <div class="cv-school">Tongji University, Shanghai, China</div>
 
 - Bachelor of Engineering in Engineering Mechanics, School of Aerospace Engineering and Applied Mechanics
-- Sept 2023 - Present (Expected Jun 30, 2027)
+- Sep. 2023 - Present (Expected Jun. 2027)
 - GPA: 87/100
 
 <div class="cv-school">Johns Hopkins University, Baltimore, MD, USA</div>
 
 - Visiting Undergraduate Research Intern, Department of Civil and Systems Engineering
-- July 3, 2026 - September 25, 2026
+- Jul. 2026 - Oct. 2026
 - Research focus: Transolver framework and physics-informed neural operators for PDEs
 
 Research Interests
@@ -48,10 +48,10 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">1. FEniCSx-Supervised Local Operator Learning for Single-Hole Domains</div>
-    <div class="cv-project__term">Jul 2026 - Present</div>
+    <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=GaKrpSkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Somdatta Goswami</a></em></span>
+    <span><em>Lead Undergraduate Researcher; Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
     <span><em>Johns Hopkins University</em></span>
   </div>
 </div>
@@ -106,10 +106,10 @@ Research Experience
 <div class="cv-project cv-project--battery">
   <div class="cv-project__header">
     <div class="cv-project__title">2. ConvLSTM Modeling of Chemo-Mechanical Fields and Damage in Battery Materials</div>
-    <div class="cv-project__term">Sep 2025 - Jan 2026</div>
+    <div class="cv-project__term">Sep. 2025 - Dec. 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=tWFKjSwAAAAJ&amp;hl=de" target="_blank" rel="noopener noreferrer">Ying Zhao</a></em></span>
+    <span><em>Undergraduate Researcher; Advisor: <a href="http://www.yingzhaotj.cn/col.jsp?id=106" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
@@ -184,17 +184,17 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">3. LLM Fine-Tuning for a Mechanics-of-Materials AI Teaching Assistant</div>
-    <div class="cv-project__term">Dec 2024 - Jun 2025</div>
+    <div class="cv-project__term">Dec. 2024 - Jun. 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=tWFKjSwAAAAJ&amp;hl=de" target="_blank" rel="noopener noreferrer">Ying Zhao</a></em></span>
+    <span><em>Undergraduate Researcher; Advisor: <a href="http://www.yingzhaotj.cn/col.jsp?id=106" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
 
 - **Project Objective:** Developed a domain-specific AI teaching assistant for Mechanics of Materials based on the Qwen 2.5 7B foundation model.
-- **Instruction Dataset Curation:** Built and published a Mechanics-of-Materials dataset on [Hugging Face](https://huggingface.co/CYHcyh66), covering concept explanations, formula-based questions, and worked examples.
-- **LoRA Fine-Tuning:** Performed LoRA-based domain adaptation on Google Colab to align the base model with educational question answering in mechanics.
+- **Instruction Dataset Curation:** Built and published two Mechanics-of-Materials instruction datasets on Hugging Face: [Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge).
+- **LoRA Fine-Tuning:** Published the [LoRA-adapted checkpoint](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and [merged model](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged) after domain adaptation on Google Colab.
 - **Model Improvement:** Improved formula rendering, explanation structure, and domain-specific response quality for Mechanics-of-Materials learning scenarios.
 
 <div class="research-gallery research-gallery--single">
@@ -212,10 +212,10 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">4. Physics-Informed Neural Networks for Shock Capturing in Nonlinear Conservation Laws</div>
-    <div class="cv-project__term">Jan 2026 - Jun 2026</div>
+    <div class="cv-project__term">Jan. 2026 - Mar. 2026</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Project, ADVISED BY <a href="https://scholar.google.com/citations?user=9gEwvDAAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Xianyang (Tom) Chen</a></em></span>
+    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm" target="_blank" rel="noopener noreferrer">Prof. Xianyang (Tom) Chen</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
@@ -258,6 +258,7 @@ Contact
 - Email: [2350083@tongji.edu.cn](mailto:2350083@tongji.edu.cn)
 - Website: [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io)
 - GitHub: [cyhcyh070126-bot](https://github.com/cyhcyh070126-bot)
+- Hugging Face: [CYHcyh66](https://huggingface.co/CYHcyh66)
 
 Publications
 ======

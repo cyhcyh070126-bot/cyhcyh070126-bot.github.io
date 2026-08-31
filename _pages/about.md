@@ -35,7 +35,7 @@ News
       <div class="home-news__content">Began research on deep-learning-based prediction of chemo-mechanical evolution in battery active materials.</div>
     </article>
     <article class="home-news__item">
-      <div class="home-news__date">Mar 2025</div>
+      <div class="home-news__date">Jan 2026</div>
       <div class="home-news__content">Worked on PINN methods for shock-dominated conservation laws and compared multiple stabilization strategies.</div>
     </article>
     <article class="home-news__item">
@@ -57,6 +57,7 @@ Quick Links
 
 - [CV](/cv/)
 - [GitHub](https://github.com/cyhcyh070126-bot)
+- [Hugging Face](https://huggingface.co/CYHcyh66)
 - [LinkedIn](https://www.linkedin.com/in/yanghao-chen-830677399/)
 - [Tongji Email](mailto:2350083@tongji.edu.cn)
 - [Gmail](mailto:cyhcyh070126@gmail.com)
