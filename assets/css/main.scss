@@ -46,6 +46,22 @@
   margin: 0.35rem 0 1rem;
 }
 
+:root {
+  --cv-section-heading-color: #2b67a0;
+  --cv-section-rule-color: #9bbbd6;
+}
+
+html[data-theme="dark"] {
+  --cv-section-heading-color: #8bc7f0;
+  --cv-section-rule-color: #4a86b8;
+}
+
+.cv-page > h1:not(.page__title) {
+  color: var(--cv-section-heading-color);
+  padding-bottom: 0.18em;
+  border-bottom: 1px solid var(--cv-section-rule-color);
+}
+
 .research-gallery + .cv-project,
 ul + .cv-project {
   margin-top: 1.6rem;
