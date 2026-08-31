@@ -54,6 +54,7 @@
   --research-panel-divider: rgba(15, 23, 42, 0.08);
   --research-card-hover-border: rgba(154, 100, 30, 0.28);
   --research-card-hover-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
+  --research-image-hover-shadow: 0 8px 18px rgba(15, 23, 42, 0.13);
 }
 
 html[data-theme="dark"] {
@@ -64,6 +65,7 @@ html[data-theme="dark"] {
   --research-panel-divider: rgba(255, 255, 255, 0.14);
   --research-card-hover-border: rgba(230, 184, 103, 0.35);
   --research-card-hover-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  --research-image-hover-shadow: 0 8px 18px rgba(0, 0, 0, 0.32);
 }
 
 html[data-theme="dark"] .research-card,
@@ -204,7 +206,7 @@ ul + .cv-project {
   border: 1px solid var(--global-border-color);
   border-radius: 8px;
   cursor: zoom-in;
-  transition: border-color 180ms ease;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease, border-color 180ms ease;
 }
 
 .research-card img {
@@ -215,7 +217,6 @@ ul + .cv-project {
   background: #fff;
   border: 0;
   border-radius: 7px;
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -227,24 +228,20 @@ ul + .cv-project {
 
   .research-card:hover a,
   .research-card:focus-within a {
+    transform: translateY(-3px) scale(1.012);
     border-color: var(--research-card-hover-border);
-  }
-
-  .research-card:hover img,
-  .research-card:focus-within img {
-    transform: scale(1.015);
+    box-shadow: var(--research-image-hover-shadow);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .research-card,
-  .research-card a,
-  .research-card img {
+  .research-card a {
     transition: none;
   }
 
-  .research-card:hover img,
-  .research-card:focus-within img {
+  .research-card:hover a,
+  .research-card:focus-within a {
     transform: none;
   }
 }
