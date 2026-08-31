@@ -23,7 +23,7 @@ Education
 - GPA: 87/100
 
 <div class="cv-school">
-  <img class="cv-school__seal" src="{{ '/images/schools/johns-hopkins-university-seal.png' | relative_url }}" alt="Johns Hopkins University seal">
+  <img class="cv-school__seal" src="{{ '/images/schools/johns-hopkins-university-shield.svg' | relative_url }}" alt="Johns Hopkins University shield">
   <span>Johns Hopkins University, Baltimore, MD, USA</span>
 </div>
 
