@@ -108,7 +108,13 @@ ul + .cv-project {
   margin-top: 1.6rem;
 }
 
-.cv-project__header,
+.cv-project__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 1rem;
+  align-items: baseline;
+}
+
 .cv-project__meta {
   display: flex;
   justify-content: space-between;
@@ -124,6 +130,7 @@ ul + .cv-project {
   font-size: 1.18rem;
   font-weight: 700;
   line-height: 1.4;
+  min-width: 0;
 }
 
 .cv-project__term,
@@ -133,7 +140,8 @@ ul + .cv-project {
 
 .cv-project__term {
   white-space: nowrap;
-  flex: 0 0 auto;
+  justify-self: end;
+  text-align: right;
 }
 
 .cv-school {
@@ -155,15 +163,6 @@ ul + .cv-project {
 .cv-project__meta {
   color: var(--global-text-color);
   margin-bottom: 0.7rem;
-}
-
-.cv-project--battery .cv-project__header {
-  justify-content: flex-start;
-  gap: 0.85rem;
-}
-
-.cv-project--battery .cv-project__title {
-  flex: 0 1 auto;
 }
 
 .research-gallery {
@@ -325,11 +324,20 @@ ul + .cv-project {
 }
 
 @media (max-width: 900px) {
-  .cv-project__header,
+  .cv-project__header {
+    grid-template-columns: 1fr;
+    row-gap: 0.15rem;
+  }
+
   .cv-project__meta {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.15rem;
+  }
+
+  .cv-project__term {
+    justify-self: start;
+    text-align: left;
   }
 
   .research-gallery {
