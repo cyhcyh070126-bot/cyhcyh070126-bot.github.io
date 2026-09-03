@@ -25,7 +25,7 @@ author:
   avatar           : "profile.jpg"
   name             : "Yanghao Chen"
   pronouns         : # example: "she/her"  
-  bio              : "Undergraduate&nbsp;student&nbsp;|&nbsp;Tongji&nbsp;University<br>Working on computational mechanics, finite element methods, and scientific machine learning."
+  bio              : "<span class=\"author__affiliation\">Undergraduate student | Tongji University</span><br>Working on computational mechanics, finite element methods, and scientific machine learning."
   location         : "Shanghai, China"
   employer         : "Tongji University"
   uri              :

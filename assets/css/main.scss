@@ -108,6 +108,13 @@ ul + .cv-project {
   margin-top: 1.6rem;
 }
 
+.author__affiliation {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 0.95em;
+  letter-spacing: -0.01em;
+}
+
 .cv-project__header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
