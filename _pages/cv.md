@@ -204,8 +204,8 @@ Research Experience
 - **Shock-Stabilization Strategies:** Examined residual reweighting, viscosity regularization, weak constraints, and domain decomposition, including Rankine-Hugoniot interface conditions in the XPINN formulation.
 - **Evaluation and Diagnostics:** Assessed each method through convergence histories, field profiles, and local reconstruction errors to distinguish global accuracy from shock-region performance.
 
-<div class="research-gallery research-gallery--single">
-  <figure class="research-card">
+<div class="research-gallery research-gallery--pinn">
+  <figure class="research-card research-card--pinn-overview">
     <a href="/images/research/pinn_shock_problem_framework.png" target="_blank" rel="noopener noreferrer">
       <img src="/images/research/pinn_shock_problem_framework.png" alt="Schematic of the Burgers Riemann problem and PINN framework, including coordinate inputs, automatic differentiation, and PDE, initial-condition, and boundary-condition losses." />
     </a>
@@ -221,7 +221,7 @@ Research Experience
     </a>
     <figcaption>
       <strong>Burgers Shock Motion</strong><br>
-      The exact entropy solution propagates at shock speed 0.5 for left and right states of 1 and 0. This animation illustrates the analytical reference solution, not a PINN prediction.
+      Exact entropy solution with u<sub>L</sub> = 1, u<sub>R</sub> = 0 and shock speed 0.5. Analytical reference, not a PINN prediction.
     </figcaption>
   </figure>
 
@@ -231,7 +231,7 @@ Research Experience
     </a>
     <figcaption>
       <strong>Burgers Shock Trajectory</strong><br>
-      The shock follows the exact path x<sub>s</sub>(t) = 0.5t in the space-time plane. This animation shows the analytical trajectory, not a learned shock location.
+      Exact shock path x<sub>s</sub>(t) = 0.5t in the space-time plane. Analytical reference, not a learned trajectory.
     </figcaption>
   </figure>
 </div>
