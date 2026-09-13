@@ -224,6 +224,16 @@ Research Experience
       The exact entropy solution propagates at shock speed 0.5 for left and right states of 1 and 0. This animation illustrates the analytical reference solution, not a PINN prediction.
     </figcaption>
   </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/burgers_shock_trajectory.gif" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/burgers_shock_trajectory.gif" alt="Animation of the analytical Burgers shock trajectory x_s(t) = 0.5t in the space-time plane." />
+    </a>
+    <figcaption>
+      <strong>Burgers Shock Trajectory</strong><br>
+      The shock follows the exact path x<sub>s</sub>(t) = 0.5t in the space-time plane. This animation shows the analytical trajectory, not a learned shock location.
+    </figcaption>
+  </figure>
 </div>
 
 <div class="cv-project">
