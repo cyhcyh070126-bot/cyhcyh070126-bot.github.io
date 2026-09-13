@@ -66,46 +66,46 @@ Research Experience
 - **Boundary-to-Field Operator Learning:** Trained local neural operators to infer full displacement fields from interface conditions while retaining the reaction information required for coupling with surrounding FEM domains.
 - **FEM-Consistent Coupling:** Combined displacement, strain, and interface-reaction supervision to support full-field recovery and neural-operator/FEM coupling across multiple subdomains.
 
-**Earlier Single-Hole Prototype:** The figures below document an earlier FEniCSx-supervised prototype that established the geometry, meshing, FEM-node representation, and Transolver evaluation workflow leading into the multi-subdomain framework.
+**Cylinder Subdomain Example:** Boundary conditions, domain decomposition, FEM-node representation, and a continuous stress-field comparison illustrate the neural-operator/FEM workflow.
 
 <div class="research-gallery research-gallery--prototype">
-  <figure class="research-card research-card--grf">
-    <a href="/files/research/grf_hole_extraction_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/grf_hole_extraction_preview.png" alt="Preview of GRF-based hole extraction and placement." />
+  <figure class="research-card">
+    <a href="/files/research/boundary_displacement_preview.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/boundary_displacement_preview.png" alt="Quarter-annulus cylinder subdomain with prescribed inner and outer arc displacements and straight-edge constraints." />
     </a>
     <figcaption>
-      <strong>GRF Hole Generation</strong><br>
-      A GRF field is windowed, thresholded, and converted into a smooth internal hole before placement on the plate.
+      <strong>Boundary Displacement Conditions</strong><br>
+      Prescribed displacement functions on the inner and outer arcs define the cylinder subdomain boundary conditions, together with straight-edge constraints.
     </figcaption>
   </figure>
 
   <figure class="research-card">
-    <a href="/files/research/plate_partition_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/plate_partition_preview.png" alt="Preview of plate partition and subdomain finite element mesh." />
+    <a href="/files/research/domain_decomposition_preview.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/domain_decomposition_preview.png" alt="Full cylinder-domain mesh, outer-domain mesh, and extracted quarter-annulus subdomain mesh." />
     </a>
     <figcaption>
-      <strong>FEM-Consistent Meshing</strong><br>
-      The local subdomain is extracted from the whole plate mesh while preserving a mechanics-consistent finite element discretization.
+      <strong>Domain Decomposition</strong><br>
+      The full finite element mesh is partitioned into an outer domain and a local subdomain with an identified coupling interface.
     </figcaption>
   </figure>
 
   <figure class="research-card">
-    <a href="/files/research/plate_mesh_point_cloud_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/plate_mesh_point_cloud_preview.png" alt="Preview showing the FE mesh and the Transolver input point cloud extracted from FEM nodes." />
+    <a href="/files/research/subdomain_point_cloud_preview.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/subdomain_point_cloud_preview.png" alt="Subdomain location, finite element mesh, and point cloud with blue interior nodes and red boundary nodes." />
     </a>
     <figcaption>
-      <strong>FEM Node Point Cloud</strong><br>
-      The Transolver input point cloud is built directly from FEM mesh nodes, which keeps learning and later FEM-based post-processing tightly aligned.
+      <strong>Subdomain Point Cloud</strong><br>
+      The point cloud is built directly from 4,102 FEM nodes, with 3,847 interior nodes and 255 boundary nodes identified for operator learning.
     </figcaption>
   </figure>
 
   <figure class="research-card">
-    <a href="/files/research/prediction.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/prediction_preview.png" alt="Prediction comparison between ground truth, prediction, and error fields." />
+    <a href="/files/research/sweep_001_sigma_xx_continuous.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Continuous sigma xx stress-field ground truth, prediction, and absolute error at coupling sweep 001; relative L2 error 0.6262 percent." />
     </a>
     <figcaption>
-      <strong>Transolver Operator Prediction</strong><br>
-      A Transolver-based neural operator predicts displacement fields across varying hole shapes, boundary displacement functions, materials, and positions, and is evaluated against FEniCSx reference solutions.
+      <strong>Continuous Stress-Field Evaluation</strong><br>
+      Ground truth, prediction, and absolute error for &sigma;<sub>xx</sub> at coupling sweep 001, with a relative L<sub>2</sub> error of 0.6262% for this field comparison.
     </figcaption>
   </figure>
 </div>
