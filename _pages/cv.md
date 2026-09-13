@@ -206,12 +206,22 @@ Research Experience
 
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
-    <a href="/images/research/pinn_workflow_v2.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/pinn_workflow_v2.png" alt="Workflow diagram showing the shock problem, Vanilla PINN smearing, PINN architecture, stabilization strategies, and sharper shock reconstruction." />
+    <a href="/images/research/pinn_shock_problem_framework.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/pinn_shock_problem_framework.png" alt="Schematic of the Burgers Riemann problem and PINN framework, including coordinate inputs, automatic differentiation, and PDE, initial-condition, and boundary-condition losses." />
     </a>
     <figcaption>
-      <strong>PINN Shock-Capturing Workflow</strong><br>
-      A method-oriented overview from shock-dominated conservation-law problems and Vanilla PINN smearing to PINN architectures, stabilization strategies, and sharper local shock reconstruction.
+      <strong>Shock Problem and PINN Framework</strong><br>
+      A schematic overview of the Burgers Riemann problem and PINN training with PDE, initial-condition, and boundary-condition losses.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/burgers_shock_motion.gif" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/burgers_shock_motion.gif" alt="Animation of the exact entropy solution of the inviscid Burgers equation, with left state 1, right state 0, and shock position x_s(t) = t/2." />
+    </a>
+    <figcaption>
+      <strong>Burgers Shock Motion</strong><br>
+      The exact entropy solution propagates at shock speed 0.5 for left and right states of 1 and 0. This animation illustrates the analytical reference solution, not a PINN prediction.
     </figcaption>
   </figure>
 </div>
