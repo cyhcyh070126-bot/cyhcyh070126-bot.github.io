@@ -234,6 +234,26 @@ Research Experience
       Exact shock path x<sub>s</sub>(t) = 0.5t in the space-time plane. Analytical reference, not a learned trajectory.
     </figcaption>
   </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/burgers_standard_pinn_prediction.gif" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/burgers_standard_pinn_prediction.gif" alt="Animation comparing the standard PINN prediction with the exact solution of the inviscid Burgers equation." />
+    </a>
+    <figcaption>
+      <strong>Standard PINN Prediction</strong><br>
+      The standard formulation produces a smeared transition and local oscillations around the moving discontinuity.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" alt="Animation comparing an artificial-viscosity PINN prediction with the exact Burgers shock solution." />
+    </a>
+    <figcaption>
+      <strong>Artificial-Viscosity PINN Prediction</strong><br>
+      Artificial-viscosity regularization with &nu; = 10<sup>&minus;3</sup> suppresses oscillations and recovers a sharper shock profile.
+    </figcaption>
+  </figure>
 </div>
 
 <div class="cv-project">
