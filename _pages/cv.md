@@ -43,17 +43,17 @@ Current Research
 ======
 
 - GPU-accelerated JAX-FEM data generation for mechanics
-- Physics-Attention Transolver subdomain operators
-- Boundary-to-field learning for multi-subdomain problems
-- FEM-consistent displacement, strain, and interface-reaction supervision
+- Physics-Attention Transolver models for local mechanics surrogates
+- Interface-displacement-to-field and reaction learning
+- Hybrid FEM–neural operator coupling with interface residual diagnostics
 
 Research Experience
 ======
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">1. GPU-Accelerated Neural Operator Framework for Multi-Subdomain Mechanics</div>
-    <div class="cv-project__term">Jan. 2026 - Present</div>
+    <div class="cv-project__title">1. GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework</div>
+    <div class="cv-project__term">Jul. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
     <span><em>Lead Undergraduate Researcher; Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
@@ -61,10 +61,10 @@ Research Experience
   </div>
 </div>
 
-- **Multi-Subdomain Framework:** Built a non-overlapping domain-decomposition framework for 2D cylinder, 3D bracket, and multi-fiber mechanics, integrating GPU-accelerated JAX-FEM simulations with Physics-Attention Transolver training.
-- **FEM Data and Interface Representation:** Generated displacement, strain, and interface-reaction fields with JAX-FEM and organized boundary and interface conditions as inputs for subdomain operator learning.
-- **Boundary-to-Field Operator Learning:** Trained local neural operators to infer full displacement fields from interface conditions while retaining the reaction information required for coupling with surrounding FEM domains.
-- **FEM-Consistent Coupling:** Combined displacement, strain, and interface-reaction supervision to support full-field recovery and neural-operator/FEM coupling across multiple subdomains.
+- **Hybrid FEM–NO Decomposition:** Partitioned mechanics problems into an outer FEM domain and an inner neural-operator subdomain connected through a shared interface.
+- **GPU-Accelerated Training Data:** Used JAX-FEM to generate displacement, strain, stress, and interface-reaction data for training Physics-Attention Transolver models.
+- **Boundary-to-Field Operator Learning:** Trained neural operators to map prescribed interface displacements to inner-domain mechanics fields and interface reactions.
+- **Iterative Interface Coupling:** Developed an FEM–NO exchange procedure in which the outer FEM model returns interface displacements and the inner neural operator returns reactions, with displacement and force residuals used to assess convergence.
 
 **Cylinder Subdomain Example:** Boundary conditions, domain decomposition, FEM-node representation, and a continuous stress-field comparison illustrate the neural-operator/FEM workflow.
 
