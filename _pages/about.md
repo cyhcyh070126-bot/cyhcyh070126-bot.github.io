@@ -18,20 +18,16 @@ News
 <div class="home-news">
   <div class="home-news__list">
     <article class="home-news__item">
-      <div class="home-news__date">Jul 2026</div>
-      <div class="home-news__content">Began a visiting undergraduate research internship in the <a href="https://engineering.jhu.edu/case/" target="_blank" rel="noopener noreferrer">Department of Civil and Systems Engineering</a> at Johns Hopkins University, advised by <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>.</div>
-    </article>
-    <article class="home-news__item">
       <div class="home-news__date">May 2026</div>
-      <div class="home-news__content">Extended the GPU-accelerated neural-operator framework to 2D, 3D, and multi-fiber mechanics, combining JAX-FEM simulation with Physics-Attention Transolver training and FEM-consistent supervision.</div>
+      <div class="home-news__content">Extended the mechanics data-generation and neural-operator training workflow to 2D, 3D, and multi-fiber examples, combining GPU-accelerated JAX-FEM simulations with Physics-Attention Transolver models.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jan 2026</div>
-      <div class="home-news__content">Started a GPU-accelerated neural-operator framework for multi-subdomain mechanics using JAX-FEM and Physics-Attention Transolver.</div>
+      <div class="home-news__content">Began a visiting undergraduate research internship in the <a href="https://engineering.jhu.edu/case/" target="_blank" rel="noopener noreferrer">Department of Civil and Systems Engineering</a> at Johns Hopkins University, advised by <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>, working on a GPU-accelerated hybrid FEM–neural operator coupling framework.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Nov 2025</div>
-      <div class="home-news__content">Worked on PINN methods for shock-dominated conservation laws and compared multiple stabilization strategies.</div>
+      <div class="home-news__content">Worked on PINNs for shock capturing in the one-dimensional Burgers equation and explored multiple stabilization strategies.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jun 2025</div>

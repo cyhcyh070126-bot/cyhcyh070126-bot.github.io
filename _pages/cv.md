@@ -28,8 +28,8 @@ Education
 </div>
 
 - Visiting Undergraduate Research Intern, Department of Civil and Systems Engineering
-- Jul. 2026 - Oct. 2026
-- Research focus: Transolver framework and physics-informed neural operators for PDEs
+- Jan. 2026 - Oct. 2026
+- Research focus: GPU-accelerated FEM and hybrid FEM–neural operator coupling
 
 Research Interests
 ======
@@ -44,7 +44,7 @@ Current Research
 
 - GPU-accelerated JAX-FEM data generation for mechanics
 - Physics-Attention Transolver models for local mechanics surrogates
-- Interface-displacement-to-field and reaction learning
+- Boundary-to-field operator learning and interface displacement–reaction exchange
 - Hybrid FEM–neural operator coupling with interface residual diagnostics
 
 Research Experience
@@ -53,7 +53,7 @@ Research Experience
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title">1. GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework</div>
-    <div class="cv-project__term">Jul. 2026 - Present</div>
+    <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
     <span><em>Lead Undergraduate Researcher; Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
@@ -63,8 +63,8 @@ Research Experience
 
 - **Hybrid FEM–NO Decomposition:** Partitioned mechanics problems into an outer FEM domain and an inner neural-operator subdomain connected through a shared interface.
 - **GPU-Accelerated Training Data:** Used JAX-FEM to generate displacement, strain, stress, and interface-reaction data for training Physics-Attention Transolver models.
-- **Boundary-to-Field Operator Learning:** Trained neural operators to map prescribed interface displacements to inner-domain mechanics fields and interface reactions.
-- **Iterative Interface Coupling:** Developed an FEM–NO exchange procedure in which the outer FEM model returns interface displacements and the inner neural operator returns reactions, with displacement and force residuals used to assess convergence.
+- **Boundary-to-Field Operator Learning:** Trained Physics-Attention Transolver models to predict local displacement fields from prescribed boundary conditions, incorporating displacement, strain, and interface-reaction supervision.
+- **Iterative Interface Coupling:** Implemented interface displacement–reaction exchange between the outer FEM domain and the local surrogate, monitoring displacement and force residuals to assess coupling convergence.
 
 **Cylinder Subdomain Example:** Boundary conditions, domain decomposition, FEM-node representation, and a continuous stress-field comparison illustrate the neural-operator/FEM workflow.
 
@@ -122,9 +122,9 @@ Research Experience
 </div>
 
 - **Simulation Data Generation:** Automated statistically distributed polycrystalline NMC microstructure generation and electro-chemo-mechanical simulation through MATLAB-COMSOL LiveLink, producing aligned lithium-concentration and von Mises stress sequences.
-- **Conditional ConvLSTM Surrogate:** Trained a three-layer ConvLSTM that conditions autoregressive two-dimensional concentration- and stress-field predictions on grain-orientation and C-rate information.
-- **Long-Horizon Training:** Combined an MSE-SSIM hybrid loss, scheduled sampling, and patch-based training to preserve spatial structure and limit error accumulation over multi-step rollouts.
-- **Field Prediction Evaluation:** Compared predicted concentration and stress sequences with COMSOL reference fields through frame-wise visualizations and spatial error maps.
+- **Conditional ConvLSTM Surrogates:** Trained separate three-layer conditional ConvLSTM models to autoregressively predict concentration or stress RGB image sequences from past field frames, grain-orientation maps, and C-rate information.
+- **Long-Horizon Training:** Combined image-space MSE-SSIM loss, scheduled sampling, and patch-based training to target spatial fidelity and reduce error accumulation during multi-step prediction.
+- **Image-Space Evaluation:** Compared predicted field images with COMSOL-rendered reference sequences using frame-wise visualizations and pixel-wise error maps; MSE and SSIM measure image-space agreement.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
@@ -190,7 +190,7 @@ Research Experience
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">3. PINNs for Shock Capturing in Nonlinear Conservation Laws</div>
+    <div class="cv-project__title">3. PINNs for Shock Capturing in the Burgers Equation</div>
     <div class="cv-project__term">Nov. 2025 - Mar. 2026</div>
   </div>
   <div class="cv-project__meta">
@@ -199,7 +199,7 @@ Research Experience
   </div>
 </div>
 
-- **Problem Formulation:** Created PyTorch benchmarks for inviscid Burgers and Buckley-Leverett equations, with reference solutions and diagnostics focused on discontinuities and local shock errors.
+- **Problem Formulation:** Built PyTorch PINN implementations for the one-dimensional inviscid Burgers equation, using analytical shock solutions for reference and local-error diagnostics.
 - **Comparative PINN Study:** Implemented and compared Vanilla, gradient-weighted, weak-form, XPINN, relaxation, and global/adaptive artificial-viscosity PINNs.
 - **Shock-Stabilization Strategies:** Examined residual reweighting, viscosity regularization, weak constraints, and domain decomposition, including Rankine-Hugoniot interface conditions in the XPINN formulation.
 - **Evaluation and Diagnostics:** Assessed each method through convergence histories, field profiles, and local reconstruction errors to distinguish global accuracy from shock-region performance.
