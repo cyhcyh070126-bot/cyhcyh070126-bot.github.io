@@ -42,10 +42,10 @@ Research Interests
 Current Research
 ======
 
-- GPU-accelerated JAX-FEM data generation for mechanics
-- Transolver models for local stress-field prediction
-- Interface-displacement-to-stress operator learning
-- Stress-based reaction-force assembly and iterative FEM–neural operator coupling
+- GPU-accelerated finite element methods for computational mechanics
+- Neural operator learning of mappings from interface displacement fields to subdomain stress fields
+- Stress-based assembly of interface reaction forces
+- Iterative coupling of finite element solvers and neural operators
 
 Research Experience
 ======
@@ -63,7 +63,7 @@ Research Experience
 
 - **Hybrid FEM–NO Framework:** Developed a hybrid framework combining an outer finite element domain with a local neural-operator subdomain connected through a shared interface.
 - **GPU-Accelerated Training Data:** Used JAX-FEM to generate displacement and stress fields for training the local neural operator.
-- **Displacement-to-Stress Learning:** Trained Transolver models to predict local stress fields from prescribed interface displacements.
+- **Displacement-to-Stress Operator Learning:** Trained Transolver models to learn the operator mapping from prescribed interface displacement fields to local stress fields.
 - **Stress-Based Interface Coupling:** Assembled interface reaction forces from the predicted stresses and returned them to the outer FEM solver, which updated the interface displacements for the next coupling iteration.
 
 **Cylinder Subdomain Example:** Boundary conditions, domain decomposition, FEM-node representation, and a continuous stress-field comparison illustrate the neural-operator/FEM workflow.
