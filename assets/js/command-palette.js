@@ -7,6 +7,22 @@
       .toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
   }
 
+  function indexEntries(entries) {
+    return entries.map(function (entry, order) {
+      var children = entry.children ? indexEntries(entry.children) : undefined;
+      var childText = (children || []).map(function (child) {
+        return child.titleIndex + " " + child.keywordIndex + " " + child.bodyIndex;
+      }).join(" ");
+      return Object.assign({}, entry, {
+        children: children,
+        order: order,
+        titleIndex: normalize(entry.title),
+        keywordIndex: normalize((entry.keywords || "") + " " + entry.group),
+        bodyIndex: normalize((entry.body || "") + " " + childText)
+      });
+    });
+  }
+
   function buildEntries(data, doc) {
     if (!data.home || !data.cv || typeof data.cv.html !== "string") throw new Error("Invalid search index");
     // A template is inert: indexed images/scripts are never inserted into the page.
@@ -20,7 +36,9 @@
     var entries = [];
     function add(group, title, url, keywords, body) {
       if (!title || !url || !/^(\/|https:\/\/|mailto:)/.test(url) || url.startsWith("//")) return;
-      entries.push({ group: group, title: title, url: url, keywords: keywords || "", body: body || "" });
+      var entry = { group: group, title: title, url: url, keywords: keywords || "", body: body || "" };
+      entries.push(entry);
+      return entry;
     }
     add("Navigation", "Home", data.home.url, "about biography 首页 主页 个人介绍", home.querySelector("p")?.textContent);
     add("Navigation", "CV", data.cv.url, "resume curriculum vitae 简历");
@@ -34,32 +52,54 @@
       "burgers-pinn": "PINN Burgers shock artificial viscosity 激波 人工粘性 人工黏性",
       "mechanics-llm": "LLM Qwen LoRA language model materials mechanics 大模型 材料力学 微调"
     };
+    var projects = [];
     cv.querySelectorAll(".cv-project__title[id]").forEach(function (heading) {
       var project = heading.closest(".cv-project");
       var body = project.textContent;
+      var nodes = [project];
       for (var node = project.nextElementSibling; node; node = node.nextElementSibling) {
         if (node.matches(".cv-project, h1, h2, h3, h4, h5, h6")) break;
         body += " " + node.textContent;
+        nodes.push(node);
       }
       // Titles are read from the CV, not duplicated or replaced with acronyms.
-      add("Research", heading.textContent.replace(/^\s*\d+\.\s*/, "").trim(),
+      var entry = add("Research", heading.textContent.replace(/^\s*\d+\.\s*/, "").trim(),
         data.cv.url + "#" + heading.id, aliases[heading.id], body);
+      projects.push({ entry: entry, nodes: nodes });
     });
     if (entries.filter(function (entry) { return entry.group === "Research"; }).length === 0) {
       throw new Error("Research headings are missing");
     }
 
     var released = new Set();
+    projects.forEach(function (project) {
+      var children = [];
+      var seen = new Set();
+      project.nodes.forEach(function (node) {
+        node.querySelectorAll("a[href]").forEach(function (link) {
+          var url = link.getAttribute("href");
+          if (seen.has(url) || !/^https:\/\/huggingface\.co\/(datasets\/)?[^/]+\/.+/.test(url)) return;
+          var isDataset = url.includes("/datasets/");
+          var name = decodeURIComponent(url.split("/").pop());
+          var label = isDataset ? name : link.textContent.trim() || name;
+          children.push({
+            group: isDataset ? "Datasets" : "Models",
+            title: label.charAt(0).toUpperCase() + label.slice(1),
+            url: url,
+            keywords: name + " " + (isDataset ? "dataset instruction data 数据集" : "model checkpoint Qwen LoRA 模型 权重")
+          });
+          seen.add(url);
+        });
+      });
+      if (!children.length) return;
+      var collection = add("Resources", project.entry.title, project.entry.url,
+        project.entry.keywords + " resources models datasets 资源 模型 数据集");
+      collection.children = children;
+    });
     cv.querySelectorAll("a[href]").forEach(function (link) {
       var url = link.getAttribute("href");
       if (released.has(url)) return;
-      if (/^https:\/\/huggingface\.co\/(datasets\/)?[^/]+\/.+/.test(url)) {
-        var isDataset = url.includes("/datasets/");
-        var name = decodeURIComponent(url.split("/").pop());
-        add("Resources", name, url,
-          isDataset ? "dataset instruction data 数据集" : "model checkpoint Qwen LoRA 模型 权重");
-        released.add(url);
-      } else if (/\.pdf(?:[?#].*)?$/i.test(url) && /\b(cv|resume)\b/i.test(link.textContent)) {
+      if (/\.pdf(?:[?#].*)?$/i.test(url) && /\b(cv|resume)\b/i.test(link.textContent)) {
         add("Resources", "CV PDF", url, "download resume 简历 下载");
         released.add(url);
       }
@@ -75,14 +115,7 @@
     if (contact.linkedin) add("Contact & Links", "LinkedIn", "https://www.linkedin.com/in/" + contact.linkedin + "/", "linkedin contact 领英 联系");
     if (contact.github) add("Contact & Links", "GitHub", "https://github.com/" + contact.github, "github code repository 代码 仓库");
     if (contact.huggingface) add("Contact & Links", "Hugging Face", "https://huggingface.co/" + contact.huggingface, "huggingface hf models datasets 模型 数据集");
-    return entries.map(function (entry, order) {
-      return Object.assign(entry, {
-        order: order,
-        titleIndex: normalize(entry.title),
-        keywordIndex: normalize(entry.keywords + " " + entry.group),
-        bodyIndex: normalize(entry.body)
-      });
-    });
+    return indexEntries(entries);
   }
 
   function searchEntries(entries, query) {
@@ -106,7 +139,7 @@
   }
 
   // Keep the indexing/ranking functions testable without a browser or live service.
-  if (typeof module !== "undefined" && module.exports) module.exports = { buildEntries: buildEntries, searchEntries: searchEntries, normalize: normalize };
+  if (typeof module !== "undefined" && module.exports) module.exports = { buildEntries: buildEntries, searchEntries: searchEntries, normalize: normalize, indexEntries: indexEntries };
   if (typeof document === "undefined") return;
   var dialog = document.getElementById("site-search");
   var trigger = document.querySelector(".site-search-toggle");
@@ -117,9 +150,17 @@
   var message = dialog.querySelector(".site-search__message");
   var retry = dialog.querySelector(".site-search__retry");
   var body = dialog.querySelector(".site-search__body");
+  var context = dialog.querySelector(".site-search__context");
+  var contextTitle = dialog.querySelector(".site-search__context-title");
+  var back = dialog.querySelector(".site-search__back");
+  var backHint = dialog.querySelector(".site-search__back-hint");
+  var defaultPlaceholder = input.placeholder;
+  var collection = null;
+  var rootState = null;
   var entries = null;
   var loading = null;
   var options = [];
+  var optionEntries = [];
   var selected = -1;
   var previousFocus = null;
   var announceTimer;
@@ -141,15 +182,42 @@
   function clearResults() {
     results.replaceChildren();
     options = [];
+    optionEntries = [];
     selected = -1;
     input.removeAttribute("aria-activedescendant");
+  }
+  function showContext() {
+    context.hidden = !collection;
+    backHint.hidden = !collection;
+    contextTitle.textContent = collection ? collection.title : "";
+    input.placeholder = collection ? "Search this project's resources…" : defaultPlaceholder;
+    if (collection) input.setAttribute("aria-label", "Search resources for " + collection.title);
+    else input.removeAttribute("aria-label");
+  }
+  function enterCollection(entry) {
+    rootState = { query: input.value, selected: optionEntries.indexOf(entry), scrollTop: body.scrollTop };
+    collection = entry;
+    input.value = "";
+    showContext();
+    render();
+    input.focus({ preventScroll: true });
+  }
+  function goBack() {
+    if (!collection) return;
+    collection = null;
+    input.value = rootState.query;
+    showContext();
+    render();
+    select(rootState.selected, false);
+    body.scrollTop = rootState.scrollTop;
+    input.focus({ preventScroll: true });
   }
   function render() {
     if (!entries || !dialog.open) return;
     clearResults();
-    var matches = searchEntries(entries, input.value);
+    var matches = searchEntries(collection ? collection.children : entries, input.value);
     message.hidden = matches.length > 0;
-    message.textContent = matches.length ? "" : "No matches. Try a project name, topic, or contact.";
+    message.textContent = matches.length ? "" : collection ? "No matching resources in this project." : "No matches. Try a project name, topic, or contact.";
     retry.hidden = true;
     var groups = new Map();
     matches.forEach(function (entry) {
@@ -166,10 +234,14 @@
       group.setAttribute("aria-labelledby", label.id);
       group.append(label);
       groupEntries.forEach(function (entry) {
-        var link = document.createElement("a");
+        var isCollection = !!entry.children;
+        var link = document.createElement(isCollection ? "button" : "a");
         link.className = "site-search__option";
         link.id = "search-option-" + options.length;
-        link.href = entry.url;
+        if (isCollection) {
+          link.type = "button";
+          link.setAttribute("aria-label", entry.title + " — browse resources");
+        } else link.href = entry.url;
         link.tabIndex = -1;
         link.setAttribute("role", "option");
         link.setAttribute("aria-selected", "false");
@@ -186,9 +258,7 @@
         title.className = "site-search__option-title";
         title.textContent = entry.title;
         link.append(title);
-        if (/^https:\/\//.test(entry.url)) {
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
+        if (isCollection || /^https:\/\//.test(entry.url)) {
           var indicator = document.createElementNS("http://www.w3.org/2000/svg", "svg");
           indicator.setAttribute("class", "site-search__option-kind");
           indicator.setAttribute("viewBox", "0 0 24 24");
@@ -198,23 +268,31 @@
           indicator.setAttribute("stroke-linecap", "round");
           indicator.setAttribute("stroke-linejoin", "round");
           var arrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          arrow.setAttribute("d", "M7 17 17 7M7 7h10v10");
+          arrow.setAttribute("d", isCollection ? "m9 5 7 7-7 7" : "M7 17 17 7M7 7h10v10");
           indicator.append(arrow);
           indicator.setAttribute("aria-hidden", "true");
-          link.setAttribute("aria-label", entry.title + " (opens in a new tab)");
+          if (!isCollection) {
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.setAttribute("aria-label", entry.title + " (opens in a new tab)");
+          }
           link.append(indicator);
         }
         var index = options.length;
         link.addEventListener("pointermove", function (event) { if (event.pointerType !== "touch") select(index, false); });
-        link.addEventListener("click", function () { dialog.close(); });
+        link.addEventListener("click", function () {
+          if (isCollection) enterCollection(entry);
+          else dialog.close();
+        });
         options.push(link);
+        optionEntries.push(entry);
         group.append(link);
       });
       results.append(group);
     });
     select(0, false);
     body.scrollTop = 0;
-    announce(matches.length + (matches.length === 1 ? " result" : " results"));
+    announce((collection ? collection.title + ": " : "") + matches.length + (matches.length === 1 ? " result" : " results"));
   }
   function load() {
     if (entries) { render(); return Promise.resolve(); }
@@ -241,6 +319,9 @@
   function open() {
     if (dialog.open) { input.focus(); return; }
     previousFocus = document.activeElement;
+    collection = null;
+    rootState = null;
+    showContext();
     input.value = "";
     dialog.showModal();
     document.documentElement.classList.add("site-search-open");
@@ -251,6 +332,7 @@
   trigger.addEventListener("click", open);
   dialog.querySelector(".site-search__close").addEventListener("click", function () { dialog.close(); });
   retry.addEventListener("click", load);
+  back.addEventListener("click", goBack);
   dialog.addEventListener("close", function () {
     document.documentElement.classList.remove("site-search-open");
     input.setAttribute("aria-expanded", "false");
@@ -269,6 +351,7 @@
   dialog.addEventListener("keydown", function (event) {
     if (event.key !== "Tab") return;
     var focusable = [input, dialog.querySelector(".site-search__close")];
+    if (!context.hidden) focusable.push(back);
     if (!retry.hidden) focusable.push(retry);
     var current = focusable.indexOf(document.activeElement);
     event.preventDefault();
@@ -284,6 +367,12 @@
     } else if (event.key === "Enter") {
       event.preventDefault();
       if (selected >= 0 && options[selected]) options[selected].click();
+    } else if (event.key === "ArrowRight" && optionEntries[selected]?.children) {
+      event.preventDefault();
+      enterCollection(optionEntries[selected]);
+    } else if (collection && ((event.key === "Backspace" && !input.value) || (event.key === "ArrowLeft" && event.altKey))) {
+      event.preventDefault();
+      goBack();
     }
   });
   document.addEventListener("keydown", function (event) {
