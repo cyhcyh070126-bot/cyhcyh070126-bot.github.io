@@ -42,9 +42,9 @@
     }
     add("Navigation", "Home", data.home.url, "about biography 首页 主页 个人介绍", home.querySelector("p")?.textContent);
     add("Navigation", "CV", data.cv.url, "resume curriculum vitae 简历");
+    if (data.projects) add("Navigation", "Projects", data.projects.url, "projects repository repositories 项目 课题 仓库");
     add("Navigation", "News", data.home.url + "#news", "updates timeline 新闻 动态", home.querySelector(".home-news")?.textContent);
     add("Navigation", "Education", data.cv.url + "#education", "university tongji jhu 教育 同济 约翰霍普金斯");
-    add("Navigation", "Research Experience", data.cv.url + "#research-experience", "research experience 科研经历 项目");
 
     var aliases = {
       "fem-neural-operator": "FEM NO FEM-NO JAX Transolver GPU cylinder bracket fiber fibre composite 3D 三维 纤维 复合材料 有限元 神经算子 应力 耦合",
@@ -63,12 +63,12 @@
         nodes.push(node);
       }
       // Titles are read from the CV, not duplicated or replaced with acronyms.
-      var entry = add("Research", heading.textContent.replace(/^\s*\d+\.\s*/, "").trim(),
-        data.cv.url + "#" + heading.id, aliases[heading.id], body);
+      var entry = add("Projects", heading.textContent.replace(/^\s*\d+\.\s*/, "").trim(),
+        (data.projects?.url || data.cv.url) + "#" + heading.id, aliases[heading.id], body);
       projects.push({ entry: entry, nodes: nodes });
     });
-    if (entries.filter(function (entry) { return entry.group === "Research"; }).length === 0) {
-      throw new Error("Research headings are missing");
+    if (entries.filter(function (entry) { return entry.group === "Projects"; }).length === 0) {
+      throw new Error("Project headings are missing");
     }
 
     var released = new Set();

@@ -1,0 +1,24 @@
+---
+layout: archive
+title: "Projects"
+permalink: /projects/
+author_profile: false
+projects_page: true
+description: "Research projects in computational mechanics and scientific machine learning."
+---
+
+<div class="project-list">
+  {% for project in site.data.projects %}
+  <article class="project-list__item" aria-labelledby="{{ project.id }}" id="project-{{ project.id }}">
+    <h2 class="project-list__title" id="{{ project.id }}">
+      <a href="{{ project.research_url | relative_url }}">{{ project.title | escape }}</a>
+    </h2>
+    <p class="project-list__description">{{ project.description | escape }}</p>
+    {% if project.repository and project.repository != '' %}
+    <a class="project-list__repository" href="{{ project.repository | escape }}" target="_blank" rel="noopener noreferrer" aria-label="Repository for {{ project.title | escape }} (opens in a new tab)">Repository <span aria-hidden="true">↗</span></a>
+    {% else %}
+    <span class="project-list__repository project-list__repository--pending" role="link" aria-disabled="true" aria-label="Repository for {{ project.title | escape }}: link not yet available" title="Repository link will be added.">Repository <span aria-hidden="true">↗</span></span>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>

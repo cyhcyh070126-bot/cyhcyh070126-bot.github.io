@@ -1,0 +1,34 @@
+- id: fem-neural-operator
+  title: GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework
+  description: >-
+    A hybrid framework coupling an outer FEM domain with a local neural operator
+    that maps interface displacements to stress fields. Stress-derived interface
+    reactions connect the two solvers through iterative coupling.
+  research_url: /cv/#fem-neural-operator
+  repository:
+
+- id: convlstm-battery
+  title: ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials
+  description: >-
+    Separate conditional ConvLSTM models for autoregressive prediction of
+    concentration or stress images in battery materials, trained and evaluated
+    using COMSOL-rendered field sequences.
+  research_url: /cv/#convlstm-battery
+  repository:
+
+- id: burgers-pinn
+  title: PINNs for Shock Capturing in the Burgers Equation
+  description: >-
+    A study of standard and constant-artificial-viscosity PINNs for a
+    one-dimensional Burgers shock problem, comparing their predicted profiles
+    with the analytical inviscid reference.
+  research_url: /cv/#burgers-pinn
+  repository:
+
+- id: mechanics-llm
+  title: Domain-Specific LLM Fine-Tuning for Mechanics of Materials
+  description: >-
+    LoRA fine-tuning of Qwen2.5-7B for question answering in mechanics of materials,
+    with curated instruction datasets and model checkpoints released on Hugging Face.
+  research_url: /cv/#mechanics-llm
+  repository:

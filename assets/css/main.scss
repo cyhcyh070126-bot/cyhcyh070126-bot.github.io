@@ -97,6 +97,81 @@ html[data-theme="dark"] .research-card figcaption strong {
   padding-left: 0;
 }
 
+.archive.projects-page {
+  float: none;
+  width: 100%;
+  margin-right: 0;
+  padding-left: 0;
+}
+
+.projects-page > .page__title {
+  color: var(--cv-section-heading-color);
+  margin-bottom: 1.4rem;
+}
+
+.project-list {
+  max-width: 1160px;
+}
+
+.project-list__item {
+  padding: 1.35rem 0 1.5rem;
+  scroll-margin-top: 90px;
+}
+
+.project-list__item + .project-list__item {
+  border-top: 1px solid var(--global-border-color);
+}
+
+.project-list__title {
+  scroll-margin-top: 90px;
+  margin: 0 0 0.45rem;
+  padding: 0;
+  border: 0;
+  font-size: 1.14rem;
+  line-height: 1.45;
+}
+
+.project-list__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-list__title a:hover {
+  color: var(--cv-section-heading-color);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.project-list__description {
+  margin: 0 0 0.45rem;
+  line-height: 1.65;
+}
+
+.project-list__repository {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  min-height: 2rem;
+  color: var(--cv-section-heading-color);
+  font-size: 0.94rem;
+  text-decoration: none;
+}
+
+a.project-list__repository:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.project-list__repository--pending {
+  cursor: default;
+}
+
+.project-list a:focus-visible {
+  outline: 2px solid var(--cv-section-heading-color);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
 .home-page__title {
   color: var(--cv-section-heading-color);
 }
