@@ -18,8 +18,8 @@ News
 <div class="home-news">
   <div class="home-news__list">
     <article class="home-news__item">
-      <div class="home-news__date">May 2026</div>
-      <div class="home-news__content">Extended the mechanics data-generation and neural-operator training workflow to 2D, 3D, and multi-fiber examples, combining GPU-accelerated JAX-FEM simulations with Physics-Attention Transolver models.</div>
+      <div class="home-news__date">Jul–Sep 2026</div>
+      <div class="home-news__content"><strong>Research progress:</strong> Advanced the hybrid FEM–neural operator workflow through cylinder, 3D bracket, and multi-fiber composite studies. Ongoing work targets a shared displacement-to-stress operator for reuse across fiber subdomains and coupling with the surrounding FEM matrix. Fiber-end effects on local stress prediction and interface-force transfer are a focus for further investigation. <a href="/cv/#research-experience">View the 100-fiber composite mesh and ongoing work.</a></div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jan 2026</div>
