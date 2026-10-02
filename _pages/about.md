@@ -18,15 +18,15 @@ News
 <div class="home-news">
   <div class="home-news__list">
     <article class="home-news__item">
-      <div class="home-news__date">Sep 15, 2026*</div>
+      <div class="home-news__date">Sep 2026</div>
       <div class="home-news__content"><strong>3D fiber-reinforced composite extension:</strong> Extending the hybrid FEM–neural operator framework to a <strong>three-dimensional composite containing 100 fibers</strong>. The goal is to train <strong>a single shared neural operator for all 100 fibers</strong>, using the same model parameters to map each fiber's interface displacement field to its 3D stress field. Interface reactions assembled from these predicted stresses are then passed to the surrounding FEM matrix in the proposed coupling scheme. Current research questions include generalization across fibers and the influence of fiber-end effects on stress prediction and interface-force transfer. <a href="/cv/#research-experience">View the 3D composite mesh cross-section and ongoing work.</a></div>
     </article>
     <article class="home-news__item">
-      <div class="home-news__date">Aug 15, 2026*</div>
+      <div class="home-news__date">Aug 2026</div>
       <div class="home-news__content"><strong>3D bracket studies:</strong> Extended the mechanics data-generation and neural-operator workflow to three-dimensional bracket examples, exploring the mapping from interface displacement fields to local stress responses for hybrid FEM–neural operator coupling.</div>
     </article>
     <article class="home-news__item">
-      <div class="home-news__date">Jul 15, 2026*</div>
+      <div class="home-news__date">Jul 2026</div>
       <div class="home-news__content"><strong>Cylinder coupling studies:</strong> Developed a cylinder example combining an outer FEM domain with a local neural operator. The operator maps interface displacements to subdomain stresses, from which interface reaction forces are assembled for iterative displacement–force exchange.</div>
     </article>
     <article class="home-news__item">
@@ -51,8 +51,6 @@ News
     </article>
   </div>
 </div>
-
-<p><small>* The July–September dates are representative mid-month markers for the research timeline, not verified milestone dates.</small></p>
 
 Current Research
 ======
