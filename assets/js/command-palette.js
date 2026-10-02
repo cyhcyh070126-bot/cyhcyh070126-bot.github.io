@@ -173,6 +173,15 @@
         link.tabIndex = -1;
         link.setAttribute("role", "option");
         link.setAttribute("aria-selected", "false");
+        if (entry.group === "Contact & Links") {
+          var contactIcon = document.createElement("i");
+          var iconClass = entry.url.startsWith("mailto:") ? "fa-solid fa-envelope" :
+            entry.title === "LinkedIn" ? "fa-brands fa-linkedin" :
+            entry.title === "GitHub" ? "fa-brands fa-github" : "fa-solid fa-robot";
+          contactIcon.className = "site-search__contact-icon " + iconClass;
+          contactIcon.setAttribute("aria-hidden", "true");
+          link.append(contactIcon);
+        }
         var title = document.createElement("span");
         title.className = "site-search__option-title";
         title.textContent = entry.title;
@@ -180,9 +189,17 @@
         if (/^https:\/\//.test(entry.url)) {
           link.target = "_blank";
           link.rel = "noopener noreferrer";
-          var indicator = document.createElement("span");
-          indicator.className = "site-search__option-kind";
-          indicator.textContent = "↗";
+          var indicator = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          indicator.setAttribute("class", "site-search__option-kind");
+          indicator.setAttribute("viewBox", "0 0 24 24");
+          indicator.setAttribute("fill", "none");
+          indicator.setAttribute("stroke", "currentColor");
+          indicator.setAttribute("stroke-width", "1.7");
+          indicator.setAttribute("stroke-linecap", "round");
+          indicator.setAttribute("stroke-linejoin", "round");
+          var arrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          arrow.setAttribute("d", "M7 17 17 7M7 7h10v10");
+          indicator.append(arrow);
           indicator.setAttribute("aria-hidden", "true");
           link.setAttribute("aria-label", entry.title + " (opens in a new tab)");
           link.append(indicator);
