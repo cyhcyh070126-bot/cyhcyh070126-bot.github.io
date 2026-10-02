@@ -43,9 +43,9 @@ Current Research
 ======
 
 - GPU-accelerated JAX-FEM data generation for mechanics
-- Physics-Attention Transolver models for local mechanics surrogates
-- Boundary-to-field operator learning and interface displacement–reaction exchange
-- Hybrid FEM–neural operator coupling with interface residual diagnostics
+- Transolver models for local stress-field prediction
+- Interface-displacement-to-stress operator learning
+- Stress-based reaction-force assembly and iterative FEM–neural operator coupling
 
 Research Experience
 ======
@@ -61,10 +61,10 @@ Research Experience
   </div>
 </div>
 
-- **Hybrid FEM–NO Decomposition:** Partitioned mechanics problems into an outer FEM domain and an inner neural-operator subdomain connected through a shared interface.
-- **GPU-Accelerated Training Data:** Used JAX-FEM to generate displacement, strain, stress, and interface-reaction data for training Physics-Attention Transolver models.
-- **Boundary-to-Field Operator Learning:** Trained Physics-Attention Transolver models to predict local displacement fields from prescribed boundary conditions, incorporating displacement, strain, and interface-reaction supervision.
-- **Iterative Interface Coupling:** Implemented interface displacement–reaction exchange between the outer FEM domain and the local surrogate, monitoring displacement and force residuals to assess coupling convergence.
+- **Hybrid FEM–NO Framework:** Developed a hybrid framework combining an outer finite element domain with a local neural-operator subdomain connected through a shared interface.
+- **GPU-Accelerated Training Data:** Used JAX-FEM to generate displacement and stress fields for training the local neural operator.
+- **Displacement-to-Stress Learning:** Trained Transolver models to predict local stress fields from prescribed interface displacements.
+- **Stress-Based Interface Coupling:** Assembled interface reaction forces from the predicted stresses and returned them to the outer FEM solver, which updated the interface displacements for the next coupling iteration.
 
 **Cylinder Subdomain Example:** Boundary conditions, domain decomposition, FEM-node representation, and a continuous stress-field comparison illustrate the neural-operator/FEM workflow.
 
