@@ -89,6 +89,15 @@ html[data-theme="dark"] .research-card figcaption strong {
   border-bottom: 1px solid var(--cv-section-rule-color);
 }
 
+@media (min-width: 1440px) {
+  .archive.cv-page {
+    --cv-right-extension: clamp(0px, calc(50vw - 720px), 180px);
+    // Offset the added width so the existing right-floated column keeps its left edge.
+    width: calc(#{span(10 of 12)} + var(--cv-right-extension));
+    margin-right: calc(-1 * var(--cv-right-extension));
+  }
+}
+
 .home-page__title {
   color: var(--cv-section-heading-color);
 }
