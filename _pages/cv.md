@@ -66,7 +66,7 @@ Research Experience
 - **Displacement-to-Stress Operator Learning:** Trained Transolver models to learn the operator mapping from prescribed interface displacement fields to local stress fields.
 - **Stress-Based Interface Coupling:** Assembled interface reaction forces from the predicted stresses and returned them to the outer FEM solver, which updated the interface displacements for the next coupling iteration.
 
-**Cylinder Subdomain Example:** Subdomain placement, domain decomposition, boundary conditions, FEM-node representation, and a stress-field comparison illustrate the hybrid FEM–neural operator workflow.
+**Cylinder Study and Ongoing Composite Extension:** The cylinder example illustrates the hybrid FEM–neural operator workflow; the final panel previews ongoing work on a 100-fiber composite.
 
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card">
@@ -116,6 +116,16 @@ Research Experience
     <figcaption>
       <strong>Continuous Stress-Field Evaluation</strong><br>
       Ground truth, prediction, and absolute error for &sigma;<sub>xx</sub> at coupling sweep 001, with a relative L<sub>2</sub> error of 0.6262% for this field comparison.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/files/research/composite_n100_mesh_overview.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/composite_n100_mesh_overview.png" alt="Bottom cross-section of a 100-fiber composite mesh and a close-up of one fiber with the surrounding matrix, shown as an ongoing extension rather than a prediction result." />
+    </a>
+    <figcaption>
+      <strong>Multi-Fiber Composite Extension (Ongoing)</strong><br>
+      Extending to a 100-fiber composite. We aim to train a shared displacement-to-stress neural operator for reuse across fiber subdomains, with stress-derived interface reactions coupled to the surrounding FEM matrix.
     </figcaption>
   </figure>
 </div>
