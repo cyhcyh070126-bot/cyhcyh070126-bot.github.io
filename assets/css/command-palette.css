@@ -34,7 +34,7 @@ html[data-theme="dark"] {
   color: var(--global-text-color, #494e52);
   background: var(--search-surface);
   font-family: inherit;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
   box-shadow: 0 22px 70px rgba(22, 18, 12, .24);
 }
@@ -52,8 +52,9 @@ html[data-theme="dark"] {
 .site-search__back { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 40px; height: 40px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--search-muted); cursor: pointer; }
 .site-search__back:hover { color: var(--cv-section-heading-color, #9a641e); background: var(--search-selected); }
 .site-search__body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--search-line) transparent; padding: 4px 0 10px; }
-.site-search__group-label { margin: 0; padding: 16px 22px 6px; color: var(--search-muted); font-size: 12px; font-weight: 600; letter-spacing: .055em; }
-.site-search__option { display: flex; align-items: center; gap: 12px; min-height: 46px; margin: 0; padding: 11px 20px; border: 0; border-left: 3px solid transparent; color: inherit; background: transparent; text-decoration: none; cursor: pointer; transition: background-color .1s ease; }
+.site-search__results > [role="group"] + [role="group"] { margin-top: 12px; }
+.site-search__group-label { margin: 0; padding: 18px 22px 8px; color: var(--cv-section-heading-color, #9a641e); font-size: 20px; font-weight: 600; line-height: 1.35; letter-spacing: normal; }
+.site-search__option { display: flex; align-items: center; gap: 12px; min-height: 52px; margin: 0; padding: 12px 20px; border: 0; border-left: 3px solid transparent; color: inherit; background: transparent; text-decoration: none; cursor: pointer; transition: background-color .1s ease; }
 .site-search__option:visited { color: inherit; }
 .site-search button.site-search__option { width: 100%; border-radius: 0; font: inherit; text-align: left; box-shadow: none; }
 .site-search__option:hover, .site-search__option[aria-selected="true"] { color: inherit; background: var(--search-selected); text-decoration: none; }
