@@ -125,7 +125,7 @@ Research Experience
     </a>
     <figcaption>
       <strong>3D Fiber-Reinforced Composite Extension (Ongoing)</strong><br>
-      Three-dimensional composite with 100 fibers; the figure shows its bottom cross-sectional mesh and a local fiber–matrix close-up. Ongoing work aims to reuse a shared interface-displacement-to-stress operator across 3D fiber subdomains and assemble stress-derived reactions for coupling with the surrounding FEM matrix, with particular attention to fiber-end effects.
+      Three-dimensional composite with 100 fibers; the figure shows its bottom cross-sectional mesh and a local fiber–matrix close-up. Our goal is to train <strong>a single shared neural operator for all 100 fibers</strong>, mapping each fiber's interface displacement field to its 3D stress field with the same model parameters. Stress-derived interface reactions would couple the fibers to the surrounding FEM matrix, with particular attention to fiber-end effects.
     </figcaption>
   </figure>
 </div>
