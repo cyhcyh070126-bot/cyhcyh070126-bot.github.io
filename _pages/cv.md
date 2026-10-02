@@ -121,10 +121,10 @@ Research Experience
   </div>
 </div>
 
-- **Simulation Data Generation:** Automated statistically distributed polycrystalline NMC microstructure generation and electro-chemo-mechanical simulation through MATLAB-COMSOL LiveLink, producing aligned lithium-concentration and von Mises stress sequences.
-- **Conditional ConvLSTM Surrogates:** Trained separate three-layer conditional ConvLSTM models to autoregressively predict concentration or stress RGB image sequences from past field frames, grain-orientation maps, and C-rate information.
-- **Long-Horizon Training:** Combined image-space MSE-SSIM loss, scheduled sampling, and patch-based training to target spatial fidelity and reduce error accumulation during multi-step prediction.
-- **Image-Space Evaluation:** Compared predicted field images with COMSOL-rendered reference sequences using frame-wise visualizations and pixel-wise error maps; MSE and SSIM measure image-space agreement.
+- **Automated Simulation Workflow:** Generated polycrystalline NMC microstructures and ran coupled lithium-transport and solid-mechanics simulations through COMSOL LiveLink for MATLAB, exporting time-aligned concentration and von Mises stress images.
+- **Conditional ConvLSTM Models:** Trained separate three-layer ConvLSTM models to autoregressively predict RGB images of concentration or stress, conditioned on past field frames, grain-orientation maps, and C-rate inputs.
+- **Multi-Step Training:** Combined MSE and SSIM losses on RGB images with scheduled sampling and patch-based training for multi-step autoregressive forecasting.
+- **Prediction Assessment:** Compared predicted sequences with COMSOL-rendered reference images using MSE, SSIM, and pixel-wise error maps to assess image agreement over successive forecast steps.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
@@ -132,8 +132,8 @@ Research Experience
       <img src="/images/research/battery_concentration.gif" alt="Animated concentration evolution from the COMSOL-based dataset." />
     </a>
     <figcaption>
-      <strong>Concentration GIF</strong><br>
-      Transient concentration evolution generated from the COMSOL-based dataset.
+      <strong>Lithium Concentration Evolution</strong><br>
+      Time-resolved lithium-concentration images exported from COMSOL simulations.
     </figcaption>
   </figure>
 
@@ -142,7 +142,7 @@ Research Experience
       <img src="/images/research/battery_von_mises.gif" alt="Animated von Mises stress evolution under the same microstructure and loading condition." />
     </a>
     <figcaption>
-      <strong>Von&nbsp;Mises&nbsp;Stress&nbsp;GIF</strong><br>
+      <strong>von Mises Stress Evolution</strong><br>
       Time-dependent von Mises stress response under the same microstructure and loading condition.
     </figcaption>
   </figure>
@@ -153,7 +153,7 @@ Research Experience
     </a>
     <figcaption>
       <strong>ConvLSTM Prediction Pipeline</strong><br>
-      Multi-channel inputs are stacked and processed by a ConvLSTM network for future field prediction.
+      Past field images, grain-orientation maps, and C-rate inputs condition autoregressive prediction. Separate models forecast concentration or stress images.
     </figcaption>
   </figure>
 
@@ -173,7 +173,7 @@ Research Experience
     </a>
     <figcaption>
       <strong>Scheduled Sampling</strong><br>
-      A scheduled sampling strategy is used during training to reduce error accumulation in autoregressive prediction.
+      During training, scheduled sampling selects ground-truth or predicted frames as inputs to subsequent prediction steps.
     </figcaption>
   </figure>
 
@@ -258,7 +258,7 @@ Research Experience
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">4. Domain-Specific LLM Fine-Tuning for Materials Mechanics</div>
+    <div class="cv-project__title">4. Domain-Specific LLM Fine-Tuning for Mechanics of Materials</div>
     <div class="cv-project__term">Sep. 2024 - Apr. 2025</div>
   </div>
   <div class="cv-project__meta">
@@ -267,10 +267,10 @@ Research Experience
   </div>
 </div>
 
-- **Project Objective:** Adapted the Qwen2.5-7B foundation model for materials-mechanics question answering and structured explanations of engineering concepts.
-- **Instruction Dataset Curation:** Curated and published two instruction datasets covering stress analysis, constitutive laws, and failure theories: [Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge).
-- **Parameter-Efficient Fine-Tuning:** Applied LoRA-based fine-tuning on Google Colab to specialize Qwen2.5-7B while retaining a compact adaptation workflow.
-- **Open-Source Publication:** Released both the [LoRA-adapted checkpoint](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and the [merged model](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged) on Hugging Face.
+- **Mechanics Question Answering:** Adapted Qwen2.5-7B to answer questions and explain concepts in mechanics of materials.
+- **Instruction Dataset Curation:** Curated instruction-response examples from textbooks and technical literature covering stress analysis, constitutive laws, and failure theories.
+- **Parameter-Efficient Fine-Tuning:** Applied LoRA fine-tuning on Google Colab to adapt the base model to mechanics questions and explanatory responses.
+- **Public Releases:** Published the [Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge) datasets, together with the [fine-tuned checkpoint](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and [merged model](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged), on Hugging Face.
 
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
@@ -279,7 +279,7 @@ Research Experience
     </a>
     <figcaption>
       <strong>LLM Fine-Tuning Workflow</strong><br>
-      A domain-specific workflow from custom Mechanics-of-Materials dataset curation and Hugging Face publication to Qwen2.5 7B LoRA fine-tuning on Google Colab and the final AI teaching assistant.
+      Instruction dataset curation, Qwen2.5-7B fine-tuning with LoRA, and public release of datasets and model checkpoints for question answering in mechanics of materials.
     </figcaption>
   </figure>
 </div>
@@ -289,8 +289,8 @@ Skills
 
 - **Scientific Machine Learning:** PyTorch, JAX, Neural Operators (Transolver, DeepONet), PINNs, ConvLSTM
 - **Computational Mechanics:** Finite Element Methods, FEniCSx, Gmsh, COMSOL Multiphysics, ABAQUS
-- **Scientific Computing & Tools:** Python, MATLAB, Linux, Git/GitHub, MATLAB LiveLink
-- **Domain LLM Development:** Qwen2.5, LoRA/PEFT Fine-Tuning, Instruction Dataset Curation
+- **Scientific Computing & Tools:** Python, MATLAB, Linux, Git/GitHub, LiveLink for MATLAB
+- **LLM Fine-Tuning:** Qwen2.5, LoRA/PEFT, Instruction Dataset Curation
 - **Visualization:** Matplotlib, Origin
 - **Languages:** Chinese (native), Cantonese, English
 

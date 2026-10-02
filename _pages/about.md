@@ -31,15 +31,15 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jun 2025</div>
-      <div class="home-news__content">Began research on deep-learning-based prediction of chemo-mechanical evolution in battery active materials.</div>
+      <div class="home-news__content">Began developing a MATLAB–COMSOL data-generation workflow and separate ConvLSTM models for concentration and stress image prediction in battery materials.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Apr 2025</div>
-      <div class="home-news__content">Published two Qwen2.5-based materials-mechanics models—the <a href="https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant" target="_blank" rel="noopener noreferrer">LoRA-adapted checkpoint</a> and <a href="https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged" target="_blank" rel="noopener noreferrer">merged model</a>—together with the <a href="https://huggingface.co/datasets/CYHcyh66/Material-mechanics" target="_blank" rel="noopener noreferrer">Material-mechanics</a> and <a href="https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge" target="_blank" rel="noopener noreferrer">Material-mechanics-merge</a> instruction datasets on Hugging Face.</div>
+      <div class="home-news__content">Released two Qwen2.5-based checkpoints for question answering in mechanics of materials—the <a href="https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant" target="_blank" rel="noopener noreferrer">fine-tuned checkpoint</a> and <a href="https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged" target="_blank" rel="noopener noreferrer">merged model</a>—together with the <a href="https://huggingface.co/datasets/CYHcyh66/Material-mechanics" target="_blank" rel="noopener noreferrer">Material-mechanics</a> and <a href="https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge" target="_blank" rel="noopener noreferrer">Material-mechanics-merge</a> instruction datasets on Hugging Face.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Sep 2024</div>
-      <div class="home-news__content">Launched the LLM fine-tuning project for a Mechanics-of-Materials AI teaching assistant.</div>
+      <div class="home-news__content">Started curating instruction data and developing an LLM fine-tuning workflow for question answering in mechanics of materials.</div>
     </article>
   </div>
 </div>
