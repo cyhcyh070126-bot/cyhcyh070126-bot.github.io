@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const fs = require('node:fs');
 const path = require('node:path');
-const { normalize, searchEntries } = require('../assets/js/command-palette.js');
+const { normalize, searchEntries, indexEntries } = require('../assets/js/command-palette.js');
 const root = path.join(__dirname, '..');
 
 function entry(title, keywords, body, order) {
@@ -47,4 +47,23 @@ test('no clipboard action; no remote search provider; inert index parsing', () =
   assert.doesNotMatch(js, /navigator\.clipboard|execCommand|copy email/i);
   assert.match(js, /createElement\("template"\)/);
   assert.match(js, /fetch\(dialog\.dataset\.indexUrl/);
+});
+
+test('resource search keeps project collections at the root and searches children within their scope', () => {
+  const tree = indexEntries([
+    { group: 'Research', title: records[3].title, url: '/cv/#mechanics-llm' },
+    { group: 'Resources', title: records[3].title, url: '/cv/#mechanics-llm', children: [
+      { group: 'Datasets', title: 'Material-mechanics', url: 'https://huggingface.co/datasets/CYHcyh66/Material-mechanics', keywords: 'dataset 数据集' },
+      { group: 'Models', title: 'AI_Material_mechanics_assistant_merged', url: 'https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged', keywords: 'model 模型 权重' }
+    ] },
+    { group: 'Contact & Links', title: 'LinkedIn', url: 'https://www.linkedin.com/' }
+  ]);
+  const collection = tree[1];
+  assert.equal(tree.length, 3);
+  assert.equal(tree.filter(e => e.group === 'Resources').length, 1);
+  assert.equal(searchEntries(tree, 'AI_Material_mechanics_assistant_merged')[0], collection);
+  assert.equal(searchEntries(tree, '数据集')[0], collection);
+  assert.deepEqual(searchEntries(collection.children, '').map(e => e.group), ['Datasets', 'Models']);
+  assert.equal(searchEntries(collection.children, 'merged')[0].title, 'AI_Material_mechanics_assistant_merged');
+  assert.equal(searchEntries(collection.children, 'LinkedIn').length, 0);
 });
