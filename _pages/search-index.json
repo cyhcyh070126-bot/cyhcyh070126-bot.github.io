@@ -1,0 +1,23 @@
+---
+layout: null
+permalink: /search-index.json
+sitemap: false
+---
+{% assign search_home = site.pages | where: 'home_page', true | first %}
+{% assign search_cv = site.pages | where: 'cv_page', true | first %}
+{
+  "home": {
+    "url": {{ '/' | relative_url | jsonify }},
+    "html": {{ search_home.content | markdownify | jsonify }}
+  },
+  "cv": {
+    "url": {{ '/cv/' | relative_url | jsonify }},
+    "html": {{ search_cv.content | markdownify | jsonify }}
+  },
+  "contact": {
+    "email": {{ site.author.email | jsonify }},
+    "linkedin": {{ site.author.linkedin | jsonify }},
+    "github": {{ site.author.github | jsonify }},
+    "huggingface": {{ site.author.huggingface | jsonify }}
+  }
+}
