@@ -18,8 +18,16 @@ News
 <div class="home-news">
   <div class="home-news__list">
     <article class="home-news__item">
-      <div class="home-news__date">Jul–Sep 2026</div>
-      <div class="home-news__content"><strong>Research progress:</strong> Advanced the hybrid FEM–neural operator workflow through cylinder, 3D bracket, and multi-fiber composite studies. Ongoing work targets a shared displacement-to-stress operator for reuse across fiber subdomains and coupling with the surrounding FEM matrix. Fiber-end effects on local stress prediction and interface-force transfer are a focus for further investigation. <a href="/cv/#research-experience">View the 100-fiber composite mesh and ongoing work.</a></div>
+      <div class="home-news__date">Sep 15, 2026*</div>
+      <div class="home-news__content"><strong>Multi-fiber composite extension:</strong> Ongoing work on a 100-fiber composite aims to reuse a shared displacement-to-stress neural operator across fiber subdomains and couple their stress-derived interface reactions to the surrounding FEM matrix. Fiber-end effects on stress prediction and interface-force transfer remain a question for further investigation. <a href="/cv/#research-experience">View the composite mesh and ongoing work.</a></div>
+    </article>
+    <article class="home-news__item">
+      <div class="home-news__date">Aug 15, 2026*</div>
+      <div class="home-news__content"><strong>3D bracket studies:</strong> Extended the mechanics data-generation and neural-operator workflow to three-dimensional bracket examples, exploring the mapping from interface displacement fields to local stress responses for hybrid FEM–neural operator coupling.</div>
+    </article>
+    <article class="home-news__item">
+      <div class="home-news__date">Jul 15, 2026*</div>
+      <div class="home-news__content"><strong>Cylinder coupling studies:</strong> Developed a cylinder example combining an outer FEM domain with a local neural operator. The operator maps interface displacements to subdomain stresses, from which interface reaction forces are assembled for iterative displacement–force exchange.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jan 2026</div>
@@ -43,6 +51,8 @@ News
     </article>
   </div>
 </div>
+
+<p><small>* The July–September dates are representative mid-month markers for the research timeline, not verified milestone dates.</small></p>
 
 Current Research
 ======
