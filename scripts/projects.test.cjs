@@ -31,3 +31,10 @@ test('Projects has a page route, navigation entry and optional search entry', ()
   assert.doesNotMatch(read('assets/js/command-palette.js'), /add\("Research"|add\("Navigation", "Research Experience"/);
   assert.match(read('_layouts/archive.html'), /if page\.projects_page.*projects-page/);
 });
+
+test('Search script, stylesheet and index share the deployment cache version', () => {
+  assert.match(read('_includes/head.html'), /capture main_css_version/);
+  for (const file of ['_includes/scripts.html', '_includes/head/custom.html', '_includes/command-palette.html']) {
+    assert.match(read(file), /\?v=\{\{ main_css_version \| strip \}\}/, file);
+  }
+});
