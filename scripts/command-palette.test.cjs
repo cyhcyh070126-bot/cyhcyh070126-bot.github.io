@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const fs = require('node:fs');
 const path = require('node:path');
-const { normalize, searchEntries, indexEntries } = require('../assets/js/command-palette.js');
+const { normalize, searchEntries, indexEntries, repositoryEntry } = require('../assets/js/command-palette.js');
 const root = path.join(__dirname, '..');
 
 function entry(title, keywords, body, order) {
@@ -66,4 +66,34 @@ test('resource search keeps project collections at the root and searches childre
   assert.deepEqual(searchEntries(collection.children, '').map(e => e.group), ['Datasets', 'Models']);
   assert.equal(searchEntries(collection.children, 'merged')[0].title, 'AI_Material_mechanics_assistant_merged');
   assert.equal(searchEntries(collection.children, 'LinkedIn').length, 0);
+});
+
+test('repository resources follow the Projects data, including the Hugging Face profile', () => {
+  for (const slug of ['convlstm-battery-field-prediction', 'burgers-pinn']) {
+    const url = 'https://github.com/cyhcyh070126-bot/' + slug + '#readme';
+    const item = repositoryEntry({ repository: url });
+    assert.equal(item.group, 'Code');
+    assert.equal(item.title, 'Repository');
+    assert.equal(item.url, url);
+    assert.equal(item.disabled, undefined);
+  }
+  const profile = repositoryEntry({ repository: 'https://huggingface.co/CYHcyh66', repository_label: 'Hugging Face' });
+  assert.equal(profile.group, 'Hub');
+  assert.equal(profile.title, 'Hugging Face');
+  assert.equal(profile.url, 'https://huggingface.co/CYHcyh66');
+  assert.match(fs.readFileSync(path.join(root, '_pages/search-index.json'), 'utf8'), /"items":\s*\{\{ site\.data\.projects \| jsonify \}\}/);
+});
+
+test('ongoing repositories are non-navigating placeholders until a URL is supplied', () => {
+  const pending = repositoryEntry({ status: 'Ongoing', repository: null });
+  assert.equal(pending.title, 'Repository (Ongoing)');
+  assert.equal(pending.disabled, true);
+  assert.equal(pending.url, undefined);
+  const published = repositoryEntry({ status: 'Ongoing', repository: 'https://github.com/example/research' });
+  assert.equal(published.title, 'Repository');
+  assert.equal(published.disabled, undefined);
+  assert.equal(repositoryEntry({}), null);
+  assert.equal(repositoryEntry(), null);
+  assert.equal(repositoryEntry({ repository: 'javascript:alert(1)' }), null);
+  assert.equal(repositoryEntry({ repository: '//example.com' }), null);
 });
