@@ -51,8 +51,8 @@ test('no clipboard action; no remote search provider; inert index parsing', () =
 
 test('resource search keeps project collections at the root and searches children within their scope', () => {
   const tree = indexEntries([
-    { group: 'Research', title: records[3].title, url: '/cv/#mechanics-llm' },
-    { group: 'Resources', title: records[3].title, url: '/cv/#mechanics-llm', children: [
+    { group: 'Projects', title: records[3].title, url: '/projects/#mechanics-llm' },
+    { group: 'Resources', title: records[3].title, url: '/projects/#mechanics-llm', children: [
       { group: 'Datasets', title: 'Material-mechanics', url: 'https://huggingface.co/datasets/CYHcyh66/Material-mechanics', keywords: 'dataset 数据集' },
       { group: 'Models', title: 'AI_Material_mechanics_assistant_merged', url: 'https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged', keywords: 'model 模型 权重' }
     ] },

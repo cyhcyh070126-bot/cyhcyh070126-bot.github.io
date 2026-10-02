@@ -14,6 +14,9 @@ sitemap: false
     "url": {{ '/cv/' | relative_url | jsonify }},
     "html": {{ search_cv.content | markdownify | jsonify }}
   },
+  "projects": {
+    "url": {{ '/projects/' | relative_url | jsonify }}
+  },
   "contact": {
     "email": {{ site.author.email | jsonify }},
     "linkedin": {{ site.author.linkedin | jsonify }},
