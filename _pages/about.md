@@ -10,7 +10,9 @@ redirect_from:
 
 Hi! I'm **Yanghao Chen**, an undergraduate in [Engineering Mechanics](https://aero-mech.tongji.edu.cn/31831/list.htm) at [Tongji University](https://www.tongji.edu.cn/)'s [School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/).
 
-Fine-tuning large language models for mechanics questions got me curious: could learning help compute the physics, not just explain it? I explored field prediction with neural networks and physical constraints with PINNs, and now work on **neural operators coupled with FEM**—learning mappings between physical fields and putting them to work inside a numerical solver.
+I started by fine-tuning large language models to answer mechanics questions. That got me curious: could learning help compute the physics, not just explain it? Exploring neural networks for field prediction and PINNs for physical constraints gradually drew me toward the relationship between data, governing equations, and numerical methods.
+
+These days, I'm working on **neural operators coupled with FEM**, learning mappings from interface displacement fields to local stress fields. What interests me most is how those learned responses can work reliably with a conventional solver. I'm also exploring this idea for 3D composites, with one shared operator for the fibers and FEM for the matrix.
 
 I'm now a visiting undergraduate research intern in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at [Johns Hopkins University](https://www.jhu.edu/), advised by [Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/) in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home). At Tongji, I've also worked with [Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm) and [Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm).
 
