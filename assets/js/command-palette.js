@@ -23,6 +23,28 @@
     });
   }
 
+  function repositoryEntry(project) {
+    if (!project) return null;
+    var title = project.repository_label || "Repository";
+    if (project.repository) {
+      if (!/^https:\/\//.test(project.repository)) return null;
+      var isHub = project.repository.startsWith("https://huggingface.co/");
+      return {
+        group: isHub ? "Hub" : "Code",
+        title: title,
+        url: project.repository,
+        keywords: isHub ? "huggingface hf profile models datasets 主页 模型 数据集" : "repository resources code readme github 仓库 代码 资源"
+      };
+    }
+    if (!project.status) return null;
+    return {
+      group: "Code",
+      title: title + " (" + project.status + ")",
+      disabled: true,
+      keywords: "repository ongoing coming soon 仓库 进行中 尚未公开"
+    };
+  }
+
   function buildEntries(data, doc) {
     if (!data.home || !data.cv || typeof data.cv.html !== "string") throw new Error("Invalid search index");
     // A template is inert: indexed images/scripts are never inserted into the page.
@@ -65,7 +87,7 @@
       // Titles are read from the CV, not duplicated or replaced with acronyms.
       var entry = add("Projects", heading.textContent.replace(/^\s*\d+\.\s*/, "").trim(),
         (data.projects?.url || data.cv.url) + "#" + heading.id, aliases[heading.id], body);
-      projects.push({ entry: entry, nodes: nodes });
+      projects.push({ id: heading.id, entry: entry, nodes: nodes });
     });
     if (entries.filter(function (entry) { return entry.group === "Projects"; }).length === 0) {
       throw new Error("Project headings are missing");
@@ -75,6 +97,13 @@
     projects.forEach(function (project) {
       var children = [];
       var seen = new Set();
+      // Use the same source as the Projects page so new releases stay in sync.
+      var metadata = (data.projects?.items || []).find(function (item) { return item.id === project.id; });
+      var repository = repositoryEntry(metadata);
+      if (repository) {
+        children.push(repository);
+        if (repository.url) seen.add(repository.url);
+      }
       project.nodes.forEach(function (node) {
         node.querySelectorAll("a[href]").forEach(function (link) {
           var url = link.getAttribute("href");
@@ -93,7 +122,7 @@
       });
       if (!children.length) return;
       var collection = add("Resources", project.entry.title, project.entry.url,
-        project.entry.keywords + " resources models datasets 资源 模型 数据集");
+        project.entry.keywords + " resources repository code models datasets 资源 仓库 代码 模型 数据集");
       collection.children = children;
     });
     cv.querySelectorAll("a[href]").forEach(function (link) {
@@ -139,7 +168,7 @@
   }
 
   // Keep the indexing/ranking functions testable without a browser or live service.
-  if (typeof module !== "undefined" && module.exports) module.exports = { buildEntries: buildEntries, searchEntries: searchEntries, normalize: normalize, indexEntries: indexEntries };
+  if (typeof module !== "undefined" && module.exports) module.exports = { buildEntries: buildEntries, searchEntries: searchEntries, normalize: normalize, indexEntries: indexEntries, repositoryEntry: repositoryEntry };
   if (typeof document === "undefined") return;
   var dialog = document.getElementById("site-search");
   var trigger = document.querySelector(".site-search-toggle");
@@ -235,10 +264,15 @@
       group.append(label);
       groupEntries.forEach(function (entry) {
         var isCollection = !!entry.children;
-        var link = document.createElement(isCollection ? "button" : "a");
+        var isDisabled = !!entry.disabled;
+        var link = document.createElement(isCollection || isDisabled ? "button" : "a");
         link.className = "site-search__option";
         link.id = "search-option-" + options.length;
-        if (isCollection) {
+        if (isDisabled) {
+          link.type = "button";
+          link.disabled = true;
+          link.setAttribute("aria-disabled", "true");
+        } else if (isCollection) {
           link.type = "button";
           link.setAttribute("aria-label", entry.title + " — browse resources");
         } else link.href = entry.url;
@@ -258,7 +292,7 @@
         title.className = "site-search__option-title";
         title.textContent = entry.title;
         link.append(title);
-        if (isCollection || /^https:\/\//.test(entry.url)) {
+        if (!isDisabled && (isCollection || /^https:\/\//.test(entry.url))) {
           var indicator = document.createElementNS("http://www.w3.org/2000/svg", "svg");
           indicator.setAttribute("class", "site-search__option-kind");
           indicator.setAttribute("viewBox", "0 0 24 24");
@@ -281,6 +315,7 @@
         var index = options.length;
         link.addEventListener("pointermove", function (event) { if (event.pointerType !== "touch") select(index, false); });
         link.addEventListener("click", function () {
+          if (isDisabled) return;
           if (isCollection) enterCollection(entry);
           else dialog.close();
         });
