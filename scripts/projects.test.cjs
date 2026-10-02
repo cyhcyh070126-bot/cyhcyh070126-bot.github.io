@@ -22,6 +22,18 @@ test('Missing repository URLs render non-navigating, accessible placeholders', (
   assert.match(page, /author_profile: false/);
 });
 
+test('Published projects have the supplied links; the ongoing NO keeps its placeholder', () => {
+  const blocks = read('_data/projects.yml').split(/(?=^- id: )/m).filter(Boolean);
+  assert.equal(blocks.length, 4);
+  assert.match(blocks[0], /status: Ongoing/);
+  assert.match(blocks[0], /repository:\s*$/);
+  assert.match(blocks[1], /repository: https:\/\/github\.com\/cyhcyh070126-bot\/convlstm-battery-field-prediction#readme/);
+  assert.match(blocks[2], /repository: https:\/\/github\.com\/cyhcyh070126-bot\/burgers-pinn#readme/);
+  assert.match(blocks[3], /repository: https:\/\/huggingface\.co\/CYHcyh66\/AI_Material_mechanics_assistant/);
+  assert.match(blocks[3], /repository_label: Hugging Face/);
+  assert.match(read('_pages/projects.html'), /project\.repository_label \| default: 'Repository'/);
+});
+
 test('Projects has a page route, navigation entry and optional search entry', () => {
   assert.match(read('_pages/projects.html'), /permalink: \/projects\//);
   assert.match(read('_data/navigation.yml'), /title: "Projects"\s+url: \/projects\//);

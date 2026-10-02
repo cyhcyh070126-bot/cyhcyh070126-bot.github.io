@@ -136,6 +136,14 @@ html[data-theme="dark"] .research-card figcaption strong {
   text-decoration: none;
 }
 
+.project-list__status {
+  display: inline-block;
+  margin-left: 0.25em;
+  color: var(--cv-section-heading-color);
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
 .project-list__title a:hover {
   color: var(--cv-section-heading-color);
   text-decoration: underline;
