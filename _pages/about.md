@@ -19,7 +19,7 @@ News
   <div class="home-news__list">
     <article class="home-news__item">
       <div class="home-news__date">Sep 15, 2026*</div>
-      <div class="home-news__content"><strong>Multi-fiber composite extension:</strong> Ongoing work on a 100-fiber composite aims to reuse a shared displacement-to-stress neural operator across fiber subdomains and couple their stress-derived interface reactions to the surrounding FEM matrix. Fiber-end effects on stress prediction and interface-force transfer remain a question for further investigation. <a href="/cv/#research-experience">View the composite mesh and ongoing work.</a></div>
+      <div class="home-news__content"><strong>3D fiber-reinforced composite extension:</strong> Extending the hybrid FEM–neural operator framework to a <strong>three-dimensional composite containing 100 fibers</strong>. The goal is to train a shared operator mapping interface displacement fields to 3D stress fields across fiber subdomains, then assemble stress-derived interface reactions for coupling with the surrounding FEM matrix. Current research questions include operator reuse across fibers and the influence of fiber-end effects on stress prediction and interface-force transfer. <a href="/cv/#research-experience">View the 3D composite mesh cross-section and ongoing work.</a></div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Aug 15, 2026*</div>
