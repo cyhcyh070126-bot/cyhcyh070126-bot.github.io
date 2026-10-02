@@ -10,9 +10,9 @@ redirect_from:
 
 Hi! I'm **Yanghao Chen**, an undergraduate in [Engineering Mechanics](https://aero-mech.tongji.edu.cn/31831/list.htm) at [Tongji University](https://www.tongji.edu.cn/)'s [School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/).
 
-I started by fine-tuning large language models to answer mechanics questions. That got me curious: could learning help compute the physics, not just explain it? Exploring neural networks for field prediction and PINNs for physical constraints gradually drew me toward the relationship between data, governing equations, and numerical methods.
+I started by fine-tuning large language models to answer mechanics questions. I then explored neural networks for field prediction and PINNs for incorporating physical constraints. These experiences shifted my focus from explaining mechanics to modeling physical behavior, and toward integrating learning with numerical methods.
 
-These days, I'm working on **neural operators coupled with FEM**, learning mappings from interface displacement fields to local stress fields. What interests me most is how those learned responses can work reliably with a conventional solver. I'm also exploring this idea for 3D composites, with one shared operator for the fibers and FEM for the matrix.
+These days, I'm working on **neural operators coupled with FEM**, learning mappings from interface displacement fields to local stress fields. My focus is on coupling these learned responses reliably with a conventional solver. I'm also exploring this idea for 3D composites, with one shared operator for the fibers and FEM for the matrix.
 
 I'm now a visiting undergraduate research intern in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at [Johns Hopkins University](https://www.jhu.edu/), advised by [Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/) in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home). At Tongji, I've also worked with [Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm) and [Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm).
 
