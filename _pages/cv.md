@@ -66,16 +66,16 @@ Research Experience
 - **Displacement-to-Stress Operator Learning:** Trained Transolver models to learn the operator mapping from prescribed interface displacement fields to local stress fields.
 - **Stress-Based Interface Coupling:** Assembled interface reaction forces from the predicted stresses and returned them to the outer FEM solver, which updated the interface displacements for the next coupling iteration.
 
-**Cylinder Subdomain Example:** Boundary conditions, domain decomposition, FEM-node representation, and a continuous stress-field comparison illustrate the neural-operator/FEM workflow.
+**Cylinder Subdomain Example:** Subdomain placement, domain decomposition, boundary conditions, FEM-node representation, and a stress-field comparison illustrate the hybrid FEM–neural operator workflow.
 
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card">
-    <a href="/files/research/boundary_displacement_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/boundary_displacement_preview.png" alt="Quarter-annulus cylinder subdomain with prescribed inner and outer arc displacements and straight-edge constraints." />
+    <a href="/files/research/cylinder_subdomain_supports_1234.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/cylinder_subdomain_supports_1234.png" alt="Cylinder model showing the gray outer FEM domain, green inner neural-operator subdomain, blue coupling interface, and supports along the straight edges." />
     </a>
     <figcaption>
-      <strong>Boundary Displacement Conditions</strong><br>
-      Prescribed displacement functions on the inner and outer arcs define the cylinder subdomain boundary conditions, together with straight-edge constraints.
+      <strong>Cylinder Subdomain Position</strong><br>
+      The local neural-operator subdomain (green) connects to the outer FEM domain (gray) through the coupling interface (blue).
     </figcaption>
   </figure>
 
@@ -86,6 +86,16 @@ Research Experience
     <figcaption>
       <strong>Domain Decomposition</strong><br>
       The full finite element mesh is partitioned into an outer domain and a local subdomain with an identified coupling interface.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/files/research/cylinder_boundary_conditions.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/cylinder_boundary_conditions.png" alt="Neural-operator cylinder subdomain with prescribed displacement functions on the inner and outer arcs, zero horizontal displacement on the left edge, and zero vertical displacement on the bottom edge." />
+    </a>
+    <figcaption>
+      <strong>Boundary Displacement Conditions</strong><br>
+      Prescribed displacement functions on the inner and outer arcs define the local subdomain boundary conditions, together with straight-edge constraints.
     </figcaption>
   </figure>
 
