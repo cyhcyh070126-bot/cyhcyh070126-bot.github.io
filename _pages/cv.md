@@ -111,11 +111,11 @@ Research Experience
 
   <figure class="research-card">
     <a href="/files/research/sweep_001_sigma_xx_continuous.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Continuous sigma xx stress-field ground truth, prediction, and absolute error at coupling sweep 001; relative L2 error 0.6262 percent." />
+      <img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Continuous sigma xx stress-field ground truth, prediction, and absolute error at coupling sweep 001; relative L^2 error 0.6262 percent." />
     </a>
     <figcaption>
       <strong>Continuous Stress-Field Evaluation</strong><br>
-      Ground truth, prediction, and absolute error for &sigma;<sub>xx</sub> at coupling sweep 001, with a relative L<sub>2</sub> error of 0.6262% for this field comparison.
+      Ground truth, prediction, and absolute error for &sigma;<sub>xx</sub> at coupling sweep 001, with a relative L<sup>2</sup> error of 0.6262% for this field comparison.
     </figcaption>
   </figure>
 
