@@ -137,7 +137,7 @@ Research Experience
     </a>
     <figcaption>
       <strong>3D Fiber Composites (Ongoing)</strong><br>
-      Bottom cross-section and local fiber–matrix mesh detail of a 3D composite with 100 fibers. Ongoing work targets one shared neural operator for all fibers.
+      Bottom cross-section and local fiber–matrix mesh detail of a 3D composite containing 100 fibers. We aim to train a single shared neural operator for all fibers, mapping each fiber's interface displacement field to its 3D stress field. The proposed coupling would transfer stress-derived interface reactions to the surrounding FEM matrix, with particular attention to fiber-end effects.
     </figcaption>
   </figure>
 </div>
