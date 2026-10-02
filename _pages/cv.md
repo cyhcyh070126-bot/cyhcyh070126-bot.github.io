@@ -199,10 +199,10 @@ Research Experience
   </div>
 </div>
 
-- **Problem Formulation:** Built PyTorch PINN implementations for the one-dimensional inviscid Burgers equation, using analytical shock solutions for reference and local-error diagnostics.
-- **Comparative PINN Study:** Implemented and compared Vanilla, gradient-weighted, weak-form, XPINN, relaxation, and global/adaptive artificial-viscosity PINNs.
-- **Shock-Stabilization Strategies:** Examined residual reweighting, viscosity regularization, weak constraints, and domain decomposition, including Rankine-Hugoniot interface conditions in the XPINN formulation.
-- **Evaluation and Diagnostics:** Assessed each method through convergence histories, field profiles, and local reconstruction errors to distinguish global accuracy from shock-region performance.
+- **Burgers Shock Problem:** Studied a one-dimensional Riemann problem with discontinuous initial data, using the analytical inviscid solution as a reference for the evolving shock profile and trajectory.
+- **Standard PINN:** Implemented a PyTorch network mapping spatial and temporal coordinates to the solution, trained with PDE-residual, initial-condition, and boundary-condition losses.
+- **Constant Artificial Viscosity:** Added a constant diffusion term to the PDE residual and used automatic differentiation to compute the second spatial derivative for the regularized formulation.
+- **Shock-Profile Analysis:** Compared standard and regularized PINN profiles with the analytical inviscid reference, using profile plots and local views to examine shock smearing and deviations near the discontinuity.
 
 <div class="research-gallery research-gallery--pinn">
   <figure class="research-card research-card--pinn-overview">
@@ -241,17 +241,17 @@ Research Experience
     </a>
     <figcaption>
       <strong>Standard PINN Prediction</strong><br>
-      The standard formulation produces a smeared transition and local oscillations around the moving discontinuity.
+      Standard PINN profiles compared with the analytical inviscid shock solution, showing the predicted transition around the moving discontinuity.
     </figcaption>
   </figure>
 
   <figure class="research-card">
     <a href="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" alt="Animation comparing an artificial-viscosity PINN prediction with the exact Burgers shock solution." />
+      <img src="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" alt="Animation comparing a constant-artificial-viscosity PINN profile with the analytical inviscid Burgers shock reference." />
     </a>
     <figcaption>
-      <strong>Artificial-Viscosity PINN Prediction</strong><br>
-      Artificial-viscosity regularization with &nu; = 10<sup>&minus;3</sup> suppresses oscillations and recovers a sharper shock profile.
+      <strong>Constant-Viscosity PINN Prediction</strong><br>
+      PINN profiles with constant artificial viscosity, compared with the analytical inviscid shock solution as a common reference.
     </figcaption>
   </figure>
 </div>
