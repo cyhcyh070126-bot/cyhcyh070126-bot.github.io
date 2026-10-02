@@ -8,9 +8,15 @@ redirect_from:
   - /about.html
 ---
 
-Welcome to my personal website.
+I am **Yanghao Chen**, an undergraduate majoring in [Engineering Mechanics](https://aero-mech.tongji.edu.cn/31831/list.htm) in the [School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/) at [Tongji University](https://www.tongji.edu.cn/). I am interested in bringing machine learning into computational mechanics—not simply to predict a response faster, but to understand how learned models can become reliable components of a physical simulation.
 
-I am **Yanghao Chen**, an undergraduate student in Engineering Mechanics at **Tongji University**. My research lies at the intersection of computational mechanics and scientific machine learning, with a particular focus on integrating GPU-accelerated finite-element simulation with neural operators for PDE-governed engineering systems.
+At Tongji, I worked with [Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm) on adapting a language model for mechanics questions and using ConvLSTMs to predict concentration and stress images in battery materials. I also studied PINNs for a Burgers shock problem under the guidance of [Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm). These projects introduced me to different ways of combining data, physical equations, and learning, as well as the need to look beyond prediction quality alone.
+
+My focus has gradually shifted toward a more specific question: **which parts of a mechanics problem should be learned, which should remain with a numerical solver, and how should the two communicate?** I am particularly interested in learning local responses while retaining finite element methods for the surrounding domain.
+
+I am currently a visiting undergraduate research intern at [Johns Hopkins University](https://www.jhu.edu/), working with [Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/) in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home), within the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/). My work explores GPU-accelerated hybrid FEM–neural operator coupling: learning the mapping from interface displacement fields to local stress fields, then assembling interface reaction forces from those stresses to exchange with the FEM solver.
+
+An ongoing direction extends this idea to **three-dimensional fiber-reinforced composites**, aiming to use **one shared neural operator for all 100 fibers**, with FEM handling the surrounding matrix. I am exploring how well the shared model generalizes across fibers and how fiber-end effects influence the coupled response.
 
 News
 ======
