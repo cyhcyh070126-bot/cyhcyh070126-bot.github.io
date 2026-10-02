@@ -52,7 +52,7 @@ Research Experience
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">1. GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework</div>
+    <div class="cv-project__title" id="fem-neural-operator">1. GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework</div>
     <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
@@ -132,7 +132,7 @@ Research Experience
 
 <div class="cv-project cv-project--battery">
   <div class="cv-project__header">
-    <div class="cv-project__title">2. ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials</div>
+    <div class="cv-project__title" id="convlstm-battery">2. ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials</div>
     <div class="cv-project__term">Jun. 2025 - Oct. 2025</div>
   </div>
   <div class="cv-project__meta">
@@ -210,7 +210,7 @@ Research Experience
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">3. PINNs for Shock Capturing in the Burgers Equation</div>
+    <div class="cv-project__title" id="burgers-pinn">3. PINNs for Shock Capturing in the Burgers Equation</div>
     <div class="cv-project__term">Nov. 2025 - Mar. 2026</div>
   </div>
   <div class="cv-project__meta">
@@ -278,7 +278,7 @@ Research Experience
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title">4. Domain-Specific LLM Fine-Tuning for Mechanics of Materials</div>
+    <div class="cv-project__title" id="mechanics-llm">4. Domain-Specific LLM Fine-Tuning for Mechanics of Materials</div>
     <div class="cv-project__term">Sep. 2024 - Apr. 2025</div>
   </div>
   <div class="cv-project__meta">

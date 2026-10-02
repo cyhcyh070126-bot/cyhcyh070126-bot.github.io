@@ -1,0 +1,19 @@
+<dialog class="site-search" id="site-search" aria-label="Site search" data-index-url="{{ '/search-index.json' | relative_url }}">
+  <div class="site-search__header">
+    <svg class="site-search__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+    <label class="site-search__sr-only" for="site-search-input">Search pages, research, and links</label>
+    <input id="site-search-input" class="site-search__input" type="text" placeholder="Search pages, research, and links…" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="site-search-results" autofocus>
+    <button class="site-search__close" type="button" aria-label="Close search" title="Close search (Esc)">×</button>
+  </div>
+  <div class="site-search__body">
+    <div id="site-search-results" class="site-search__results" role="listbox" aria-label="Search results"></div>
+    <p class="site-search__message" hidden></p>
+    <button class="site-search__retry" type="button" hidden>Try again</button>
+  </div>
+  <div class="site-search__footer" aria-hidden="true">
+    <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+    <span><kbd>↵</kbd> open</span>
+    <span><kbd>esc</kbd> close</span>
+  </div>
+  <p class="site-search__sr-only" id="site-search-status" role="status" aria-live="polite" aria-atomic="true"></p>
+</dialog>
