@@ -27,7 +27,7 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Nov 2025</div>
-      <div class="home-news__content">Worked on PINNs for shock capturing in the one-dimensional Burgers equation and explored multiple stabilization strategies.</div>
+      <div class="home-news__content">Developed standard and artificial-viscosity PINNs for one-dimensional Burgers shock problems, with analytical-reference comparisons of the predicted solution profiles.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jun 2025</div>
