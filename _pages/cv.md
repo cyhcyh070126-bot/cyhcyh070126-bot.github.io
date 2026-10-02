@@ -66,7 +66,7 @@ Research Experience
 - **Displacement-to-Stress Operator Learning:** Trained Transolver models to learn the operator mapping from prescribed interface displacement fields to local stress fields.
 - **Stress-Based Interface Coupling:** Assembled interface reaction forces from the predicted stresses and returned them to the outer FEM solver, which updated the interface displacements for the next coupling iteration.
 
-**Cylinder Study and Ongoing 3D Composite Extension:** The cylinder example illustrates the hybrid FEM–neural operator workflow; the final panel shows a bottom cross-section of the three-dimensional, 100-fiber composite mesh used in our ongoing extension.
+**Ongoing 3D Composite Extension:** We are extending the framework to a three-dimensional composite containing 100 fibers. Our goal is to train **a single shared neural operator for all 100 fibers**, using the same model parameters to map each fiber's interface displacement field to its 3D stress field. Stress-derived interface reactions would couple the fibers to the surrounding FEM matrix through iterative displacement–force exchange. Key questions include generalization across fibers and the influence of fiber-end effects on stress prediction and interface-force transfer.
 
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card">
@@ -124,8 +124,8 @@ Research Experience
       <img src="/images/research/composite_n100_mesh_overview.png" alt="Bottom cross-section of a three-dimensional finite element mesh for a 100-fiber reinforced composite, with a local fiber–matrix close-up. This is a cross-sectional view of a 3D model, not a 2D simulation or a prediction result." />
     </a>
     <figcaption>
-      <strong>3D Fiber-Reinforced Composite Extension (Ongoing)</strong><br>
-      Three-dimensional composite with 100 fibers; the figure shows its bottom cross-sectional mesh and a local fiber–matrix close-up. Our goal is to train <strong>a single shared neural operator for all 100 fibers</strong>, mapping each fiber's interface displacement field to its 3D stress field with the same model parameters. Stress-derived interface reactions would couple the fibers to the surrounding FEM matrix, with particular attention to fiber-end effects.
+      <strong>3D Fiber Composites (Ongoing)</strong><br>
+      Bottom cross-section of a 100-fiber mesh, supporting ongoing work on one shared neural operator for all fibers.
     </figcaption>
   </figure>
 </div>
