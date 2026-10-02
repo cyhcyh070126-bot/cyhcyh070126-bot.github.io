@@ -47,7 +47,7 @@ News
 Current Research
 ======
 
-My current research focuses on GPU-accelerated computational mechanics and scientific machine learning. I am developing hybrid FEM–neural operator solvers in which a local neural operator predicts stress fields from interface displacements. Interface reaction forces are assembled from the predicted stresses and returned to the outer finite element solver in an iterative coupling process.
+My current research focuses on GPU-accelerated computational mechanics and scientific machine learning. I am developing hybrid FEM–neural operator solvers in which a local neural operator learns the mapping from interface displacement fields to subdomain stress fields. Interface reaction forces are assembled from the resulting stress fields and returned to the outer finite element solver through iterative coupling.
 
 [View Research Experience in CV](/cv/#research-experience).
 
