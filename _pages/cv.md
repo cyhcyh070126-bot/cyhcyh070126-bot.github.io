@@ -119,13 +119,25 @@ Research Experience
     </figcaption>
   </figure>
 
-  <figure class="research-card">
+  <figure class="research-card" id="cylinder-coupling-results">
+    <a href="/files/research/cylinder_coupled_stress_comparison.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FEM-NO solution, and absolute error. Dashed arcs mark the coupling interface." />
+    </a>
+    <figcaption>
+      <strong>Cylinder Coupling Results</strong><br>
+      Monolithic FEM reference and coupled FEM–NO stress fields (&sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, &tau;<sub>xy</sub>), with corresponding absolute-error maps.
+    </figcaption>
+  </figure>
+</div>
+
+<div class="research-gallery research-gallery--single research-gallery--composite">
+  <figure class="research-card" id="fiber-composite">
     <a href="/files/research/composite_n100_mesh_overview.pdf" target="_blank" rel="noopener noreferrer">
       <img src="/images/research/composite_n100_mesh_overview.png" alt="Bottom cross-section of a three-dimensional finite element mesh for a 100-fiber reinforced composite, with a local fiber–matrix close-up. This is a cross-sectional view of a 3D model, not a 2D simulation or a prediction result." />
     </a>
     <figcaption>
       <strong>3D Fiber Composites (Ongoing)</strong><br>
-      Bottom cross-section of a 100-fiber mesh, supporting ongoing work on one shared neural operator for all fibers.
+      Bottom cross-section and local fiber–matrix mesh detail of a 3D composite with 100 fibers. Ongoing work targets one shared neural operator for all fibers.
     </figcaption>
   </figure>
 </div>

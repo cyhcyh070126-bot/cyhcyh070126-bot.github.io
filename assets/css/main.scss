@@ -195,6 +195,15 @@ ul + .cv-project {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.research-gallery--composite {
+  width: min(100%, 1100px);
+  margin: 1.75rem auto 2rem;
+}
+
+.research-card[id] {
+  scroll-margin-top: 90px;
+}
+
 .research-gallery--single .research-card {
   padding: 0.75rem;
 }
