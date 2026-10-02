@@ -29,7 +29,7 @@ test('Published projects have the supplied links; the ongoing NO keeps its place
   assert.match(blocks[0], /repository:\s*$/);
   assert.match(blocks[1], /repository: https:\/\/github\.com\/cyhcyh070126-bot\/convlstm-battery-field-prediction#readme/);
   assert.match(blocks[2], /repository: https:\/\/github\.com\/cyhcyh070126-bot\/burgers-pinn#readme/);
-  assert.match(blocks[3], /repository: https:\/\/huggingface\.co\/CYHcyh66\/AI_Material_mechanics_assistant/);
+  assert.match(blocks[3], /^  repository: https:\/\/huggingface\.co\/CYHcyh66\r?$/m);
   assert.match(blocks[3], /repository_label: Hugging Face/);
   assert.match(read('_pages/projects.html'), /project\.repository_label \| default: 'Repository'/);
 });
