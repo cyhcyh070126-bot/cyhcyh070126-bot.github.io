@@ -8,11 +8,11 @@ redirect_from:
   - /about.html
 ---
 
-I am **Yanghao Chen**, an undergraduate in [Engineering Mechanics](https://aero-mech.tongji.edu.cn/31831/list.htm) at [Tongji University](https://www.tongji.edu.cn/)'s [School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/).
+Hi! I'm **Yanghao Chen**, an undergraduate in [Engineering Mechanics](https://aero-mech.tongji.edu.cn/31831/list.htm) at [Tongji University](https://www.tongji.edu.cn/)'s [School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/).
 
-My interest has evolved from predicting physical responses to understanding how learned models can become reliable parts of a numerical solver. I now explore **hybrid FEM–neural operator methods**, focusing on how learned local responses interact with the surrounding finite element domain.
+Fine-tuning large language models for mechanics questions got me curious: could learning help compute the physics, not just explain it? I explored field prediction with neural networks and physical constraints with PINNs, and now work on **neural operators coupled with FEM**—learning mappings between physical fields and putting them to work inside a numerical solver.
 
-I am a visiting undergraduate research intern in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at [Johns Hopkins University](https://www.jhu.edu/), advised by [Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/) in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home). At Tongji, I have also worked with [Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm) and [Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm).
+I'm now a visiting undergraduate research intern in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at [Johns Hopkins University](https://www.jhu.edu/), advised by [Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/) in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home). At Tongji, I've also worked with [Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm) and [Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm).
 
 News
 ======
