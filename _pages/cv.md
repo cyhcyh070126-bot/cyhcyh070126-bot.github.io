@@ -160,16 +160,6 @@ Research Experience
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
-    <a href="/images/research/battery_orientation_input.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_orientation_input.png" alt="Grain-orientation map of the 60-grain, 5C microstructure in case 28571, matching the concentration and von Mises stress animations." />
-    </a>
-    <figcaption>
-      <strong>Grain Orientation Map</strong><br>
-      Grain-orientation input for the same 5C microstructure shown in the concentration and stress animations.
-    </figcaption>
-  </figure>
-
-  <figure class="research-card">
     <a href="/images/research/battery_concentration.gif" target="_blank" rel="noopener noreferrer">
       <img src="/images/research/battery_concentration.gif" alt="Animated concentration evolution from the COMSOL-based dataset." />
     </a>
@@ -186,6 +176,16 @@ Research Experience
     <figcaption>
       <strong>von Mises Stress Evolution</strong><br>
       Time-dependent von Mises stress response under the same microstructure and loading condition.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card">
+    <a href="/images/research/battery_orientation_input.png" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/battery_orientation_input.png" alt="Grain-orientation map of the 60-grain, 5C microstructure in case 28571, matching the concentration and von Mises stress animations." />
+    </a>
+    <figcaption>
+      <strong>Grain Orientation Map</strong><br>
+      Grain-orientation input for the same 5C microstructure shown in the concentration and stress animations.
     </figcaption>
   </figure>
 
