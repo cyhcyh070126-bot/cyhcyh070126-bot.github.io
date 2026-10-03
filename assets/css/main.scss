@@ -392,6 +392,12 @@ ul + .cv-project {
   transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease, border-color 180ms ease;
 }
 
+.research-card--grain-orientation img {
+  box-sizing: border-box;
+  padding: 28px;
+  margin-inline: auto;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .research-card:hover,
   .research-card:focus-within {
