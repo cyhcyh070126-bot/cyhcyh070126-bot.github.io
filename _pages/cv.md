@@ -185,7 +185,7 @@ Research Experience
     </a>
     <figcaption>
       <strong>Grain Orientation Map</strong><br>
-      Colors encode grain orientation relative to the x-axis, folded to 0°–90° (violet to pink). The orientation β = α + θ combines the local radial angle α and the deviation θ from the radial direction.
+      Colors represent each grain’s orientation relative to the global x-axis, folded into the range 0°–90°.
     </figcaption>
   </figure>
 
