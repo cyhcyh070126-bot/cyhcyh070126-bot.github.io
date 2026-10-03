@@ -219,7 +219,10 @@ Research Experience
     </figcaption>
   </figure>
 
-  <figure class="research-card">
+</div>
+
+<div class="research-gallery research-gallery--single research-gallery--composite">
+  <figure class="research-card" id="battery-prediction-summary">
     <a href="/images/research/battery_prediction_summary.png" target="_blank" rel="noopener noreferrer">
       <img src="/images/research/battery_prediction_summary.png" alt="Prediction summary comparing ground truth, model prediction, and error heatmaps across multiple frames." />
     </a>
