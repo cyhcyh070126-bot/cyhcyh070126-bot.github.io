@@ -12,7 +12,7 @@ sitemap: false
   },
   "cv": {
     "url": {{ '/cv/' | relative_url | jsonify }},
-    "pdf_url": {{ '/files/Yanghao_Chen_CV.pdf' | relative_url | jsonify }},
+    "pdf_url": {{ '/files/Yanghao_Chen_CV.pdf' | relative_url | append: '?v=research-projects' | jsonify }},
     "html": {{ search_cv.content | markdownify | jsonify }}
   },
   "projects": {

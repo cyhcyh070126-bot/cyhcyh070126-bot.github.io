@@ -47,8 +47,7 @@ Current Research
 - Stress-based assembly of interface reaction forces
 - Iterative coupling of finite element solvers and neural operators
 
-Research Experience
-======
+<h1 id="research-projects"><span id="research-experience">Research Projects</span></h1>
 
 <div class="cv-project">
   <div class="cv-project__header">
