@@ -181,11 +181,11 @@ Research Experience
 
   <figure class="research-card">
     <a href="/images/research/battery_orientation_input.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_orientation_input.png" alt="Grain-orientation map of the 60-grain, 5C microstructure in case 28571, matching the concentration and von Mises stress animations." />
+      <img src="/images/research/battery_orientation_input.png" alt="Grain orientations relative to the global x-axis, folded into 0 to 90 degrees and encoded from violet to pink. Each orientation beta is the local radial angle alpha plus the deviation theta from the radial direction." />
     </a>
     <figcaption>
       <strong>Grain Orientation Map</strong><br>
-      Grain-orientation input for the same 5C microstructure shown in the concentration and stress animations.
+      Colors encode grain orientation relative to the x-axis, folded to 0°–90° (violet to pink). The orientation β = α + θ combines the local radial angle α and the deviation θ from the radial direction.
     </figcaption>
   </figure>
 
