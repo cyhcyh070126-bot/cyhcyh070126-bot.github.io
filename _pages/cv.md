@@ -250,9 +250,9 @@ Research Experience
 - **Shock-Profile Analysis:** Compared standard and regularized PINN profiles with the analytical inviscid reference, using profile plots and local views to examine shock smearing and deviations near the discontinuity.
 
 <div class="research-gallery research-gallery--pinn">
-  <figure class="research-card research-card--pinn-overview">
-    <a href="/images/research/pinn_shock_problem_framework.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/pinn_shock_problem_framework.png" alt="Schematic of the Burgers Riemann problem and PINN framework, including coordinate inputs, automatic differentiation, and PDE, initial-condition, and boundary-condition losses." />
+  <figure class="research-card research-card--pinn-overview" id="pinn-framework">
+    <a href="/images/research/pinn_shock_problem_framework_v2.svg" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/pinn_shock_problem_framework_v2.svg" alt="Vector schematic of the inviscid Burgers Riemann problem: coordinate inputs x and t feed a neural network; separate time and space derivatives form the PDE residual, and full sums define the initial, boundary, and PDE losses. Analytical profiles show sharp entropy shocks." />
     </a>
     <figcaption>
       <strong>Shock Problem and PINN Framework</strong><br>

@@ -337,8 +337,9 @@ ul + .cv-project {
 }
 
 .research-gallery--pinn .research-card--pinn-overview img {
+  width: 100%;
   height: auto;
-  max-height: 360px;
+  max-height: none;
 }
 
 .research-gallery--prototype {
