@@ -179,7 +179,7 @@ Research Experience
     </figcaption>
   </figure>
 
-  <figure class="research-card">
+  <figure class="research-card research-card--grain-orientation">
     <a href="/images/research/battery_orientation_input.png" target="_blank" rel="noopener noreferrer">
       <img src="/images/research/battery_orientation_input.png" alt="Grain orientations relative to the global x-axis, folded into 0 to 90 degrees and encoded from violet to pink. Each orientation beta is the local radial angle alpha plus the deviation theta from the radial direction." />
     </a>
