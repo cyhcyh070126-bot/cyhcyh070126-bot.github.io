@@ -251,8 +251,8 @@ Research Experience
 
 <div class="research-gallery research-gallery--pinn">
   <figure class="research-card research-card--pinn-overview" id="pinn-framework">
-    <a href="/files/research/pinn_shock_problem_framework_v7.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/pinn_shock_problem_framework_v7.svg" alt="Burgers Riemann problem setup for x in [-1, 1] and t in (0, 1], with a precisely connected coordinate-network schematic and full PDE, initial-condition and boundary-condition loss sums in the PINN training diagram." />
+    <a href="/files/research/pinn_shock_problem_framework_v8.pdf" target="_blank" rel="noopener noreferrer">
+      <img src="/images/research/pinn_shock_problem_framework_v8.svg" alt="Burgers Riemann problem setup for x in [-1, 1] and t in (0, 1], with analytical shock sketches and a PINN coordinate network. Automatic differentiation forms the inviscid PDE residual; initial-condition and boundary-condition evaluations separately connect to their full loss sums. The three weighted losses drive the training loop." />
     </a>
     <figcaption>
       <strong>Shock Problem and PINN Framework</strong><br>
