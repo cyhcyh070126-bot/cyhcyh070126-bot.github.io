@@ -8,13 +8,13 @@ redirect_from:
   - /about.html
 ---
 
-Hi! I'm **Yanghao Chen**, an undergraduate in [Engineering Mechanics](https://aero-mech.tongji.edu.cn/31831/list.htm) at [Tongji University](https://www.tongji.edu.cn/)'s [School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/).
+Hi, I'm **Yanghao Chen**, a **final-year undergraduate** at **[Tongji University](https://www.tongji.edu.cn/)**. I study **Engineering Mechanics** in the **[School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/31828/list.htm)**. My research interests lie in **scientific machine learning and computational mechanics**, particularly **AI-accelerated simulation and GPU computing**.
 
-I started by fine-tuning large language models to answer mechanics questions. I then explored neural networks for field prediction and PINNs for incorporating physical constraints. These experiences shifted my focus from explaining mechanics to modeling physical behavior, and toward integrating learning with numerical methods.
+My research began with adapting **large language models (LLMs)** to mechanics and later expanded to modeling evolving physical fields with **ConvLSTMs**. This led me to explore **physics-informed neural networks (PINNs), where physical laws guide learning**.
 
-These days, I'm working on **neural operators coupled with FEM**, learning mappings from interface displacement fields to local stress fields. My focus is on coupling these learned responses reliably with a conventional solver. I'm also exploring this idea for 3D composites, with one shared operator for the fibers and FEM for the matrix.
+Building on this work, my interests have expanded to **neural operators**, which learn **mappings between function spaces**. My current research focuses on **hybrid FEM–neural operator solvers**, integrating learned operators with the finite element method. I aim to combine operator learning, numerical methods, and GPU computing to make scientific simulation more efficient and scalable.
 
-At [Tongji University](https://www.tongji.edu.cn/), I've worked with [Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm) and [Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm) during my undergraduate studies. I'm currently a **visiting undergraduate research intern** in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at [Johns Hopkins University](https://www.jhu.edu/), advised by [Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/) in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home).
+At Tongji, I have been fortunate to work under the guidance of **[Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm)** and **[Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm)**. I am currently a **visiting undergraduate research intern** in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at **[Johns Hopkins University](https://www.jhu.edu/)**, working with **[Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/)** in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home).
 
 News
 ======
