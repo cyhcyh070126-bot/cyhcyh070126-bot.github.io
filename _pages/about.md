@@ -10,7 +10,7 @@ redirect_from:
 
 Hi, I'm Yanghao Chen, a final-year undergraduate at **[Tongji University](https://www.tongji.edu.cn/)**. I study Engineering Mechanics in the **[School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/31828/list.htm)**. My research interests lie in scientific machine learning and computational mechanics, particularly AI-accelerated simulation and GPU computing.
 
-My research began with adapting large language models (LLMs) to mechanics and later expanded to modeling evolving physical fields with ConvLSTMs. This led me to explore physics-informed neural networks (PINNs), where physical laws guide learning.
+My research began with fine-tuning large language models using LoRA on Google Colab to improve their ability to answer questions in mechanics of materials. I later turned to ConvLSTMs to model evolving physical fields. This led me to explore physics-informed neural networks (PINNs), where physical laws guide learning.
 
 Building on this work, my interests have expanded to neural operators, which learn mappings between function spaces. My current research focuses on hybrid FEM–neural operator solvers, integrating learned operators with the finite element method. I aim to combine operator learning, numerical methods, and GPU computing to make scientific simulation more efficient and scalable.
 
