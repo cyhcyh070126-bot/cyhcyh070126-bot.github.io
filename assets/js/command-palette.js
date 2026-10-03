@@ -87,7 +87,7 @@
       }
       // Titles are read from the CV, not duplicated or replaced with acronyms.
       var entry = add("Projects", heading.textContent.replace(/^\s*\d+\.\s*/, "").trim(),
-        (data.projects?.url || data.cv.url) + "#" + heading.id, aliases[heading.id], body);
+        data.cv.url + "#" + heading.id, aliases[heading.id], body);
       projects.push({ id: heading.id, entry: entry, nodes: nodes });
     });
     if (entries.filter(function (entry) { return entry.group === "Projects"; }).length === 0) {
