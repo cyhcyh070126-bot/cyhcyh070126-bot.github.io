@@ -63,8 +63,8 @@
       return entry;
     }
     add("Navigation", "Home", data.home.url, "about biography 首页 主页 个人介绍", home.querySelector("p")?.textContent);
-    var cvLink = add("Navigation", "CV", data.cv.pdf_url || data.cv.url, "resume curriculum vitae pdf download 简历 下载");
-    if (cvLink && data.cv.pdf_url) cvLink.download = "Yanghao_Chen_CV.pdf";
+    var cvLink = add("Navigation", "CV", data.cv.pdf_url || data.cv.url, "resume curriculum vitae pdf view 简历 查看");
+    if (cvLink && data.cv.pdf_url) cvLink.openInNewTab = true;
     if (data.projects) add("Navigation", "Projects", data.projects.url, "projects repository repositories 项目 课题 仓库");
     add("Navigation", "News", data.home.url + "#news", "updates timeline 新闻 动态", home.querySelector(".home-news")?.textContent);
     add("Navigation", "Education", data.cv.url + "#education", "university tongji jhu 教育 同济 约翰霍普金斯");
@@ -293,7 +293,7 @@
         title.className = "site-search__option-title";
         title.textContent = entry.title;
         link.append(title);
-        if (!isDisabled && (isCollection || entry.download || /^https:\/\//.test(entry.url))) {
+        if (!isDisabled && (isCollection || entry.openInNewTab || /^https:\/\//.test(entry.url))) {
           var indicator = document.createElementNS("http://www.w3.org/2000/svg", "svg");
           indicator.setAttribute("class", "site-search__option-kind");
           indicator.setAttribute("viewBox", "0 0 24 24");
@@ -303,13 +303,10 @@
           indicator.setAttribute("stroke-linecap", "round");
           indicator.setAttribute("stroke-linejoin", "round");
           var arrow = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          arrow.setAttribute("d", isCollection ? "m9 5 7 7-7 7" : entry.download ? "M12 3v12m-4-4 4 4 4-4M5 17v4h14v-4" : "M7 17 17 7M7 7h10v10");
+          arrow.setAttribute("d", isCollection ? "m9 5 7 7-7 7" : "M7 17 17 7M7 7h10v10");
           indicator.append(arrow);
           indicator.setAttribute("aria-hidden", "true");
-          if (entry.download) {
-            link.setAttribute("download", entry.download);
-            link.setAttribute("aria-label", entry.title + " (download PDF)");
-          } else if (!isCollection) {
+          if (!isCollection) {
             link.target = "_blank";
             link.rel = "noopener noreferrer";
             link.setAttribute("aria-label", entry.title + " (opens in a new tab)");
