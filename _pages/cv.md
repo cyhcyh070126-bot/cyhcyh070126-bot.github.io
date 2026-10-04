@@ -72,7 +72,7 @@ Current Research
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card">
     <a href="/files/research/cylinder_subdomain_supports_1234.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/cylinder_subdomain_supports_1234.png" alt="Cylinder model showing the FEM subdomain in gray, neural-operator subdomain in green, shared interface in blue, and supports along the straight edges." />
+      <img src="/images/research/cylinder_subdomain_supports_1234.png" alt="Cylinder model showing the FEM subdomain in gray, neural-operator subdomain in green, shared interface in blue, and supports along the straight edges." loading="lazy" decoding="async" width="1600" height="1600" />
     </a>
     <figcaption>
       <strong>Cylinder Subdomain Layout</strong><br>
@@ -82,7 +82,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/files/research/domain_decomposition_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/domain_decomposition_preview.png" alt="Full cylinder-domain mesh and its non-overlapping FEM and neural-operator subdomain meshes." />
+      <img src="/images/research/domain_decomposition_preview.png" alt="Full cylinder-domain mesh and its non-overlapping FEM and neural-operator subdomain meshes." loading="lazy" decoding="async" width="2592" height="749" />
     </a>
     <figcaption>
       <strong>Non-overlapping Domain Decomposition</strong><br>
@@ -92,7 +92,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/files/research/cylinder_boundary_conditions.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/cylinder_boundary_conditions.png" alt="Neural-operator cylinder subdomain with prescribed displacement functions on the inner and outer arcs, zero horizontal displacement on the left edge, and zero vertical displacement on the bottom edge." />
+      <img src="/images/research/cylinder_boundary_conditions.png" alt="Neural-operator cylinder subdomain with prescribed displacement functions on the inner and outer arcs, zero horizontal displacement on the left edge, and zero vertical displacement on the bottom edge." loading="lazy" decoding="async" width="1540" height="1600" />
     </a>
     <figcaption>
       <strong>GRF-Sampled Boundary Displacements</strong><br>
@@ -102,7 +102,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/files/research/subdomain_point_cloud_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/subdomain_point_cloud_preview.png" alt="Subdomain location, finite element mesh, and point cloud with blue interior nodes and red boundary nodes." />
+      <img src="/images/research/subdomain_point_cloud_preview.png" alt="Subdomain location, finite element mesh, and point cloud with blue interior nodes and red boundary nodes." loading="lazy" decoding="async" width="2592" height="749" />
     </a>
     <figcaption>
       <strong>Subdomain Mesh and Point Cloud</strong><br>
@@ -112,7 +112,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/files/research/sweep_001_sigma_xx_continuous.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Predicted sigma xx stress field, FEM reference, and absolute error map; relative L2 error 0.6262 percent." />
+      <img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Predicted sigma xx stress field, FEM reference, and absolute error map; relative L2 error 0.6262 percent." loading="lazy" decoding="async" width="3543" height="1239" />
     </a>
     <figcaption>
       <strong>&sigma;<sub>xx</sub> Stress Prediction and Error</strong><br>
@@ -122,7 +122,7 @@ Current Research
 
   <figure class="research-card" id="cylinder-coupling-results">
     <a href="/files/research/cylinder_coupled_stress_comparison.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FEM-NO solution, and absolute error. Dashed arcs mark the coupling interface." />
+      <img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FEM-NO solution, and absolute error. Dashed arcs mark the coupling interface." loading="lazy" decoding="async" width="2200" height="1841" />
     </a>
     <figcaption>
       <strong>Coupled FEM–Neural Operator Results</strong><br>
@@ -134,7 +134,7 @@ Current Research
 <div class="research-gallery research-gallery--single research-gallery--composite">
   <figure class="research-card" id="fiber-composite">
     <a href="/files/research/composite_n100_mesh_overview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/composite_n100_mesh_overview.png" alt="Bottom cross-section of a three-dimensional finite element mesh for a 100-fiber reinforced composite, with a local fiber–matrix close-up. This is a cross-sectional view of a 3D model, not a 2D simulation or a prediction result." />
+      <img src="/images/research/composite_n100_mesh_overview.png" alt="Bottom cross-section of a three-dimensional finite element mesh for a 100-fiber reinforced composite, with a local fiber–matrix close-up. This is a cross-sectional view of a 3D model, not a 2D simulation or a prediction result." loading="lazy" decoding="async" width="2400" height="1362" />
     </a>
     <figcaption>
       <strong>3D Composite Mesh with 100 Fibers</strong><br>
@@ -162,7 +162,7 @@ Current Research
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
     <a href="/images/research/battery_concentration.gif" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_concentration.gif" alt="Animated concentration evolution from the COMSOL-based dataset." />
+      <img src="/images/research/battery_concentration.gif" alt="Animated concentration evolution from the COMSOL-based dataset." loading="lazy" decoding="async" width="640" height="480" />
     </a>
     <figcaption>
       <strong>Lithium Concentration Evolution</strong><br>
@@ -172,7 +172,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/battery_von_mises.gif" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_von_mises.gif" alt="Animated von Mises stress evolution under the same microstructure and loading condition." />
+      <img src="/images/research/battery_von_mises.gif" alt="Animated von Mises stress evolution under the same microstructure and loading condition." loading="lazy" decoding="async" width="640" height="480" />
     </a>
     <figcaption>
       <strong>von Mises Stress Evolution</strong><br>
@@ -182,7 +182,7 @@ Current Research
 
   <figure class="research-card research-card--grain-orientation">
     <a href="/images/research/battery_orientation_input.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_orientation_input.png" alt="Grain orientations relative to the global x-axis, folded into 0 to 90 degrees and encoded from violet to pink. Each orientation beta is the local radial angle alpha plus the deviation theta from the radial direction." />
+      <img src="/images/research/battery_orientation_input.png" alt="Grain orientations relative to the global x-axis, folded into 0 to 90 degrees and encoded from violet to pink. Each orientation beta is the local radial angle alpha plus the deviation theta from the radial direction." loading="lazy" decoding="async" width="512" height="512" />
     </a>
     <figcaption>
       <strong>Grain Orientation Map</strong><br>
@@ -192,7 +192,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/battery_convlstm_pipeline.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_convlstm_pipeline.png" alt="ConvLSTM prediction pipeline with concentration, grain orientation, and C-rate inputs." />
+      <img src="/images/research/battery_convlstm_pipeline.png" alt="ConvLSTM prediction pipeline with concentration, grain orientation, and C-rate inputs." loading="lazy" decoding="async" width="834" height="480" />
     </a>
     <figcaption>
       <strong>Conditional ConvLSTM Prediction</strong><br>
@@ -202,7 +202,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/battery_convlstm_cell_clean.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_convlstm_cell_clean.png" alt="Internal structure of the ConvLSTM cell used in the model." />
+      <img src="/images/research/battery_convlstm_cell_clean.png" alt="Internal structure of the ConvLSTM cell used in the model." loading="lazy" decoding="async" width="715" height="513" />
     </a>
     <figcaption>
       <strong>ConvLSTM Cell Structure</strong><br>
@@ -212,7 +212,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/battery_scheduled_sampling.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_scheduled_sampling.png" alt="Scheduled sampling strategy for autoregressive sequence training." />
+      <img src="/images/research/battery_scheduled_sampling.png" alt="Scheduled sampling strategy for autoregressive sequence training." loading="lazy" decoding="async" width="560" height="419" />
     </a>
     <figcaption>
       <strong>Scheduled Sampling</strong><br>
@@ -225,7 +225,7 @@ Current Research
 <div class="research-gallery research-gallery--single research-gallery--composite">
   <figure class="research-card" id="battery-prediction-summary">
     <a href="/images/research/battery_prediction_summary.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_prediction_summary.png" alt="Prediction summary comparing ground truth, model prediction, and error heatmaps across multiple frames." />
+      <img src="/images/research/battery_prediction_summary.png" alt="Prediction summary comparing ground truth, model prediction, and error heatmaps across multiple frames." loading="lazy" decoding="async" width="2332" height="1145" />
     </a>
     <figcaption>
       <strong>Concentration Sequence Prediction</strong><br>
@@ -253,7 +253,7 @@ Current Research
 <div class="research-gallery research-gallery--pinn">
   <figure class="research-card research-card--pinn-overview" id="pinn-framework">
     <a href="/files/research/pinn_shock_problem_framework_v8.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/pinn_shock_problem_framework_v8.svg" alt="Burgers Riemann problem setup for x in [-1, 1] and t in (0, 1], with analytical shock sketches and a PINN coordinate network. Automatic differentiation forms the inviscid PDE residual; initial-condition and boundary-condition evaluations separately connect to their full loss sums. The three weighted losses drive the training loop." />
+      <img src="/images/research/pinn_shock_problem_framework_v8.svg" alt="Burgers Riemann problem setup for x in [-1, 1] and t in (0, 1], with analytical shock sketches and a PINN coordinate network. Automatic differentiation forms the inviscid PDE residual; initial-condition and boundary-condition evaluations separately connect to their full loss sums. The three weighted losses drive the training loop." loading="lazy" decoding="async" width="1728" height="922" />
     </a>
     <figcaption>
       <strong>Burgers Problem and PINN Training</strong><br>
@@ -263,7 +263,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/burgers_shock_motion.gif" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/burgers_shock_motion.gif" alt="Animation of the exact entropy solution of the inviscid Burgers equation, with left state 1, right state 0, and shock position x_s(t) = t/2." />
+      <img src="/images/research/burgers_shock_motion.gif" alt="Animation of the exact entropy solution of the inviscid Burgers equation, with left state 1, right state 0, and shock position x_s(t) = t/2." loading="lazy" decoding="async" width="960" height="900" />
     </a>
     <figcaption>
       <strong>Analytical Shock Evolution</strong><br>
@@ -273,7 +273,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/burgers_shock_trajectory.gif" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/burgers_shock_trajectory.gif" alt="Animation of the analytical Burgers shock trajectory x_s(t) = 0.5t in the space-time plane." />
+      <img src="/images/research/burgers_shock_trajectory.gif" alt="Animation of the analytical Burgers shock trajectory x_s(t) = 0.5t in the space-time plane." loading="lazy" decoding="async" width="960" height="900" />
     </a>
     <figcaption>
       <strong>Analytical Shock Trajectory</strong><br>
@@ -284,7 +284,7 @@ Current Research
   <div class="pinn-prediction-comparison" id="pinn-prediction-comparison">
   <figure class="research-card">
     <a href="/images/research/burgers_standard_pinn_prediction.gif" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/burgers_standard_pinn_prediction.gif" alt="Animation comparing the standard PINN prediction with the exact solution of the inviscid Burgers equation." />
+      <img src="/images/research/burgers_standard_pinn_prediction.gif" alt="Animation comparing the standard PINN prediction with the exact solution of the inviscid Burgers equation." loading="lazy" decoding="async" width="960" height="900" />
     </a>
     <figcaption>
       <strong>Standard PINN Prediction</strong><br>
@@ -294,7 +294,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" alt="Animation comparing a constant-artificial-viscosity PINN profile with the analytical inviscid Burgers shock reference." />
+      <img src="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" alt="Animation comparing a constant-artificial-viscosity PINN profile with the analytical inviscid Burgers shock reference." loading="lazy" decoding="async" width="960" height="900" />
     </a>
     <figcaption>
       <strong>Artificial-Viscosity PINN Prediction</strong><br>
@@ -323,7 +323,7 @@ Current Research
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
     <a href="/images/research/llm_finetuning_workflow_v2.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/llm_finetuning_workflow_v2.png" alt="Workflow diagram showing self-built mechanics dataset construction, Hugging Face dataset publication, Qwen2.5 7B LoRA fine-tuning on Google Colab, fine-tuned model publication, and the final AI teaching assistant." />
+      <img src="/images/research/llm_finetuning_workflow_v2.png" alt="Workflow diagram showing self-built mechanics dataset construction, Hugging Face dataset publication, Qwen2.5 7B LoRA fine-tuning on Google Colab, fine-tuned model publication, and the final AI teaching assistant." loading="lazy" decoding="async" width="2816" height="1536" />
     </a>
     <figcaption>
       <strong>LLM Fine-Tuning and Release Workflow</strong><br>
