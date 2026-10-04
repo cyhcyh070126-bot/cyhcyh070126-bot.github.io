@@ -315,10 +315,10 @@ Current Research
   </div>
 </div>
 
-- **Mechanics Question Answering:** Adapted Qwen2.5-7B to answer questions and explain concepts in mechanics of materials.
-- **Instruction Dataset Curation:** Curated instruction-response examples from textbooks and technical literature covering stress analysis, constitutive laws, and failure theories.
-- **Parameter-Efficient Fine-Tuning:** Applied LoRA fine-tuning on Google Colab to adapt the base model to mechanics questions and explanatory responses.
-- **Public Releases:** Published the [Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge) datasets, together with the [fine-tuned checkpoint](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and [merged model](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged), on Hugging Face.
+- **Mechanics Question Answering:** Adapted Qwen2.5-7B for question answering and concept explanation in mechanics of materials.
+- **Instruction Dataset Construction:** Built instruction–response datasets from textbooks and technical literature, covering stress analysis, constitutive laws, and failure theories in mechanics of materials.
+- **LoRA Fine-Tuning:** Fine-tuned Qwen2.5-7B on the instruction–response datasets using LoRA on Google Colab.
+- **Public Release:** Released two instruction–response datasets ([Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge)) and two fine-tuned Qwen2.5-based model checkpoints ([AI_Material_mechanics_assistant](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and [AI_Material_mechanics_assistant_merged](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged)) on Hugging Face for question answering in mechanics of materials.
 
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
