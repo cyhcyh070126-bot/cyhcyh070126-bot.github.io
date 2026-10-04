@@ -338,16 +338,6 @@ Current Research
   </figure>
 </div>
 
-Skills
-======
-
-- **Scientific Machine Learning:** PyTorch, JAX, Neural Operators (Transolver, DeepONet), PINNs, ConvLSTM
-- **Computational Mechanics:** JAX-FEM, FEniCSx, Abaqus, COMSOL Multiphysics (LiveLink for MATLAB), Gmsh
-- **Programming & Tools:** Python, MATLAB, Linux, Git/GitHub
-- **Visualization:** Matplotlib, Origin
-- **LLM Fine-Tuning:** Qwen2.5, LoRA, Instruction Dataset Curation
-- **Languages:** Mandarin Chinese (native), Cantonese, English
-
 Contact
 ======
 
