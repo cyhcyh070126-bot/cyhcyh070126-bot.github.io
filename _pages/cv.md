@@ -125,8 +125,8 @@ Current Research
       <img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FEM-NO solution, and absolute error. Dashed arcs mark the coupling interface." />
     </a>
     <figcaption>
-      <strong>Hybrid Solver Stress Comparison</strong><br>
-      Compared &sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, and &tau;<sub>xy</sub> stress fields from the hybrid FEM–neural operator solver with the full FEM solution, with absolute error maps for each component.
+      <strong>Coupled FEM–Neural Operator Results</strong><br>
+      Compared the &sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, and &tau;<sub>xy</sub> components of the coupled FEM–neural operator solution with the full FEM reference and plotted the absolute error for each component.
     </figcaption>
   </figure>
 </div>
