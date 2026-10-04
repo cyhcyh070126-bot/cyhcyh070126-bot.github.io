@@ -139,6 +139,23 @@ test('perspective stays finite and provides near/far particle sizes', () => {
   assert.ok(Math.max(...app.radii()) - Math.min(...app.radii()) > 0.5);
 });
 
+test('phone, landscape and desktop resizing keep particles bounded with one loop', () => {
+  const app = setup();
+  app.visible(true);
+  let time = 0;
+  for (const [width, height] of [[305, 676], [375, 780], [829, 326], [1425, 836]]) {
+    app.document.documentElement.clientWidth = width;
+    app.window.innerHeight = height + 64;
+    app.events.resize();
+    for (let frame = 0; frame < 120; frame++) {
+      app.frame(time += 40);
+      assert.ok(app.positions().every(([x, y]) => x >= 4 && x <= width - 4 && y >= 4 && y <= height - 4));
+      assert.equal(app.callbacks.size, 1);
+    }
+    assert.ok(app.topology().maxDegree <= 5);
+  }
+});
+
 test('reduced motion starts static, drawing frequency and pixel ratio are bounded', () => {
   const app = setup(true);
   app.visible(true);
