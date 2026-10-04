@@ -61,7 +61,7 @@ a,
 a span,
 #main a,
 #main a span {
-  text-underline-offset: 0.5em;
+  text-underline-offset: 0.4em;
   text-decoration-thickness: 1px;
   text-decoration-skip-ink: auto;
 }
@@ -174,7 +174,7 @@ html[data-theme="dark"] .research-card figcaption strong {
 .project-list__title a:hover {
   color: var(--cv-section-heading-color);
   text-decoration: underline;
-  text-underline-offset: 0.5em;
+  text-underline-offset: 0.4em;
 }
 
 .project-list__description {
