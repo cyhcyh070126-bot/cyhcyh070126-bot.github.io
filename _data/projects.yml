@@ -2,30 +2,30 @@
   title: GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework
   status: Ongoing
   description: >-
-    Combines finite element simulation with a local neural operator trained on
-    data from GPU-accelerated finite element simulations. The operator maps interface displacement fields to
-    subdomain stress fields; reaction forces assembled from these stresses
-    couple the subdomain to the surrounding FEM domain through iterative exchange.
+    Uses JAX-FEM to generate training data and trains Transolver in JAX to learn
+    mappings from interface displacement fields to subdomain stress fields.
+    Interface reaction forces computed from the predicted stresses couple the
+    neural operator to the surrounding FEM domain through an iterative solver.
   research_url: /cv/#fem-neural-operator
   repository:
 
 - id: convlstm-battery
   title: ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials
   description: >-
-    Uses conditional ConvLSTM models to predict the evolution of concentration
-    and stress in polycrystalline battery materials. Trained separately for each
-    field on MATLAB–COMSOL simulation images, the models use grain orientation
-    and C-rate as conditioning inputs and an MSE + SSIM training objective.
+    Trains conditional ConvLSTM models in PyTorch to predict how concentration
+    and stress fields evolve in polycrystalline battery materials. Separate
+    models for each field use past field images, grain-orientation maps, and
+    C-rate inputs, with MATLAB–COMSOL simulation data and an MSE + SSIM loss.
   research_url: /cv/#convlstm-battery
   repository: https://github.com/cyhcyh070126-bot/convlstm-battery-field-prediction#readme
 
 - id: burgers-pinn
   title: PINNs for Shock Capturing in the Burgers Equation
   description: >-
-    Investigates how physics-informed neural networks represent a moving shock
-    in the one-dimensional Burgers equation. Compares a standard PINN with a
-    formulation that adds constant artificial viscosity to the PDE residual,
-    using the analytical inviscid solution to assess shock profiles over time.
+    Trains PINNs in PyTorch to predict shock propagation in the one-dimensional
+    Burgers equation, using PDE-residual, initial-condition, and boundary-condition
+    losses. Compares standard and constant-artificial-viscosity PINNs against
+    the analytical inviscid solution to assess the predicted shock profiles.
   research_url: /cv/#burgers-pinn
   repository: https://github.com/cyhcyh070126-bot/burgers-pinn#readme
 
