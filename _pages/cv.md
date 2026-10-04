@@ -67,7 +67,7 @@ Current Research
 - **Neural Operator Training:** Trained Transolver in JAX to learn mappings from interface displacement fields to stress fields within the neural-operator subdomain.
 - **Iterative Interface Coupling:** Computed interface reaction forces from predicted stresses in the neural-operator subdomain and transferred them to the FEM solver. The FEM solver used these forces to compute updated interface displacements and returned them to the neural operator for the next coupling iteration.
 
-**Ongoing 3D Composite Extension:** We are extending the framework to a three-dimensional composite containing 100 fibers. Our goal is to train **a single shared neural operator for all 100 fibers**, using the same model parameters to map each fiber's interface displacement field to its 3D stress field. Stress-derived interface reactions would couple the fibers to the surrounding FEM matrix through iterative displacement–force exchange. Key questions include generalization across fibers and the influence of fiber-end effects on stress prediction and interface-force transfer.
+**Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
 
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card">
