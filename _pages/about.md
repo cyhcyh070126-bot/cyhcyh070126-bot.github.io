@@ -14,7 +14,7 @@ My research began with fine-tuning <strong class="research-keyword">large langua
 
 Together, these experiences have shaped my interest in combining machine learning with numerical methods for scientific simulation. My current research focuses on <strong class="research-keyword">neural operators</strong>, which learn mappings between function spaces, and <strong class="research-keyword">hybrid FEM–neural operator solvers</strong> based on non-overlapping domain decomposition. I aim to combine AI-based models with <strong class="research-keyword">GPU-accelerated numerical computing</strong> to make engineering simulations more efficient and scalable.
 
-At Tongji, I have been fortunate to work under the guidance of **[Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm)** and **[Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm)**. From January to October 2026, I was a visiting undergraduate research intern in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at **[Johns Hopkins University](https://www.jhu.edu/)**, working with **[Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/)** in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home).
+At Tongji, I have been fortunate to work under the guidance of **[Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm)** and **[Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm)**. From January to October 2026, I was an undergraduate research intern in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at **[Johns Hopkins University](https://www.jhu.edu/)**, working with **[Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/)** in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home).
 
 News
 ======
@@ -35,7 +35,7 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jan 2026</div>
-      <div class="home-news__content">Began a visiting undergraduate research internship in the <a href="https://engineering.jhu.edu/case/" target="_blank" rel="noopener noreferrer">Department of Civil and Systems Engineering</a> at Johns Hopkins University, advised by <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>, working on a GPU-accelerated hybrid FEM–neural operator coupling framework.</div>
+      <div class="home-news__content">Began an undergraduate research internship in the <a href="https://engineering.jhu.edu/case/" target="_blank" rel="noopener noreferrer">Department of Civil and Systems Engineering</a> at Johns Hopkins University, advised by <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>, working on a GPU-accelerated hybrid FEM–neural operator coupling framework.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Nov 2025</div>
