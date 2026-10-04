@@ -203,6 +203,42 @@ html[data-theme="dark"] .research-card figcaption strong {
   border-radius: 2px;
 }
 
+.quick-links {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin-bottom: 0.35em;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    text-decoration: none;
+  }
+
+  a span {
+    text-decoration: underline;
+  }
+
+  .quick-links__icon {
+    flex: 0 0 1.35em;
+    width: 1.35em;
+    text-align: center;
+    color: var(--global-text-color);
+  }
+
+  img.quick-links__icon {
+    height: 1.35em;
+    object-fit: contain;
+  }
+
+  .quick-links__icon--linkedin {
+    color: #0a66c2;
+  }
+}
+
 .home-page__title {
   color: var(--cv-section-heading-color);
 }

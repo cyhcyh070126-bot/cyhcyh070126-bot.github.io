@@ -70,12 +70,14 @@ My current research focuses on GPU-accelerated computational mechanics and scien
 Quick Links
 ======
 
-- [CV](/cv/)
-- [GitHub](https://github.com/cyhcyh070126-bot)
-- [Hugging Face](https://huggingface.co/CYHcyh66)
-- [LinkedIn](https://www.linkedin.com/in/yanghao-chen-830677399/)
-- [Tongji Email](mailto:2350083@tongji.edu.cn)
-- [Gmail](mailto:cyhcyh070126@gmail.com)
+<ul class="quick-links">
+  <li><a href="{{ '/cv/' | relative_url }}"><i class="far fa-file-alt quick-links__icon" aria-hidden="true"></i><span>CV</span></a></li>
+  <li><a href="https://github.com/cyhcyh070126-bot"><i class="fab fa-github quick-links__icon" aria-hidden="true"></i><span>GitHub</span></a></li>
+  <li><a href="https://huggingface.co/CYHcyh66"><img class="quick-links__icon" src="{{ '/assets/icons/huggingface.svg' | relative_url }}" width="24" height="24" alt="" aria-hidden="true" /><span>Hugging Face</span></a></li>
+  <li><a href="https://www.linkedin.com/in/yanghao-chen-830677399/"><i class="fab fa-linkedin quick-links__icon quick-links__icon--linkedin" aria-hidden="true"></i><span>LinkedIn</span></a></li>
+  <li><a href="mailto:2350083@tongji.edu.cn"><i class="fas fa-envelope quick-links__icon" aria-hidden="true"></i><span>Tongji Email</span></a></li>
+  <li><a href="mailto:cyhcyh070126@gmail.com"><i class="far fa-envelope quick-links__icon" aria-hidden="true"></i><span>Gmail</span></a></li>
+</ul>
 
 Contact
 ======
