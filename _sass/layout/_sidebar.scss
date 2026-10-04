@@ -17,14 +17,13 @@
     margin-top: 1em;
   }
 
-  @media screen and (min-width: $sidebar-screen-min-width) {
+  // Match the breakpoint that turns the profile into a left-hand column.
+  @include breakpoint($large) {
     height: auto;
     overflow: visible;              // Keep the profile stationary; scroll the page instead.
     position: fixed;
+    top: 2em;
     padding-top: $masthead-height;
-  }
-
-  @include breakpoint($large) {
     @include span(2 of 12);
     opacity: 1;
     -webkit-transition: opacity 0.2s ease-in-out;
