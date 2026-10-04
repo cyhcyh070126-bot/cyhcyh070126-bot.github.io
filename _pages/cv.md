@@ -105,18 +105,18 @@ Current Research
       <img src="/images/research/subdomain_point_cloud_preview.png" alt="Subdomain location, finite element mesh, and point cloud with blue interior nodes and red boundary nodes." />
     </a>
     <figcaption>
-      <strong>Subdomain Point Cloud</strong><br>
-      The point cloud is built directly from 4,102 FEM nodes, with 3,847 interior nodes and 255 boundary nodes identified for operator learning.
+      <strong>Subdomain Mesh and Point Cloud</strong><br>
+      Constructed the point cloud from 4,102 finite element nodes, including 3,847 interior nodes (blue) and 255 boundary nodes (red), for neural-operator training.
     </figcaption>
   </figure>
 
   <figure class="research-card">
     <a href="/files/research/sweep_001_sigma_xx_continuous.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Continuous sigma xx stress-field ground truth, prediction, and absolute error at coupling sweep 001; relative L^2 error 0.6262 percent." />
+      <img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Predicted sigma xx stress field, FEM reference, and absolute error map; relative L2 error 0.6262 percent." />
     </a>
     <figcaption>
-      <strong>Continuous Stress-Field Evaluation</strong><br>
-      Ground truth, prediction, and absolute error for &sigma;<sub>xx</sub> at coupling sweep 001, with a relative L<sup>2</sup> error of 0.6262% for this field comparison.
+      <strong>&sigma;<sub>xx</sub> Stress Prediction and Error</strong><br>
+      Compared the predicted &sigma;<sub>xx</sub> stress field with the FEM reference. The relative L<sup>2</sup> error is 0.6262%, and the absolute error map shows the spatial error distribution.
     </figcaption>
   </figure>
 
