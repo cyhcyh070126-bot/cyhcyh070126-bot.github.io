@@ -26,7 +26,7 @@
     Trains conditional ConvLSTM models in PyTorch to predict future sequences
     of concentration and stress fields in polycrystalline battery materials. Separate
     models for each field use past field images, grain-orientation maps, and
-    C-rate inputs, with MATLAB–COMSOL simulation data and an MSE + SSIM loss.
+    C-rate inputs, with MATLAB–COMSOL simulation data and a combined MSE and SSIM loss.
   research_url: /cv/#convlstm-battery
   repository: https://github.com/cyhcyh070126-bot/convlstm-battery-field-prediction#readme
 
