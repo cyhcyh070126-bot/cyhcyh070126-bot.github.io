@@ -346,6 +346,13 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
   transition: color 150ms ease, background-color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease, scale 150ms ease;
 }
 
+// Use a smaller, centered scale for links embedded in sentences.
+#main :is(p, .home-news__content, .cv-project__meta) a,
+#main .page__content li:not(.quick-links > li) a {
+  --link-hover-scale: 1.02;
+  transform-origin: center center;
+}
+
 // Keep the project title and its status together, without scaling the link twice.
 #main .project-list__title a {
   display: inline;
@@ -354,13 +361,13 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
 
 body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):focus-visible,
 #main .project-list__title:has(a:focus-visible) {
-  scale: 1.04;
+  scale: var(--link-hover-scale, 1.04);
 }
 
 @media (hover: hover) and (pointer: fine) {
   body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):hover,
   #main .project-list__title:has(a:hover) {
-    scale: 1.04;
+    scale: var(--link-hover-scale, 1.04);
   }
 }
 
@@ -396,6 +403,20 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
 
 .masthead__menu-item--lg.selected > a {
   border-bottom-color: var(--cv-section-rule-color);
+}
+
+.masthead #site-nav a:is(:hover, :focus-visible),
+.masthead button:is(:hover, :focus-visible) {
+  color: var(--cv-section-heading-color);
+}
+
+.masthead #site-nav a:is(:hover, :focus-visible)::before {
+  background-color: currentColor;
+}
+
+.masthead .site-search-toggle:is(:hover, :focus-visible) kbd {
+  color: inherit;
+  border-color: currentColor;
 }
 
 .research-gallery + .cv-project,

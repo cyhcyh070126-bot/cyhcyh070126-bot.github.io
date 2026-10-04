@@ -57,7 +57,7 @@ Current Research
     <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Lead Undergraduate Researcher; Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
+    <span><em>Lead Undergraduate Researcher</em> | <em>Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
     <span><em>Johns Hopkins University</em></span>
   </div>
 </div>
@@ -149,7 +149,7 @@ Current Research
     <div class="cv-project__term">Jun. 2025 - Oct. 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
+    <span><em>Undergraduate Researcher</em> | <em>Advisor: <a href="https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
@@ -240,7 +240,7 @@ Current Research
     <div class="cv-project__term">Nov. 2025 - Mar. 2026</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm" target="_blank" rel="noopener noreferrer">Prof. Xianyang (Tom) Chen</a></em></span>
+    <span><em>Undergraduate Researcher</em> | <em>Advisor: <a href="https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm" target="_blank" rel="noopener noreferrer">Prof. Xianyang (Tom) Chen</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
@@ -310,7 +310,7 @@ Current Research
     <div class="cv-project__term">Sep. 2024 - Apr. 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
+    <span><em>Undergraduate Researcher</em> | <em>Advisor: <a href="https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
