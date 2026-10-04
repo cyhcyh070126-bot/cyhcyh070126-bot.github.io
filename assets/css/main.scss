@@ -56,6 +56,13 @@
   font-weight: 700;
 }
 
+@media (min-width: 1280px) {
+  .page--home .page__inner-wrap {
+    // Use part of the reserved right gutter without shifting the left edge.
+    width: calc(100% + 120px);
+  }
+}
+
 :root {
   --cv-section-heading-color: #9a641e;
   --cv-section-rule-color: #d7b47a;
