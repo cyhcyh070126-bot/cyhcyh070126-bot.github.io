@@ -33,6 +33,7 @@
       if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       var target = document.getElementById(link.hash.slice(1));
       if (!target) return;
+      if (window.sitePrepareSection) window.sitePrepareSection(link.href, true);
       event.preventDefault();
       event.stopPropagation();
       closeContents();

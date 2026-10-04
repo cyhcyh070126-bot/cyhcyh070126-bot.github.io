@@ -14,7 +14,7 @@ description: "Research projects in computational mechanics and scientific machin
       <a href="{{ project.research_url | relative_url }}" aria-label="View {{ project.title | escape }} research details">
         <picture>
           {% if project.preview contains '.png' %}<source type="image/webp" srcset="{{ project.preview | replace: '.png', '.webp' | relative_url }}" />{% endif %}
-          <img src="{{ project.preview | relative_url }}" alt="{{ project.preview_alt | escape }}" loading="lazy" decoding="async" width="320" height="240" />
+          <img src="{{ project.preview | relative_url }}" alt="{{ project.preview_alt | escape }}" loading="lazy" decoding="async" width="320" height="240" {% if site.data.image_previews[project.preview] %}style="background-image:url('{{ site.data.image_previews[project.preview] }}');background-size:contain;background-position:center;background-repeat:no-repeat"{% endif %} />
         </picture>
       </a>
       <figcaption>{{ project.preview_caption }}</figcaption>

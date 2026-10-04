@@ -24,6 +24,7 @@
   var warmed = new Set();
   var assetCount = 0;
   function warm(href) {
+    if (window.sitePrepareSection) window.sitePrepareSection(href, false);
     if (constrained()) return;
     var item = destination(href, location.href);
     if (!item || warmed.has(item.url) || (item.type === "asset" && assetCount >= 8)) return;

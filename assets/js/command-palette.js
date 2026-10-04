@@ -331,6 +331,7 @@
           if (isDisabled) return;
           if (isCollection) enterCollection(entry);
           else {
+            if (window.sitePrepareSection) window.sitePrepareSection(link.href, true);
             // Search results are dynamic, so the legacy anchor listener misses them.
             // Navigate same-page sections immediately without reloading the document.
             var url = new URL(link.href, location.href);
