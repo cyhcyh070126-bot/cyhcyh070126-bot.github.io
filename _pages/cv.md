@@ -37,17 +37,17 @@ Research Interests
 ======
 
 - Computational mechanics
-- Finite element methods
 - Scientific machine learning
 - Neural operators and surrogate modeling
+- GPU-accelerated scientific computing
 
 Current Research
 ======
 
-- GPU-accelerated finite element methods for computational mechanics
-- Neural operator learning of mappings from interface displacement fields to subdomain stress fields
-- Stress-based assembly of interface reaction forces
-- Iterative coupling of finite element solvers and neural operators
+- Hybrid FEM–neural operator solvers based on non-overlapping domain decomposition
+- Neural operator learning for subdomain stress prediction
+- Iterative exchange of interface forces and displacements
+- Shared neural operators for 3D fiber-reinforced composites
 
 <h1 id="research-projects"><span id="research-experience">Research Projects</span></h1>
 
