@@ -339,7 +339,7 @@ Skills
 - **Computational Mechanics:** Finite Element Methods, JAX-FEM, FEniCSx, COMSOL Multiphysics, Abaqus
 - **Programming & Tools:** Python, MATLAB, Linux, Git/GitHub
 - **Simulation & Visualization:** Gmsh, LiveLink for MATLAB, Matplotlib, Origin
-- **LLM Fine-Tuning:** Qwen2.5, LoRA/PEFT, Instruction Dataset Curation
+- **LLM Fine-Tuning:** Qwen2.5, LoRA, Instruction Dataset Curation
 - **Languages:** Mandarin Chinese (native), Cantonese, English
 
 Contact
