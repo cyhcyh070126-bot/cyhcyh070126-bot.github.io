@@ -336,19 +336,22 @@ Skills
 ======
 
 - **Scientific Machine Learning:** PyTorch, JAX, Neural Operators (Transolver, DeepONet), PINNs, ConvLSTM
-- **Computational Mechanics:** Finite Element Methods, FEniCSx, Gmsh, COMSOL Multiphysics, ABAQUS
-- **Scientific Computing & Tools:** Python, MATLAB, Linux, Git/GitHub, LiveLink for MATLAB
+- **Computational Mechanics:** Finite Element Methods, JAX-FEM, FEniCSx, COMSOL Multiphysics, Abaqus
+- **Programming & Tools:** Python, MATLAB, Linux, Git/GitHub
+- **Simulation & Visualization:** Gmsh, LiveLink for MATLAB, Matplotlib, Origin
 - **LLM Fine-Tuning:** Qwen2.5, LoRA/PEFT, Instruction Dataset Curation
-- **Visualization:** Matplotlib, Origin
-- **Languages:** Chinese (native), Cantonese, English
+- **Languages:** Mandarin Chinese (native), Cantonese, English
 
 Contact
 ======
 
-- Email: [2350083@tongji.edu.cn](mailto:2350083@tongji.edu.cn)
-- Website: [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io)
-- GitHub: [cyhcyh070126-bot](https://github.com/cyhcyh070126-bot)
-- Hugging Face: [CYHcyh66](https://huggingface.co/CYHcyh66)
+<ul class="quick-links">
+  <li><a href="mailto:2350083@tongji.edu.cn"><i class="fas fa-envelope quick-links__icon" aria-hidden="true"></i><span>Tongji Email</span></a></li>
+  <li><a href="mailto:cyhcyh070126@gmail.com"><i class="far fa-envelope quick-links__icon" aria-hidden="true"></i><span>Gmail</span></a></li>
+  <li><a href="https://github.com/cyhcyh070126-bot"><i class="fab fa-github quick-links__icon" aria-hidden="true"></i><span>GitHub</span></a></li>
+  <li><a href="https://huggingface.co/CYHcyh66"><img class="quick-links__icon" src="{{ '/assets/icons/huggingface.svg' | relative_url }}" width="24" height="24" alt="" aria-hidden="true" /><span>Hugging Face</span></a></li>
+  <li><a href="https://www.linkedin.com/in/yanghao-chen-830677399/"><i class="fab fa-linkedin quick-links__icon quick-links__icon--linkedin" aria-hidden="true"></i><span>LinkedIn</span></a></li>
+</ul>
 
 {% if site.publications.size > 0 %}
 
