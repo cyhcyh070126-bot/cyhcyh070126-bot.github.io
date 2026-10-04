@@ -53,7 +53,7 @@ Current Research
 
 <nav class="cv-project-nav" aria-label="Jump to a research project">
   {% for project in site.data.projects %}
-  <a href="#{{ project.id }}"><span class="cv-project-nav__number">0{{ forloop.index }}</span>{{ project.short_title }}</a>
+  <a href="#{{ project.id }}">{{ project.short_title }}</a>
   {% endfor %}
 </nav>
 

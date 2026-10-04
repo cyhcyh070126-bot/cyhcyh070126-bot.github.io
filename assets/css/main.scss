@@ -246,27 +246,35 @@ html[data-theme="dark"] .research-card figcaption strong {
 }
 
 .cv-project-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 1.2rem;
-  margin: 0 0 1.3rem;
-  padding: 0.15rem 0 0.75rem;
-  border-bottom: 1px solid var(--global-border-color);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  max-width: 760px;
+  margin: 0.3rem 0 1.5rem;
 }
 
 #main .cv-project-nav a {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
   min-height: 44px;
-  color: var(--cv-section-heading-color);
-  font-size: 0.9rem;
+  padding: 0.45rem 0.5rem;
+  border: 1px solid var(--global-border-color);
+  border-radius: 6px;
+  color: var(--global-text-color);
+  font-size: 0.85rem;
+  line-height: 1.35;
+  text-align: center;
+  text-decoration: none;
+  transform-origin: center center;
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, scale 150ms ease;
 }
 
-.cv-project-nav__number {
-  font-size: 0.7rem;
-  font-weight: 600;
-  opacity: 0.7;
+#main .cv-project-nav a:is(:hover, :focus-visible) {
+  color: var(--cv-section-heading-color);
+  background: rgba(154, 100, 30, 0.08);
+  border-color: var(--cv-section-rule-color);
+  text-decoration: none;
 }
 
 .back-to-top {
@@ -303,6 +311,10 @@ html[data-theme="dark"] .research-card figcaption strong {
 }
 
 @media (max-width: 699px) {
+  .cv-project-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .project-list__item {
     grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
@@ -490,6 +502,7 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
 }
 
 @media (prefers-reduced-motion: reduce) {
+  #main .cv-project-nav a,
   #main a,
   #main a i,
   body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]),
