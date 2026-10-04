@@ -72,21 +72,21 @@ Current Research
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card">
     <a href="/files/research/cylinder_subdomain_supports_1234.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/cylinder_subdomain_supports_1234.png" alt="Cylinder model showing the gray outer FEM domain, green inner neural-operator subdomain, blue coupling interface, and supports along the straight edges." />
+      <img src="/images/research/cylinder_subdomain_supports_1234.png" alt="Cylinder model showing the FEM subdomain in gray, neural-operator subdomain in green, shared interface in blue, and supports along the straight edges." />
     </a>
     <figcaption>
-      <strong>Cylinder Subdomain Position</strong><br>
-      The local neural-operator subdomain (green) connects to the outer FEM domain (gray) through the coupling interface (blue).
+      <strong>Cylinder Subdomain Layout</strong><br>
+      The FEM subdomain (gray) and neural-operator subdomain (green) are connected through a shared interface (blue).
     </figcaption>
   </figure>
 
   <figure class="research-card">
     <a href="/files/research/domain_decomposition_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/domain_decomposition_preview.png" alt="Full cylinder-domain mesh, outer-domain mesh, and extracted quarter-annulus subdomain mesh." />
+      <img src="/images/research/domain_decomposition_preview.png" alt="Full cylinder-domain mesh and its non-overlapping FEM and neural-operator subdomain meshes." />
     </a>
     <figcaption>
-      <strong>Domain Decomposition</strong><br>
-      The full finite element mesh is partitioned into an outer domain and a local subdomain with an identified coupling interface.
+      <strong>Non-overlapping Domain Decomposition</strong><br>
+      The mesh is partitioned into non-overlapping FEM and neural-operator subdomains with a shared interface.
     </figcaption>
   </figure>
 
