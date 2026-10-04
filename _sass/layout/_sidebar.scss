@@ -245,12 +245,19 @@
   }
 }
 
+.author__urls .icon-pad-right,
 .author__urls .author__brand-icon {
   display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.25em;
+  padding: 0;
   margin-right: 0.5em;
-  vertical-align: -0.35em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.author__urls .author__brand-icon {
+  height: 1.25em;
+  object-fit: contain;
 }
 
 .author__urls {
