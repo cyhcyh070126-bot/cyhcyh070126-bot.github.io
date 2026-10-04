@@ -13,20 +13,24 @@ test('Projects lists the same four titles and stable anchors as the CV', () => {
   assert.deepEqual([...projects.matchAll(/^  research_url: (.+)$/gm)].map(m => m[1]), cv.map(m => '/cv/#' + m[1]));
 });
 
-test('Missing repository URLs render non-navigating, accessible placeholders', () => {
+test('Projects without a public repository link to research details', () => {
   const page = read('_pages/projects.html');
   assert.match(page, /if project\.repository and project\.repository != ''/);
-  assert.match(page, /<span class="project-list__repository project-list__repository--pending" role="link" aria-disabled="true"/);
+  const fallback = page.split('{% else %}')[1].split('{% endif %}')[0];
+  assert.match(fallback, /href="\{\{ project\.research_url \| relative_url \}\}"/);
+  assert.match(fallback, />Research details<\/a>/);
+  assert.doesNotMatch(fallback, /aria-disabled|Repository link will be added/);
   assert.doesNotMatch(page, /href=["'](?:#|javascript:)/);
   assert.match(page, /rel="noopener noreferrer"/);
   assert.match(page, /author_profile: false/);
 });
 
-test('Published projects have the supplied links; the ongoing NO keeps its placeholder', () => {
+test('Published projects retain supplied links; the ongoing NO has a research destination', () => {
   const blocks = read('_data/projects.yml').split(/(?=^- id: )/m).filter(Boolean);
   assert.equal(blocks.length, 4);
   assert.match(blocks[0], /status: Ongoing/);
   assert.match(blocks[0], /repository:\s*$/);
+  assert.match(blocks[0], /research_url: \/cv\/#fem-neural-operator/);
   assert.match(blocks[1], /repository: https:\/\/github\.com\/cyhcyh070126-bot\/convlstm-battery-field-prediction#readme/);
   assert.match(blocks[2], /repository: https:\/\/github\.com\/cyhcyh070126-bot\/burgers-pinn#readme/);
   assert.match(blocks[3], /^  repository: https:\/\/huggingface\.co\/CYHcyh66\r?$/m);

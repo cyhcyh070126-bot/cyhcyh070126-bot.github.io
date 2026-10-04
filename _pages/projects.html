@@ -19,7 +19,7 @@ description: "Research projects in computational mechanics and scientific machin
     {% assign repository_label = project.repository_label | default: 'Repository' %}
     <a class="project-list__repository" href="{{ project.repository | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ repository_label | escape }} for {{ project.title | escape }} (opens in a new tab)">{{ repository_label | escape }} <span aria-hidden="true">↗</span></a>
     {% else %}
-    <span class="project-list__repository project-list__repository--pending" role="link" aria-disabled="true" aria-label="Repository for {{ project.title | escape }}: link not yet available" title="Repository link will be added.">Repository <span aria-hidden="true">↗</span></span>
+    <a class="project-list__repository" href="{{ project.research_url | relative_url }}" aria-label="Research details for {{ project.title | escape }}">Research details</a>
     {% endif %}
   </article>
   {% endfor %}
