@@ -23,7 +23,7 @@ description: "Research projects in computational mechanics and scientific machin
       {% elsif project.repository contains 'https://huggingface.co/' %}
       <img class="project-list__link-icon project-list__link-icon--huggingface" src="{{ '/assets/icons/huggingface.svg' | relative_url }}" width="24" height="24" alt="" aria-hidden="true" />
       {% endif %}
-      {{ repository_label | escape }} <span aria-hidden="true">↗</span>
+      {{ repository_label | escape }} <span class="project-list__link-arrow" aria-hidden="true">↗</span>
     </a>
     {% else %}
     <a class="project-list__repository" href="{{ project.research_url | relative_url }}" aria-label="Research details for {{ project.title | escape }}"><i class="far fa-file-alt project-list__link-icon" aria-hidden="true"></i>Research details</a>

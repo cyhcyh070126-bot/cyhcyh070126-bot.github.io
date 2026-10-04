@@ -96,6 +96,8 @@ a span,
 
 :root {
   --cv-section-heading-color: #9a641e;
+  --content-link-hover-color: #267e97;
+  --resource-link-hover-color: #744913;
   --cv-section-rule-color: #d7b47a;
   --research-panel-background: rgba(255, 255, 255, 0.72);
   --research-panel-text: var(--global-text-color);
@@ -107,6 +109,8 @@ a span,
 
 html[data-theme="dark"] {
   --cv-section-heading-color: #e6b867;
+  --content-link-hover-color: #89d5e6;
+  --resource-link-hover-color: #f2d29a;
   --cv-section-rule-color: #a97832;
   --research-panel-background: rgba(255, 255, 255, 0.08);
   --research-panel-text: #f3f3f3;
@@ -283,6 +287,62 @@ html[data-theme="dark"] .research-card figcaption strong {
 
   .quick-links__icon--linkedin {
     color: #0a66c2;
+  }
+}
+
+// Consistent, subtle feedback for text links without moving the text.
+#main a {
+  transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease;
+}
+
+#main a:hover,
+#main a:focus-visible {
+  color: var(--content-link-hover-color);
+}
+
+#main .author__urls a:hover,
+#main .author__urls a:focus-visible,
+#main .project-list__title a:hover,
+#main .project-list__title a:focus-visible {
+  color: var(--cv-section-heading-color);
+}
+
+#main .project-list__repository:hover,
+#main .project-list__repository:focus-visible {
+  color: var(--resource-link-hover-color);
+}
+
+#main a .icon-pad-right,
+#main a .quick-links__icon,
+#main a .project-list__link-icon {
+  transition: color 150ms ease;
+}
+
+#main a:hover i,
+#main a:focus-visible i {
+  color: inherit;
+}
+
+.project-list__link-arrow {
+  display: inline-block;
+  transition: transform 150ms ease;
+}
+
+.project-list__repository:hover .project-list__link-arrow,
+.project-list__repository:focus-visible .project-list__link-arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main a,
+  #main a i,
+  .project-list__link-arrow {
+    transition: none;
+  }
+
+  .project-list__repository:hover .project-list__link-arrow,
+  .project-list__repository:focus-visible .project-list__link-arrow {
+    transform: none;
   }
 }
 
