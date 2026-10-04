@@ -12,8 +12,8 @@
 - id: convlstm-battery
   title: ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials
   description: >-
-    Trains conditional ConvLSTM models in PyTorch to predict how concentration
-    and stress fields evolve in polycrystalline battery materials. Separate
+    Trains conditional ConvLSTM models in PyTorch to predict future sequences
+    of concentration and stress fields in polycrystalline battery materials. Separate
     models for each field use past field images, grain-orientation maps, and
     C-rate inputs, with MATLAB–COMSOL simulation data and an MSE + SSIM loss.
   research_url: /cv/#convlstm-battery
