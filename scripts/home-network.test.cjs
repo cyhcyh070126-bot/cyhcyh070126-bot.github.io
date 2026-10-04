@@ -12,12 +12,13 @@ function setup(reduce = false) {
   let intersect;
   let segments = [];
   let positions = [];
+  let radii = [];
   let start;
   const drawing = {
-    clearRect: () => { draws++; segments = []; positions = []; },
+    clearRect: () => { draws++; segments = []; positions = []; radii = []; },
     moveTo: (x, y) => { start = [x, y]; },
     lineTo: (x, y) => segments.push([start, [x, y]]),
-    arc: (x, y) => positions.push([x, y])
+    arc: (x, y, radius) => { positions.push([x, y]); radii.push(radius); }
   };
   const context = new Proxy({}, { get: (_, name) => drawing[name] || (() => {}) });
   const host = { getBoundingClientRect: () => ({ width: 1000, top: 100, left: 120 }) };
@@ -41,6 +42,7 @@ function setup(reduce = false) {
     visible: value => intersect([{ isIntersecting: value }]),
     draws: () => draws,
     positions: () => positions.map(p => [...p]),
+    radii: () => [...radii],
     topology: () => {
       const key = p => p.join(',');
       const neighbors = new Map(positions.map(p => [key(p), []]));
@@ -109,6 +111,17 @@ test('connections change freely without dense knots or additional animation loop
 
 test('independent page loads start with different particle positions', () => {
   assert.notDeepEqual(setup(true).positions(), setup(true).positions());
+});
+
+test('perspective stays finite and provides near/far particle sizes', () => {
+  const app = setup();
+  app.visible(true);
+  for (let frame = 1; frame <= 900; frame++) {
+    app.frame(frame * 40);
+    assert.ok(app.positions().every(p => p.every(Number.isFinite)));
+    assert.ok(app.radii().every(r => r >= 0.9 && r <= 2));
+  }
+  assert.ok(Math.max(...app.radii()) - Math.min(...app.radii()) > 0.5);
 });
 
 test('reduced motion starts static, drawing frequency and pixel ratio are bounded', () => {
