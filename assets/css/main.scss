@@ -56,14 +56,10 @@
   font-weight: 700;
 }
 
-// Keep link underlines clear of descenders, including icon-link labels.
-a,
-a span,
+// Keep content links clean in both resting and hover states.
 #main a,
 #main a span {
-  text-underline-offset: 0.22em;
-  text-decoration-thickness: 1px;
-  text-decoration-skip-ink: auto;
+  text-decoration: none;
 }
 
 @media (min-width: 1280px) {
@@ -173,8 +169,7 @@ html[data-theme="dark"] .research-card figcaption strong {
 
 .project-list__title a:hover {
   color: var(--cv-section-heading-color);
-  text-decoration: underline;
-  text-underline-offset: 0.22em;
+  text-decoration: none;
 }
 
 .project-list__description {
@@ -207,7 +202,7 @@ html[data-theme="dark"] .research-card figcaption strong {
 
 .project-list a.project-list__repository:hover {
   text-decoration: none;
-  border-bottom-color: currentColor;
+  border-bottom-color: transparent;
 }
 
 .project-list__repository--pending {
@@ -236,8 +231,7 @@ html[data-theme="dark"] .research-card figcaption strong {
   }
 
   a span {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
+    text-decoration: none;
   }
 
   .quick-links__icon {
