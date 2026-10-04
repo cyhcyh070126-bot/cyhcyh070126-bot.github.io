@@ -326,8 +326,8 @@ Current Research
       <img src="/images/research/llm_finetuning_workflow_v2.png" alt="Workflow diagram showing self-built mechanics dataset construction, Hugging Face dataset publication, Qwen2.5 7B LoRA fine-tuning on Google Colab, fine-tuned model publication, and the final AI teaching assistant." />
     </a>
     <figcaption>
-      <strong>LLM Fine-Tuning Workflow</strong><br>
-      Instruction dataset curation, Qwen2.5-7B fine-tuning with LoRA, and public release of datasets and model checkpoints for question answering in mechanics of materials.
+      <strong>LLM Fine-Tuning and Release Workflow</strong><br>
+      Built instruction–response datasets for mechanics of materials, fine-tuned Qwen2.5-7B using LoRA on Google Colab, and released the datasets and model checkpoints on Hugging Face.
     </figcaption>
   </figure>
 </div>
