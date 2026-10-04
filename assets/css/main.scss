@@ -632,6 +632,14 @@ ul + .cv-project {
 }
 
 @media (max-width: 480px) {
+  .masthead__menu-item--lg {
+    padding-right: 0.5rem;
+  }
+
+  .greedy-nav .visible-links #theme-toggle a {
+    margin-left: 0.5rem;
+  }
+
   .author__content {
     padding-left: 0;
     padding-right: 12px;
