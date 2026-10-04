@@ -63,7 +63,7 @@ Current Research
 </div>
 
 - **Non-overlapping Domain Decomposition and Hybrid Solver:** Developed a hybrid solver based on non-overlapping domain decomposition, using FEM and neural operators in separate subdomains connected through a shared interface.
-- **GPU-Accelerated Data Generation:** Used JAX-FEM to run GPU-accelerated simulations under different prescribed interface displacements, generating displacement and stress data for neural-operator training.
+- **GPU-Accelerated Data Generation:** Sampled interface displacement fields using Gaussian random fields (GRFs) and used GPU-accelerated JAX-FEM simulations to generate displacement and stress data for neural-operator training.
 - **Neural Operator Training:** Trained Transolver in JAX to learn mappings from interface displacement fields to stress fields within the neural-operator subdomain.
 - **Iterative Interface Coupling:** Computed interface reaction forces from predicted stresses in the neural-operator subdomain and transferred them to the FEM solver. The FEM solver used these forces to compute updated interface displacements and returned them to the neural operator for the next coupling iteration.
 
