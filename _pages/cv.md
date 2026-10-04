@@ -72,7 +72,7 @@ Current Research
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card">
     <a href="/files/research/cylinder_subdomain_supports_1234.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/cylinder_subdomain_supports_1234.png" alt="Cylinder model showing the FEM subdomain in gray, neural-operator subdomain in green, shared interface in blue, and supports along the straight edges." loading="lazy" decoding="async" width="1600" height="1600" />
+      <picture><source type="image/webp" srcset="/images/research/cylinder_subdomain_supports_1234.webp" /><img src="/images/research/cylinder_subdomain_supports_1234.png" alt="Cylinder model showing the FEM subdomain in gray, neural-operator subdomain in green, shared interface in blue, and supports along the straight edges." loading="lazy" decoding="async" width="1600" height="1600" /></picture>
     </a>
     <figcaption>
       <strong>Cylinder Subdomain Layout</strong><br>
@@ -82,7 +82,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/files/research/domain_decomposition_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/domain_decomposition_preview.png" alt="Full cylinder-domain mesh and its non-overlapping FEM and neural-operator subdomain meshes." loading="lazy" decoding="async" width="2592" height="749" />
+      <picture><source type="image/webp" srcset="/images/research/domain_decomposition_preview.webp" /><img src="/images/research/domain_decomposition_preview.png" alt="Full cylinder-domain mesh and its non-overlapping FEM and neural-operator subdomain meshes." loading="lazy" decoding="async" width="2592" height="749" /></picture>
     </a>
     <figcaption>
       <strong>Non-overlapping Domain Decomposition</strong><br>
@@ -92,7 +92,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/files/research/cylinder_boundary_conditions.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/cylinder_boundary_conditions.png" alt="Neural-operator cylinder subdomain with prescribed displacement functions on the inner and outer arcs, zero horizontal displacement on the left edge, and zero vertical displacement on the bottom edge." loading="lazy" decoding="async" width="1540" height="1600" />
+      <picture><source type="image/webp" srcset="/images/research/cylinder_boundary_conditions.webp" /><img src="/images/research/cylinder_boundary_conditions.png" alt="Neural-operator cylinder subdomain with prescribed displacement functions on the inner and outer arcs, zero horizontal displacement on the left edge, and zero vertical displacement on the bottom edge." loading="lazy" decoding="async" width="1540" height="1600" /></picture>
     </a>
     <figcaption>
       <strong>GRF-Sampled Boundary Displacements</strong><br>
@@ -102,7 +102,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/files/research/subdomain_point_cloud_preview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/subdomain_point_cloud_preview.png" alt="Subdomain location, finite element mesh, and point cloud with blue interior nodes and red boundary nodes." loading="lazy" decoding="async" width="2592" height="749" />
+      <picture><source type="image/webp" srcset="/images/research/subdomain_point_cloud_preview.webp" /><img src="/images/research/subdomain_point_cloud_preview.png" alt="Subdomain location, finite element mesh, and point cloud with blue interior nodes and red boundary nodes." loading="lazy" decoding="async" width="2592" height="749" /></picture>
     </a>
     <figcaption>
       <strong>Subdomain Mesh and Point Cloud</strong><br>
@@ -112,7 +112,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/files/research/sweep_001_sigma_xx_continuous.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Predicted sigma xx stress field, FEM reference, and absolute error map; relative L2 error 0.6262 percent." loading="lazy" decoding="async" width="3543" height="1239" />
+      <picture><source type="image/webp" srcset="/images/research/sweep_001_sigma_xx_continuous.webp" /><img src="/images/research/sweep_001_sigma_xx_continuous.png" alt="Predicted sigma xx stress field, FEM reference, and absolute error map; relative L2 error 0.6262 percent." loading="lazy" decoding="async" width="3543" height="1239" /></picture>
     </a>
     <figcaption>
       <strong>&sigma;<sub>xx</sub> Stress Prediction and Error</strong><br>
@@ -122,7 +122,7 @@ Current Research
 
   <figure class="research-card" id="cylinder-coupling-results">
     <a href="/files/research/cylinder_coupled_stress_comparison.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FEM-NO solution, and absolute error. Dashed arcs mark the coupling interface." loading="lazy" decoding="async" width="2200" height="1841" />
+      <picture><source type="image/webp" srcset="/images/research/cylinder_coupled_stress_comparison.webp" /><img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FEM-NO solution, and absolute error. Dashed arcs mark the coupling interface." loading="lazy" decoding="async" width="2200" height="1841" /></picture>
     </a>
     <figcaption>
       <strong>Coupled FEM–Neural Operator Results</strong><br>
@@ -134,7 +134,7 @@ Current Research
 <div class="research-gallery research-gallery--single research-gallery--composite">
   <figure class="research-card" id="fiber-composite">
     <a href="/files/research/composite_n100_mesh_overview.pdf" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/composite_n100_mesh_overview.png" alt="Bottom cross-section of a three-dimensional finite element mesh for a 100-fiber reinforced composite, with a local fiber–matrix close-up. This is a cross-sectional view of a 3D model, not a 2D simulation or a prediction result." loading="lazy" decoding="async" width="2400" height="1362" />
+      <picture><source type="image/webp" srcset="/images/research/composite_n100_mesh_overview.webp" /><img src="/images/research/composite_n100_mesh_overview.png" alt="Bottom cross-section of a three-dimensional finite element mesh for a 100-fiber reinforced composite, with a local fiber–matrix close-up. This is a cross-sectional view of a 3D model, not a 2D simulation or a prediction result." loading="lazy" decoding="async" width="2400" height="1362" /></picture>
     </a>
     <figcaption>
       <strong>3D Composite Mesh with 100 Fibers</strong><br>
@@ -182,7 +182,7 @@ Current Research
 
   <figure class="research-card research-card--grain-orientation">
     <a href="/images/research/battery_orientation_input.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_orientation_input.png" alt="Grain orientations relative to the global x-axis, folded into 0 to 90 degrees and encoded from violet to pink. Each orientation beta is the local radial angle alpha plus the deviation theta from the radial direction." loading="lazy" decoding="async" width="512" height="512" />
+      <picture><source type="image/webp" srcset="/images/research/battery_orientation_input.webp" /><img src="/images/research/battery_orientation_input.png" alt="Grain orientations relative to the global x-axis, folded into 0 to 90 degrees and encoded from violet to pink. Each orientation beta is the local radial angle alpha plus the deviation theta from the radial direction." loading="lazy" decoding="async" width="512" height="512" /></picture>
     </a>
     <figcaption>
       <strong>Grain Orientation Map</strong><br>
@@ -192,7 +192,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/battery_convlstm_pipeline.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_convlstm_pipeline.png" alt="ConvLSTM prediction pipeline with concentration, grain orientation, and C-rate inputs." loading="lazy" decoding="async" width="834" height="480" />
+      <picture><source type="image/webp" srcset="/images/research/battery_convlstm_pipeline.webp" /><img src="/images/research/battery_convlstm_pipeline.png" alt="ConvLSTM prediction pipeline with concentration, grain orientation, and C-rate inputs." loading="lazy" decoding="async" width="834" height="480" /></picture>
     </a>
     <figcaption>
       <strong>Conditional ConvLSTM Prediction</strong><br>
@@ -202,7 +202,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/battery_convlstm_cell_clean.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_convlstm_cell_clean.png" alt="Internal structure of the ConvLSTM cell used in the model." loading="lazy" decoding="async" width="715" height="513" />
+      <picture><source type="image/webp" srcset="/images/research/battery_convlstm_cell_clean.webp" /><img src="/images/research/battery_convlstm_cell_clean.png" alt="Internal structure of the ConvLSTM cell used in the model." loading="lazy" decoding="async" width="715" height="513" /></picture>
     </a>
     <figcaption>
       <strong>ConvLSTM Cell Structure</strong><br>
@@ -212,7 +212,7 @@ Current Research
 
   <figure class="research-card">
     <a href="/images/research/battery_scheduled_sampling.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_scheduled_sampling.png" alt="Scheduled sampling strategy for autoregressive sequence training." loading="lazy" decoding="async" width="560" height="419" />
+      <picture><source type="image/webp" srcset="/images/research/battery_scheduled_sampling.webp" /><img src="/images/research/battery_scheduled_sampling.png" alt="Scheduled sampling strategy for autoregressive sequence training." loading="lazy" decoding="async" width="560" height="419" /></picture>
     </a>
     <figcaption>
       <strong>Scheduled Sampling</strong><br>
@@ -225,7 +225,7 @@ Current Research
 <div class="research-gallery research-gallery--single research-gallery--composite">
   <figure class="research-card" id="battery-prediction-summary">
     <a href="/images/research/battery_prediction_summary.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/battery_prediction_summary.png" alt="Prediction summary comparing ground truth, model prediction, and error heatmaps across multiple frames." loading="lazy" decoding="async" width="2332" height="1145" />
+      <picture><source type="image/webp" srcset="/images/research/battery_prediction_summary.webp" /><img src="/images/research/battery_prediction_summary.png" alt="Prediction summary comparing ground truth, model prediction, and error heatmaps across multiple frames." loading="lazy" decoding="async" width="2332" height="1145" /></picture>
     </a>
     <figcaption>
       <strong>Concentration Sequence Prediction</strong><br>
@@ -323,7 +323,7 @@ Current Research
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
     <a href="/images/research/llm_finetuning_workflow_v2.png" target="_blank" rel="noopener noreferrer">
-      <img src="/images/research/llm_finetuning_workflow_v2.png" alt="Workflow diagram showing self-built mechanics dataset construction, Hugging Face dataset publication, Qwen2.5 7B LoRA fine-tuning on Google Colab, fine-tuned model publication, and the final AI teaching assistant." loading="lazy" decoding="async" width="2816" height="1536" />
+      <picture><source type="image/webp" srcset="/images/research/llm_finetuning_workflow_v2.webp" /><img src="/images/research/llm_finetuning_workflow_v2.png" alt="Workflow diagram showing self-built mechanics dataset construction, Hugging Face dataset publication, Qwen2.5 7B LoRA fine-tuning on Google Colab, fine-tuned model publication, and the final AI teaching assistant." loading="lazy" decoding="async" width="2816" height="1536" /></picture>
     </a>
     <figcaption>
       <strong>LLM Fine-Tuning and Release Workflow</strong><br>

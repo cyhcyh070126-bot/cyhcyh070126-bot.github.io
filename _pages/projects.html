@@ -12,7 +12,10 @@ description: "Research projects in computational mechanics and scientific machin
   <article class="project-list__item" aria-labelledby="{{ project.id }}" id="project-{{ project.id }}">
     <figure class="project-list__preview">
       <a href="{{ project.research_url | relative_url }}" aria-label="View {{ project.title | escape }} research details">
-        <img src="{{ project.preview | relative_url }}" alt="{{ project.preview_alt | escape }}" loading="lazy" decoding="async" width="320" height="240" />
+        <picture>
+          {% if project.preview contains '.png' %}<source type="image/webp" srcset="{{ project.preview | replace: '.png', '.webp' | relative_url }}" />{% endif %}
+          <img src="{{ project.preview | relative_url }}" alt="{{ project.preview_alt | escape }}" loading="lazy" decoding="async" width="320" height="240" />
+        </picture>
       </a>
       <figcaption>{{ project.preview_caption }}</figcaption>
     </figure>

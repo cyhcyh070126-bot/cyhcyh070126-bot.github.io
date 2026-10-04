@@ -38,7 +38,7 @@ html[data-theme="dark"] {
   line-height: 1.5;
   box-shadow: 0 22px 70px rgba(22, 18, 12, .24);
 }
-.site-search[open] { display: flex; flex-direction: column; animation: search-enter .14s ease-out; }
+.site-search[open] { display: flex; flex-direction: column; }
 .site-search::backdrop { background: var(--search-backdrop); }
 .site-search__header { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; padding: 16px 18px; border-bottom: 1px solid var(--search-line); }
 .site-search__icon { flex: 0 0 auto; color: var(--cv-section-heading-color, #9a641e); }

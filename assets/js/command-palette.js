@@ -202,11 +202,13 @@
     announceTimer = setTimeout(function () { status.textContent = text; }, 150);
   }
   function select(index, scroll) {
+    if (options.length && selected === (index + options.length) % options.length && !scroll) return;
     if (selected >= 0 && options[selected]) options[selected].setAttribute("aria-selected", "false");
     selected = options.length ? (index + options.length) % options.length : -1;
     if (selected < 0) { input.removeAttribute("aria-activedescendant"); return; }
     options[selected].setAttribute("aria-selected", "true");
     input.setAttribute("aria-activedescendant", options[selected].id);
+    if (window.siteWarmLink && options[selected].href) window.siteWarmLink(options[selected].href);
     if (scroll) options[selected].scrollIntoView({ block: "nearest" });
   }
   function clearResults() {
@@ -325,10 +327,26 @@
         }
         var index = options.length;
         link.addEventListener("pointermove", function (event) { if (event.pointerType !== "touch") select(index, false); });
-        link.addEventListener("click", function () {
+        link.addEventListener("click", function (event) {
           if (isDisabled) return;
           if (isCollection) enterCollection(entry);
-          else dialog.close();
+          else {
+            // Search results are dynamic, so the legacy anchor listener misses them.
+            // Navigate same-page sections immediately without reloading the document.
+            var url = new URL(link.href, location.href);
+            var target = url.hash && url.origin === location.origin && url.pathname === location.pathname &&
+              url.search === location.search && document.getElementById(decodeURIComponent(url.hash.slice(1)));
+            if (target && !link.target && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+              event.preventDefault();
+              target.setAttribute("tabindex", "-1");
+              previousFocus = target;
+              dialog.close();
+              history.pushState(null, "", url.hash);
+              var masthead = document.querySelector(".masthead");
+              var offset = masthead ? masthead.getBoundingClientRect().height + 16 : 16;
+              window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: "instant" });
+            } else dialog.close();
+          }
         });
         options.push(link);
         optionEntries.push(entry);
@@ -348,11 +366,26 @@
     message.textContent = "Loading site search…";
     retry.hidden = true;
     results.setAttribute("aria-busy", "true");
+    // Reuse this release's data across Home/CV/Projects, even if storage is blocked.
+    try {
+      var cached = JSON.parse(sessionStorage.getItem("site-search-index") || "null");
+      if (cached && cached.version === dialog.dataset.indexUrl) {
+        entries = buildEntries(cached.data, document);
+        results.removeAttribute("aria-busy");
+        render();
+        return Promise.resolve();
+      }
+    } catch (_) { /* Storage disabled, full, or stale: use the normal network path. */ }
     var controller = new AbortController();
     var timeout = setTimeout(function () { controller.abort(); }, 12000);
     loading = fetch(dialog.dataset.indexUrl, { signal: controller.signal, credentials: "same-origin" })
       .then(function (response) { if (!response.ok) throw new Error("Index unavailable"); return response.json(); })
-      .then(function (data) { entries = buildEntries(data, document); render(); })
+      .then(function (data) {
+        entries = buildEntries(data, document);
+        try { sessionStorage.setItem("site-search-index", JSON.stringify({ version: dialog.dataset.indexUrl, data: data })); }
+        catch (_) { /* Search still works without persistent storage. */ }
+        render();
+      })
       .catch(function () {
         if (!dialog.open) return;
         message.hidden = false;
@@ -376,6 +409,14 @@
     load();
   }
   trigger.addEventListener("click", open);
+  trigger.addEventListener("pointerenter", load, { once: true });
+  trigger.addEventListener("focus", load, { once: true });
+  // Prepare search before Ctrl K, without competing with the first paint.
+  var connection = navigator.connection;
+  if (!connection || (!connection.saveData && !/(^|-)2g$/.test(connection.effectiveType))) {
+    if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1500 });
+    else window.setTimeout(load, 600);
+  }
   dialog.querySelector(".site-search__close").addEventListener("click", function () { dialog.close(); });
   retry.addEventListener("click", load);
   back.addEventListener("click", goBack);

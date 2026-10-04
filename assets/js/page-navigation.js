@@ -43,7 +43,7 @@
       window.history.pushState(null, "", link.hash);
       window.scrollTo({
         top: target.getBoundingClientRect().top + window.scrollY - offset,
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"
+        behavior: "instant"
       });
     }, true);
   }
@@ -69,7 +69,7 @@
     }
     window.scrollTo({
       top: 0,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"
+      behavior: "instant"
     });
   });
   update();
