@@ -101,7 +101,7 @@ test('connections change freely without dense knots or additional animation loop
     if (frame % 150 === 0) {
       const topology = app.topology();
       arrangements.add(topology.links);
-      assert.ok(topology.maxDegree <= 3);
+      assert.ok(topology.maxDegree <= 5);
       assert.ok(topology.particles <= 72);
     }
     assert.equal(app.callbacks.size, 1);

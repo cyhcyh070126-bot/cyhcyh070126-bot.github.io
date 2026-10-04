@@ -99,12 +99,12 @@
         if (distance < reach) candidates.push({ i, j, distance, key: `${i}:${j}` });
       }
     }
-    // Prefer existing edges to avoid flicker. Three connections per point at most.
+    // Prefer existing edges to avoid flicker. Five connections per point at most.
     candidates.sort((a, b) => a.distance * (edges.has(a.key) ? 0.8 : 1) - b.distance * (edges.has(b.key) ? 0.8 : 1));
     edges.clear();
     const degree = points.map(() => 0);
     for (const { i, j, distance, key } of candidates) {
-      if (degree[i] >= 3 || degree[j] >= 3) continue;
+      if (degree[i] >= 5 || degree[j] >= 5) continue;
       degree[i]++; degree[j]++; edges.add(key);
       const depth = (points[i].depth + points[j].depth) / 2;
       context.lineWidth = 0.55 + depth * 0.55;
