@@ -10,7 +10,16 @@ function setup(reduce = false) {
   let id = 0;
   let draws = 0;
   let intersect;
-  const context = new Proxy({}, { get: (_, name) => name === 'clearRect' ? () => draws++ : () => {} });
+  let segments = [];
+  let positions = [];
+  let start;
+  const drawing = {
+    clearRect: () => { draws++; segments = []; positions = []; },
+    moveTo: (x, y) => { start = [x, y]; },
+    lineTo: (x, y) => segments.push([start, [x, y]]),
+    arc: (x, y) => positions.push([x, y])
+  };
+  const context = new Proxy({}, { get: (_, name) => drawing[name] || (() => {}) });
   const host = { getBoundingClientRect: () => ({ width: 1000, top: 100, left: 120 }) };
   const canvas = { parentElement: host, style: {}, getContext: () => context, getBoundingClientRect: () => ({ top: 100, bottom: 900 }) };
   const button = { dataset: {}, setAttribute: (name, value) => button[name] = value, addEventListener: (_, cb) => events.click = cb };
@@ -32,6 +41,29 @@ function setup(reduce = false) {
   return { events, canvas, button, document, media, callbacks,
     visible: value => intersect([{ isIntersecting: value }]),
     draws: () => draws,
+    topology: () => {
+      const key = p => p.join(',');
+      const neighbors = new Map(positions.map(p => [key(p), []]));
+      for (const [a, b] of segments) {
+        neighbors.get(key(a)).push(key(b));
+        neighbors.get(key(b)).push(key(a));
+      }
+      const visited = new Set();
+      const sizes = [];
+      for (const node of neighbors.keys()) {
+        if (visited.has(node)) continue;
+        const stack = [node];
+        let size = 0;
+        while (stack.length) {
+          const current = stack.pop();
+          if (visited.has(current)) continue;
+          visited.add(current); size++;
+          stack.push(...neighbors.get(current));
+        }
+        sizes.push(size);
+      }
+      return { largest: Math.max(...sizes), particles: positions.length };
+    },
     frame: time => { const [key, cb] = callbacks.entries().next().value; callbacks.delete(key); cb(time); }
   };
 }
@@ -55,15 +87,29 @@ test('background stops offscreen, in hidden tabs and when manually paused', () =
   assert.equal(app.callbacks.size, 0);
 });
 
+test('networks repeatedly split and merge without adding particles or animation loops', () => {
+  const app = setup();
+  app.visible(true);
+  const sizes = [];
+  for (let frame = 1; frame <= 1800; frame++) {
+    app.frame(frame * 40);
+    if (frame % 150 === 0) sizes.push(app.topology().largest);
+    assert.equal(app.callbacks.size, 1);
+    assert.ok(app.topology().particles <= 84);
+  }
+  assert.ok(Math.max(...sizes) - Math.min(...sizes) >= 10, `Networks stayed static: ${sizes}`);
+  assert.ok(sizes.some((n, i) => i && n > sizes[i - 1]), `No merging: ${sizes}`);
+  assert.ok(sizes.some((n, i) => i && n < sizes[i - 1]), `No splitting: ${sizes}`);
+});
+
 test('reduced motion starts static, drawing frequency and pixel ratio are bounded', () => {
   const app = setup(true);
   app.visible(true);
   assert.equal(app.callbacks.size, 0);
   assert.equal(app.canvas.width, 1920);
-  assert.equal(app.canvas.style.height, '844px');
+  assert.equal(app.canvas.style.height, '656px');
   assert.equal(app.canvas.style.width, '1280px');
-  assert.equal(app.canvas.style.left, '-120px');
-  assert.equal(app.canvas.style.top, '-36px');
+  assert.equal(app.canvas.style.top, '64px');
   app.events.click();
   app.frame(100);
   const count = app.draws();

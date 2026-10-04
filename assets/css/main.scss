@@ -588,14 +588,13 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
 }
 
 .home-network {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 0;
   z-index: -1;
   pointer-events: none;
-  mask-image: linear-gradient(to bottom, #000, #000 92%, transparent);
 }
 
 .home-network-toggle {
