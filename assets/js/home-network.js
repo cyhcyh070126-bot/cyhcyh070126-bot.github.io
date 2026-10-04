@@ -97,9 +97,9 @@
         context.lineTo(b.px, b.py);
         context.stroke();
       }
-      context.fillStyle = 'rgba(207, 168, 70, 0.55)';
+      context.fillStyle = 'rgba(218, 188, 114, 0.28)';
       context.beginPath();
-      context.arc(a.px, a.py, 1.9, 0, Math.PI * 2);
+      context.arc(a.px, a.py, 1.6, 0, Math.PI * 2);
       context.fill();
     }
   }

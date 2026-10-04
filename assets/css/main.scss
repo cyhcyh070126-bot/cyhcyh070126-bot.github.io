@@ -240,6 +240,31 @@ html[data-theme="dark"] .research-card figcaption strong {
   border-radius: 8px;
 }
 
+// Keep the image border above the zoomed pixels instead of scaling/clipping it.
+#main .research-card > a {
+  position: relative;
+}
+
+#main .research-card > a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 1px solid var(--global-border-color);
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color 180ms ease;
+}
+
+#main .research-card > a img {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+#main .research-card > a:is(:hover, :focus-visible)::after {
+  border-color: var(--research-card-hover-border);
+}
+
 @media (hover: hover) and (pointer: fine) {
   #main .project-list__preview > a:is(:hover, :focus-visible) img {
     transform: scale(1.04);
