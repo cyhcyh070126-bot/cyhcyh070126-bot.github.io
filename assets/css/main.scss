@@ -631,6 +631,21 @@ ul + .cv-project {
   letter-spacing: -0.01em;
 }
 
+@media (max-width: 480px) {
+  .author__content {
+    padding-left: 0;
+    padding-right: 12px;
+  }
+
+  .author__affiliation {
+    white-space: normal;
+  }
+}
+
+.cv-page a {
+  overflow-wrap: anywhere;
+}
+
 .cv-project__header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

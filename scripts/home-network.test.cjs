@@ -30,15 +30,16 @@ function setup(reduce = false) {
     querySelector: selector => selector === '.home-network' ? canvas : selector === '.masthead' ? { getBoundingClientRect: () => ({ height: 64 }) } : null,
     addEventListener: (name, cb) => events[name] = cb
   };
+  const window = { matchMedia: () => media, devicePixelRatio: 3, innerHeight: 720, scrollY: 0, addEventListener: (name, cb) => events[name] = cb };
   runInNewContext(readFileSync(join(__dirname, '../assets/js/home-network.js'), 'utf8'), {
     document,
-    window: { matchMedia: () => media, devicePixelRatio: 3, innerHeight: 720, scrollY: 0, addEventListener: (name, cb) => events[name] = cb },
+    window,
     ResizeObserver: class { observe() {} },
     IntersectionObserver: class { constructor(cb) { intersect = cb; } observe() {} },
     requestAnimationFrame: cb => { callbacks.set(++id, cb); return id; },
     cancelAnimationFrame: n => callbacks.delete(n)
   });
-  return { events, canvas, document, media, callbacks,
+  return { events, canvas, document, window, media, callbacks,
     visible: value => intersect([{ isIntersecting: value }]),
     draws: () => draws,
     positions: () => positions.map(p => [...p]),
@@ -111,6 +112,18 @@ test('connections change freely without dense knots or additional animation loop
 
 test('independent page loads start with different particle positions', () => {
   assert.notDeepEqual(setup(true).positions(), setup(true).positions());
+});
+
+test('small viewport height changes preserve particle arrangement', () => {
+  const app = setup(true);
+  const before = app.positions();
+  app.window.innerHeight -= 1;
+  app.events.resize();
+  const after = app.positions();
+  assert.equal(after.length, before.length);
+  assert.ok(after.every(([x, y], i) => Math.hypot(x - before[i][0], y - before[i][1]) < 5),
+    'Browser chrome resize must not restart the random arrangement');
+  assert.equal(app.callbacks.size, 0);
 });
 
 test('perspective stays finite and provides near/far particle sizes', () => {

@@ -21,10 +21,11 @@
   const edges = new Set();
   function populate() {
     const count = Math.min(72, Math.max(22, Math.round(width * height / 19000)));
-    points = [];
-    edges.clear();
+    // Retain existing particles on resize (including mobile browser chrome).
+    // Only add or remove the number needed for the new visible area.
+    points.length = Math.min(points.length, count);
     const spacing = Math.min(80, Math.sqrt(width * height / count) * 0.55);
-    for (let i = 0; i < count; i++) {
+    for (let i = points.length; i < count; i++) {
       let x, y;
       for (let attempt = 0; attempt < 60; attempt++) {
         x = random() * width;
@@ -165,6 +166,12 @@
     canvas.style.top = `${top}px`;
     canvas.style.width = `${nextWidth}px`;
     if (nextWidth === width && nextHeight === height) return;
+    if (width > 0 && height > 0) {
+      for (const point of points) {
+        point.x *= nextWidth / width;
+        point.y *= nextHeight / height;
+      }
+    }
     width = nextWidth;
     height = nextHeight;
     const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
