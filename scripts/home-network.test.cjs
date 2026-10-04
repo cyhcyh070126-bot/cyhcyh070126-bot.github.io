@@ -22,12 +22,11 @@ function setup(reduce = false) {
   const context = new Proxy({}, { get: (_, name) => drawing[name] || (() => {}) });
   const host = { getBoundingClientRect: () => ({ width: 1000, top: 100, left: 120 }) };
   const canvas = { parentElement: host, style: {}, getContext: () => context, getBoundingClientRect: () => ({ top: 100, bottom: 900 }) };
-  const button = { style: {}, dataset: {}, setAttribute: (name, value) => button[name] = value, addEventListener: (_, cb) => events.click = cb };
   const media = { matches: reduce, addEventListener: (_, cb) => events.motion = cb };
   const document = {
     hidden: false,
     documentElement: { clientWidth: 1280 },
-    querySelector: selector => selector === '.home-network' ? canvas : selector === '.home-network-toggle' ? button : selector === '.masthead' ? { getBoundingClientRect: () => ({ height: 64 }) } : { getBoundingClientRect: () => ({ top: 920 }) },
+    querySelector: selector => selector === '.home-network' ? canvas : selector === '.masthead' ? { getBoundingClientRect: () => ({ height: 64 }) } : null,
     addEventListener: (name, cb) => events[name] = cb
   };
   runInNewContext(readFileSync(join(__dirname, '../assets/js/home-network.js'), 'utf8'), {
@@ -38,7 +37,7 @@ function setup(reduce = false) {
     requestAnimationFrame: cb => { callbacks.set(++id, cb); return id; },
     cancelAnimationFrame: n => callbacks.delete(n)
   });
-  return { events, canvas, button, document, media, callbacks,
+  return { events, canvas, document, media, callbacks,
     visible: value => intersect([{ isIntersecting: value }]),
     draws: () => draws,
     positions: () => positions.map(p => [...p]),
@@ -71,15 +70,16 @@ function setup(reduce = false) {
   };
 }
 
-test('background stops offscreen, in hidden tabs and when manually paused', () => {
+test('background stops offscreen, in hidden tabs and for reduced motion', () => {
   const app = setup();
   assert.equal(app.callbacks.size, 0);
   app.visible(true);
   assert.equal(app.callbacks.size, 1);
-  app.events.click();
+  app.media.matches = true;
+  app.events.motion();
   assert.equal(app.callbacks.size, 0);
-  assert.equal(app.button['aria-label'], 'Play background animation');
-  app.events.click();
+  app.media.matches = false;
+  app.events.motion();
   app.document.hidden = true;
   app.events.visibilitychange();
   assert.equal(app.callbacks.size, 0);
@@ -119,7 +119,8 @@ test('reduced motion starts static, drawing frequency and pixel ratio are bounde
   assert.equal(app.canvas.style.height, '656px');
   assert.equal(app.canvas.style.width, '1280px');
   assert.equal(app.canvas.style.top, '64px');
-  app.events.click();
+  app.media.matches = false;
+  app.events.motion();
   app.frame(100);
   const count = app.draws();
   app.frame(116);

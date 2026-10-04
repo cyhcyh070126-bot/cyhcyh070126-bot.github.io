@@ -1,9 +1,8 @@
 /* A quiet, site-wide background. No pointer handlers or third-party dependencies. */
 (() => {
   const canvas = document.querySelector('.home-network');
-  const button = document.querySelector('.home-network-toggle');
   const masthead = document.querySelector('.masthead');
-  if (!canvas || !button || !masthead) return;
+  if (!canvas || !masthead) return;
   const context = canvas.getContext('2d');
   if (!context) return;
   const host = canvas.parentElement;
@@ -86,13 +85,13 @@
     for (const { i, j, distance, key } of candidates) {
       if (degree[i] >= 3 || degree[j] >= 3) continue;
       degree[i]++; degree[j]++; edges.add(key);
-      context.strokeStyle = `rgba(215, 184, 108, ${0.20 * (1 - distance / reach)})`;
+      context.strokeStyle = `rgba(215, 184, 108, ${0.28 * (1 - distance / reach)})`;
       context.beginPath();
       context.moveTo(points[i].x, points[i].y);
       context.lineTo(points[j].x, points[j].y);
       context.stroke();
     }
-    context.fillStyle = 'rgba(220, 193, 127, 0.18)';
+    context.fillStyle = 'rgba(220, 193, 127, 0.24)';
     for (const point of points) {
       context.beginPath();
       context.arc(point.x, point.y, 1.4, 0, Math.PI * 2);
@@ -111,10 +110,6 @@
     frame = 0;
     previous = 0;
     if (!paused && visible && !document.hidden) frame = requestAnimationFrame(tick);
-    button.dataset.paused = String(paused);
-    const label = paused ? 'Play background animation' : 'Pause background animation';
-    button.setAttribute('aria-label', label);
-    button.title = label;
   }
   function resize() {
     // One viewport-sized canvas follows the whole page without allocating
@@ -123,7 +118,6 @@
     const nextWidth = document.documentElement.clientWidth;
     const nextHeight = Math.max(0, Math.round(window.innerHeight - top));
     canvas.style.top = `${top}px`;
-    button.style.top = `${top + 12}px`;
     canvas.style.width = `${nextWidth}px`;
     if (nextWidth === width && nextHeight === height) return;
     width = nextWidth;
@@ -136,7 +130,6 @@
     populate();
     paint();
   }
-  button.addEventListener('click', () => { paused = !paused; sync(); });
   reducedMotion.addEventListener('change', () => { paused = reducedMotion.matches; sync(); });
   document.addEventListener('visibilitychange', sync);
   window.addEventListener('resize', resize, { passive: true });
@@ -152,5 +145,4 @@
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }).observe(canvas);
   resize();
   sync();
-  button.hidden = false;
 })();
