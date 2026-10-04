@@ -292,7 +292,7 @@ html[data-theme="dark"] .research-card figcaption strong {
 
 // Consistent color feedback for text links.
 #main a {
-  transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease;
+  transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease, scale 150ms ease;
 }
 
 #main a:hover,
@@ -333,41 +333,41 @@ html[data-theme="dark"] .research-card figcaption strong {
   transform: translate(2px, -2px);
 }
 
-// Scale standalone links without changing document flow or inline prose.
-#main .author__urls a,
-#main .quick-links a,
-#main .project-list__repository,
+// Inline links need a transformable box; retain more specific flex/block layouts.
+a[href] {
+  display: inline-block;
+  max-width: 100%;
+}
+
+// Apply the same scale to every link and control, independently of existing transforms.
+body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]),
 #main .project-list__title {
   transform-origin: left center;
-  transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+  transition: color 150ms ease, background-color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease, scale 150ms ease;
 }
 
-#main .author__urls a {
-  display: inline-block;
+// Keep the project title and its status together, without scaling the link twice.
+#main .project-list__title a {
+  display: inline;
+  scale: none;
 }
 
-#main .author__urls a:focus-visible,
-#main .quick-links a:focus-visible,
-#main .project-list__repository:focus-visible,
+body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):focus-visible,
 #main .project-list__title:has(a:focus-visible) {
-  transform: scale(1.04);
+  scale: 1.04;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  #main .author__urls a:hover,
-  #main .quick-links a:hover,
-  #main .project-list__repository:hover,
+  body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):hover,
   #main .project-list__title:has(a:hover) {
-    transform: scale(1.04);
+    scale: 1.04;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   #main a,
   #main a i,
-  #main .author__urls a,
-  #main .quick-links a,
-  #main .project-list__repository,
+  body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]),
   #main .project-list__title,
   .project-list__link-arrow {
     transition: none;
@@ -378,11 +378,9 @@ html[data-theme="dark"] .research-card figcaption strong {
     transform: none;
   }
 
-  #main .author__urls a:is(:hover, :focus-visible),
-  #main .quick-links a:is(:hover, :focus-visible),
-  #main .project-list__repository:is(:hover, :focus-visible),
+  body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):is(:hover, :focus-visible),
   #main .project-list__title:has(a:is(:hover, :focus-visible)) {
-    transform: none;
+    scale: none;
   }
 }
 
