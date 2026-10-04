@@ -290,7 +290,7 @@ html[data-theme="dark"] .research-card figcaption strong {
   }
 }
 
-// Consistent, subtle feedback for text links without moving the text.
+// Consistent color feedback for text links.
 #main a {
   transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease;
 }
@@ -333,15 +333,55 @@ html[data-theme="dark"] .research-card figcaption strong {
   transform: translate(2px, -2px);
 }
 
+// Scale standalone links without changing document flow or inline prose.
+#main .author__urls a,
+#main .quick-links a,
+#main .project-list__repository,
+#main .project-list__title {
+  transform-origin: left center;
+  transition: color 150ms ease, text-decoration-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+#main .author__urls a {
+  display: inline-block;
+}
+
+#main .author__urls a:focus-visible,
+#main .quick-links a:focus-visible,
+#main .project-list__repository:focus-visible,
+#main .project-list__title:has(a:focus-visible) {
+  transform: scale(1.04);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #main .author__urls a:hover,
+  #main .quick-links a:hover,
+  #main .project-list__repository:hover,
+  #main .project-list__title:has(a:hover) {
+    transform: scale(1.04);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   #main a,
   #main a i,
+  #main .author__urls a,
+  #main .quick-links a,
+  #main .project-list__repository,
+  #main .project-list__title,
   .project-list__link-arrow {
     transition: none;
   }
 
   .project-list__repository:hover .project-list__link-arrow,
   .project-list__repository:focus-visible .project-list__link-arrow {
+    transform: none;
+  }
+
+  #main .author__urls a:is(:hover, :focus-visible),
+  #main .quick-links a:is(:hover, :focus-visible),
+  #main .project-list__repository:is(:hover, :focus-visible),
+  #main .project-list__title:has(a:is(:hover, :focus-visible)) {
     transform: none;
   }
 }
