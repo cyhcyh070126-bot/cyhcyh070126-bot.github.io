@@ -330,6 +330,21 @@ ul + .cv-project {
   grid-column: 1 / -1;
 }
 
+.pinn-prediction-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column: 1 / -1;
+  gap: 1rem;
+  min-width: 0;
+  scroll-margin-top: 90px;
+}
+
+@media (max-width: 600px) {
+  .pinn-prediction-comparison {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .research-gallery--pinn .research-card a {
   width: 100%;
 }

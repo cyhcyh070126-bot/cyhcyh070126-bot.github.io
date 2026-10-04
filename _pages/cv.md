@@ -281,6 +281,7 @@ Current Research
     </figcaption>
   </figure>
 
+  <div class="pinn-prediction-comparison" id="pinn-prediction-comparison">
   <figure class="research-card">
     <a href="/images/research/burgers_standard_pinn_prediction.gif" target="_blank" rel="noopener noreferrer">
       <img src="/images/research/burgers_standard_pinn_prediction.gif" alt="Animation comparing the standard PINN prediction with the exact solution of the inviscid Burgers equation." />
@@ -300,6 +301,7 @@ Current Research
       PINN profiles with constant artificial viscosity, compared with the analytical inviscid shock solution as a common reference.
     </figcaption>
   </figure>
+  </div>
 </div>
 
 <div class="cv-project">
