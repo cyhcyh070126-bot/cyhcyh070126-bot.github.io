@@ -245,14 +245,14 @@ html[data-theme="dark"] .research-card figcaption strong {
   color: var(--cv-section-heading-color);
 }
 
-.cv-contents {
+.page-contents {
   position: fixed;
   right: max(1rem, env(safe-area-inset-right));
   bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 54px);
   z-index: 30;
 }
 
-.cv-contents__toggle {
+.page-contents__toggle {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -267,7 +267,7 @@ html[data-theme="dark"] .research-card figcaption strong {
   cursor: pointer;
 }
 
-.cv-contents__panel {
+.page-contents__panel {
   position: absolute;
   right: 0;
   bottom: calc(100% + 10px);
@@ -281,9 +281,9 @@ html[data-theme="dark"] .research-card figcaption strong {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
 }
 
-.cv-contents__panel[hidden] { display: none; }
+.page-contents__panel[hidden] { display: none; }
 
-body .cv-contents__panel a {
+body .page-contents__panel a {
   display: block;
   padding: 0.5rem;
   border-radius: 5px;
@@ -293,13 +293,13 @@ body .cv-contents__panel a {
   text-decoration: none;
 }
 
-.cv-contents__projects {
+.page-contents__projects {
   margin: 0.15rem 0 0.3rem 0.5rem;
   padding-left: 0.45rem;
   border-left: 1px solid var(--cv-section-rule-color);
 }
 
-body .cv-contents__panel a:is(:hover, :focus-visible) {
+body .page-contents__panel a:is(:hover, :focus-visible) {
   color: var(--cv-section-heading-color);
   background: rgba(154, 100, 30, 0.08);
   text-decoration: none;
@@ -328,14 +328,14 @@ body .cv-contents__panel a:is(:hover, :focus-visible) {
 }
 
 .back-to-top:is(:hover, :focus-visible),
-.cv-contents__toggle:is(:hover, :focus-visible),
-.cv-contents__toggle[aria-expanded="true"] {
+.page-contents__toggle:is(:hover, :focus-visible),
+.page-contents__toggle[aria-expanded="true"] {
   color: var(--global-bg-color);
   background: var(--cv-section-heading-color);
 }
 
 .back-to-top:focus-visible,
-.cv-contents :focus-visible {
+.page-contents :focus-visible {
   outline: 2px solid var(--cv-section-heading-color);
   outline-offset: 4px;
 }

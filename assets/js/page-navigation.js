@@ -2,9 +2,9 @@
   "use strict";
   var button = document.querySelector(".back-to-top");
   if (!button) return;
-  var contents = document.querySelector(".cv-contents");
-  var toggle = contents && contents.querySelector(".cv-contents__toggle");
-  var panel = contents && contents.querySelector(".cv-contents__panel");
+  var contents = document.querySelector(".page-contents");
+  var toggle = contents && contents.querySelector(".page-contents__toggle");
+  var panel = contents && contents.querySelector(".page-contents__panel");
   function closeContents() {
     if (!panel) return;
     panel.hidden = true;

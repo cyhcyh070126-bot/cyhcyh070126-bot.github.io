@@ -1,0 +1,31 @@
+<div class="page-contents">
+  <button class="page-contents__toggle" type="button" aria-expanded="false" aria-controls="page-contents-panel">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+    Contents
+  </button>
+  <nav class="page-contents__panel" id="page-contents-panel" aria-label="Page contents" hidden>
+    {% if page.home_page %}
+    <a href="#main">About Me</a>
+    <a href="#news">News</a>
+    <a href="#current-research">Current Research</a>
+    <a href="#skills">Skills</a>
+    <a href="#quick-links">Quick Links</a>
+    <a href="#contact">Contact</a>
+    {% elsif page.projects_page %}
+    {% for project in site.data.projects %}
+    <a href="#project-{{ project.id }}">{{ project.short_title }}</a>
+    {% endfor %}
+    {% elsif page.cv_page %}
+    <a href="#education">Education</a>
+    <a href="#research-interests">Research Interests</a>
+    <a href="#current-research">Current Research</a>
+    <a href="#research-projects">Research Projects</a>
+    <div class="page-contents__projects">
+      {% for project in site.data.projects %}
+      <a href="#{{ project.id }}">{{ project.short_title }}</a>
+      {% endfor %}
+    </div>
+    <a href="#contact">Contact</a>
+    {% endif %}
+  </nav>
+</div>
