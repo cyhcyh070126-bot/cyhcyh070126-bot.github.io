@@ -245,10 +245,10 @@ Current Research
   </div>
 </div>
 
-- **Burgers Shock Problem:** Studied a one-dimensional Riemann problem with discontinuous initial data, using the analytical inviscid solution as a reference for the evolving shock profile and trajectory.
-- **Standard PINN:** Trained a PINN in PyTorch to predict shock propagation in the one-dimensional inviscid Burgers equation, using PDE-residual, initial-condition, and boundary-condition losses.
-- **Constant Artificial Viscosity:** Added a constant diffusion term to the PDE residual and used automatic differentiation to compute the second spatial derivative for the regularized formulation.
-- **Shock-Profile Analysis:** Compared standard and regularized PINN profiles with the analytical inviscid reference, using profile plots and local views to examine shock smearing and deviations near the discontinuity.
+- **Burgers Shock Problem:** Studied shock propagation in the one-dimensional inviscid Burgers equation with discontinuous initial conditions, using the analytical solution as a reference.
+- **Standard PINN:** Trained a PINN in PyTorch using PDE-residual, initial-condition, and boundary-condition losses, with automatic differentiation to compute the derivatives in the PDE residual.
+- **Artificial-Viscosity PINN:** Added an artificial-viscosity term with a fixed coefficient to the PDE residual and trained a second PINN to predict the shock profile.
+- **Prediction Comparison:** Compared standard and artificial-viscosity PINN predictions against the analytical inviscid solution, analyzing shock location, transition width, and errors near the discontinuity.
 
 <div class="research-gallery research-gallery--pinn">
   <figure class="research-card research-card--pinn-overview" id="pinn-framework">
