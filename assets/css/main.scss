@@ -100,7 +100,7 @@ a span,
   --content-link-hover-color: #267e97;
   --resource-link-hover-color: #744913;
   --cv-section-rule-color: #d7b47a;
-  --research-panel-background: rgba(255, 255, 255, 0.72);
+  --research-panel-background: #fff;
   --research-panel-text: var(--global-text-color);
   --research-panel-divider: rgba(15, 23, 42, 0.08);
   --research-card-hover-border: rgba(154, 100, 30, 0.28);
@@ -113,7 +113,7 @@ html[data-theme="dark"] {
   --content-link-hover-color: #89d5e6;
   --resource-link-hover-color: #f2d29a;
   --cv-section-rule-color: #a97832;
-  --research-panel-background: rgba(255, 255, 255, 0.08);
+  --research-panel-background: color-mix(in srgb, var(--global-bg-color) 92%, white);
   --research-panel-text: #f3f3f3;
   --research-panel-divider: rgba(255, 255, 255, 0.14);
   --research-card-hover-border: rgba(230, 184, 103, 0.35);
@@ -122,7 +122,6 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="dark"] .research-card {
-  background: rgba(255, 255, 255, 0.08);
   color: #f3f3f3;
 }
 
