@@ -256,8 +256,8 @@ Current Research
       <img src="/images/research/pinn_shock_problem_framework_v8.svg" alt="Burgers Riemann problem setup for x in [-1, 1] and t in (0, 1], with analytical shock sketches and a PINN coordinate network. Automatic differentiation forms the inviscid PDE residual; initial-condition and boundary-condition evaluations separately connect to their full loss sums. The three weighted losses drive the training loop." />
     </a>
     <figcaption>
-      <strong>Shock Problem and PINN Framework</strong><br>
-      A schematic overview of the Burgers Riemann problem and PINN training with PDE, initial-condition, and boundary-condition losses.
+      <strong>Burgers Problem and PINN Training</strong><br>
+      Defined the inviscid Burgers shock problem with initial and boundary conditions. Trained the PINN using PDE-residual, initial-condition, and boundary-condition losses.
     </figcaption>
   </figure>
 
@@ -266,8 +266,8 @@ Current Research
       <img src="/images/research/burgers_shock_motion.gif" alt="Animation of the exact entropy solution of the inviscid Burgers equation, with left state 1, right state 0, and shock position x_s(t) = t/2." />
     </a>
     <figcaption>
-      <strong>Burgers Shock Motion</strong><br>
-      Exact entropy solution with u<sub>L</sub> = 1, u<sub>R</sub> = 0 and shock speed 0.5. Analytical reference, not a PINN prediction.
+      <strong>Analytical Shock Evolution</strong><br>
+      Illustrated the analytical solution of the inviscid Burgers equation, with a discontinuity moving at a constant speed of 0.5.
     </figcaption>
   </figure>
 
@@ -276,8 +276,8 @@ Current Research
       <img src="/images/research/burgers_shock_trajectory.gif" alt="Animation of the analytical Burgers shock trajectory x_s(t) = 0.5t in the space-time plane." />
     </a>
     <figcaption>
-      <strong>Burgers Shock Trajectory</strong><br>
-      Exact shock path x<sub>s</sub>(t) = 0.5t in the space-time plane. Analytical reference, not a learned trajectory.
+      <strong>Analytical Shock Trajectory</strong><br>
+      Tracked the analytical shock position along x<sub>s</sub>(t) = 0.5t in the space–time plane.
     </figcaption>
   </figure>
 
@@ -288,7 +288,7 @@ Current Research
     </a>
     <figcaption>
       <strong>Standard PINN Prediction</strong><br>
-      Standard PINN profiles compared with the analytical inviscid shock solution, showing the predicted transition around the moving discontinuity.
+      Compared the standard PINN prediction with the analytical inviscid solution over time, examining the shock location and transition width.
     </figcaption>
   </figure>
 
@@ -297,8 +297,8 @@ Current Research
       <img src="/images/research/burgers_artificial_viscosity_pinn_prediction.gif" alt="Animation comparing a constant-artificial-viscosity PINN profile with the analytical inviscid Burgers shock reference." />
     </a>
     <figcaption>
-      <strong>Constant-Viscosity PINN Prediction</strong><br>
-      PINN profiles with constant artificial viscosity, compared with the analytical inviscid shock solution as a common reference.
+      <strong>Artificial-Viscosity PINN Prediction</strong><br>
+      Compared the PINN prediction with fixed artificial viscosity against the analytical inviscid solution, examining the shock location and transition width.
     </figcaption>
   </figure>
   </div>
