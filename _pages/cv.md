@@ -95,8 +95,8 @@ Current Research
       <img src="/images/research/cylinder_boundary_conditions.png" alt="Neural-operator cylinder subdomain with prescribed displacement functions on the inner and outer arcs, zero horizontal displacement on the left edge, and zero vertical displacement on the bottom edge." />
     </a>
     <figcaption>
-      <strong>Boundary Displacement Conditions</strong><br>
-      Prescribed displacement functions on the inner and outer arcs define the local subdomain boundary conditions, together with straight-edge constraints.
+      <strong>GRF-Sampled Boundary Displacements</strong><br>
+      Sampled displacement fields on the inner and outer arcs using Gaussian random fields (GRFs). Set horizontal displacement to zero on the left edge and vertical displacement to zero on the bottom edge.
     </figcaption>
   </figure>
 
