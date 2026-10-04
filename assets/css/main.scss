@@ -95,6 +95,7 @@ a span,
 }
 
 :root {
+  --floating-nav-bottom: max(80px, env(safe-area-inset-bottom));
   --cv-section-heading-color: #9a641e;
   --content-link-hover-color: #267e97;
   --resource-link-hover-color: #744913;
@@ -248,7 +249,7 @@ html[data-theme="dark"] .research-card figcaption strong {
 .page-contents {
   position: fixed;
   right: max(1rem, env(safe-area-inset-right));
-  bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 54px);
+  bottom: calc(var(--floating-nav-bottom) + 56px);
   z-index: 30;
 }
 
@@ -256,14 +257,15 @@ html[data-theme="dark"] .research-card figcaption strong {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  min-height: 44px;
-  padding: 0.4rem 0.7rem;
-  border: 1px solid var(--cv-section-rule-color);
-  border-radius: 22px;
-  color: var(--cv-section-heading-color);
-  background: var(--global-bg-color);
+  min-height: 48px;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #9a641e;
+  border-radius: 24px;
+  color: #fff;
+  background: #9a641e;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -272,7 +274,7 @@ html[data-theme="dark"] .research-card figcaption strong {
   right: 0;
   bottom: calc(100% + 10px);
   width: min(250px, calc(100vw - 2rem));
-  max-height: calc(100dvh - 180px);
+  max-height: calc(100dvh - var(--floating-nav-bottom) - 194px);
   overflow-y: auto;
   padding: 0.65rem;
   border: 1px solid var(--global-border-color);
@@ -308,7 +310,7 @@ body .page-contents__panel a:is(:hover, :focus-visible) {
 .back-to-top {
   position: fixed;
   right: max(1rem, env(safe-area-inset-right));
-  bottom: max(1rem, env(safe-area-inset-bottom));
+  bottom: var(--floating-nav-bottom);
   z-index: 30;
   display: grid;
   place-items: center;
@@ -327,11 +329,16 @@ body .page-contents__panel a:is(:hover, :focus-visible) {
   display: none;
 }
 
-.back-to-top:is(:hover, :focus-visible),
-.page-contents__toggle:is(:hover, :focus-visible),
-.page-contents__toggle[aria-expanded="true"] {
+.back-to-top:is(:hover, :focus-visible) {
   color: var(--global-bg-color);
   background: var(--cv-section-heading-color);
+}
+
+.page-contents__toggle:is(:hover, :focus-visible),
+.page-contents__toggle[aria-expanded="true"] {
+  color: #fff;
+  background: #744913;
+  border-color: #744913;
 }
 
 .back-to-top:focus-visible,
