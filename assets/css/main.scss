@@ -229,6 +229,30 @@ html[data-theme="dark"] .research-card figcaption strong {
   aspect-ratio: 4 / 3;
   object-fit: contain;
   box-shadow: none;
+  transition: transform 180ms ease;
+}
+
+// Image links are fixed viewports: zoom the image, never the clickable frame.
+#main .research-card > a,
+#main .project-list__preview > a {
+  scale: none;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #main .project-list__preview > a:is(:hover, :focus-visible) img {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main .project-list__preview > a img {
+    transition: none;
+  }
+  #main .project-list__preview > a:is(:hover, :focus-visible) img {
+    transform: none;
+  }
 }
 
 .project-list__preview figcaption {
@@ -855,7 +879,7 @@ ul + .cv-project {
 
   .research-card:hover img,
   .research-card:focus-within img {
-    transform: translateY(-3px) scale(1.012);
+    transform: scale(1.012);
     border-color: var(--research-card-hover-border);
     box-shadow: var(--research-image-hover-shadow);
   }
