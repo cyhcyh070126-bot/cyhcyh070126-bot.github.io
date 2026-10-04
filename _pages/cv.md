@@ -155,7 +155,7 @@ Current Research
 </div>
 
 - **Automated Simulation Workflow:** Generated polycrystalline NMC microstructures and ran coupled lithium-transport and solid-mechanics simulations through COMSOL LiveLink for MATLAB, exporting time-aligned concentration and von Mises stress images.
-- **Conditional ConvLSTM Models:** Trained separate PyTorch models for concentration and stress image prediction, combining a Conv3d feature extractor with three ConvLSTM layers and conditioning on field history, grain orientation, and C-rate.
+- **Spatiotemporal Field Prediction:** Developed conditional ConvLSTM models in PyTorch to predict the temporal evolution of concentration and stress fields in battery materials, using past field images, grain-orientation maps, and C-rate inputs.
 - **Multi-Step Training:** Combined MSE and SSIM losses on 128×128 patches extracted from 512×512 RGB images, with scheduled sampling for multi-step autoregressive prediction.
 - **Prediction Assessment:** Compared predicted sequences with COMSOL-rendered reference images using MSE, SSIM, and pixel-wise error maps to assess image agreement over successive prediction steps.
 
