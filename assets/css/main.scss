@@ -656,14 +656,15 @@ ul + .cv-project {
 
 .author__urls-wrapper button.btn--inverse {
   min-height: 44px;
-  color: var(--global-text-color);
+  // The theme's .btn--inverse color and border are !important.
+  color: var(--global-text-color) !important;
   background: var(--global-bg-color);
   border-color: var(--global-border-color);
 }
 
 .author__urls-wrapper button.btn--inverse:is(:hover, :focus-visible) {
-  color: var(--cv-section-heading-color);
-  border-color: var(--cv-section-rule-color);
+  color: var(--cv-section-heading-color) !important;
+  border-color: var(--cv-section-rule-color) !important;
 }
 
 .cv-project__header {
