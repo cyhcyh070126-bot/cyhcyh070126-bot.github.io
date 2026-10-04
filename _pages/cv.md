@@ -155,7 +155,7 @@ Current Research
 - **Automated Simulation Workflow:** Generated polycrystalline NMC microstructures and ran coupled lithium-transport and solid-mechanics simulations through COMSOL LiveLink for MATLAB, exporting time-aligned concentration and von Mises stress images.
 - **Conditional ConvLSTM Models:** Trained separate three-layer ConvLSTM models to autoregressively predict RGB images of concentration or stress, conditioned on past field frames, grain-orientation maps, and C-rate inputs.
 - **Multi-Step Training:** Combined MSE and SSIM losses on 128×128 patches extracted from 512×512 RGB images, with scheduled sampling for multi-step autoregressive prediction.
-- **Prediction Assessment:** Compared predicted sequences with COMSOL-rendered reference images using MSE, SSIM, and pixel-wise error maps to assess image agreement over successive forecast steps.
+- **Prediction Assessment:** Compared predicted sequences with COMSOL-rendered reference images using MSE, SSIM, and pixel-wise error maps to assess image agreement over successive prediction steps.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
@@ -194,7 +194,7 @@ Current Research
     </a>
     <figcaption>
       <strong>ConvLSTM Prediction Pipeline</strong><br>
-      Past field images, grain-orientation maps, and C-rate inputs condition autoregressive prediction. Separate models forecast concentration or stress images.
+      Past field images, grain-orientation maps, and C-rate inputs condition autoregressive prediction. Separate models predict concentration or stress images.
     </figcaption>
   </figure>
 
