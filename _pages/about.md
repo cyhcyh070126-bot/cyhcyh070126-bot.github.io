@@ -34,8 +34,12 @@ News
       <div class="home-news__content"><strong>Cylinder Studies:</strong> Developed a hybrid FEM–neural operator solver for a cylinder problem, using GRFs to sample displacement fields on both inner and outer arcs. Coupled the FEM and neural-operator subdomains through iterative exchange of interface forces and displacements.</div>
     </article>
     <article class="home-news__item">
+      <div class="home-news__date">Jul 2026</div>
+      <div class="home-news__content">Transitioned to an on-site undergraduate research internship at Johns Hopkins University to continue working with <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>.</div>
+    </article>
+    <article class="home-news__item">
       <div class="home-news__date">Jan 2026</div>
-      <div class="home-news__content">Began an undergraduate research internship in the <a href="https://engineering.jhu.edu/case/" target="_blank" rel="noopener noreferrer">Department of Civil and Systems Engineering</a> at Johns Hopkins University, advised by <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>, working on a GPU-accelerated hybrid FEM–neural operator coupling framework.</div>
+      <div class="home-news__content">Began a remote undergraduate research internship in the <a href="https://engineering.jhu.edu/case/" target="_blank" rel="noopener noreferrer">Department of Civil and Systems Engineering</a> at Johns Hopkins University, advised by <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>, working on a GPU-accelerated hybrid FEM–neural operator solver.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Nov 2025</div>
