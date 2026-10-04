@@ -1,4 +1,4 @@
-/* A quiet, Home-only background. No pointer handlers or third-party dependencies. */
+/* A quiet, site-wide background. No pointer handlers or third-party dependencies. */
 (() => {
   const canvas = document.querySelector('.home-network');
   const button = document.querySelector('.home-network-toggle');
@@ -16,90 +16,86 @@
   let height = 0;
   let elapsed = 0;
   let points = [];
-  let centers = [];
-  let nextFormation = 0;
-  let formation = 0;
-  let seed = 29;
-  const random = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-  function reshape() {
-    // Reassign particles to different numbers of moving destinations. Existing
-    // networks split, travel and join again instead of remaining fixed islands.
-    const groups = [3, 8, 4, 7, 2, 6][formation++ % 6];
-    const columns = Math.ceil(Math.sqrt(groups * width / Math.max(height, 1)));
-    const rows = Math.ceil(groups / columns);
-    centers = Array.from({ length: groups }, (_, i) => ({
-      x: ((i % columns) + 0.3 + random() * 0.4) * width / columns,
-      y: (Math.floor(i / columns) + 0.3 + random() * 0.4) * height / rows,
-      phase: random() * Math.PI * 2
-    }));
-    for (const point of points) {
-      point.group = Math.floor(random() * groups);
-      const angle = random() * Math.PI * 2;
-      const radius = (35 + random() * 100) * Math.min(1, width / 700);
-      point.ox = Math.cos(angle) * radius;
-      point.oy = Math.sin(angle) * radius;
-      // A few independent particles bridge groups and keep empty space alive.
-      point.free = random() < 0.18;
-      point.tx = random() * width;
-      point.ty = random() * height;
-    }
-    nextFormation = elapsed + 12;
-  }
-  // A fixed seed avoids a different composition after every resize.
+  // No fixed seed or repeating choreography: every load is a fresh arrangement.
+  const random = Math.random;
+  const edges = new Set();
   function populate() {
-    seed = 29;
-    formation = 0;
-    const count = Math.min(84, Math.max(28, Math.round(width * height / 14000)));
-    points = Array.from({ length: count }, () => ({
-      x: random() * width, y: random() * height,
-      vx: (random() - 0.5) * 28, vy: (random() - 0.5) * 28,
-      phase: random() * Math.PI * 2
-    }));
-    reshape();
+    const count = Math.min(72, Math.max(22, Math.round(width * height / 19000)));
+    points = [];
+    edges.clear();
+    const spacing = Math.min(80, Math.sqrt(width * height / count) * 0.55);
+    for (let i = 0; i < count; i++) {
+      let x, y;
+      for (let attempt = 0; attempt < 60; attempt++) {
+        x = random() * width;
+        y = random() * height;
+        if (points.every(p => Math.hypot(p.x - x, p.y - y) > spacing)) break;
+      }
+      const angle = random() * Math.PI * 2;
+      const speed = 16 + random() * 16;
+      points.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+        angle, speed, turnAt: elapsed + 2 + random() * 5 });
+    }
   }
   function paint(seconds = 0) {
     context.clearRect(0, 0, width, height);
     elapsed += seconds;
-    if (elapsed >= nextFormation) reshape();
-    const reach = Math.min(210, Math.max(100, Math.min(width, height) * 0.3));
-    for (const point of points) {
-      const center = centers[point.group];
-      const tx = point.free ? point.tx : center.x + point.ox + 28 * Math.sin(elapsed * 0.35 + center.phase);
-      const ty = point.free ? point.ty : center.y + point.oy + 24 * Math.cos(elapsed * 0.4 + center.phase);
-      let vx = (tx - point.x) * 0.45 + 9 * Math.sin(elapsed * 0.7 + point.phase);
-      let vy = (ty - point.y) * 0.45 + 9 * Math.cos(elapsed * 0.6 + point.phase);
-      const speed = Math.hypot(vx, vy);
-      if (speed > 65) { vx *= 65 / speed; vy *= 65 / speed; }
-      const blend = 1 - Math.exp(-seconds * 1.8);
-      point.vx += (vx - point.vx) * blend;
-      point.vy += (vy - point.vy) * blend;
+    const reach = Math.min(225, Math.max(125, Math.sqrt(width * height / points.length) * 1.65));
+    const forces = points.map(() => ({ x: 0, y: 0 }));
+    // Gentle separation prevents crowding; there are no attraction centers.
+    for (let i = 0; i < points.length; i++) {
+      for (let j = i + 1; j < points.length; j++) {
+        const dx = points[i].x - points[j].x;
+        const dy = points[i].y - points[j].y;
+        const distance = Math.max(0.1, Math.hypot(dx, dy));
+        if (distance >= 75) continue;
+        const push = (75 - distance) * 1.4 / distance;
+        forces[i].x += dx * push; forces[i].y += dy * push;
+        forces[j].x -= dx * push; forces[j].y -= dy * push;
+      }
+    }
+    points.forEach((point, i) => {
+      if (elapsed > point.turnAt) {
+        point.angle += (random() - 0.5) * 1.6;
+        point.turnAt = elapsed + 3 + random() * 5;
+      }
+      const blend = 1 - Math.exp(-seconds * 0.6);
+      point.vx += (Math.cos(point.angle) * point.speed - point.vx) * blend + forces[i].x * seconds;
+      point.vy += (Math.sin(point.angle) * point.speed - point.vy) * blend + forces[i].y * seconds;
+      const speed = Math.hypot(point.vx, point.vy);
+      if (speed > 42) { point.vx *= 42 / speed; point.vy *= 42 / speed; }
       point.x += point.vx * seconds;
       point.y += point.vy * seconds;
-      if (point.x < 0 || point.x > width) point.vx *= -1;
-      if (point.y < 0 || point.y > height) point.vy *= -1;
+      if (point.x < 0 || point.x > width) { point.vx *= -1; point.angle = Math.PI - point.angle; }
+      if (point.y < 0 || point.y > height) { point.vy *= -1; point.angle *= -1; }
       point.x = Math.max(0, Math.min(width, point.x));
       point.y = Math.max(0, Math.min(height, point.y));
-      // Independent depth cycles gently fold and unfold the projected network.
-      const depth = 1 + 0.07 * Math.sin(elapsed * 0.55 + point.phase);
-      point.px = width / 2 + (point.x - width / 2) * depth;
-      point.py = height / 2 + (point.y - height / 2) * depth;
-    }
-    context.lineWidth = 1;
+    });
+    const candidates = [];
     for (let i = 0; i < points.length; i++) {
-      const a = points[i];
       for (let j = i + 1; j < points.length; j++) {
-        const b = points[j];
-        const distance = Math.hypot(a.px - b.px, a.py - b.py);
-        if (distance >= reach) continue;
-        context.strokeStyle = `rgba(207, 168, 70, ${0.42 * (1 - distance / reach)})`;
-        context.beginPath();
-        context.moveTo(a.px, a.py);
-        context.lineTo(b.px, b.py);
-        context.stroke();
+        const distance = Math.hypot(points[i].x - points[j].x, points[i].y - points[j].y);
+        if (distance < reach) candidates.push({ i, j, distance, key: `${i}:${j}` });
       }
-      context.fillStyle = 'rgba(218, 188, 114, 0.28)';
+    }
+    // Prefer existing edges to avoid flicker. Three connections per point at most.
+    candidates.sort((a, b) => a.distance * (edges.has(a.key) ? 0.8 : 1) - b.distance * (edges.has(b.key) ? 0.8 : 1));
+    edges.clear();
+    const degree = points.map(() => 0);
+    context.lineWidth = 0.8;
+    for (const { i, j, distance, key } of candidates) {
+      if (degree[i] >= 3 || degree[j] >= 3) continue;
+      degree[i]++; degree[j]++; edges.add(key);
+      context.strokeStyle = `rgba(215, 184, 108, ${0.20 * (1 - distance / reach)})`;
       context.beginPath();
-      context.arc(a.px, a.py, 1.6, 0, Math.PI * 2);
+      context.moveTo(points[i].x, points[i].y);
+      context.lineTo(points[j].x, points[j].y);
+      context.stroke();
+    }
+    context.fillStyle = 'rgba(220, 193, 127, 0.18)';
+    for (const point of points) {
+      context.beginPath();
+      context.arc(point.x, point.y, 1.4, 0, Math.PI * 2);
       context.fill();
     }
   }
@@ -121,12 +117,13 @@
     button.title = label;
   }
   function resize() {
-    // One viewport-sized canvas follows the whole Home page without allocating
+    // One viewport-sized canvas follows the whole page without allocating
     // a canvas as tall as the document. The fixed masthead remains clear.
     const top = masthead.getBoundingClientRect().height;
     const nextWidth = document.documentElement.clientWidth;
     const nextHeight = Math.max(0, Math.round(window.innerHeight - top));
     canvas.style.top = `${top}px`;
+    button.style.top = `${top + 12}px`;
     canvas.style.width = `${nextWidth}px`;
     if (nextWidth === width && nextHeight === height) return;
     width = nextWidth;

@@ -11,10 +11,17 @@ layout: compress
     {% include head/custom.html %}
   </head>
 
-  <body>
+  <body{% if page.home_page or page.cv_page or page.projects_page %} class="network-page"{% endif %}>
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
+    {% if page.home_page or page.cv_page or page.projects_page %}
+      <canvas class="home-network" aria-hidden="true"></canvas>
+      <button class="home-network-toggle" type="button" aria-label="Pause background animation" title="Pause background animation" hidden>
+        <svg class="home-network-toggle__pause" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        <svg class="home-network-toggle__play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg>
+      </button>
+    {% endif %}
 
     {{ content }}
 

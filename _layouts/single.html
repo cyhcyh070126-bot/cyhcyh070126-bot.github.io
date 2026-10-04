@@ -15,7 +15,6 @@ layout: default
 {% endif %}
 
 <div id="main"{% if page.home_page %} class="main--home"{% endif %} role="main">
-  {% if page.home_page %}<canvas class="home-network" aria-hidden="true"></canvas>{% endif %}
   {% include sidebar.html %}
 
   <article class="page{% if page.home_page %} page--home{% endif %}" itemscope itemtype="http://schema.org/CreativeWork">
@@ -25,12 +24,6 @@ layout: default
     {% if page.modified %}<meta itemprop="dateModified" content="{{ page.modified | date: "%B %d, %Y" }}">{% endif %}
 
     <div class="page__inner-wrap">
-      {% if page.home_page %}
-        <button class="home-network-toggle" type="button" aria-label="Pause background animation" title="Pause background animation" hidden>
-          <svg class="home-network-toggle__pause" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-          <svg class="home-network-toggle__play" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z" fill="currentColor"/></svg>
-        </button>
-      {% endif %}
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
           {% if page.title %}<h1 class="page__title{% if page.home_page %} home-page__title{% endif %}" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}

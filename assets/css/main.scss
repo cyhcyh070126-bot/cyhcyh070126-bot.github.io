@@ -564,8 +564,7 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
   position: relative;
 }
 
-.main--home {
-  position: relative;
+.network-page {
   isolation: isolate;
 }
 
@@ -580,8 +579,9 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
 }
 
 .home-network-toggle {
-  position: absolute;
-  right: 0;
+  position: fixed;
+  z-index: 15;
+  right: 1rem;
   top: 0.2rem;
   width: 34px;
   height: 34px;

@@ -1,7 +1,7 @@
 <script type="module" src="{{ base_path }}/assets/js/main.min.js?v={{ main_css_version | strip }}"></script>
 <script defer src="{{ '/assets/js/command-palette.js' | relative_url }}?v={{ main_css_version | strip }}"></script>
 <script defer src="{{ '/assets/js/page-navigation.js' | relative_url }}?v={{ main_css_version | strip }}"></script>
-{% if page.home_page %}
+{% if page.home_page or page.cv_page or page.projects_page %}
 <script defer src="{{ '/assets/js/home-network.js' | relative_url }}?v={{ main_css_version | strip }}"></script>
 {% endif %}
 

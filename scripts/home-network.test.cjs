@@ -22,7 +22,7 @@ function setup(reduce = false) {
   const context = new Proxy({}, { get: (_, name) => drawing[name] || (() => {}) });
   const host = { getBoundingClientRect: () => ({ width: 1000, top: 100, left: 120 }) };
   const canvas = { parentElement: host, style: {}, getContext: () => context, getBoundingClientRect: () => ({ top: 100, bottom: 900 }) };
-  const button = { dataset: {}, setAttribute: (name, value) => button[name] = value, addEventListener: (_, cb) => events.click = cb };
+  const button = { style: {}, dataset: {}, setAttribute: (name, value) => button[name] = value, addEventListener: (_, cb) => events.click = cb };
   const media = { matches: reduce, addEventListener: (_, cb) => events.motion = cb };
   const document = {
     hidden: false,
@@ -41,6 +41,7 @@ function setup(reduce = false) {
   return { events, canvas, button, document, media, callbacks,
     visible: value => intersect([{ isIntersecting: value }]),
     draws: () => draws,
+    positions: () => positions.map(p => [...p]),
     topology: () => {
       const key = p => p.join(',');
       const neighbors = new Map(positions.map(p => [key(p), []]));
@@ -62,7 +63,9 @@ function setup(reduce = false) {
         }
         sizes.push(size);
       }
-      return { largest: Math.max(...sizes), particles: positions.length };
+      return { largest: Math.max(...sizes), particles: positions.length,
+        maxDegree: Math.max(...[...neighbors.values()].map(n => n.length)),
+        links: segments.map(([a, b]) => `${positions.findIndex(p => key(p) === key(a))}:${positions.findIndex(p => key(p) === key(b))}`).join('|') };
     },
     frame: time => { const [key, cb] = callbacks.entries().next().value; callbacks.delete(key); cb(time); }
   };
@@ -87,19 +90,25 @@ test('background stops offscreen, in hidden tabs and when manually paused', () =
   assert.equal(app.callbacks.size, 0);
 });
 
-test('networks repeatedly split and merge without adding particles or animation loops', () => {
+test('connections change freely without dense knots or additional animation loops', () => {
   const app = setup();
   app.visible(true);
-  const sizes = [];
+  const arrangements = new Set();
   for (let frame = 1; frame <= 1800; frame++) {
     app.frame(frame * 40);
-    if (frame % 150 === 0) sizes.push(app.topology().largest);
+    if (frame % 150 === 0) {
+      const topology = app.topology();
+      arrangements.add(topology.links);
+      assert.ok(topology.maxDegree <= 3);
+      assert.ok(topology.particles <= 72);
+    }
     assert.equal(app.callbacks.size, 1);
-    assert.ok(app.topology().particles <= 84);
   }
-  assert.ok(Math.max(...sizes) - Math.min(...sizes) >= 10, `Networks stayed static: ${sizes}`);
-  assert.ok(sizes.some((n, i) => i && n > sizes[i - 1]), `No merging: ${sizes}`);
-  assert.ok(sizes.some((n, i) => i && n < sizes[i - 1]), `No splitting: ${sizes}`);
+  assert.ok(arrangements.size > 6, 'Connections should keep changing');
+});
+
+test('independent page loads start with different particle positions', () => {
+  assert.notDeepEqual(setup(true).positions(), setup(true).positions());
 });
 
 test('reduced motion starts static, drawing frequency and pixel ratio are bounded', () => {
