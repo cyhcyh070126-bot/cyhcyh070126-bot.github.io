@@ -66,6 +66,27 @@ a span,
   text-decoration-skip-ink: auto;
 }
 
+#main a,
+#main a span {
+  text-decoration-line: none;
+}
+
+#main a:not(.project-list__repository):hover,
+#main a:not(.project-list__repository):focus-visible {
+  text-decoration-line: underline;
+}
+
+// Underline the label only, leaving the icon clear.
+#main .quick-links a:hover,
+#main .quick-links a:focus-visible {
+  text-decoration-line: none;
+}
+
+#main .quick-links a:hover span,
+#main .quick-links a:focus-visible span {
+  text-decoration-line: underline;
+}
+
 @media (min-width: 1280px) {
   .page--home .page__inner-wrap {
     // Use part of the reserved right gutter without shifting the left edge.
@@ -212,7 +233,8 @@ html[data-theme="dark"] .research-card figcaption strong {
   box-shadow: none;
 }
 
-.project-list a.project-list__repository:hover {
+.project-list a.project-list__repository:hover,
+.project-list a.project-list__repository:focus-visible {
   text-decoration: none;
   border-bottom-color: currentColor;
 }
@@ -243,7 +265,7 @@ html[data-theme="dark"] .research-card figcaption strong {
   }
 
   a span {
-    text-decoration: underline;
+    text-decoration: none;
     text-decoration-thickness: 1px;
   }
 
