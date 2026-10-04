@@ -56,6 +56,16 @@
   font-weight: 700;
 }
 
+// Keep link underlines clear of descenders, including icon-link labels.
+a,
+a span,
+#main a,
+#main a span {
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+  text-decoration-skip-ink: auto;
+}
+
 @media (min-width: 1280px) {
   .page--home .page__inner-wrap {
     // Use part of the reserved right gutter without shifting the left edge.
@@ -164,7 +174,7 @@ html[data-theme="dark"] .research-card figcaption strong {
 .project-list__title a:hover {
   color: var(--cv-section-heading-color);
   text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-underline-offset: 0.22em;
 }
 
 .project-list__description {
@@ -227,6 +237,7 @@ html[data-theme="dark"] .research-card figcaption strong {
 
   a span {
     text-decoration: underline;
+    text-decoration-thickness: 1px;
   }
 
   .quick-links__icon {
