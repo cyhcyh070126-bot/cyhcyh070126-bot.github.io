@@ -73,10 +73,6 @@
       if (speed > 42) { point.vx *= 42 / speed; point.vy *= 42 / speed; }
       point.x += point.vx * seconds;
       point.y += point.vy * seconds;
-      if (point.x < 0 || point.x > width) { point.vx *= -1; point.angle = Math.PI - point.angle; }
-      if (point.y < 0 || point.y > height) { point.vy *= -1; point.angle *= -1; }
-      point.x = Math.max(0, Math.min(width, point.x));
-      point.y = Math.max(0, Math.min(height, point.y));
       // Perspective projection and slow camera rotation provide actual depth;
       // simulation/separation still run in the spread-out underlying field.
       const x = point.x - width / 2;
@@ -89,6 +85,32 @@
       const perspective = focalLength / (focalLength - point.z);
       point.px = width / 2 + rotatedX * perspective;
       point.py = height / 2 + rotatedY * perspective;
+      // Bounce at the visible canvas edges, after perspective, so near points
+      // cannot drift beyond the screen before their underlying position turns.
+      const insetX = Math.min(4, width / 2), insetY = Math.min(4, height / 2);
+      const hitX = point.px < insetX || point.px > width - insetX;
+      const hitY = point.py < insetY || point.py > height - insetY;
+      if (hitX || hitY) {
+        if (hitX) point.vx = (point.px < insetX ? 1 : -1) * Math.abs(point.vx);
+        if (hitY) point.vy = (point.py < insetY ? 1 : -1) * Math.abs(point.vy);
+        point.angle = Math.atan2(point.vy, point.vx);
+        point.px = Math.max(insetX, Math.min(width - insetX, point.px));
+        point.py = Math.max(insetY, Math.min(height - insetY, point.py));
+        // Unproject the corrected position onto its original depth plane.
+        // This keeps motion continuous instead of only clipping the drawing.
+        const u = (point.px - width / 2) / focalLength;
+        const v = (point.py - height / 2) / focalLength;
+        const a = cy - u * sy * cp, b = u * sp;
+        const c = sy * sp - v * sy * cp, d = cp + v * sp;
+        const e = u * (focalLength - z * cy * cp) - z * sy;
+        const f = v * (focalLength - z * cy * cp) + z * cy * sp;
+        const determinant = a * d - b * c;
+        const correctedX = (e * d - b * f) / determinant;
+        const correctedY = (a * f - e * c) / determinant;
+        point.x = width / 2 + correctedX;
+        point.y = height / 2 + correctedY;
+        point.z = correctedY * sp + (z * cy - correctedX * sy) * cp;
+      }
       point.depth = Math.max(0, Math.min(1, (point.z / Math.max(depthRange, 1) + 1) / 2));
     });
     const candidates = [];

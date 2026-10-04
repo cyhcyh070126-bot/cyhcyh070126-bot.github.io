@@ -119,6 +119,8 @@ test('perspective stays finite and provides near/far particle sizes', () => {
   for (let frame = 1; frame <= 900; frame++) {
     app.frame(frame * 40);
     assert.ok(app.positions().every(p => p.every(Number.isFinite)));
+    assert.ok(app.positions().every(([x, y]) => x >= 4 && x <= 1276 && y >= 4 && y <= 652),
+      'Perspective-projected particles should bounce inside the visible edges');
     assert.ok(app.radii().every(r => r >= 0.9 && r <= 2));
   }
   assert.ok(Math.max(...app.radii()) - Math.min(...app.radii()) > 0.5);
