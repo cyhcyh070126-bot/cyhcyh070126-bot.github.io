@@ -10,6 +10,8 @@ redirect_from:
 
 {% include base_path %}
 
+<p><a href="{{ '/files/Yanghao_Chen_CV.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">View CV (PDF)</a> · <a href="{{ '/projects/' | relative_url }}">Project repositories</a></p>
+
 Education
 ======
 
@@ -147,13 +149,13 @@ Current Research
     <div class="cv-project__term">Jun. 2025 - Oct. 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher; Advisor: <a href="http://www.yingzhaotj.cn/col.jsp?id=106" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
+    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
 
 - **Automated Simulation Workflow:** Generated polycrystalline NMC microstructures and ran coupled lithium-transport and solid-mechanics simulations through COMSOL LiveLink for MATLAB, exporting time-aligned concentration and von Mises stress images.
-- **Conditional ConvLSTM Models:** Trained separate three-layer ConvLSTM models to autoregressively predict RGB images of concentration or stress, conditioned on past field frames, grain-orientation maps, and C-rate inputs.
+- **Conditional ConvLSTM Models:** Used a Conv3d feature extractor followed by three ConvLSTM layers to autoregressively predict RGB images of concentration or stress, with separate models conditioned on past field frames, grain-orientation maps, and C-rate inputs.
 - **Multi-Step Training:** Combined MSE and SSIM losses on 128×128 patches extracted from 512×512 RGB images, with scheduled sampling for multi-step autoregressive prediction.
 - **Prediction Assessment:** Compared predicted sequences with COMSOL-rendered reference images using MSE, SSIM, and pixel-wise error maps to assess image agreement over successive prediction steps.
 
@@ -195,6 +197,7 @@ Current Research
     <figcaption>
       <strong>ConvLSTM Prediction Pipeline</strong><br>
       Past field images, grain-orientation maps, and C-rate inputs condition autoregressive prediction. Separate models predict concentration or stress images.
+      Illustration: <a href="https://doi.org/10.1016/j.ensm.2025.104581" target="_blank" rel="noopener noreferrer">Wang et al. (2025), Fig. 5</a>.
     </figcaption>
   </figure>
 
@@ -205,6 +208,7 @@ Current Research
     <figcaption>
       <strong>ConvLSTM Cell Design</strong><br>
       The internal gating structure of the ConvLSTM cell used for spatiotemporal feature propagation.
+      Illustration: <a href="https://doi.org/10.1016/j.ensm.2025.104581" target="_blank" rel="noopener noreferrer">Wang et al. (2025), Fig. 4</a>.
     </figcaption>
   </figure>
 
@@ -215,6 +219,7 @@ Current Research
     <figcaption>
       <strong>Scheduled Sampling</strong><br>
       During training, scheduled sampling selects ground-truth or predicted frames as inputs to subsequent prediction steps.
+      Illustration: <a href="https://doi.org/10.1016/j.ensm.2025.104581" target="_blank" rel="noopener noreferrer">Wang et al. (2025), Fig. 6</a>.
     </figcaption>
   </figure>
 
@@ -306,7 +311,7 @@ Current Research
     <div class="cv-project__term">Sep. 2024 - Apr. 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher; Advisor: <a href="http://www.yingzhaotj.cn/col.jsp?id=106" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
+    <span><em>Undergraduate Researcher; Advisor: <a href="https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
@@ -346,12 +351,17 @@ Contact
 - GitHub: [cyhcyh070126-bot](https://github.com/cyhcyh070126-bot)
 - Hugging Face: [CYHcyh66](https://huggingface.co/CYHcyh66)
 
+{% if site.publications.size > 0 %}
+
 Publications
 ======
 
 <ul>{% for post in site.publications reversed %}
   {% include archive-single-cv.html %}
 {% endfor %}</ul>
+
+{% endif %}
+{% if site.talks.size > 0 %}
 
 Talks
 ======
@@ -360,6 +370,9 @@ Talks
   {% include archive-single-talk-cv.html  %}
 {% endfor %}</ul>
 
+{% endif %}
+{% if site.teaching.size > 0 %}
+
 Teaching
 ======
 
@@ -367,8 +380,5 @@ Teaching
   {% include archive-single-cv.html %}
 {% endfor %}</ul>
 
-Service and Leadership
-======
-
-This section will be updated as the site content grows.
+{% endif %}
 

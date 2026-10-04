@@ -4,7 +4,7 @@ Source code for the personal website at [cyhcyh070126-bot.github.io](https://cyh
 
 ## Overview
 
-This repository contains the Jekyll-based source for Yanghao Chen's homepage. The site is used to present research interests, projects, publications, and professional updates.
+This repository contains the Jekyll-based source for Yanghao Chen's homepage. The site presents research interests, illustrated projects, a CV, and professional updates.
 
 ## Main Files
 
@@ -12,7 +12,11 @@ This repository contains the Jekyll-based source for Yanghao Chen's homepage. Th
 - `_pages/about.md`: homepage content
 - `_pages/cv.md`: markdown CV page
 - `_data/navigation.yml`: top navigation bar
-- `_data/cv.json`: JSON-backed CV content
+- `_data/projects.yml`: project summaries and repository links
+- `files/Yanghao_Chen_CV.pdf`: downloadable one-page CV
+
+The canonical CV is `/cv/`. Legacy `/cv-json/` and `/resume-json` links redirect
+to this page so visitors reach the current version.
 
 ## Local Preview
 

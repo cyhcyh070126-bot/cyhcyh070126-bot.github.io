@@ -3,7 +3,7 @@
   status: Ongoing
   description: >-
     Combines finite element simulation with a local neural operator trained on
-    GPU-generated data. The operator maps interface displacement fields to
+    data from GPU-accelerated finite element simulations. The operator maps interface displacement fields to
     subdomain stress fields; reaction forces assembled from these stresses
     couple the subdomain to the surrounding FEM domain through iterative exchange.
   research_url: /cv/#fem-neural-operator
