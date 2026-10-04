@@ -591,6 +591,34 @@ html[data-theme="dark"] .home-network {
   opacity: 0.7;
 }
 
+// Animate small introductory blocks, never the fixed nav or the long CV gallery.
+@keyframes site-entry-content {
+  from { opacity: 0; translate: 0 4px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes site-entry-network {
+  from { opacity: 0; }
+  // The implicit end value preserves the active theme's network opacity.
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-enter .main--home .sidebar,
+  .site-enter .page--home .page__inner-wrap > header,
+  .site-enter .home-page > p:nth-of-type(-n+4),
+  .site-enter .archive > .page__title {
+    animation: site-entry-content 500ms ease-out backwards;
+  }
+
+  .site-enter .home-page > p:nth-of-type(-n+4) {
+    animation-delay: 60ms;
+  }
+
+  .site-enter .home-network {
+    animation: site-entry-network 600ms ease-out;
+  }
+}
+
 .home-page__title {
   color: var(--cv-section-heading-color);
 }

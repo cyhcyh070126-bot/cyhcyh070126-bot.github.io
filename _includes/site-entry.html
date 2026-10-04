@@ -1,0 +1,20 @@
+<script>
+// Decide before content is painted, so entering never flashes and then hides.
+(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const navigation = window.performance.getEntriesByType('navigation')[0];
+  if (navigation && (navigation.type === 'reload' || navigation.type === 'back_forward')) return;
+  if (document.referrer) {
+    try {
+      const source = new URL(document.referrer);
+      // A PDF hosted on this domain is still an entry point, not a site page.
+      if (source.origin === window.location.origin && !/\.pdf$/i.test(source.pathname)) return;
+    } catch (_) { /* Missing/invalid source is treated like a direct visit. */ }
+  }
+  const root = document.documentElement;
+  root.classList.add('site-enter');
+  const finish = () => root.classList.remove('site-enter');
+  document.addEventListener('DOMContentLoaded', () => window.setTimeout(finish, 1200), { once: true });
+  window.addEventListener('pagehide', finish, { once: true });
+})();
+</script>
