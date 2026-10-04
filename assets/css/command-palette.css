@@ -64,6 +64,9 @@ html[data-theme="dark"] {
 .site-search__option-kind { display: inline-flex; flex: 0 0 auto; width: 16px; height: 16px; color: var(--search-muted); }
 .site-search__contact-icon { flex: 0 0 18px; width: 18px; text-align: center; font-size: 16px; color: var(--search-muted); }
 .site-search__option[aria-selected="true"] .site-search__contact-icon { color: var(--cv-section-heading-color, #9a641e); }
+img.site-search__contact-icon { height: 18px; object-fit: contain; }
+.site-search__contact-icon--linkedin,
+.site-search__option[aria-selected="true"] .site-search__contact-icon--linkedin { color: #0a66c2; }
 .site-search__message { margin: 0; padding: 28px 22px 16px; color: var(--search-muted); overflow-wrap: anywhere; }
 .site-search__retry { margin: 0 22px 16px; padding: 8px 16px; border: 1px solid var(--search-line); border-radius: 5px; background: var(--search-selected); color: inherit; font: inherit; cursor: pointer; }
 .site-search__footer { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 20px; flex: 0 0 auto; padding: 10px 20px; border-top: 1px solid var(--search-line); color: var(--search-muted); font-size: 12px; }

@@ -135,7 +135,7 @@
       }
     });
     var contact = data.contact || {};
-    if (contact.email) add("Contact & Links", "Email (Tongji)", "mailto:" + contact.email, "email contact mail 邮箱 邮件 联系 " + contact.email);
+    if (contact.email) add("Contact & Links", "Tongji Email", "mailto:" + contact.email, "email contact mail 同济 邮箱 邮件 联系 " + contact.email);
     home.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
       var url = link.getAttribute("href");
       if (url === "mailto:" + contact.email || released.has(url)) return;
@@ -281,11 +281,21 @@
         link.setAttribute("role", "option");
         link.setAttribute("aria-selected", "false");
         if (entry.group === "Contact & Links") {
-          var contactIcon = document.createElement("i");
-          var iconClass = entry.url.startsWith("mailto:") ? "fa-solid fa-envelope" :
-            entry.title === "LinkedIn" ? "fa-brands fa-linkedin" :
-            entry.title === "GitHub" ? "fa-brands fa-github" : "fa-solid fa-robot";
-          contactIcon.className = "site-search__contact-icon " + iconClass;
+          var isHuggingFace = entry.title === "Hugging Face";
+          var contactIcon = document.createElement(isHuggingFace ? "img" : "i");
+          contactIcon.className = "site-search__contact-icon";
+          if (isHuggingFace) {
+            contactIcon.src = dialog.dataset.huggingfaceIcon;
+            contactIcon.alt = "";
+            contactIcon.width = 18;
+            contactIcon.height = 18;
+          } else {
+            var iconClass = entry.url.startsWith("mailto:") ?
+              (entry.title === "Gmail" ? "far fa-envelope" : "fas fa-envelope") :
+              entry.title === "LinkedIn" ? "fab fa-linkedin site-search__contact-icon--linkedin" :
+              "fab fa-github";
+            contactIcon.className += " " + iconClass;
+          }
           contactIcon.setAttribute("aria-hidden", "true");
           link.append(contactIcon);
         }
