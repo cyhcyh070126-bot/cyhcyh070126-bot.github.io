@@ -27,11 +27,11 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Aug 2026</div>
-      <div class="home-news__content"><strong>3D bracket studies:</strong> Extended the mechanics data-generation and neural-operator workflow to three-dimensional bracket examples, exploring the mapping from interface displacement fields to local stress responses for hybrid FEM–neural operator coupling.</div>
+      <div class="home-news__content"><strong>3D Bracket Studies:</strong> Extended the workflow to 3D bracket problems, using GRFs to sample interface displacement fields and tractions on internal surfaces. Trained neural operators to predict subdomain stress fields from these inputs.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jul 2026</div>
-      <div class="home-news__content"><strong>Cylinder coupling studies:</strong> Developed a cylinder example combining an outer FEM domain with a local neural operator. The operator maps interface displacements to subdomain stresses, from which interface reaction forces are assembled for iterative displacement–force exchange.</div>
+      <div class="home-news__content"><strong>Cylinder Studies:</strong> Developed a hybrid FEM–neural operator solver for a cylinder problem, using GRFs to sample displacement fields on both inner and outer arcs. Coupled the FEM and neural-operator subdomains through iterative exchange of interface forces and displacements.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jan 2026</div>
