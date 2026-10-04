@@ -606,7 +606,8 @@ ul + .cv-project {
   margin-bottom: 0.7rem;
 }
 
-.cv-project__separator {
+.cv-project__separator,
+.cv-links__separator {
   margin-inline: 0.3em;
   font-style: inherit;
 }
