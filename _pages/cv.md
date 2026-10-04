@@ -145,7 +145,7 @@ Current Research
 
 <div class="cv-project cv-project--battery">
   <div class="cv-project__header">
-    <div class="cv-project__title" id="convlstm-battery">2. ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials</div>
+    <div class="cv-project__title" id="convlstm-battery">2. ConvLSTM Prediction of Concentration and Stress Fields in Battery Materials</div>
     <div class="cv-project__term">Jun. 2025 - Oct. 2025</div>
   </div>
   <div class="cv-project__meta">
@@ -154,10 +154,10 @@ Current Research
   </div>
 </div>
 
-- **Automated Simulation Workflow:** Generated polycrystalline NMC microstructures and ran coupled lithium-transport and solid-mechanics simulations through COMSOL LiveLink for MATLAB, exporting time-aligned concentration and von Mises stress images.
-- **Spatiotemporal Field Prediction:** Trained separate conditional ConvLSTM models in PyTorch to predict future sequences of concentration and stress fields from past field images, grain-orientation maps, and C-rate inputs.
-- **Multi-Step Training:** Combined MSE and SSIM losses on 128×128 patches extracted from 512×512 RGB images, with scheduled sampling for multi-step autoregressive prediction.
-- **Prediction Assessment:** Compared predicted sequences with COMSOL-rendered reference images using MSE, SSIM, and pixel-wise error maps to assess image agreement over successive prediction steps.
+- **Automated Simulation and Data Generation:** Generated polycrystalline NMC microstructures and automated MATLAB–COMSOL simulations to produce time-aligned image sequences of lithium concentration and von Mises stress.
+- **Concentration and Stress Prediction:** Trained separate conditional ConvLSTM models in PyTorch to predict future image sequences of lithium concentration and von Mises stress, using past image sequences, grain-orientation maps, and C-rate inputs.
+- **Model Training:** Trained the models with MSE and SSIM losses, using scheduled sampling to select reference or model-predicted frames as inputs during training.
+- **Prediction Evaluation:** Compared predicted lithium concentration and von Mises stress image sequences with COMSOL reference sequences and analyzed error accumulation during autoregressive prediction.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
