@@ -2,35 +2,40 @@
   title: GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework
   status: Ongoing
   description: >-
-    A hybrid framework coupling an outer FEM domain with a local neural operator
-    that maps interface displacements to stress fields. Stress-derived interface
-    reactions connect the two solvers through iterative coupling.
+    Combines finite element simulation with a local neural operator trained on
+    GPU-generated data. The operator maps interface displacement fields to
+    subdomain stress fields; reaction forces assembled from these stresses
+    couple the subdomain to the surrounding FEM domain through iterative exchange.
   research_url: /cv/#fem-neural-operator
   repository:
 
 - id: convlstm-battery
   title: ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials
   description: >-
-    Separate conditional ConvLSTM models for autoregressive prediction of
-    concentration or stress images in battery materials, trained and evaluated
-    using COMSOL-rendered field sequences.
+    Uses conditional ConvLSTM models to forecast the evolution of concentration
+    and stress in polycrystalline battery materials. Trained separately for each
+    field on MATLAB–COMSOL simulation images, the models use grain orientation
+    and C-rate as conditioning inputs and an MSE + SSIM training objective.
   research_url: /cv/#convlstm-battery
   repository: https://github.com/cyhcyh070126-bot/convlstm-battery-field-prediction#readme
 
 - id: burgers-pinn
   title: PINNs for Shock Capturing in the Burgers Equation
   description: >-
-    A study of standard and constant-artificial-viscosity PINNs for a
-    one-dimensional Burgers shock problem, comparing their predicted profiles
-    with the analytical inviscid reference.
+    Investigates how physics-informed neural networks represent a moving shock
+    in the one-dimensional Burgers equation. Compares a standard PINN with a
+    formulation that adds constant artificial viscosity to the PDE residual,
+    using the analytical inviscid solution to assess shock profiles over time.
   research_url: /cv/#burgers-pinn
   repository: https://github.com/cyhcyh070126-bot/burgers-pinn#readme
 
 - id: mechanics-llm
   title: Domain-Specific LLM Fine-Tuning for Mechanics of Materials
   description: >-
-    LoRA fine-tuning of Qwen2.5-7B for question answering in mechanics of materials,
-    with curated instruction datasets and model checkpoints released on Hugging Face.
+    Adapts Qwen2.5-7B for question answering and concept explanation in mechanics
+    of materials through LoRA fine-tuning on Google Colab. Uses curated
+    instruction–response examples from textbooks and technical literature,
+    with datasets and fine-tuned models released on Hugging Face.
   research_url: /cv/#mechanics-llm
   repository: https://huggingface.co/CYHcyh66
   repository_label: Hugging Face

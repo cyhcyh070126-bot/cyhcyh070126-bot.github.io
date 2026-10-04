@@ -165,19 +165,21 @@ html[data-theme="dark"] .research-card figcaption strong {
   line-height: 1.65;
 }
 
-.project-list__repository {
+.project-list .project-list__repository {
   display: inline-flex;
   align-items: center;
   gap: 0.35em;
+  white-space: nowrap;
   min-height: 2rem;
+  border-bottom: 1px solid transparent;
   color: var(--cv-section-heading-color);
   font-size: 0.94rem;
   text-decoration: none;
 }
 
-a.project-list__repository:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+.project-list a.project-list__repository:hover {
+  text-decoration: none;
+  border-bottom-color: currentColor;
 }
 
 .project-list__repository--pending {
