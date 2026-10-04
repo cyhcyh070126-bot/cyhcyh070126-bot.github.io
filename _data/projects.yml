@@ -6,9 +6,10 @@
   preview_caption: Cylinder subdomain layout
   status: Ongoing
   description: >-
-    A hybrid solver based on non-overlapping domain decomposition, using FEM
-    and neural operators in separate subdomains connected through iterative
-    exchange of interface displacements and reaction forces. Uses
+    A hybrid solver based on non-overlapping domain decomposition, with FEM
+    and neural-operator subdomains connected through a shared interface.
+    The two solvers exchange interface displacements and reaction forces
+    iteratively across this interface. Uses
     GPU-accelerated JAX-FEM simulations to generate training data
     and trains Transolver in JAX to learn mappings from interface displacement
     fields to local stress fields.
