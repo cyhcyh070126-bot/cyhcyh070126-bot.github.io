@@ -654,6 +654,18 @@ ul + .cv-project {
   overflow-wrap: anywhere;
 }
 
+.author__urls-wrapper button.btn--inverse {
+  min-height: 44px;
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+  border-color: var(--global-border-color);
+}
+
+.author__urls-wrapper button.btn--inverse:is(:hover, :focus-visible) {
+  color: var(--cv-section-heading-color);
+  border-color: var(--cv-section-rule-color);
+}
+
 .cv-project__header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
