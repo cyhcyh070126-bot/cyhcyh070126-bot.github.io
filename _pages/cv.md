@@ -53,7 +53,7 @@ Current Research
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title" id="fem-neural-operator">1. GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework</div>
+    <div class="cv-project__title" id="fem-neural-operator">1. GPU-Accelerated Hybrid FEM–Neural Operator Solver</div>
     <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
@@ -62,10 +62,10 @@ Current Research
   </div>
 </div>
 
-- **Domain Decomposition and Hybrid Coupling:** Developed a domain-decomposition framework that couples a surrounding FEM domain with a local subdomain modeled by a neural operator.
-- **GPU-Accelerated Data Generation:** Used JAX-FEM to generate displacement and stress data under prescribed interface displacements for neural-operator training.
-- **Neural Operator Training:** Trained Transolver in JAX to learn mappings from interface displacement fields to stress fields within the local subdomain.
-- **Iterative Interface Coupling:** Computed interface reaction forces from predicted stresses and applied them to the surrounding FEM solver. Used the updated interface displacements for the next neural-operator prediction.
+- **Non-overlapping Domain Decomposition and Hybrid Solver:** Developed a hybrid solver based on non-overlapping domain decomposition, using FEM and neural operators in separate subdomains connected through a shared interface.
+- **GPU-Accelerated Data Generation:** Used JAX-FEM to run GPU-accelerated simulations under different prescribed interface displacements, generating displacement and stress data for neural-operator training.
+- **Neural Operator Training:** Trained Transolver in JAX to learn mappings from interface displacement fields to stress fields within the neural-operator subdomain.
+- **Iterative Interface Coupling:** Computed interface reaction forces from predicted stresses in the neural-operator subdomain and passed them to the FEM solver. The FEM solver updated the interface displacements, which were then fed back to the neural operator for the next coupling iteration.
 
 **Ongoing 3D Composite Extension:** We are extending the framework to a three-dimensional composite containing 100 fibers. Our goal is to train **a single shared neural operator for all 100 fibers**, using the same model parameters to map each fiber's interface displacement field to its 3D stress field. Stress-derived interface reactions would couple the fibers to the surrounding FEM matrix through iterative displacement–force exchange. Key questions include generalization across fibers and the influence of fiber-end effects on stress prediction and interface-force transfer.
 
