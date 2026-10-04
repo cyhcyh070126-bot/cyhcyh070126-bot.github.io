@@ -3,7 +3,8 @@ const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const { join } = require('node:path');
 const { runInNewContext } = require('node:vm');
-const script = readFileSync(join(__dirname, '../_includes/site-entry.html'), 'utf8').replace(/<\/?script>/g, '');
+// Jekyll's HTML compression collapses inline scripts to one line in production.
+const script = readFileSync(join(__dirname, '../_includes/site-entry.html'), 'utf8').replace(/<\/?script>/g, '').replace(/\s+/g, ' ');
 
 function visit({ referrer = '', type = 'navigate', reduced = false } = {}) {
   const classes = new Set();

@@ -1,5 +1,5 @@
 <script>
-// Decide before content is painted, so entering never flashes and then hides.
+/* Decide before content is painted, so entering never flashes and then hides. */
 (() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const navigation = window.performance.getEntriesByType('navigation')[0];
@@ -7,7 +7,7 @@
   if (document.referrer) {
     try {
       const source = new URL(document.referrer);
-      // A PDF hosted on this domain is still an entry point, not a site page.
+      /* A PDF hosted on this domain is still an entry point, not a site page. */
       if (source.origin === window.location.origin && !/\.pdf$/i.test(source.pathname)) return;
     } catch (_) { /* Missing/invalid source is treated like a direct visit. */ }
   }
