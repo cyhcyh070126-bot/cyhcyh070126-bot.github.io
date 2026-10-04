@@ -336,9 +336,9 @@ Skills
 ======
 
 - **Scientific Machine Learning:** PyTorch, JAX, Neural Operators (Transolver, DeepONet), PINNs, ConvLSTM
-- **Computational Mechanics:** Finite Element Methods, JAX-FEM, FEniCSx, COMSOL Multiphysics, Abaqus
+- **Computational Mechanics:** JAX-FEM, FEniCSx, Abaqus, COMSOL Multiphysics (LiveLink for MATLAB), Gmsh
 - **Programming & Tools:** Python, MATLAB, Linux, Git/GitHub
-- **Simulation & Visualization:** Gmsh, LiveLink for MATLAB, Matplotlib, Origin
+- **Visualization:** Matplotlib, Origin
 - **LLM Fine-Tuning:** Qwen2.5, LoRA, Instruction Dataset Curation
 - **Languages:** Mandarin Chinese (native), Cantonese, English
 
