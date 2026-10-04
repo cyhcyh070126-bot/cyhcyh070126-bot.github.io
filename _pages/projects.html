@@ -17,9 +17,16 @@ description: "Research projects in computational mechanics and scientific machin
     <p class="project-list__description">{{ project.description | escape }}</p>
     {% if project.repository and project.repository != '' %}
     {% assign repository_label = project.repository_label | default: 'Repository' %}
-    <a class="project-list__repository" href="{{ project.repository | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ repository_label | escape }} for {{ project.title | escape }} (opens in a new tab)">{{ repository_label | escape }} <span aria-hidden="true">↗</span></a>
+    <a class="project-list__repository" href="{{ project.repository | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ repository_label | escape }} for {{ project.title | escape }} (opens in a new tab)">
+      {% if project.repository contains 'https://github.com/' %}
+      <i class="fab fa-github project-list__link-icon" aria-hidden="true"></i>
+      {% elsif project.repository contains 'https://huggingface.co/' %}
+      <img class="project-list__link-icon project-list__link-icon--huggingface" src="{{ '/assets/icons/huggingface.svg' | relative_url }}" width="24" height="24" alt="" aria-hidden="true" />
+      {% endif %}
+      {{ repository_label | escape }} <span aria-hidden="true">↗</span>
+    </a>
     {% else %}
-    <a class="project-list__repository" href="{{ project.research_url | relative_url }}" aria-label="Research details for {{ project.title | escape }}">Research details</a>
+    <a class="project-list__repository" href="{{ project.research_url | relative_url }}" aria-label="Research details for {{ project.title | escape }}"><i class="far fa-file-alt project-list__link-icon" aria-hidden="true"></i>Research details</a>
     {% endif %}
   </article>
   {% endfor %}

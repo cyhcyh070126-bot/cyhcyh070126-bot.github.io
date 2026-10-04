@@ -177,6 +177,17 @@ html[data-theme="dark"] .research-card figcaption strong {
   text-decoration: none;
 }
 
+.project-list__link-icon {
+  flex: 0 0 1.25em;
+  width: 1.25em;
+  text-align: center;
+}
+
+.project-list__link-icon--huggingface {
+  height: 1.25em;
+  object-fit: contain;
+}
+
 .project-list a.project-list__repository:hover {
   text-decoration: none;
   border-bottom-color: currentColor;
