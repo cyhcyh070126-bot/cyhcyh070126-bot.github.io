@@ -12,7 +12,7 @@
 - id: convlstm-battery
   title: ConvLSTM Modeling of Chemo-Mechanical Fields in Battery Materials
   description: >-
-    Uses conditional ConvLSTM models to forecast the evolution of concentration
+    Uses conditional ConvLSTM models to predict the evolution of concentration
     and stress in polycrystalline battery materials. Trained separately for each
     field on MATLAB–COMSOL simulation images, the models use grain orientation
     and C-rate as conditioning inputs and an MSE + SSIM training objective.
