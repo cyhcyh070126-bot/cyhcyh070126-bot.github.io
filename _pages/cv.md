@@ -197,7 +197,6 @@ Current Research
     <figcaption>
       <strong>ConvLSTM Prediction Pipeline</strong><br>
       Past field images, grain-orientation maps, and C-rate inputs condition autoregressive prediction. Separate models predict concentration or stress images.
-      Illustration: Wang et al. (2025), Fig. 5.
     </figcaption>
   </figure>
 
@@ -208,7 +207,6 @@ Current Research
     <figcaption>
       <strong>ConvLSTM Cell Design</strong><br>
       The internal gating structure of the ConvLSTM cell used for spatiotemporal feature propagation.
-      Illustration: Wang et al. (2025), Fig. 4.
     </figcaption>
   </figure>
 
@@ -219,7 +217,6 @@ Current Research
     <figcaption>
       <strong>Scheduled Sampling</strong><br>
       During training, scheduled sampling selects ground-truth or predicted frames as inputs to subsequent prediction steps.
-      Illustration: Wang et al. (2025), Fig. 6.
     </figcaption>
   </figure>
 
