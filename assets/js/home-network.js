@@ -3,7 +3,8 @@
   const canvas = document.querySelector('.home-network');
   const button = document.querySelector('.home-network-toggle');
   const news = document.querySelector('.home-page #news');
-  if (!canvas || !button || !news) return;
+  const masthead = document.querySelector('.masthead');
+  if (!canvas || !button || !news || !masthead) return;
   const context = canvas.getContext('2d');
   if (!context) return;
   const host = canvas.parentElement;
@@ -14,20 +15,23 @@
   let previous = 0;
   let width = 0;
   let height = 0;
+  let elapsed = 0;
   let points = [];
   // A fixed seed avoids a different composition after every resize.
   function populate() {
     let seed = 29;
     const random = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-    const count = Math.min(48, Math.max(16, Math.round(width * height / 18000)));
+    const count = Math.min(64, Math.max(20, Math.round(width * height / 20000)));
     points = Array.from({ length: count }, () => ({
       x: random() * width, y: random() * height,
-      vx: (random() - 0.5) * 7, vy: (random() - 0.5) * 7
+      vx: (random() - 0.5) * 28, vy: (random() - 0.5) * 28,
+      phase: random() * Math.PI * 2
     }));
   }
   function paint(seconds = 0) {
     context.clearRect(0, 0, width, height);
-    const reach = Math.min(190, width * 0.45);
+    elapsed += seconds;
+    const reach = Math.min(220, width * 0.45);
     for (const point of points) {
       point.x += point.vx * seconds;
       point.y += point.vy * seconds;
@@ -35,23 +39,27 @@
       if (point.y < 0 || point.y > height) point.vy *= -1;
       point.x = Math.max(0, Math.min(width, point.x));
       point.y = Math.max(0, Math.min(height, point.y));
+      // Independent depth cycles gently fold and unfold the projected network.
+      const depth = 1 + 0.07 * Math.sin(elapsed * 0.55 + point.phase);
+      point.px = width / 2 + (point.x - width / 2) * depth;
+      point.py = height / 2 + (point.y - height / 2) * depth;
     }
-    context.lineWidth = 0.8;
+    context.lineWidth = 1;
     for (let i = 0; i < points.length; i++) {
       const a = points[i];
       for (let j = i + 1; j < points.length; j++) {
         const b = points[j];
-        const distance = Math.hypot(a.x - b.x, a.y - b.y);
+        const distance = Math.hypot(a.px - b.px, a.py - b.py);
         if (distance >= reach) continue;
-        context.strokeStyle = `rgba(213, 180, 94, ${0.24 * (1 - distance / reach)})`;
+        context.strokeStyle = `rgba(207, 168, 70, ${0.42 * (1 - distance / reach)})`;
         context.beginPath();
-        context.moveTo(a.x, a.y);
-        context.lineTo(b.x, b.y);
+        context.moveTo(a.px, a.py);
+        context.lineTo(b.px, b.py);
         context.stroke();
       }
-      context.fillStyle = 'rgba(213, 180, 94, 0.30)';
+      context.fillStyle = 'rgba(207, 168, 70, 0.55)';
       context.beginPath();
-      context.arc(a.x, a.y, 1.6, 0, Math.PI * 2);
+      context.arc(a.px, a.py, 1.9, 0, Math.PI * 2);
       context.fill();
     }
   }
@@ -74,8 +82,14 @@
   }
   function resize() {
     const rect = host.getBoundingClientRect();
-    const nextWidth = Math.round(rect.width);
-    const nextHeight = Math.max(0, Math.round(news.getBoundingClientRect().top - rect.top - 16));
+    // Cover the entire page width, from the masthead rule to just above News.
+    // Use document coordinates so resizing while scrolled keeps the same bounds.
+    const top = masthead.getBoundingClientRect().height;
+    const nextWidth = document.documentElement.clientWidth;
+    const nextHeight = Math.max(0, Math.round(news.getBoundingClientRect().top + window.scrollY - top - 12));
+    canvas.style.left = `${-rect.left}px`;
+    canvas.style.top = `${top - rect.top - window.scrollY}px`;
+    canvas.style.width = `${nextWidth}px`;
     if (nextWidth === width && nextHeight === height) return;
     width = nextWidth;
     height = nextHeight;
@@ -96,7 +110,9 @@
     visible = rect.bottom > 0 && rect.top < window.innerHeight;
     sync();
   });
-  new ResizeObserver(resize).observe(host);
+  const sizeObserver = new ResizeObserver(resize);
+  sizeObserver.observe(host);
+  sizeObserver.observe(masthead);
   new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }).observe(canvas);
   resize();
   sync();

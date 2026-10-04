@@ -556,6 +556,10 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
 
 .page--home .page__inner-wrap {
   position: relative;
+}
+
+.main--home {
+  position: relative;
   isolation: isolate;
 }
 
@@ -567,7 +571,7 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
   height: 0;
   z-index: -1;
   pointer-events: none;
-  mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 88%, transparent);
+  mask-image: linear-gradient(to bottom, #000, #000 92%, transparent);
 }
 
 .home-network-toggle {

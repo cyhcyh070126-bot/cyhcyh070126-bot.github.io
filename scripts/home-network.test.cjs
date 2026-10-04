@@ -11,18 +11,19 @@ function setup(reduce = false) {
   let draws = 0;
   let intersect;
   const context = new Proxy({}, { get: (_, name) => name === 'clearRect' ? () => draws++ : () => {} });
-  const host = { getBoundingClientRect: () => ({ width: 1000, top: 100 }) };
+  const host = { getBoundingClientRect: () => ({ width: 1000, top: 100, left: 120 }) };
   const canvas = { parentElement: host, style: {}, getContext: () => context, getBoundingClientRect: () => ({ top: 100, bottom: 900 }) };
   const button = { dataset: {}, setAttribute: (name, value) => button[name] = value, addEventListener: (_, cb) => events.click = cb };
   const media = { matches: reduce, addEventListener: (_, cb) => events.motion = cb };
   const document = {
     hidden: false,
-    querySelector: selector => selector === '.home-network' ? canvas : selector === '.home-network-toggle' ? button : { getBoundingClientRect: () => ({ top: 920 }) },
+    documentElement: { clientWidth: 1280 },
+    querySelector: selector => selector === '.home-network' ? canvas : selector === '.home-network-toggle' ? button : selector === '.masthead' ? { getBoundingClientRect: () => ({ height: 64 }) } : { getBoundingClientRect: () => ({ top: 920 }) },
     addEventListener: (name, cb) => events[name] = cb
   };
   runInNewContext(readFileSync(join(__dirname, '../assets/js/home-network.js'), 'utf8'), {
     document,
-    window: { matchMedia: () => media, devicePixelRatio: 3, innerHeight: 720, addEventListener: (name, cb) => events[name] = cb },
+    window: { matchMedia: () => media, devicePixelRatio: 3, innerHeight: 720, scrollY: 0, addEventListener: (name, cb) => events[name] = cb },
     ResizeObserver: class { observe() {} },
     IntersectionObserver: class { constructor(cb) { intersect = cb; } observe() {} },
     requestAnimationFrame: cb => { callbacks.set(++id, cb); return id; },
@@ -58,8 +59,11 @@ test('reduced motion starts static, drawing frequency and pixel ratio are bounde
   const app = setup(true);
   app.visible(true);
   assert.equal(app.callbacks.size, 0);
-  assert.equal(app.canvas.width, 1500);
-  assert.equal(app.canvas.style.height, '804px');
+  assert.equal(app.canvas.width, 1920);
+  assert.equal(app.canvas.style.height, '844px');
+  assert.equal(app.canvas.style.width, '1280px');
+  assert.equal(app.canvas.style.left, '-120px');
+  assert.equal(app.canvas.style.top, '-36px');
   app.events.click();
   app.frame(100);
   const count = app.draws();
