@@ -74,16 +74,13 @@ Quick Links
   <li><a href="{{ '/cv/' | relative_url }}"><i class="far fa-file-alt quick-links__icon" aria-hidden="true"></i><span>CV</span></a></li>
   <li><a href="https://github.com/cyhcyh070126-bot"><i class="fab fa-github quick-links__icon" aria-hidden="true"></i><span>GitHub</span></a></li>
   <li><a href="https://huggingface.co/CYHcyh66"><img class="quick-links__icon" src="{{ '/assets/icons/huggingface.svg' | relative_url }}" width="24" height="24" alt="" aria-hidden="true" /><span>Hugging Face</span></a></li>
-  <li><a href="https://www.linkedin.com/in/yanghao-chen-830677399/"><i class="fab fa-linkedin quick-links__icon quick-links__icon--linkedin" aria-hidden="true"></i><span>LinkedIn</span></a></li>
-  <li><a href="mailto:2350083@tongji.edu.cn"><i class="fas fa-envelope quick-links__icon" aria-hidden="true"></i><span>Tongji Email</span></a></li>
-  <li><a href="mailto:cyhcyh070126@gmail.com"><i class="far fa-envelope quick-links__icon" aria-hidden="true"></i><span>Gmail</span></a></li>
 </ul>
 
 Contact
 ======
 
-You can reach me at [2350083@tongji.edu.cn](mailto:2350083@tongji.edu.cn).
-
-My LinkedIn profile is [linkedin.com/in/yanghao-chen-830677399](https://www.linkedin.com/in/yanghao-chen-830677399/).
-
-The site is published at [cyhcyh070126-bot.github.io](https://cyhcyh070126-bot.github.io).
+<ul class="quick-links">
+  <li><a href="mailto:2350083@tongji.edu.cn"><i class="fas fa-envelope quick-links__icon" aria-hidden="true"></i><span>Tongji Email</span></a></li>
+  <li><a href="mailto:cyhcyh070126@gmail.com"><i class="far fa-envelope quick-links__icon" aria-hidden="true"></i><span>Gmail</span></a></li>
+  <li><a href="https://www.linkedin.com/in/yanghao-chen-830677399/"><i class="fab fa-linkedin quick-links__icon quick-links__icon--linkedin" aria-hidden="true"></i><span>LinkedIn</span></a></li>
+</ul>
