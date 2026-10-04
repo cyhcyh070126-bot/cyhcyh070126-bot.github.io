@@ -51,6 +51,12 @@
   scroll-margin-top: 100px;
 }
 
+// Native cross-page anchors must also clear the fixed header (including Ctrl K).
+#main,
+#main :is(h1, h2, h3, h4, h5, h6, figure, article)[id] {
+  scroll-margin-top: 100px;
+}
+
 .home-page .research-keyword {
   color: inherit;
   font-weight: 700;
