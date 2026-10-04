@@ -2,10 +2,11 @@
   title: GPU-Accelerated Hybrid FEM–Neural Operator Coupling Framework
   status: Ongoing
   description: >-
-    Uses JAX-FEM to generate training data and trains Transolver in JAX to learn
-    mappings from interface displacement fields to subdomain stress fields.
-    Interface reaction forces computed from the predicted stresses couple the
-    neural operator to the surrounding FEM domain through an iterative solver.
+    A hybrid solver based on domain decomposition, coupling a surrounding FEM
+    domain with a local neural operator through iterative displacement–force
+    exchange. Uses GPU-accelerated JAX-FEM simulations to generate training data
+    and trains Transolver in JAX to learn mappings from interface displacement
+    fields to local stress fields.
   research_url: /cv/#fem-neural-operator
   repository:
 
