@@ -64,7 +64,7 @@ Current Research
 
 - **Hybrid FEM–NO Framework:** Developed a hybrid framework combining an outer finite element domain with a local neural-operator subdomain connected through a shared interface.
 - **GPU-Accelerated Training Data:** Used JAX-FEM to generate displacement and stress fields for training the local neural operator.
-- **Displacement-to-Stress Operator Learning:** Trained Transolver models to learn the operator mapping from prescribed interface displacement fields to local stress fields.
+- **Displacement-to-Stress Operator Learning:** Trained Transolver in JAX to learn mappings from prescribed interface displacement fields to subdomain stress fields, and used the trained operator for inference within the coupling loop.
 - **Stress-Based Interface Coupling:** Assembled interface reaction forces from the predicted stresses and returned them to the outer FEM solver, which updated the interface displacements for the next coupling iteration.
 
 **Ongoing 3D Composite Extension:** We are extending the framework to a three-dimensional composite containing 100 fibers. Our goal is to train **a single shared neural operator for all 100 fibers**, using the same model parameters to map each fiber's interface displacement field to its 3D stress field. Stress-derived interface reactions would couple the fibers to the surrounding FEM matrix through iterative displacement–force exchange. Key questions include generalization across fibers and the influence of fiber-end effects on stress prediction and interface-force transfer.
@@ -155,7 +155,7 @@ Current Research
 </div>
 
 - **Automated Simulation Workflow:** Generated polycrystalline NMC microstructures and ran coupled lithium-transport and solid-mechanics simulations through COMSOL LiveLink for MATLAB, exporting time-aligned concentration and von Mises stress images.
-- **Conditional ConvLSTM Models:** Used a Conv3d feature extractor followed by three ConvLSTM layers to autoregressively predict RGB images of concentration or stress, with separate models conditioned on past field frames, grain-orientation maps, and C-rate inputs.
+- **Conditional ConvLSTM Models:** Trained separate PyTorch models for concentration and stress image prediction, combining a Conv3d feature extractor with three ConvLSTM layers and conditioning on field history, grain orientation, and C-rate.
 - **Multi-Step Training:** Combined MSE and SSIM losses on 128×128 patches extracted from 512×512 RGB images, with scheduled sampling for multi-step autoregressive prediction.
 - **Prediction Assessment:** Compared predicted sequences with COMSOL-rendered reference images using MSE, SSIM, and pixel-wise error maps to assess image agreement over successive prediction steps.
 
@@ -249,7 +249,7 @@ Current Research
 </div>
 
 - **Burgers Shock Problem:** Studied a one-dimensional Riemann problem with discontinuous initial data, using the analytical inviscid solution as a reference for the evolving shock profile and trajectory.
-- **Standard PINN:** Implemented a PyTorch network mapping spatial and temporal coordinates to the solution, trained with PDE-residual, initial-condition, and boundary-condition losses.
+- **Standard PINN:** Implemented a PINN in PyTorch to map spatial and temporal coordinates to the solution, trained with PDE-residual, initial-condition, and boundary-condition losses.
 - **Constant Artificial Viscosity:** Added a constant diffusion term to the PDE residual and used automatic differentiation to compute the second spatial derivative for the regularized formulation.
 - **Shock-Profile Analysis:** Compared standard and regularized PINN profiles with the analytical inviscid reference, using profile plots and local views to examine shock smearing and deviations near the discontinuity.
 
