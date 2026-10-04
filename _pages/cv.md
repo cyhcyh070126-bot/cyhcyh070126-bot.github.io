@@ -51,6 +51,12 @@ Current Research
 
 <h1 id="research-projects"><span id="research-experience">Research Projects</span></h1>
 
+<nav class="cv-project-nav" aria-label="Jump to a research project">
+  {% for project in site.data.projects %}
+  <a href="#{{ project.id }}"><span class="cv-project-nav__number">0{{ forloop.index }}</span>{{ project.short_title }}</a>
+  {% endfor %}
+</nav>
+
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title" id="fem-neural-operator">1. GPU-Accelerated Hybrid FEM–Neural Operator Solver</div>

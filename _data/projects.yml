@@ -1,5 +1,9 @@
 - id: fem-neural-operator
   title: GPU-Accelerated Hybrid FEM–Neural Operator Solver
+  short_title: Hybrid FEM–NO
+  preview: /images/research/cylinder_subdomain_supports_1234.png
+  preview_alt: Cylinder FEM and neural-operator subdomains connected through a shared interface.
+  preview_caption: Cylinder subdomain layout
   status: Ongoing
   description: >-
     A hybrid solver based on non-overlapping domain decomposition, using FEM
@@ -13,6 +17,10 @@
 
 - id: convlstm-battery
   title: ConvLSTM Prediction of Concentration and Stress Fields in Battery Materials
+  short_title: ConvLSTM
+  preview: /images/research/battery_concentration.gif
+  preview_alt: Lithium concentration evolution in the COMSOL simulation dataset.
+  preview_caption: Concentration evolution · COMSOL
   description: >-
     Trains conditional ConvLSTM models in PyTorch to predict future sequences
     of concentration and stress fields in polycrystalline battery materials. Separate
@@ -23,6 +31,10 @@
 
 - id: burgers-pinn
   title: PINNs for Shock Capturing in the Burgers Equation
+  short_title: PINNs
+  preview: /images/research/burgers_standard_pinn_prediction.gif
+  preview_alt: Standard PINN prediction compared with the analytical Burgers shock solution.
+  preview_caption: Standard PINN prediction
   description: >-
     Trains PINNs in PyTorch to predict shock propagation in the one-dimensional
     Burgers equation, using PDE-residual, initial-condition, and boundary-condition
@@ -33,6 +45,10 @@
 
 - id: mechanics-llm
   title: Domain-Specific LLM Fine-Tuning for Mechanics of Materials
+  short_title: LLM Fine-Tuning
+  preview: /images/research/llm_finetuning_workflow_v2.png
+  preview_alt: Mechanics dataset preparation, LoRA fine-tuning, and model release workflow.
+  preview_caption: Fine-tuning and release workflow
   description: >-
     Adapts Qwen2.5-7B for question answering and concept explanation in mechanics
     of materials through LoRA fine-tuning on Google Colab. Uses curated

@@ -10,9 +10,16 @@ description: "Research projects in computational mechanics and scientific machin
 <div class="project-list">
   {% for project in site.data.projects %}
   <article class="project-list__item" aria-labelledby="{{ project.id }}" id="project-{{ project.id }}">
+    <figure class="project-list__preview">
+      <a href="{{ project.research_url | relative_url }}" aria-label="View {{ project.title | escape }} research details">
+        <img src="{{ project.preview | relative_url }}" alt="{{ project.preview_alt | escape }}" loading="lazy" decoding="async" width="320" height="240" />
+      </a>
+      <figcaption>{{ project.preview_caption }}</figcaption>
+    </figure>
+    <div class="project-list__body">
     <h2 class="project-list__title" id="{{ project.id }}">
       <a href="{{ project.research_url | relative_url }}">{{ project.title | escape }}</a>
-      {% if project.status %}<span class="project-list__status">({{ project.status | escape }})</span>{% endif %}
+      {% if project.status %}<span class="project-list__status">{{ project.status | escape }}</span>{% endif %}
     </h2>
     <p class="project-list__description">{{ project.description | escape }}</p>
     {% if project.repository and project.repository != '' %}
@@ -28,6 +35,7 @@ description: "Research projects in computational mechanics and scientific machin
     {% else %}
     <a class="project-list__repository" href="{{ project.research_url | relative_url }}" aria-label="Research details for {{ project.title | escape }}"><i class="far fa-file-alt project-list__link-icon" aria-hidden="true"></i>Research details</a>
     {% endif %}
+    </div>
   </article>
   {% endfor %}
 </div>
