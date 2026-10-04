@@ -220,6 +220,17 @@
   }
 }
 
+.author__interests {
+  display: block;
+  margin-top: 0.35em;
+  line-height: 1.65;
+  text-align: left;
+
+  > span {
+    display: block;
+  }
+}
+
 .author__urls-wrapper {
   position: relative;
   display: table-cell;
