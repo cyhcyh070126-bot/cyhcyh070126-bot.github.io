@@ -205,6 +205,13 @@ html[data-theme="dark"] .research-card figcaption strong {
   object-fit: contain;
 }
 
+// Brand icons should not inherit the hover shadow used for linked figures.
+#main a img.project-list__link-icon,
+#main a img.quick-links__icon,
+#main a img.author__brand-icon {
+  box-shadow: none;
+}
+
 .project-list a.project-list__repository:hover {
   text-decoration: none;
   border-bottom-color: currentColor;
