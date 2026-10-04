@@ -166,7 +166,7 @@ Current Research
     </a>
     <figcaption>
       <strong>Lithium Concentration Evolution</strong><br>
-      Time-resolved lithium-concentration images exported from COMSOL simulations.
+      Simulated lithium concentration evolution in a polycrystalline NMC particle using MATLAB–COMSOL.
     </figcaption>
   </figure>
 
@@ -176,7 +176,7 @@ Current Research
     </a>
     <figcaption>
       <strong>von Mises Stress Evolution</strong><br>
-      Time-dependent von Mises stress response under the same microstructure and loading condition.
+      Simulated von Mises stress evolution in the same particle under the same loading conditions.
     </figcaption>
   </figure>
 
@@ -186,7 +186,7 @@ Current Research
     </a>
     <figcaption>
       <strong>Grain Orientation Map</strong><br>
-      Colors represent each grain’s orientation relative to the global x-axis, folded into the range 0°–90°.
+      Encoded grain orientations relative to the global x-axis as a color map for the conditional ConvLSTM models.
     </figcaption>
   </figure>
 
@@ -195,8 +195,8 @@ Current Research
       <img src="/images/research/battery_convlstm_pipeline.png" alt="ConvLSTM prediction pipeline with concentration, grain orientation, and C-rate inputs." />
     </a>
     <figcaption>
-      <strong>ConvLSTM Prediction Pipeline</strong><br>
-      Past field images, grain-orientation maps, and C-rate inputs condition autoregressive prediction. Separate models predict concentration or stress images.
+      <strong>Conditional ConvLSTM Prediction</strong><br>
+      Used separate conditional ConvLSTM models to predict future concentration and stress image sequences from past image sequences, grain-orientation maps, and C-rate inputs.
     </figcaption>
   </figure>
 
@@ -205,8 +205,8 @@ Current Research
       <img src="/images/research/battery_convlstm_cell_clean.png" alt="Internal structure of the ConvLSTM cell used in the model." />
     </a>
     <figcaption>
-      <strong>ConvLSTM Cell Design</strong><br>
-      The internal gating structure of the ConvLSTM cell used for spatiotemporal feature propagation.
+      <strong>ConvLSTM Cell Structure</strong><br>
+      Used convolutional input, forget, and output gates to update the cell and hidden states across the image sequence.
     </figcaption>
   </figure>
 
@@ -216,7 +216,7 @@ Current Research
     </a>
     <figcaption>
       <strong>Scheduled Sampling</strong><br>
-      During training, scheduled sampling selects ground-truth or predicted frames as inputs to subsequent prediction steps.
+      Selected reference or model-predicted frames as inputs during training to prepare the models for autoregressive prediction.
     </figcaption>
   </figure>
 
