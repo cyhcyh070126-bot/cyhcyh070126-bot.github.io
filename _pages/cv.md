@@ -64,7 +64,7 @@ Current Research
 
 - **Hybrid FEM–NO Framework:** Developed a hybrid framework combining an outer finite element domain with a local neural-operator subdomain connected through a shared interface.
 - **GPU-Accelerated Training Data:** Used JAX-FEM to generate displacement and stress fields for training the local neural operator.
-- **Displacement-to-Stress Operator Learning:** Trained Transolver in JAX to learn mappings from prescribed interface displacement fields to subdomain stress fields, and used the trained operator for inference within the coupling loop.
+- **Displacement-to-Stress Operator Learning:** Trained Transolver in JAX to predict subdomain stress fields from interface displacement fields, then coupled its predictions with a finite element solver through interface reaction forces.
 - **Stress-Based Interface Coupling:** Assembled interface reaction forces from the predicted stresses and returned them to the outer FEM solver, which updated the interface displacements for the next coupling iteration.
 
 **Ongoing 3D Composite Extension:** We are extending the framework to a three-dimensional composite containing 100 fibers. Our goal is to train **a single shared neural operator for all 100 fibers**, using the same model parameters to map each fiber's interface displacement field to its 3D stress field. Stress-derived interface reactions would couple the fibers to the surrounding FEM matrix through iterative displacement–force exchange. Key questions include generalization across fibers and the influence of fiber-end effects on stress prediction and interface-force transfer.
