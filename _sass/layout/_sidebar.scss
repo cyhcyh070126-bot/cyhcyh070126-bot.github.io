@@ -245,6 +245,14 @@
   }
 }
 
+.author__urls .author__brand-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.5em;
+  vertical-align: -0.35em;
+}
+
 .author__urls {
   display: none;
   position: absolute;
