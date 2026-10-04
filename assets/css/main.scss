@@ -323,23 +323,6 @@ html[data-theme="dark"] .research-card figcaption strong {
   color: inherit;
 }
 
-// Tint the Hugging Face artwork on interaction while retaining its facial details.
-#main a img[src$="/huggingface.svg"] {
-  transition: filter 150ms ease;
-}
-
-#main a:hover img[src$="/huggingface.svg"],
-#main a:focus-visible img[src$="/huggingface.svg"] {
-  filter: grayscale(1) sepia(1) saturate(3) hue-rotate(145deg) brightness(0.8);
-}
-
-#main .author__urls a:hover img[src$="/huggingface.svg"],
-#main .author__urls a:focus-visible img[src$="/huggingface.svg"],
-#main .project-list__repository:hover img[src$="/huggingface.svg"],
-#main .project-list__repository:focus-visible img[src$="/huggingface.svg"] {
-  filter: grayscale(1) sepia(1) saturate(3) brightness(0.8);
-}
-
 .project-list__link-arrow {
   display: inline-block;
   transition: transform 150ms ease;
@@ -353,7 +336,6 @@ html[data-theme="dark"] .research-card figcaption strong {
 @media (prefers-reduced-motion: reduce) {
   #main a,
   #main a i,
-  #main a img[src$="/huggingface.svg"],
   .project-list__link-arrow {
     transition: none;
   }
