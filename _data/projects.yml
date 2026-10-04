@@ -32,9 +32,9 @@
 - id: burgers-pinn
   title: PINNs for Shock Capturing in the Burgers Equation
   short_title: PINNs
-  preview: /images/research/pinn_shock_problem_framework_v8.svg
-  preview_alt: Burgers shock problem setup and PINN training with PDE, initial-condition, and boundary-condition losses.
-  preview_caption: Burgers problem and PINN training
+  preview: /images/research/burgers_standard_pinn_prediction.gif
+  preview_alt: Standard PINN prediction compared with the analytical Burgers shock solution.
+  preview_caption: Standard PINN prediction
   description: >-
     Trains PINNs in PyTorch to predict shock propagation in the one-dimensional
     Burgers equation, using PDE-residual, initial-condition, and boundary-condition
