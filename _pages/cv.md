@@ -249,7 +249,7 @@ Current Research
 </div>
 
 - **Burgers Shock Problem:** Studied a one-dimensional Riemann problem with discontinuous initial data, using the analytical inviscid solution as a reference for the evolving shock profile and trajectory.
-- **Standard PINN:** Implemented a PINN in PyTorch to map spatial and temporal coordinates to the solution, trained with PDE-residual, initial-condition, and boundary-condition losses.
+- **Standard PINN:** Developed a PINN in PyTorch to model shock propagation in the one-dimensional inviscid Burgers equation, incorporating PDE-residual, initial-condition, and boundary-condition losses.
 - **Constant Artificial Viscosity:** Added a constant diffusion term to the PDE residual and used automatic differentiation to compute the second spatial derivative for the regularized formulation.
 - **Shock-Profile Analysis:** Compared standard and regularized PINN profiles with the analytical inviscid reference, using profile plots and local views to examine shock smearing and deviations near the discontinuity.
 
