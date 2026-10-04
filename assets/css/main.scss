@@ -274,10 +274,10 @@ html[data-theme="dark"] .research-card figcaption strong {
   gap: 0.4rem;
   min-height: 48px;
   padding: 0.45rem 0.85rem;
-  border: 1px solid #9a641e;
+  border: 1px solid #e4bd56;
   border-radius: 24px;
-  color: #fff;
-  background: #9a641e;
+  color: #40351b;
+  background: #f4d477;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   font-size: 0.85rem;
   font-weight: 600;
@@ -351,9 +351,9 @@ body .page-contents__panel a:is(:hover, :focus-visible) {
 
 .page-contents__toggle:is(:hover, :focus-visible),
 .page-contents__toggle[aria-expanded="true"] {
-  color: #fff;
-  background: #744913;
-  border-color: #744913;
+  color: #40351b;
+  background: #edc453;
+  border-color: #d8ac3b;
 }
 
 .back-to-top:focus-visible,
