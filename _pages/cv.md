@@ -125,8 +125,8 @@ Current Research
       <img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FEM-NO solution, and absolute error. Dashed arcs mark the coupling interface." />
     </a>
     <figcaption>
-      <strong>Cylinder Coupling Results</strong><br>
-      Monolithic FEM reference and coupled FEM–NO stress fields (&sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, &tau;<sub>xy</sub>), with corresponding absolute-error maps.
+      <strong>Hybrid Solver Stress Comparison</strong><br>
+      Compared &sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, and &tau;<sub>xy</sub> stress fields from the hybrid FEM–neural operator solver with the full FEM solution, with absolute error maps for each component.
     </figcaption>
   </figure>
 </div>
@@ -137,8 +137,8 @@ Current Research
       <img src="/images/research/composite_n100_mesh_overview.png" alt="Bottom cross-section of a three-dimensional finite element mesh for a 100-fiber reinforced composite, with a local fiber–matrix close-up. This is a cross-sectional view of a 3D model, not a 2D simulation or a prediction result." />
     </a>
     <figcaption>
-      <strong>3D Fiber Composites (Ongoing)</strong><br>
-      Our goal is to use one shared neural operator for all 100 fibers, with FEM handling the surrounding matrix.
+      <strong>3D Composite Mesh with 100 Fibers</strong><br>
+      Cross-sectional view of the 3D composite mesh containing 100 fibers, with a close-up of the fiber–matrix interfaces.
     </figcaption>
   </figure>
 </div>
@@ -228,8 +228,8 @@ Current Research
       <img src="/images/research/battery_prediction_summary.png" alt="Prediction summary comparing ground truth, model prediction, and error heatmaps across multiple frames." />
     </a>
     <figcaption>
-      <strong>Prediction Summary</strong><br>
-      Representative rollout results comparing ground truth, model prediction, and error heatmaps over multiple future frames.
+      <strong>Concentration Sequence Prediction</strong><br>
+      Compared autoregressive concentration predictions with COMSOL reference images and analyzed error accumulation across successive prediction steps using error maps.
     </figcaption>
   </figure>
 </div>
