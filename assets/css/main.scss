@@ -665,6 +665,19 @@ html[data-theme="dark"] .home-network {
   outline-offset: 4px;
 }
 
+// Fade the complete underline instead of shrinking it into a small block.
+.masthead #site-nav .visible-links a::before {
+  height: 2px;
+  transform: none;
+  opacity: 0;
+  transition: opacity 150ms ease, background-color 150ms ease;
+}
+
+.masthead #site-nav .visible-links a:is(:hover, :focus-visible)::before {
+  transform: none;
+  opacity: 1;
+}
+
 .masthead #site-nav a:is(:hover, :focus-visible)::before {
   background-color: currentColor;
 }
