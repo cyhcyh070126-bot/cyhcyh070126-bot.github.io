@@ -9,8 +9,9 @@ redirect_from:
 ---
 
 {% include base_path %}
+{% include cv-pdf-url.html %}
 
-<p><a href="{{ '/files/Yanghao_Chen_CV.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">View CV (PDF)</a> <span class="cv-links__separator">|</span> <a href="{{ '/projects/' | relative_url }}">Project repositories</a></p>
+<p><a href="{{ cv_pdf_url }}" target="_blank" rel="noopener noreferrer">View CV (PDF)</a> <span class="cv-links__separator">|</span> <a href="{{ '/projects/' | relative_url }}">Project repositories</a></p>
 
 Education
 ======

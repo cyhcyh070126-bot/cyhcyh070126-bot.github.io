@@ -3,6 +3,7 @@ layout: null
 permalink: /search-index.json
 sitemap: false
 ---
+{% include cv-pdf-url.html %}
 {% assign search_home = site.pages | where: 'home_page', true | first %}
 {% assign search_cv = site.pages | where: 'cv_page', true | first %}
 {
@@ -12,7 +13,7 @@ sitemap: false
   },
   "cv": {
     "url": {{ '/cv/' | relative_url | jsonify }},
-    "pdf_url": {{ '/files/Yanghao_Chen_CV.pdf' | relative_url | append: '?v=research-projects' | jsonify }},
+    "pdf_url": {{ cv_pdf_url | jsonify }},
     "html": {{ search_cv.content | markdownify | jsonify }}
   },
   "projects": {

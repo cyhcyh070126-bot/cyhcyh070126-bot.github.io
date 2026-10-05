@@ -1,0 +1,2 @@
+{%- capture cv_pdf_version -%}{% if site.github.build_revision %}{{ site.github.build_revision }}{% else %}{{ site.time | date: '%s' }}{% endif %}{%- endcapture -%}
+{%- assign cv_pdf_url = '/files/Yanghao_Chen_CV.pdf' | relative_url | append: '?v=' | append: cv_pdf_version -%}
