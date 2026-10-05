@@ -655,6 +655,16 @@ html[data-theme="dark"] .home-network {
   color: var(--cv-section-heading-color);
 }
 
+// Keep the legacy orange focus ring out of pointer-operated navigation.
+.masthead :is(a, button):focus:not(:focus-visible) {
+  outline: none;
+}
+
+.masthead :is(a, button):focus-visible {
+  outline: 2px solid var(--cv-section-heading-color);
+  outline-offset: 4px;
+}
+
 .masthead #site-nav a:is(:hover, :focus-visible)::before {
   background-color: currentColor;
 }
