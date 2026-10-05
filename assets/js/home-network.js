@@ -42,7 +42,8 @@
   function paint(seconds = 0) {
     context.clearRect(0, 0, width, height);
     elapsed += seconds;
-    const intensity = document.documentElement.dataset?.theme === 'dark' ? 1 : 1.1;
+    const lightTheme = document.documentElement.dataset?.theme !== 'dark';
+    const intensity = lightTheme ? 1.1 : 1;
     const reach = Math.min(225, Math.max(125, Math.sqrt(width * height / points.length) * 1.65));
     const depthRange = Math.min(210, height * 0.3);
     const focalLength = Math.max(700, width * 0.7);
@@ -131,15 +132,19 @@
       if (degree[i] >= 5 || degree[j] >= 5) continue;
       degree[i]++; degree[j]++; edges.add(key);
       const depth = (points[i].depth + points[j].depth) / 2;
+      const proximity = 1 - distance / reach;
+      // Lift longer edges gently while still fading to zero at the cutoff.
+      const visibility = proximity * (lightTheme ? 1 + 0.35 * (1 - proximity) : 1);
       context.lineWidth = 0.55 + depth * 0.55;
-      context.strokeStyle = `rgba(215, 184, 108, ${(0.18 + depth * 0.14) * (1 - distance / reach) * intensity})`;
+      context.strokeStyle = `rgba(215, 184, 108, ${(0.18 + depth * 0.14) * visibility * intensity})`;
       context.beginPath();
       context.moveTo(points[i].px, points[i].py);
       context.lineTo(points[j].px, points[j].py);
       context.stroke();
     }
     for (const point of points) {
-      context.fillStyle = `rgba(220, 193, 127, ${(0.14 + point.depth * 0.14) * intensity})`;
+      const distantLift = lightTheme ? 0.02 * (1 - point.depth) : 0;
+      context.fillStyle = `rgba(220, 193, 127, ${(0.14 + point.depth * 0.14 + distantLift) * intensity})`;
       context.beginPath();
       context.arc(point.px, point.py, 0.9 + point.depth * 1.1, 0, Math.PI * 2);
       context.fill();
