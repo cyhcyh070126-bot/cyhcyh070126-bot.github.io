@@ -134,7 +134,7 @@
       const depth = (points[i].depth + points[j].depth) / 2;
       const proximity = 1 - distance / reach;
       // Lift longer edges gently while still fading to zero at the cutoff.
-      const visibility = proximity * (lightTheme ? 1 + 0.35 * (1 - proximity) : 1);
+      const visibility = proximity * (1 + 0.35 * (1 - proximity));
       context.lineWidth = 0.55 + depth * 0.55;
       context.strokeStyle = `rgba(215, 184, 108, ${(0.18 + depth * 0.14) * visibility * intensity})`;
       context.beginPath();
@@ -143,7 +143,7 @@
       context.stroke();
     }
     for (const point of points) {
-      const distantLift = lightTheme ? 0.02 * (1 - point.depth) : 0;
+      const distantLift = 0.02 * (1 - point.depth);
       context.fillStyle = `rgba(220, 193, 127, ${(0.14 + point.depth * 0.14 + distantLift) * intensity})`;
       context.beginPath();
       context.arc(point.px, point.py, 0.9 + point.depth * 1.1, 0, Math.PI * 2);
