@@ -792,7 +792,11 @@ ul + .cv-project {
   margin-bottom: 0.7rem;
 }
 
-.cv-project__separator,
+.cv-project__separator {
+  margin-inline: 0.25em;
+  font-style: inherit;
+}
+
 .cv-links__separator {
   margin-inline: 0.3em;
   font-style: inherit;
