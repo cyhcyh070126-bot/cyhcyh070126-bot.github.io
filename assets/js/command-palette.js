@@ -130,7 +130,8 @@
       var url = link.getAttribute("href");
       if (released.has(url)) return;
       if (/\.pdf(?:[?#].*)?$/i.test(url) && /\b(cv|resume)\b/i.test(link.textContent)) {
-        add("Resources", "CV PDF", url, "download resume 简历 下载");
+        var pdfEntry = add("Resources", "CV PDF", data.cv.pdf_url || url, "download resume 简历 下载");
+        if (pdfEntry) pdfEntry.openInNewTab = true;
         released.add(url);
       }
     });

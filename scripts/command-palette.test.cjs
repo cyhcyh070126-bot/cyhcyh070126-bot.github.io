@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const fs = require('node:fs');
 const path = require('node:path');
-const { normalize, searchEntries, indexEntries, repositoryEntry } = require('../assets/js/command-palette.js');
+const { normalize, searchEntries, indexEntries, repositoryEntry, buildEntries } = require('../assets/js/command-palette.js');
 const root = path.join(__dirname, '..');
 
 function entry(title, keywords, body, order) {
@@ -47,6 +47,25 @@ test('no clipboard action; no remote search provider; inert index parsing', () =
   assert.doesNotMatch(js, /navigator\.clipboard|execCommand|copy email/i);
   assert.match(js, /createElement\("template"\)/);
   assert.match(js, /fetch\(dialog\.dataset\.indexUrl/);
+});
+
+test('both CV search entries open the canonical versioned PDF in a new tab', () => {
+  const project = { textContent: 'PINN project', nextElementSibling: null, querySelectorAll: () => [] };
+  const heading = { id: 'burgers-pinn', textContent: '1. PINN project', closest: () => project };
+  const pdfLink = { textContent: 'View CV (PDF)', getAttribute: () => '/files/Yanghao_Chen_CV.pdf?v=old' };
+  const home = { querySelector: () => null, querySelectorAll: () => [] };
+  const cv = { querySelectorAll: selector => selector === '.cv-project__title[id]' ? [heading] : [pdfLink] };
+  const doc = { createElement: () => {
+    let markup;
+    return { set innerHTML(value) { markup = value; }, get content() { return markup === 'cv' ? cv : home; } };
+  } };
+  const canonical = '/files/Yanghao_Chen_CV.pdf?v=current';
+  const entries = buildEntries({ home: { url: '/', html: 'home' }, cv: { url: '/cv/', html: 'cv', pdf_url: canonical } }, doc);
+  for (const title of ['CV', 'CV PDF']) {
+    const entry = entries.find(item => item.title === title);
+    assert.equal(entry.url, canonical);
+    assert.equal(entry.openInNewTab, true);
+  }
 });
 
 test('resource search keeps project collections at the root and searches children within their scope', () => {
