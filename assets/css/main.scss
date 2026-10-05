@@ -793,8 +793,10 @@ ul + .cv-project {
 }
 
 .cv-project__separator {
+  display: inline-block;
   margin-inline: 0.25em;
-  font-style: inherit;
+  font-style: normal;
+  transform: skewX(-12deg);
 }
 
 .cv-links__separator {
