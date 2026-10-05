@@ -242,6 +242,17 @@ html[data-theme="dark"] .research-card figcaption strong {
   margin-inline: auto;
 }
 
+// Pointer clicks may retain focus after returning from an image tab.
+// Only keyboard-visible focus should keep an image link highlighted.
+#main :is(.research-card, .project-list__preview) > a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+#main :is(.research-card, .project-list__preview) > a:focus-visible {
+  outline: 2px solid var(--cv-section-heading-color);
+  outline-offset: 4px;
+}
+
 #main .research-card img,
 #main .project-list__preview img {
   margin-inline: auto;
@@ -912,13 +923,13 @@ ul + .cv-project {
 
 @media (hover: hover) and (pointer: fine) {
   .research-card:hover,
-  .research-card:focus-within {
+  .research-card:has(a:focus-visible) {
     border-color: var(--research-card-hover-border);
     box-shadow: var(--research-card-hover-shadow);
   }
 
   .research-card:hover img,
-  .research-card:focus-within img {
+  .research-card:has(a:focus-visible) img {
     transform: translateY(-3px) scale(1.012);
     border-color: var(--research-card-hover-border);
     box-shadow: var(--research-image-hover-shadow);
@@ -932,7 +943,7 @@ ul + .cv-project {
   }
 
   .research-card:hover img,
-  .research-card:focus-within img {
+  .research-card:has(a:focus-visible) img {
     transform: none;
   }
 }
