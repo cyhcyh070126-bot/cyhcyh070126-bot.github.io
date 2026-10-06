@@ -48,6 +48,51 @@ if (document.querySelector("pre>code.language-plotly")) {
    ========================================================================== */
 
 $(document).ready(function () {
+  // Give each naturally wrapped line a real box for the existing CSS scale.
+  const departmentLink = document.querySelector('.home-mentorship a[href="https://engineering.jhu.edu/case/"]');
+  if (departmentLink) {
+    const label = departmentLink.textContent;
+    const paragraph = departmentLink.closest('p');
+    let measuredWidth = 0;
+    let layoutFrame = 0;
+    const layoutDepartmentLink = () => {
+      layoutFrame = 0;
+      departmentLink.textContent = label;
+      const range = document.createRange();
+      const lines = [];
+      for (const word of label.matchAll(/\S+/g)) {
+        range.setStart(departmentLink.firstChild, word.index);
+        range.setEnd(departmentLink.firstChild, word.index + word[0].length);
+        const rect = range.getBoundingClientRect();
+        let line = lines[lines.length - 1];
+        if (!line || Math.abs(line.top - rect.top) > 1) {
+          line = {top: rect.top, left: rect.left, right: rect.right, words: []};
+          lines.push(line);
+        }
+        line.right = rect.right;
+        line.words.push(word[0]);
+      }
+      const content = document.createDocumentFragment();
+      lines.forEach((line, index) => {
+        if (index) content.appendChild(document.createTextNode(' '));
+        const span = document.createElement('span');
+        span.className = 'department-link-line';
+        span.textContent = line.words.join(' ');
+        span.style.width = (line.right - line.left) + 'px';
+        content.appendChild(span);
+      });
+      departmentLink.replaceChildren(content);
+      measuredWidth = paragraph.clientWidth;
+    };
+    layoutDepartmentLink();
+    new ResizeObserver(() => {
+      if (paragraph.clientWidth !== measuredWidth && !layoutFrame) {
+        layoutFrame = requestAnimationFrame(layoutDepartmentLink);
+      }
+    }).observe(paragraph);
+    document.fonts.ready.then(layoutDepartmentLink);
+  }
+
   // SCSS SETTINGS - These should be the same as the settings in the relevant files 
   const scssLarge = 925;          // pixels, from /_sass/_themes.scss
   const scssMastheadHeight = 70;  // pixels, from the current theme (e.g., /_sass/theme/_default.scss)

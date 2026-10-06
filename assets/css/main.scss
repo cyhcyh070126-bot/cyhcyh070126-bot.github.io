@@ -547,6 +547,24 @@ a[href] {
   display: inline;
 }
 
+// Inherit the same scale and timing as the link; no duplicated hover text.
+#main .home-mentorship a .department-link-line {
+  display: inline-block;
+  white-space: nowrap;
+  text-align: justify;
+  text-align-last: justify;
+  transform-origin: inherit;
+  transition: inherit;
+}
+
+#main .home-mentorship a:has(.department-link-line):is(:hover, :focus-visible) {
+  text-decoration-line: none;
+}
+
+#main .home-mentorship a:is(:hover, :focus-visible) .department-link-line {
+  text-decoration-line: underline;
+}
+
 // Apply the same scale to every link and control, independently of existing transforms.
 body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]),
 #main .project-list__title {
@@ -568,12 +586,14 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
 }
 
 body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):focus-visible,
+#main .home-mentorship a:focus-visible .department-link-line,
 #main .project-list__title:has(a:focus-visible) {
   scale: var(--link-hover-scale, 1.04);
 }
 
 @media (hover: hover) and (pointer: fine) {
   body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):hover,
+  #main .home-mentorship a:hover .department-link-line,
   #main .project-list__title:has(a:hover) {
     scale: var(--link-hover-scale, 1.04);
   }
@@ -594,6 +614,7 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
   }
 
   body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):is(:hover, :focus-visible),
+  #main .home-mentorship a:is(:hover, :focus-visible) .department-link-line,
   #main .project-list__title:has(a:is(:hover, :focus-visible)) {
     scale: none;
   }
