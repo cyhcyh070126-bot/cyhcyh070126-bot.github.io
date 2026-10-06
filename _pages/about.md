@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-Hi! I'm Yanghao Chen, a final-year undergraduate at **[Tongji University](https://www.tongji.edu.cn/)**, studying Engineering Mechanics in the **[School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/31828/list.htm)**. My interests center on <strong class="research-keyword">scientific machine learning</strong> and computational mechanics.
+Hi! I'm Yanghao Chen, a final-year undergraduate at **[Tongji University](https://www.tongji.edu.cn/)**, studying Engineering Mechanics in the **[School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/31828/list.htm)**. My interests center on <strong class="research-keyword">scientific machine learning</strong> and <strong class="research-keyword">computational mechanics</strong>.
 
 My research began with fine-tuning <strong class="research-keyword">large language models</strong> using LoRA on Google Colab for question answering in mechanics of materials. I then developed <strong class="research-keyword">ConvLSTM</strong> models to predict lithium concentration and von Mises stress image sequences in battery materials using MATLAB–COMSOL simulation data. I also studied shock propagation with <strong class="research-keyword">physics-informed neural networks (PINNs)</strong>, comparing standard and artificial-viscosity formulations against the analytical inviscid solution.
 
