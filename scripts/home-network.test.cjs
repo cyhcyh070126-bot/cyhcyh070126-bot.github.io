@@ -102,7 +102,7 @@ test('connections change freely without dense knots or additional animation loop
     if (frame % 150 === 0) {
       const topology = app.topology();
       arrangements.add(topology.links);
-      assert.ok(topology.maxDegree <= 5);
+      assert.ok(topology.maxDegree <= 6);
       assert.ok(topology.particles <= 72);
     }
     assert.equal(app.callbacks.size, 1);
@@ -152,7 +152,7 @@ test('phone, landscape and desktop resizing keep particles bounded with one loop
       assert.ok(app.positions().every(([x, y]) => x >= 4 && x <= width - 4 && y >= 4 && y <= height - 4));
       assert.equal(app.callbacks.size, 1);
     }
-    assert.ok(app.topology().maxDegree <= 5);
+    assert.ok(app.topology().maxDegree <= 6);
   }
 });
 

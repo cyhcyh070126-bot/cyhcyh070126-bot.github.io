@@ -20,7 +20,7 @@
   const cameraPhase = random() * Math.PI * 2;
   const edges = new Set();
   function populate() {
-    const count = Math.min(72, Math.max(22, Math.round(width * height / 19000)));
+    const count = Math.min(72, Math.max(30, Math.round(width * height / 19000)));
     // Retain existing particles on resize (including mobile browser chrome).
     // Only add or remove the number needed for the new visible area.
     points.length = Math.min(points.length, count);
@@ -124,12 +124,12 @@
         if (distance < reach) candidates.push({ i, j, distance, key: `${i}:${j}` });
       }
     }
-    // Prefer existing edges to avoid flicker. Five connections per point at most.
+    // Prefer existing edges to avoid flicker. Six connections per point at most.
     candidates.sort((a, b) => a.distance * (edges.has(a.key) ? 0.8 : 1) - b.distance * (edges.has(b.key) ? 0.8 : 1));
     edges.clear();
     const degree = points.map(() => 0);
     for (const { i, j, distance, key } of candidates) {
-      if (degree[i] >= 5 || degree[j] >= 5) continue;
+      if (degree[i] >= 6 || degree[j] >= 6) continue;
       degree[i]++; degree[j]++; edges.add(key);
       const depth = (points[i].depth + points[j].depth) / 2;
       const proximity = 1 - distance / reach;
