@@ -542,39 +542,30 @@ a[href] {
   text-align-last: left;
 }
 
-// Keep prose links wrappable. Scale their words without changing line layout.
+// Native inline text retains continuous underlines and natural line wrapping.
 #main .home-page > p:nth-of-type(-n+4) a[href] {
   display: inline;
   scale: none;
 }
 
-.home-page .link-word {
-  display: inline-block;
-  transform-origin: center center;
-  transition: transform 150ms ease;
+// A temporary visual copy scales each rendered line without moving the prose.
+#main .home-page a.home-link-preview-active {
+  color: transparent !important;
+  text-decoration-color: transparent !important;
 }
 
-// Inline-block words need their own decoration; inherit the link hover underline.
-#main .home-page a .link-word {
-  text-decoration-line: inherit;
-  text-decoration-color: inherit;
-}
-
-.home-page a:focus-visible .link-word {
+.home-link-preview {
+  position: fixed;
+  pointer-events: none;
+  z-index: 20;
   transform: scale(1.02);
+  transform-origin: center center;
+  border-bottom: 1px solid currentColor;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .home-page a:hover .link-word {
-    transform: scale(1.02);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-page a:is(:hover, :focus-visible) .link-word {
-    transition: none;
-    transform: none;
-  }
+.home-link-preview > span {
+  position: absolute;
+  white-space: pre;
 }
 
 // Apply the same scale to every link and control, independently of existing transforms.
