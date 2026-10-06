@@ -534,6 +534,11 @@ a[href] {
   max-width: 100%;
 }
 
+// Let the long institution and advisor links flow with this prose paragraph.
+.home-page .home-mentorship a[href] {
+  display: inline;
+}
+
 // Apply the same scale to every link and control, independently of existing transforms.
 body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]),
 #main .project-list__title {
