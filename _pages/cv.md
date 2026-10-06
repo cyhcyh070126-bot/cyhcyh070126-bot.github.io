@@ -150,7 +150,7 @@ Current Research
     <div class="cv-project__term">Jun. 2025 - Oct. 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher<span class="cv-project__separator">|</span>Advisor: <a href="https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
+    <span><em>Undergraduate Researcher<span class="cv-project__separator">|</span>Advisor: <a href="http://yingzhaotj.cn/col.jsp?id=106" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
@@ -311,7 +311,7 @@ Current Research
     <div class="cv-project__term">Sep. 2024 - Apr. 2025</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Researcher<span class="cv-project__separator">|</span>Advisor: <a href="https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
+    <span><em>Undergraduate Researcher<span class="cv-project__separator">|</span>Advisor: <a href="http://yingzhaotj.cn/col.jsp?id=106" target="_blank" rel="noopener noreferrer">Prof. Ying Zhao</a></em></span>
     <span><em>Tongji University</em></span>
   </div>
 </div>
