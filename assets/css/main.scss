@@ -293,7 +293,17 @@ html[data-theme="dark"] .research-card figcaption strong {
   display: contents;
 }
 
+// Reserve the final header space before the navigation scripts measure it.
+// The row is a 44px control or a text link with its active 2px border.
+body.network-page {
+  padding-top: calc(max(44px, 2.5rem + 2px) + 1rem);
+}
+
 @media (max-width: 900px) {
+  body.network-page {
+    padding-top: calc(max(44px, 2.5rem + 2px) + 45px + 1.6rem);
+  }
+
   // Reserve a header row for the existing controls, outside the reading area.
   .page-navigation {
     display: flex;

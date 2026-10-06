@@ -13,7 +13,7 @@ html[data-theme="dark"] {
   --search-selected: #393126;
   --search-backdrop: rgba(0, 0, 0, .58);
 }
-.masthead__menu { display: flex; align-items: center; gap: 14px; }
+.masthead__menu { display: flex; align-items: center; gap: 14px; min-height: 44px; }
 .masthead__menu > .greedy-nav { flex: 1 1 auto; min-width: 0; }
 .site-search-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 9px; flex: 0 0 auto; min-width: 44px; min-height: 44px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: var(--global-text-color, #494e52); cursor: pointer; }
 .site-search-toggle:hover { color: var(--cv-section-heading-color, #9a641e); background: var(--search-selected); }
