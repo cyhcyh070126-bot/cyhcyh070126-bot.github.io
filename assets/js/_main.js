@@ -49,7 +49,7 @@ if (document.querySelector("pre>code.language-plotly")) {
 
 $(document).ready(function () {
   // Preserve spaces and native link behavior while allowing prose links to wrap.
-  document.querySelectorAll('.home-mentorship a').forEach(function (link) {
+  document.querySelectorAll('.home-page > p:nth-of-type(-n+4) a').forEach(function (link) {
     if (link.children.length) return;
     const words = document.createDocumentFragment();
     link.textContent.split(/(\s+)/).forEach(function (part) {

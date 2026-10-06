@@ -535,30 +535,43 @@ a[href] {
   max-width: 100%;
 }
 
-// Keep long prose links wrappable. Scale their words without changing line layout.
-#main .home-mentorship a[href] {
+// Justify the four introduction paragraphs; keep the last line left aligned.
+.home-page > p:nth-of-type(-n+4) {
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+}
+
+// Keep prose links wrappable. Scale their words without changing line layout.
+#main .home-page > p:nth-of-type(-n+4) a[href] {
   display: inline;
   scale: none;
 }
 
-.home-mentorship .link-word {
+.home-page .link-word {
   display: inline-block;
   transform-origin: center center;
   transition: transform 150ms ease;
 }
 
-.home-mentorship a:focus-visible .link-word {
+// Inline-block words need their own decoration; inherit the link hover underline.
+#main .home-page a .link-word {
+  text-decoration-line: inherit;
+  text-decoration-color: inherit;
+}
+
+.home-page a:focus-visible .link-word {
   transform: scale(1.02);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .home-mentorship a:hover .link-word {
+  .home-page a:hover .link-word {
     transform: scale(1.02);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-mentorship a:is(:hover, :focus-visible) .link-word {
+  .home-page a:is(:hover, :focus-visible) .link-word {
     transition: none;
     transform: none;
   }
