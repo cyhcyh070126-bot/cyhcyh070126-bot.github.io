@@ -709,9 +709,9 @@ html[data-theme="dark"] .home-network {
   opacity: 0.7;
 }
 
-// Animate small introductory blocks, never the fixed nav or the long CV gallery.
+// Share one entrance across the introductory blocks, excluding navigation and galleries.
 @keyframes site-entry-content {
-  from { opacity: 0; translate: 0 var(--site-entry-distance, 12px); }
+  from { opacity: 0; translate: 0 var(--site-entry-distance, 18px); }
   to { opacity: 1; translate: 0 0; }
 }
 
@@ -724,37 +724,72 @@ html[data-theme="dark"] .home-network {
   .site-enter .main--home .sidebar,
   .site-enter .page--home .page__inner-wrap > header,
   .site-enter .home-page > p:nth-of-type(-n+4),
-  .site-enter .archive > .page__title {
-    animation: site-entry-content 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  .site-enter .home-page > #news,
+  .site-enter .home-page > .home-news,
+  .site-enter .archive > .page__title,
+  .site-enter .cv-page > :nth-child(n+2):nth-child(-n+11),
+  .site-enter .project-list > .project-list__item:nth-child(-n+2) {
+    animation: site-entry-content 640ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: var(--site-entry-delay, 0ms);
   }
 
-  .site-enter .page--home .page__inner-wrap > header {
-    animation-delay: 40ms;
+  .site-enter .page--home .page__inner-wrap > header,
+  .site-enter .archive > .page__title {
+    --site-entry-delay: 60ms;
   }
 
   .site-enter .home-page > p:nth-of-type(1) {
-    animation-delay: 80ms;
+    --site-entry-delay: 120ms;
   }
 
   .site-enter .home-page > p:nth-of-type(2) {
-    animation-delay: 140ms;
+    --site-entry-delay: 220ms;
   }
 
   .site-enter .home-page > p:nth-of-type(3) {
-    animation-delay: 200ms;
+    --site-entry-delay: 320ms;
   }
 
   .site-enter .home-page > p:nth-of-type(4) {
-    animation-delay: 260ms;
+    --site-entry-delay: 420ms;
+  }
+
+  .site-enter .home-page > #news,
+  .site-enter .home-page > .home-news {
+    --site-entry-delay: 500ms;
+  }
+
+  .site-enter .cv-page {
+    --site-entry-delay: 300ms;
+  }
+
+  .site-enter .cv-page > p:first-of-type {
+    --site-entry-delay: 100ms;
+  }
+
+  .site-enter .cv-page > #education {
+    --site-entry-delay: 160ms;
+  }
+
+  .site-enter .cv-page > :nth-child(n+4):nth-child(-n+7) {
+    --site-entry-delay: 220ms;
+  }
+
+  .site-enter .project-list > .project-list__item:nth-child(1) {
+    --site-entry-delay: 140ms;
+  }
+
+  .site-enter .project-list > .project-list__item:nth-child(2) {
+    --site-entry-delay: 260ms;
   }
 
   .site-enter .home-network {
-    animation: site-entry-network 850ms ease-out;
+    animation: site-entry-network 900ms ease-out;
   }
 
   @media (max-width: 767px) {
     .site-enter {
-      --site-entry-distance: 8px;
+      --site-entry-distance: 10px;
     }
   }
 }
