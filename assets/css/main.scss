@@ -774,12 +774,17 @@ ul + .cv-project {
   margin-top: 1.6rem;
 }
 
-// Separate subsequent CV projects with a short rule aligned to their titles.
-.cv-page .cv-project ~ .cv-project::before {
+// Match each divider to its title while preserving the existing 22px clearance.
+.cv-page .cv-project ~ .cv-project {
+  padding-top: 22px;
+}
+
+.cv-page .cv-project ~ .cv-project .cv-project__title::before {
   content: "";
-  display: block;
-  width: 50%;
-  margin: 0 0 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + 20px);
   border-top: 2px solid var(--cv-section-rule-color);
 }
 
@@ -845,6 +850,9 @@ ul + .cv-project {
 }
 
 .cv-project__title {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
   font-size: 1.18rem;
   font-weight: 700;
   line-height: 1.4;
