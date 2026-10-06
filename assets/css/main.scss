@@ -692,6 +692,16 @@ ul + .cv-project {
   margin-top: 1.6rem;
 }
 
+// Separate subsequent CV projects with a short rule aligned to their titles.
+.cv-page .cv-project ~ .cv-project::before {
+  content: "";
+  display: block;
+  width: 50%;
+  margin: 0 0 20px;
+  border-top: 1px solid var(--cv-section-rule-color);
+  opacity: 0.75;
+}
+
 .author__affiliation {
   display: inline-block;
   white-space: nowrap;
