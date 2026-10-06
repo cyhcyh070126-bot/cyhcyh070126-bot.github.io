@@ -9,11 +9,11 @@
   {% unless priority_author.avatar contains '://' %}<link rel="preload" as="image" href="{{ priority_author.avatar | prepend: '/images/' | relative_url }}" fetchpriority="high">{% endunless %}
 {% endif %}
 {% if page.cv_page %}
-<link rel="preload" as="image" href="{{ '/images/schools/tongji-university-seal-128.png' | relative_url }}" fetchpriority="high">
+<link rel="preload" as="image" href="{{ '/images/schools/tongji-university-seal-128.png' | relative_url }}" imagesrcset="/images/schools/tongji-university-seal-128.png 128w, /images/schools/tongji-university-seal-256.png 256w, /images/schools/tongji-university-seal.png 1280w" imagesizes="40px" fetchpriority="high">
 <link rel="preload" as="image" href="{{ '/images/schools/johns-hopkins-university-shield.svg' | relative_url }}" fetchpriority="high">
 {% endif %}
 {% if page.projects_page %}
 {% assign priority_preview = site.data.projects.first.preview %}
 {% assign priority_variant = site.data.image_variants[priority_preview] %}
-<link rel="preload" as="image" href="{% if priority_variant %}{{ priority_variant.candidates.first.src | relative_url }}{% else %}{{ priority_preview | relative_url }}{% endif %}" {% if priority_variant %}type="image/webp" imagesrcset="{{ priority_variant.srcset }}" imagesizes="(max-width: 767px) calc(100vw - 64px), 320px"{% endif %} fetchpriority="high">
+<link rel="preload" as="image" href="{% if priority_variant %}{{ priority_variant.candidates.first.src | relative_url }}{% else %}{{ priority_preview | relative_url }}{% endif %}" {% if priority_variant %}type="image/webp" imagesrcset="{{ priority_variant.srcset }}" imagesizes="(max-width: 699px) min(360px, calc(100vw - 48px)), 340px"{% endif %} fetchpriority="high">
 {% endif %}

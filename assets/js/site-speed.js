@@ -86,7 +86,8 @@
   var current = new Set(Array.from(document.querySelectorAll("img[src]")).map(function (img) {
     var picture = img.closest && img.closest("picture");
     var source = picture && picture.querySelector('source[type="image/webp"]');
-    return imageKey({ src: img.src, srcset: source ? source.getAttribute("srcset") || "" : "", sizes: source ? source.getAttribute("sizes") || "" : "" });
+    var responsive = source || img;
+    return imageKey({ src: img.src, srcset: responsive.getAttribute ? responsive.getAttribute("srcset") || "" : "", sizes: responsive.getAttribute ? responsive.getAttribute("sizes") || "" : "" });
   }));
   var seen = new Set();
   queue = queue.filter(function (item) {

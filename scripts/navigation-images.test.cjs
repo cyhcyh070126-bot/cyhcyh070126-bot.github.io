@@ -98,6 +98,8 @@ test('display copies exist, materially reduce downloads, and preserve original l
   assert.equal(Object.keys(variants).length,13);
   for (const [src, item] of Object.entries(variants)) {
     assert.ok(fs.existsSync(path.join(root,src)));
+    const sourceWidth=fs.readFileSync(path.join(root,src)).readUInt32BE(16);
+    assert.ok(item.candidates.some(candidate=>candidate.width===sourceWidth),'Full resolution missing: '+src);
     originalBytes+=fs.statSync(path.join(root,src.replace(/\.png$/,'.webp'))).size;
     displayBytes+=(item.candidates.find(c=>c.width>=1280)||item.candidates.at(-1)).bytes;
     for (const candidate of item.candidates) {
@@ -111,7 +113,7 @@ test('display copies exist, materially reduce downloads, and preserve original l
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'_data/navigation_images.json')));
   assert.equal(manifest.length,25);
   assert.equal(new Set(manifest.map(item=>item.src)).size,23);
-  assert.equal(manifest.filter(item=>item.sizes?.endsWith('320px')).length,2);
+  assert.equal(manifest.filter(item=>item.sizes?.endsWith('340px')).length,2);
   manifest.forEach(item=>assert.ok(fs.existsSync(path.join(root,item.src)),item.src));
   const links = text=>[...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
   for (const file of ['_pages/cv.md','_pages/projects.html','_includes/author-profile.html']) {
