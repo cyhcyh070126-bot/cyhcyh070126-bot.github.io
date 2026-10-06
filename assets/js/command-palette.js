@@ -343,6 +343,8 @@
               target.setAttribute("tabindex", "-1");
               previousFocus = target;
               dialog.close();
+              // Restore the page width before measuring; the close event runs later.
+              document.documentElement.classList.remove("site-search-open");
               history.pushState(null, "", url.hash);
               var masthead = document.querySelector(".masthead");
               var offset = masthead ? masthead.getBoundingClientRect().height + 16 : 16;
