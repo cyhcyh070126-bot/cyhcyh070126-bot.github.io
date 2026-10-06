@@ -535,6 +535,35 @@ a[href] {
   max-width: 100%;
 }
 
+// Keep long prose links wrappable. Scale their words without changing line layout.
+#main .home-mentorship a[href] {
+  display: inline;
+  scale: none;
+}
+
+.home-mentorship .link-word {
+  display: inline-block;
+  transform-origin: center center;
+  transition: transform 150ms ease;
+}
+
+.home-mentorship a:focus-visible .link-word {
+  transform: scale(1.02);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-mentorship a:hover .link-word {
+    transform: scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-mentorship a:is(:hover, :focus-visible) .link-word {
+    transition: none;
+    transform: none;
+  }
+}
+
 // Apply the same scale to every link and control, independently of existing transforms.
 body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]),
 #main .project-list__title {

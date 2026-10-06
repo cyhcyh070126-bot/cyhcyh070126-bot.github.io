@@ -48,6 +48,24 @@ if (document.querySelector("pre>code.language-plotly")) {
    ========================================================================== */
 
 $(document).ready(function () {
+  // Preserve spaces and native link behavior while allowing prose links to wrap.
+  document.querySelectorAll('.home-mentorship a').forEach(function (link) {
+    if (link.children.length) return;
+    const words = document.createDocumentFragment();
+    link.textContent.split(/(\s+)/).forEach(function (part) {
+      if (!part) return;
+      if (/^\s+$/.test(part)) {
+        words.appendChild(document.createTextNode(part));
+      } else {
+        const word = document.createElement('span');
+        word.className = 'link-word';
+        word.textContent = part;
+        words.appendChild(word);
+      }
+    });
+    link.replaceChildren(words);
+  });
+
   // SCSS SETTINGS - These should be the same as the settings in the relevant files 
   const scssLarge = 925;          // pixels, from /_sass/_themes.scss
   const scssMastheadHeight = 70;  // pixels, from the current theme (e.g., /_sass/theme/_default.scss)
