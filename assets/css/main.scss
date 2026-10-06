@@ -159,6 +159,13 @@ html[data-theme="dark"] .research-card figcaption strong {
   left: clamp(4px, 0.8vw, 12px);
 }
 
+@media (min-width: 1280px) {
+  .archive.cv-page {
+    // Use the outer gutter for the shift without changing the content width.
+    left: clamp(12px, calc((100vw - 1280px) / 2), 28px);
+  }
+}
+
 .archive.projects-page {
   float: none;
   width: 100%;
