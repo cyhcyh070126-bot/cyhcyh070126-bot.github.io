@@ -4,7 +4,7 @@ const { readFileSync } = require('node:fs');
 const { join } = require('node:path');
 const { runInNewContext } = require('node:vm');
 
-function setup(reduce = false) {
+function setup(reduce = false, random = Math.random) {
   const events = {};
   const callbacks = new Map();
   let id = 0;
@@ -32,6 +32,7 @@ function setup(reduce = false) {
   };
   const window = { matchMedia: () => media, devicePixelRatio: 3, innerHeight: 720, scrollY: 0, addEventListener: (name, cb) => events[name] = cb };
   runInNewContext(readFileSync(join(__dirname, '../assets/js/home-network.js'), 'utf8'), {
+    Math: Object.assign(Object.create(Math), { random }),
     document,
     window,
     ResizeObserver: class { observe() {} },
@@ -112,6 +113,22 @@ test('connections change freely without dense knots or additional animation loop
 
 test('independent page loads start with different particle positions', () => {
   assert.notDeepEqual(setup(true).positions(), setup(true).positions());
+});
+
+test('grazing edge contacts move visibly inward instead of lingering at the boundary', () => {
+  // Start at the top edge with a horizontal heading and zero vertical speed.
+  let randomCalls = 0;
+  const app = setup(false, () => {
+    if (randomCalls++ === 0) return 0.25;
+    if (randomCalls === 2) return 0.5;
+    return 0;
+  });
+  const initialY = app.positions()[0][1];
+  app.visible(true);
+  for (let frame = 1; frame <= 14; frame++) app.frame(frame * 40);
+  const finalY = app.positions()[0][1];
+  assert.ok(finalY - initialY > 8, `A grazing contact should rebound into the viewport within half a second (${initialY} to ${finalY})`);
+  assert.ok(app.positions().every(([x, y]) => x >= 4 && x <= 1276 && y >= 4 && y <= 652));
 });
 
 test('small viewport height changes preserve particle arrangement', () => {

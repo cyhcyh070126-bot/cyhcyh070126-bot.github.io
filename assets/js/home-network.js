@@ -94,8 +94,11 @@
       const hitX = point.px < insetX || point.px > width - insetX;
       const hitY = point.py < insetY || point.py > height - insetY;
       if (hitX || hitY) {
-        if (hitX) point.vx = (point.px < insetX ? 1 : -1) * Math.abs(point.vx);
-        if (hitY) point.vy = (point.py < insetY ? 1 : -1) * Math.abs(point.vy);
+        // Give grazing contacts a clear inward impulse instead of reflecting
+        // a nearly zero normal velocity and leaving the particle on the edge.
+        const reboundSpeed = 40;
+        if (hitX) point.vx = (point.px < insetX ? 1 : -1) * Math.max(reboundSpeed, Math.abs(point.vx));
+        if (hitY) point.vy = (point.py < insetY ? 1 : -1) * Math.max(reboundSpeed, Math.abs(point.vy));
         point.angle = Math.atan2(point.vy, point.vx);
         point.px = Math.max(insetX, Math.min(width - insetX, point.px));
         point.py = Math.max(insetY, Math.min(height - insetY, point.py));
