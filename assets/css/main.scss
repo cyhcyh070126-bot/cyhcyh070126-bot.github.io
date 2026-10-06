@@ -155,6 +155,8 @@ html[data-theme="dark"] .research-card figcaption strong {
   width: 100%;
   margin-right: 0;
   padding-left: 0;
+  position: relative;
+  left: clamp(4px, 0.8vw, 12px);
 }
 
 .archive.projects-page {
