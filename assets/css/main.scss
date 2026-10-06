@@ -542,30 +542,9 @@ a[href] {
   text-align-last: left;
 }
 
-// Native inline text retains continuous underlines and natural line wrapping.
-#main .home-page > p:nth-of-type(-n+4) a[href] {
+// Only this long institution link needs to break naturally within the paragraph.
+#main .home-mentorship a[href="https://engineering.jhu.edu/case/"] {
   display: inline;
-  scale: none;
-}
-
-// A temporary visual copy scales each rendered line without moving the prose.
-#main .home-page a.home-link-preview-active {
-  color: transparent !important;
-  text-decoration-color: transparent !important;
-}
-
-.home-link-preview {
-  position: fixed;
-  pointer-events: none;
-  z-index: 20;
-  transform: scale(1.02);
-  transform-origin: center center;
-  border-bottom: 1px solid currentColor;
-}
-
-.home-link-preview > span {
-  position: absolute;
-  white-space: pre;
 }
 
 // Apply the same scale to every link and control, independently of existing transforms.
