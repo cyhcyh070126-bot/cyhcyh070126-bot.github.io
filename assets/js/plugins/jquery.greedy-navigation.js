@@ -36,6 +36,7 @@ function updateNav() {
 
   // update masthead height and the body/sidebar top padding
   var mastheadHeight = $('.masthead').height();
+  document.documentElement.style.setProperty('--site-scroll-offset', (mastheadHeight + 16) + 'px');
   $('body').css('padding-top', mastheadHeight + 'px');
   if ($(".author__urls-wrapper button").is(":visible")) {
     $(".sidebar").css("padding-top", "");

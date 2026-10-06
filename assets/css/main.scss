@@ -48,13 +48,14 @@
 
 #research-projects,
 #research-experience {
-  scroll-margin-top: 100px;
+  scroll-margin-top: var(--site-scroll-offset, 100px);
 }
 
 // Native cross-page anchors must also clear the fixed header (including Ctrl K).
 #main,
+#main .cv-project__title[id],
 #main :is(h1, h2, h3, h4, h5, h6, figure, article)[id] {
-  scroll-margin-top: 100px;
+  scroll-margin-top: var(--site-scroll-offset, 100px);
 }
 
 .home-page .research-keyword {
@@ -178,7 +179,7 @@ html[data-theme="dark"] .research-card figcaption strong {
   gap: 1.8rem;
   align-items: center;
   padding: 1.35rem 0 1.5rem;
-  scroll-margin-top: 90px;
+  scroll-margin-top: var(--site-scroll-offset, 90px);
 }
 
 .project-list__item + .project-list__item {
@@ -186,7 +187,7 @@ html[data-theme="dark"] .research-card figcaption strong {
 }
 
 .project-list__title {
-  scroll-margin-top: 90px;
+  scroll-margin-top: var(--site-scroll-offset, 90px);
   margin: 0 0 0.45rem;
   padding: 0;
   border: 0;
@@ -288,6 +289,51 @@ html[data-theme="dark"] .research-card figcaption strong {
   z-index: 30;
 }
 
+.page-navigation {
+  display: contents;
+}
+
+@media (max-width: 900px) {
+  // Reserve a header row for the existing controls, outside the reading area.
+  .page-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.3rem max(1rem, env(safe-area-inset-right)) 0.3rem max(1rem, env(safe-area-inset-left));
+    border-top: 1px solid var(--global-border-color);
+  }
+
+  .page-navigation .page-contents {
+    position: relative;
+    inset: auto;
+  }
+
+  .page-navigation .page-contents__toggle {
+    min-height: 44px;
+  }
+
+  .page-navigation .page-contents__panel {
+    top: calc(100% + 10px);
+    bottom: auto;
+    left: 0;
+    right: auto;
+    max-height: calc(100dvh - var(--site-scroll-offset, 140px) - 24px);
+  }
+
+  .page-navigation .back-to-top {
+    position: static;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  // Keep the header height stable when the back-to-top control is unavailable.
+  .page-navigation .back-to-top[hidden] {
+    display: grid;
+    visibility: hidden;
+  }
+}
+
 .page-contents__toggle {
   display: flex;
   align-items: center;
@@ -364,13 +410,13 @@ body .page-contents__panel a:is(:hover, :focus-visible) {
   display: none;
 }
 
-.back-to-top:is(:hover, :focus-visible) {
+.page-navigation .back-to-top:is(:hover, :focus-visible) {
   color: var(--global-bg-color);
   background: var(--cv-section-heading-color);
 }
 
-.page-contents__toggle:is(:hover, :focus-visible),
-.page-contents__toggle[aria-expanded="true"] {
+.page-navigation .page-contents__toggle:is(:hover, :focus-visible),
+.page-navigation .page-contents__toggle[aria-expanded="true"] {
   color: #fff;
   background: #806000;
   border-color: #806000;
@@ -870,7 +916,7 @@ ul + .cv-project {
 }
 
 .research-card[id] {
-  scroll-margin-top: 90px;
+  scroll-margin-top: var(--site-scroll-offset, 90px);
 }
 
 .research-gallery--single .research-card {
@@ -910,7 +956,7 @@ ul + .cv-project {
   grid-column: 1 / -1;
   gap: 1rem;
   min-width: 0;
-  scroll-margin-top: 90px;
+  scroll-margin-top: var(--site-scroll-offset, 90px);
 }
 
 @media (max-width: 600px) {

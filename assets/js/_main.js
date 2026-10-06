@@ -149,6 +149,9 @@ $(document).ready(function () {
   // Init smooth scroll, this needs to be slightly more than then fixed masthead height
   $("a").smoothScroll({
     offset: -scssMastheadHeight,
+    beforeScroll: function (options) {
+      options.offset = -($('.masthead').outerHeight() + 16);
+    },
     speed: 0,
     preventDefault: false,
   });
