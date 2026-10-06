@@ -15,19 +15,42 @@
     } catch (_) { /* Invalid or non-navigation link. */ }
     return null;
   }
-  if (typeof module !== "undefined" && module.exports) module.exports = { destination: destination };
+  function imageDestination(item, current) {
+    try {
+      var here = new URL(current);
+      var url = new URL(item.src, here);
+      if (url.origin !== here.origin || !/^https?:$/.test(url.protocol) ||
+          !/^\/(?:images|assets\/icons)\//.test(url.pathname)) return null;
+      return { src: url.href, srcset: item.srcset || "", sizes: item.sizes || "" };
+    } catch (_) { return null; }
+  }
+  if (typeof module !== "undefined" && module.exports) module.exports = { destination: destination, imageDestination: imageDestination };
   if (typeof document === "undefined") return;
   var connection = navigator.connection;
   function constrained() {
     return connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType));
   }
   var warmed = new Set();
+  var connected = new Set();
   var assetCount = 0;
+  function connect(href) {
+    if (constrained()) return;
+    try {
+      var url = new URL(href, location.href);
+      if (url.origin === new URL(location.href).origin || url.protocol !== "https:" || connected.has(url.origin) || connected.size >= 4) return;
+      connected.add(url.origin);
+      var hint = document.createElement("link");
+      hint.rel = "preconnect";
+      hint.href = url.origin;
+      document.head.appendChild(hint);
+    } catch (_) { /* Native navigation still handles invalid links. */ }
+  }
   function warm(href) {
     if (window.sitePrepareSection) window.sitePrepareSection(href, false);
     if (constrained()) return;
     var item = destination(href, location.href);
-    if (!item || warmed.has(item.url) || (item.type === "asset" && assetCount >= 8)) return;
+    if (!item) { connect(href); return; }
+    if (warmed.has(item.url) || (item.type === "asset" && assetCount >= 8)) return;
     warmed.add(item.url);
     if (item.type === "asset") assetCount++;
     var hint = document.createElement("link");
@@ -48,7 +71,49 @@
     if (document.visibilityState === "hidden") return;
     ["/", "/cv/", "/projects/"].forEach(warm);
   }
-  // Only three small HTML documents; do not eagerly download the image gallery.
+  // Warm route documents independently of the lower-priority image queue below.
   if (window.requestIdleCallback) window.requestIdleCallback(warmPages, { timeout: 1500 });
   else window.setTimeout(warmPages, 600);
+
+  // Warm the actual responsive display files, not just the other pages' HTML.
+  // Current-page images are already prepared by section-images.js; avoid duplicates.
+  var manifest = document.getElementById && document.getElementById("site-navigation-images");
+  if (!manifest || typeof Image === "undefined") return;
+  var queue;
+  try { queue = JSON.parse(manifest.textContent).map(function (item) { return imageDestination(item, location.href); }).filter(Boolean); }
+  catch (_) { return; }
+  var current = new Set(Array.from(document.querySelectorAll("img[src]")).map(function (img) { return img.src; }));
+  var seen = new Set();
+  queue = queue.filter(function (item) {
+    if (current.has(item.src) || seen.has(item.src)) return false;
+    seen.add(item.src);
+    return true;
+  });
+  var active = 0;
+  var pageLoaded = document.readyState === "complete";
+  function pumpImages() {
+    if (!pageLoaded || constrained() || document.visibilityState === "hidden") return;
+    while (active < 2 && queue.length) {
+      var item = queue.shift();
+      var img = new Image();
+      active++;
+      img.fetchPriority = "low";
+      img.decoding = "async";
+      img.onload = img.onerror = function () {
+        this.onload = this.onerror = null;
+        active--;
+        pumpImages();
+      };
+      if (item.srcset) { img.sizes = item.sizes; img.srcset = item.srcset; }
+      img.src = item.src;
+    }
+  }
+  function scheduleImages() {
+    pageLoaded = true;
+    if (window.requestIdleCallback) window.requestIdleCallback(pumpImages, { timeout: 1500 });
+    else window.setTimeout(pumpImages, 100);
+  }
+  document.addEventListener("visibilitychange", pumpImages);
+  if (document.readyState === "complete") scheduleImages();
+  else window.addEventListener("load", scheduleImages, { once: true });
 })();

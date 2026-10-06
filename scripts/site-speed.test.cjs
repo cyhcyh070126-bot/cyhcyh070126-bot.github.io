@@ -51,3 +51,12 @@ test('asset warming is bounded and respects data saver and slow connections', ()
     assert.equal(limited.links.length, 0);
   }
 });
+
+test('external connections prepare only HTTPS origins, deduplicated and bounded', () => {
+  const app=setup();
+  for (const href of ['/', '#news', 'mailto:a@example.com', 'http://elsewhere.com/',
+    'https://github.com/a','https://github.com/b','https://huggingface.co/a',
+    'https://engineering.jhu.edu/','https://tongji.edu.cn/','https://fifth.example/']) app.window.siteWarmLink(href);
+  assert.deepEqual(app.links.map(l=>l.href),['https://github.com','https://huggingface.co','https://engineering.jhu.edu','https://tongji.edu.cn']);
+  assert.ok(app.links.every(l=>l.rel==='preconnect'));
+});

@@ -16,7 +16,8 @@ test('Projects lists the same four titles and stable anchors as the CV', () => {
 test('Projects without a public repository link to research details', () => {
   const page = read('_pages/projects.html');
   assert.match(page, /if project\.repository and project\.repository != ''/);
-  const fallback = page.split('{% else %}')[1].split('{% endif %}')[0];
+  const repositoryBlock = page.split("{% if project.repository and project.repository != '' %}")[1];
+  const fallback = repositoryBlock.split('{% else %}')[1].split('{% endif %}')[0];
   assert.match(fallback, /href="\{\{ project\.research_url \| relative_url \}\}"/);
   assert.match(fallback, />Research details<\/a>/);
   assert.doesNotMatch(fallback, /aria-disabled|Repository link will be added/);

@@ -1,0 +1,19 @@
+{% if page.home_page or page.cv_page or page.projects_page %}
+<script type="application/json" id="site-navigation-images">{{ site.data.navigation_images | jsonify }}</script>
+<link rel="preload" as="image" href="{{ '/assets/icons/huggingface.svg' | relative_url }}">
+<link rel="preload" as="font" href="{{ '/assets/webfonts/fa-solid-900.woff2' | relative_url }}" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="{{ '/assets/webfonts/fa-brands-400.woff2' | relative_url }}" type="font/woff2" crossorigin>
+{% endif %}
+{% if page.author_profile %}
+  {% if page.author and site.data.authors[page.author] %}{% assign priority_author = site.data.authors[page.author] %}{% else %}{% assign priority_author = site.author %}{% endif %}
+  {% unless priority_author.avatar contains '://' %}<link rel="preload" as="image" href="{{ priority_author.avatar | prepend: '/images/' | relative_url }}" fetchpriority="high">{% endunless %}
+{% endif %}
+{% if page.cv_page %}
+<link rel="preload" as="image" href="{{ '/images/schools/tongji-university-seal-128.png' | relative_url }}" fetchpriority="high">
+<link rel="preload" as="image" href="{{ '/images/schools/johns-hopkins-university-shield.svg' | relative_url }}" fetchpriority="high">
+{% endif %}
+{% if page.projects_page %}
+{% assign priority_preview = site.data.projects.first.preview %}
+{% assign priority_variant = site.data.image_variants[priority_preview] %}
+<link rel="preload" as="image" href="{% if priority_variant %}{{ priority_variant.candidates.first.src | relative_url }}{% else %}{{ priority_preview | relative_url }}{% endif %}" {% if priority_variant %}type="image/webp" imagesrcset="{{ priority_variant.srcset }}" imagesizes="(max-width: 767px) calc(100vw - 64px), 320px"{% endif %} fetchpriority="high">
+{% endif %}
