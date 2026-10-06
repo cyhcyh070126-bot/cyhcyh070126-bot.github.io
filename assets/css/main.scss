@@ -109,6 +109,7 @@ a span,
   --research-panel-background: #fff;
   --research-panel-text: var(--global-text-color);
   --research-panel-divider: rgba(15, 23, 42, 0.08);
+  --research-figure-number-color: #a67c22;
   --research-card-hover-border: rgba(154, 100, 30, 0.28);
   --research-card-hover-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
   --research-image-hover-shadow: 0 8px 18px rgba(15, 23, 42, 0.13);
@@ -122,6 +123,7 @@ html[data-theme="dark"] {
   --research-panel-background: color-mix(in srgb, var(--global-bg-color) 92%, white);
   --research-panel-text: #f3f3f3;
   --research-panel-divider: rgba(255, 255, 255, 0.14);
+  --research-figure-number-color: #dfb85f;
   --research-card-hover-border: rgba(230, 184, 103, 0.35);
   --research-card-hover-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
   --research-image-hover-shadow: 0 8px 18px rgba(0, 0, 0, 0.32);
@@ -969,6 +971,30 @@ ul + .cv-project {
   background: var(--research-panel-background);
   color: var(--research-panel-text);
   transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+
+// Keep figure numbering continuous across galleries within each project.
+.cv-project {
+  counter-reset: research-figure;
+}
+
+.research-gallery .research-card {
+  position: relative;
+  counter-increment: research-figure;
+  padding-bottom: 2.2rem;
+}
+
+.research-card::after {
+  content: counter(research-figure);
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.65rem;
+  color: var(--research-figure-number-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .research-card a {
