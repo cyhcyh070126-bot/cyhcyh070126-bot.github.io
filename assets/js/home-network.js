@@ -33,7 +33,7 @@
         if (points.every(p => Math.hypot(p.x - x, p.y - y) > spacing)) break;
       }
       const angle = random() * Math.PI * 2;
-      const speed = 16 + random() * 16;
+      const speed = 20 + random() * 20;
       points.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
         angle, speed, turnAt: elapsed + 2 + random() * 5,
         depthPhase: random() * Math.PI * 2, depthRate: 0.22 + random() * 0.2 });
