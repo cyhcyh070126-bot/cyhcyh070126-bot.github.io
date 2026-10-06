@@ -537,6 +537,31 @@ a[href] {
 // Let the long institution and advisor links flow with this prose paragraph.
 .home-page .home-mentorship a[href] {
   display: inline;
+  // Inline text cannot use scale; enlarge its font while retaining natural wrapping.
+  scale: none;
+  font-size: 1em;
+  line-height: 1;
+  transition: color 150ms ease, text-decoration-color 150ms ease, font-size 150ms ease;
+}
+
+.home-page .home-mentorship a[href]:focus-visible {
+  font-size: 1.02em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-page .home-mentorship a[href]:hover {
+    font-size: 1.02em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-mentorship a[href] {
+    transition: none;
+  }
+
+  .home-page .home-mentorship a[href]:is(:hover, :focus-visible) {
+    font-size: 1em;
+  }
 }
 
 // Apply the same scale to every link and control, independently of existing transforms.
