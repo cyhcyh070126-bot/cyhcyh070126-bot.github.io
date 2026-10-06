@@ -9,12 +9,13 @@ const script = fs.readFileSync(path.join(root, 'assets/js/site-speed.js'), 'utf8
 const {imageDestination} = require('../assets/js/site-speed.js');
 const origin = 'https://example.com';
 
-function setup({connection, hidden = false, complete = false} = {}) {
+function setup({connection, hidden = false, complete = false, previewVariant = false} = {}) {
   const images = [], idle = [], events = {}, windowEvents = {};
   const src = i => '/images/research/' + i + '.png';
   const manifest = [{src:src(0)}, {src:src(0)}, ...[1,2,3,4].map(i=>({src:src(i)})),
     {src:'https://elsewhere.com/image.png'}];
   manifest[2] = {src:src(1), srcset:src(1) + ' 640w', sizes:'320px'};
+  if (previewVariant) manifest.push({src:src(1),srcset:src(1)+' 640w',sizes:'600px'});
   const document = {
     readyState: complete ? 'complete' : 'loading',
     visibilityState: hidden ? 'hidden' : 'visible',
@@ -83,6 +84,14 @@ test('preparation pauses in hidden tabs and respects constrained connections', (
   }
 });
 
+test('the same figure warms both CV and Projects display sizes without discarding one', () => {
+  const app=setup({complete:true,previewVariant:true});
+  app.idle.at(-1)();
+  for (let i=0;i<app.images.length;i++) app.images[i].finish();
+  const selected=app.images.filter(image=>image.src===origin+'/images/research/1.png');
+  assert.deepEqual(selected.map(image=>image.sizes),['320px','600px']);
+});
+
 test('display copies exist, materially reduce downloads, and preserve original link destinations', () => {
   const variants = JSON.parse(fs.readFileSync(path.join(root,'_data/image_variants.json')));
   let originalBytes=0, displayBytes=0;
@@ -100,7 +109,9 @@ test('display copies exist, materially reduce downloads, and preserve original l
   const sealBytes=fs.statSync(path.join(root,'images/schools/tongji-university-seal-128.png')).size;
   assert.ok(sealBytes<25000);
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'_data/navigation_images.json')));
-  assert.equal(manifest.length,23);
+  assert.equal(manifest.length,25);
+  assert.equal(new Set(manifest.map(item=>item.src)).size,23);
+  assert.equal(manifest.filter(item=>item.sizes?.endsWith('320px')).length,2);
   manifest.forEach(item=>assert.ok(fs.existsSync(path.join(root,item.src)),item.src));
   const links = text=>[...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
   for (const file of ['_pages/cv.md','_pages/projects.html','_includes/author-profile.html']) {

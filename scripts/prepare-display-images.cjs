@@ -43,7 +43,12 @@ const root = path.join(__dirname, '..');
   const manifest = [
     {src:sealCopy}, {src:'/images/schools/johns-hopkins-university-shield.svg'},
     {src:'/assets/icons/huggingface.svg'},
-    ...gallery.map(src=>({src, ...(variants[src] ? {srcset:variants[src].srcset, sizes:variants[src].sizes} : {})}))
+    ...gallery.map(src=>({src, ...(variants[src] ? {srcset:variants[src].srcset, sizes:variants[src].sizes} : {})})),
+    // Projects previews select a smaller candidate than the same figure in CV.
+    ...['cylinder_subdomain_supports_1234.png', 'llm_finetuning_workflow_v2.png'].map(name=>{
+      const src='/images/research/'+name;
+      return {src,srcset:variants[src].srcset,sizes:'(max-width: 767px) calc(100vw - 64px), 320px'};
+    })
   ];
   // Prepare each project's entry image first, then static figures, then animations.
   const seeds = ['cylinder_subdomain_supports_1234.png', 'battery_concentration.gif', 'pinn_shock_problem_framework_v8.svg', 'llm_finetuning_workflow_v2.png'];

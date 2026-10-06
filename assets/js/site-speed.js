@@ -82,11 +82,17 @@
   var queue;
   try { queue = JSON.parse(manifest.textContent).map(function (item) { return imageDestination(item, location.href); }).filter(Boolean); }
   catch (_) { return; }
-  var current = new Set(Array.from(document.querySelectorAll("img[src]")).map(function (img) { return img.src; }));
+  function imageKey(item) { return item.src + "|" + item.srcset + "|" + item.sizes; }
+  var current = new Set(Array.from(document.querySelectorAll("img[src]")).map(function (img) {
+    var picture = img.closest && img.closest("picture");
+    var source = picture && picture.querySelector('source[type="image/webp"]');
+    return imageKey({ src: img.src, srcset: source ? source.getAttribute("srcset") || "" : "", sizes: source ? source.getAttribute("sizes") || "" : "" });
+  }));
   var seen = new Set();
   queue = queue.filter(function (item) {
-    if (current.has(item.src) || seen.has(item.src)) return false;
-    seen.add(item.src);
+    var key = imageKey(item);
+    if (current.has(key) || seen.has(key)) return false;
+    seen.add(key);
     return true;
   });
   var active = 0;
