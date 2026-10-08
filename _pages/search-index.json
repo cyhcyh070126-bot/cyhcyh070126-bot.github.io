@@ -14,6 +14,7 @@ sitemap: false
   "cv": {
     "url": {{ '/cv/' | relative_url | jsonify }},
     "pdf_url": {{ cv_pdf_url | jsonify }},
+    "research_statement_pdf_url": {{ '/files/Yanghao_Chen_Research_Statement.pdf' | relative_url | append: '?v=' | append: cv_pdf_version | jsonify }},
     "html": {{ search_cv.content | markdownify | jsonify }}
   },
   "projects": {

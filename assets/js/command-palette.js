@@ -135,6 +135,9 @@
         released.add(url);
       }
     });
+    var researchStatement = add("Resources", "Research Statement PDF", data.cv.research_statement_pdf_url,
+      "RS research statement pdf download 研究陈述 科研陈述 下载");
+    if (researchStatement) researchStatement.openInNewTab = true;
     var contact = data.contact || {};
     if (contact.email) add("Contact & Links", "Tongji Email", "mailto:" + contact.email, "email contact mail 同济 邮箱 邮件 联系 " + contact.email);
     home.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
