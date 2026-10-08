@@ -607,11 +607,14 @@ a[href] {
   text-align: justify;
   text-justify: inter-word;
   text-align-last: left;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
 }
 
 // Introduction links wrap as text; their line boxes retain the shared interaction.
 #main .home-page a.inline-wrapped-link {
   display: inline;
+  hyphens: manual;
 }
 
 // Inherit the same scale and timing as the link; no duplicated hover text.
