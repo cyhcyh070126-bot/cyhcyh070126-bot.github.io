@@ -41,6 +41,7 @@ Research Interests
 - Scientific machine learning
 - Neural operators and surrogate modeling
 - GPU-accelerated scientific computing
+- Differentiable computing and simulation
 
 Current Research
 ======
