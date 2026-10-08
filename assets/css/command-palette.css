@@ -18,6 +18,7 @@ html[data-theme="dark"] {
 .site-search-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 9px; flex: 0 0 auto; min-width: 44px; min-height: 44px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: var(--global-text-color, #494e52); cursor: pointer; }
 .site-search-toggle:hover { color: var(--cv-section-heading-color, #9a641e); background: var(--search-selected); }
 .site-search-toggle kbd, .site-search kbd { display: inline-block; padding: 1px 5px; border: 1px solid var(--search-line); border-radius: 4px; font: inherit; font-size: 12px; line-height: 1.5; color: var(--search-muted); background: transparent; box-shadow: none; }
+.site-search-toggle kbd { border-color: color-mix(in srgb, var(--search-line) 50%, var(--search-muted)); }
 .site-search {
   box-sizing: border-box;
   position: fixed;
