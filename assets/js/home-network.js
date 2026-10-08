@@ -118,24 +118,36 @@
         point.z = correctedY * sp + (z * cy - correctedX * sy) * cp;
       }
       point.depth = Math.max(0, Math.min(1, (point.z / Math.max(depthRange, 1) + 1) / 2));
+      // Edge points have fewer possible neighbours outside the visible area.
+      // Compensate locally without increasing density in the screen centre.
+      const edgeDistance = Math.min(point.px, width - point.px, point.py, height - point.py);
+      point.reach = reach * (1 + 0.35 * Math.max(0, 1 - edgeDistance / reach));
     });
     const candidates = [];
     for (let i = 0; i < points.length; i++) {
       for (let j = i + 1; j < points.length; j++) {
         const distance = Math.hypot(points[i].px - points[j].px, points[i].py - points[j].py,
           (points[i].z - points[j].z) * 0.35);
-        if (distance < reach) candidates.push({ i, j, distance, key: `${i}:${j}` });
+        const pairReach = Math.max(points[i].reach, points[j].reach);
+        if (distance < pairReach) candidates.push({ i, j, distance, reach: pairReach, key: `${i}:${j}` });
       }
     }
     // Prefer existing edges to avoid flicker. Six connections per point at most.
     candidates.sort((a, b) => a.distance * (edges.has(a.key) ? 0.8 : 1) - b.distance * (edges.has(b.key) ? 0.8 : 1));
     edges.clear();
     const degree = points.map(() => 0);
-    for (const { i, j, distance, key } of candidates) {
-      if (degree[i] >= 6 || degree[j] >= 6) continue;
-      degree[i]++; degree[j]++; edges.add(key);
+    // Give sparsely connected points a turn before filling denser clusters.
+    for (const minimum of [2, 6]) {
+      for (const { i, j, key } of candidates) {
+        if (edges.has(key) || degree[i] >= 6 || degree[j] >= 6) continue;
+        if (degree[i] >= minimum && degree[j] >= minimum) continue;
+        degree[i]++; degree[j]++; edges.add(key);
+      }
+    }
+    for (const { i, j, distance, reach: pairReach, key } of candidates) {
+      if (!edges.has(key)) continue;
       const depth = (points[i].depth + points[j].depth) / 2;
-      const proximity = 1 - distance / reach;
+      const proximity = 1 - distance / pairReach;
       // Lift longer edges gently while still fading to zero at the cutoff.
       const visibility = proximity * (1 + 0.35 * (1 - proximity));
       context.lineWidth = 0.55 + depth * 0.55;
