@@ -56,7 +56,7 @@ html[data-theme="dark"] {
 .site-search__results { padding-right: calc(100% - 100% / var(--link-hover-scale, 1.04) + 1px); }
 .site-search__results > [role="group"] + [role="group"] { margin-top: 12px; }
 .site-search__group-label { margin: 0; padding: 18px 22px 8px; color: var(--cv-section-heading-color, #9a641e); font-size: 20px; font-weight: 600; line-height: 1.35; letter-spacing: normal; }
-.site-search__option { display: flex; align-items: center; gap: 12px; min-height: 52px; margin: 0; padding: 12px 20px; border: 0; border-left: 3px solid transparent; color: inherit; background: transparent; text-decoration: none; cursor: pointer; transition: background-color .1s ease; }
+.site-search .site-search__option { display: flex; width: 100%; align-items: center; gap: 12px; min-height: 52px; margin: 0; padding: 12px 20px; border: 0; border-left: 3px solid transparent; color: inherit; background: transparent; text-decoration: none; cursor: pointer; transition: background-color .1s ease; }
 .site-search__option:visited { color: inherit; }
 .site-search button.site-search__option { width: 100%; border-radius: 0; font: inherit; text-align: left; box-shadow: none; }
 .site-search__option:hover, .site-search__option[aria-selected="true"] { color: inherit; background: var(--search-selected); text-decoration: none; }
