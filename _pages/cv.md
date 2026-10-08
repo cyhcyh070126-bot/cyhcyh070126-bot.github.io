@@ -11,7 +11,7 @@ redirect_from:
 {% include base_path %}
 {% include cv-pdf-url.html %}
 
-<p><a href="{{ cv_pdf_url }}" target="_blank" rel="noopener noreferrer">View CV (PDF)</a> <span class="cv-links__separator">|</span> <a href="{{ '/projects/' | relative_url }}">Project repositories</a></p>
+<p><a href="{{ cv_pdf_url }}" target="_blank" rel="noopener noreferrer">View CV (PDF)</a> <span class="cv-links__separator">|</span> <a href="{{ '/files/Yanghao_Chen_Research_Statement.pdf' | relative_url | append: '?v=' | append: cv_pdf_version }}" target="_blank" rel="noopener noreferrer">Research Statement (PDF)</a> <span class="cv-links__separator">|</span> <a href="{{ '/projects/' | relative_url }}">Project repositories</a></p>
 
 Education
 ======
