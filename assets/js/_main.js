@@ -49,49 +49,55 @@ if (document.querySelector("pre>code.language-plotly")) {
 
 $(document).ready(function () {
   // Give each naturally wrapped line a real box for the existing CSS scale.
-  const departmentLink = document.querySelector('.home-mentorship a[href="https://engineering.jhu.edu/case/"]');
-  if (departmentLink) {
-    const label = departmentLink.textContent;
-    const paragraph = departmentLink.closest('p');
+  document.querySelectorAll('.home-page > p:nth-of-type(-n+4)').forEach(paragraph => {
+    const links = Array.from(paragraph.querySelectorAll('a'), link => ({link, label: link.textContent}));
+    if (!links.length) return;
+    links.forEach(({link}) => link.classList.add('inline-wrapped-link'));
     let measuredWidth = 0;
     let layoutFrame = 0;
-    const layoutDepartmentLink = () => {
+    const layoutInlineLinks = () => {
       layoutFrame = 0;
-      departmentLink.textContent = label;
-      const range = document.createRange();
-      const lines = [];
-      for (const word of label.matchAll(/\S+/g)) {
-        range.setStart(departmentLink.firstChild, word.index);
-        range.setEnd(departmentLink.firstChild, word.index + word[0].length);
-        const rect = range.getBoundingClientRect();
-        let line = lines[lines.length - 1];
-        if (!line || Math.abs(line.top - rect.top) > 1) {
-          line = {top: rect.top, left: rect.left, right: rect.right, words: []};
-          lines.push(line);
+      // Measure all links as natural inline text before fixing any line boxes.
+      links.forEach(({link, label}) => { link.textContent = label; });
+      const layouts = links.map(({link, label}) => {
+        const range = document.createRange();
+        const lines = [];
+        for (const word of label.matchAll(/\S+/g)) {
+          range.setStart(link.firstChild, word.index);
+          range.setEnd(link.firstChild, word.index + word[0].length);
+          const rect = range.getBoundingClientRect();
+          let line = lines[lines.length - 1];
+          if (!line || Math.abs(line.top - rect.top) > 1) {
+            line = {top: rect.top, left: rect.left, right: rect.right, words: []};
+            lines.push(line);
+          }
+          line.right = rect.right;
+          line.words.push(word[0]);
         }
-        line.right = rect.right;
-        line.words.push(word[0]);
-      }
-      const content = document.createDocumentFragment();
-      lines.forEach((line, index) => {
-        if (index) content.appendChild(document.createTextNode(' '));
-        const span = document.createElement('span');
-        span.className = 'department-link-line';
-        span.textContent = line.words.join(' ');
-        span.style.width = (line.right - line.left) + 'px';
-        content.appendChild(span);
+        return {link, lines};
       });
-      departmentLink.replaceChildren(content);
+      layouts.forEach(({link, lines}) => {
+        const content = document.createDocumentFragment();
+        lines.forEach((line, index) => {
+          if (index) content.appendChild(document.createTextNode(' '));
+          const span = document.createElement('span');
+          span.className = 'inline-link-line';
+          span.textContent = line.words.join(' ');
+          span.style.width = (line.right - line.left) + 'px';
+          content.appendChild(span);
+        });
+        link.replaceChildren(content);
+      });
       measuredWidth = paragraph.clientWidth;
     };
-    layoutDepartmentLink();
+    layoutInlineLinks();
     new ResizeObserver(() => {
       if (paragraph.clientWidth !== measuredWidth && !layoutFrame) {
-        layoutFrame = requestAnimationFrame(layoutDepartmentLink);
+        layoutFrame = requestAnimationFrame(layoutInlineLinks);
       }
     }).observe(paragraph);
-    document.fonts.ready.then(layoutDepartmentLink);
-  }
+    document.fonts.ready.then(layoutInlineLinks);
+  });
 
   // SCSS SETTINGS - These should be the same as the settings in the relevant files 
   const scssLarge = 925;          // pixels, from /_sass/_themes.scss

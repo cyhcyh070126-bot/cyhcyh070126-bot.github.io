@@ -609,13 +609,13 @@ a[href] {
   text-align-last: left;
 }
 
-// Only this long institution link needs to break naturally within the paragraph.
-#main .home-mentorship a[href="https://engineering.jhu.edu/case/"] {
+// Introduction links wrap as text; their line boxes retain the shared interaction.
+#main .home-page a.inline-wrapped-link {
   display: inline;
 }
 
 // Inherit the same scale and timing as the link; no duplicated hover text.
-#main .home-mentorship a .department-link-line {
+#main .home-page a.inline-wrapped-link .inline-link-line {
   display: inline-block;
   white-space: nowrap;
   text-align: justify;
@@ -624,11 +624,11 @@ a[href] {
   transition: inherit;
 }
 
-#main .home-mentorship a:has(.department-link-line):is(:hover, :focus-visible) {
+#main .home-page a.inline-wrapped-link:has(.inline-link-line):is(:hover, :focus-visible) {
   text-decoration-line: none;
 }
 
-#main .home-mentorship a:is(:hover, :focus-visible) .department-link-line {
+#main .home-page a.inline-wrapped-link:is(:hover, :focus-visible) .inline-link-line {
   text-decoration-line: underline;
 }
 
@@ -653,14 +653,14 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
 }
 
 body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):focus-visible,
-#main .home-mentorship a:focus-visible .department-link-line,
+#main .home-page a.inline-wrapped-link:focus-visible .inline-link-line,
 #main .project-list__title:has(a:focus-visible) {
   scale: var(--link-hover-scale, 1.04);
 }
 
 @media (hover: hover) and (pointer: fine) {
   body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):hover,
-  #main .home-mentorship a:hover .department-link-line,
+  #main .home-page a.inline-wrapped-link:hover .inline-link-line,
   #main .project-list__title:has(a:hover) {
     scale: var(--link-hover-scale, 1.04);
   }
@@ -681,7 +681,7 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
   }
 
   body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]):is(:hover, :focus-visible),
-  #main .home-mentorship a:is(:hover, :focus-visible) .department-link-line,
+  #main .home-page a.inline-wrapped-link:is(:hover, :focus-visible) .inline-link-line,
   #main .project-list__title:has(a:is(:hover, :focus-visible)) {
     scale: none;
   }
