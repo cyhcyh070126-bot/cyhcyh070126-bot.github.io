@@ -229,6 +229,11 @@
   > span {
     display: block;
   }
+
+  // Balance the visible gap below the descenders in "Machine Learning".
+  > span:nth-child(3) {
+    margin-top: 0.15em;
+  }
 }
 
 .author__urls-wrapper {
