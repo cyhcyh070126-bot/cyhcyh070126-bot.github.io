@@ -157,7 +157,7 @@ Current Research
 </div>
 
 - **Automated Simulation and Data Generation:** Generated polycrystalline NMC microstructures and automated MATLAB–COMSOL simulations to produce time-aligned image sequences of lithium concentration and von Mises stress.
-- **Concentration and Stress Prediction:** Trained separate conditional ConvLSTM models in PyTorch to predict future image sequences of lithium concentration and von Mises stress, using past image sequences, grain-orientation maps, and C-rate inputs.
+- **Concentration Field and Stress Field Prediction:** Trained separate conditional ConvLSTM models in PyTorch to predict future image sequences of lithium concentration and von Mises stress, using past image sequences, grain-orientation maps, and C-rate inputs.
 - **Model Training:** Trained the models with MSE and SSIM losses, using scheduled sampling to select reference or model-predicted frames as inputs during training.
 - **Prediction Evaluation:** Compared predicted lithium concentration and von Mises stress image sequences with COMSOL reference sequences and analyzed error accumulation during autoregressive prediction.
 
