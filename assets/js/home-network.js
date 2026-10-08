@@ -20,7 +20,7 @@
   const cameraPhase = random() * Math.PI * 2;
   const edges = new Set();
   function populate() {
-    const count = Math.min(72, Math.max(30, Math.round(width * height / 19000)));
+    const count = Math.min(76, Math.max(33, Math.round(width * height / 19000)));
     // Retain existing particles on resize (including mobile browser chrome).
     // Only add or remove the number needed for the new visible area.
     points.length = Math.min(points.length, count);
