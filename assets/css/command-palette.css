@@ -22,7 +22,7 @@ html[data-theme="dark"] {
   box-sizing: border-box;
   position: fixed;
   inset: 0;
-  width: min(920px, calc(100% - 32px));
+  width: min(1040px, calc(100% - 32px));
   max-width: none;
   max-height: min(650px, calc(100vh - 120px));
   max-height: min(650px, calc(100dvh - 120px));
@@ -52,6 +52,8 @@ html[data-theme="dark"] {
 .site-search__back { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 40px; height: 40px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--search-muted); cursor: pointer; }
 .site-search__back:hover { color: var(--cv-section-heading-color, #9a641e); background: var(--search-selected); }
 .site-search__body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--search-line) transparent; padding: 4px 0 10px; }
+/* Reserve room for the shared whole-row hover scale, including its arrow. */
+.site-search__results { padding-right: calc(100% - 100% / var(--link-hover-scale, 1.04) + 1px); }
 .site-search__results > [role="group"] + [role="group"] { margin-top: 12px; }
 .site-search__group-label { margin: 0; padding: 18px 22px 8px; color: var(--cv-section-heading-color, #9a641e); font-size: 20px; font-weight: 600; line-height: 1.35; letter-spacing: normal; }
 .site-search__option { display: flex; align-items: center; gap: 12px; min-height: 52px; margin: 0; padding: 12px 20px; border: 0; border-left: 3px solid transparent; color: inherit; background: transparent; text-decoration: none; cursor: pointer; transition: background-color .1s ease; }
