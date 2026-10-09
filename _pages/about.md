@@ -24,7 +24,7 @@ News
   <div class="home-news__list">
     <article class="home-news__item">
       <div class="home-news__date">Sep 2026</div>
-      <div class="home-news__content"><strong>3D Composite Extension:</strong> Extending the hybrid FEM–neural operator solver to a 100-fiber composite. A shared neural operator computes stress fields across all fiber subdomains, with component-specific weights shared across fibers. Periodic boundary conditions eliminate fiber-end effects. <a href="/cv/#fiber-composite">View the composite mesh.</a></div>
+      <div class="home-news__content"><strong>3D Composite Extension:</strong> Extending the hybrid FEM–neural operator solver to a 100-fiber composite. A shared neural operator computes stress fields across all fiber subdomains, with component-specific weights shared across fibers. Periodic boundary conditions are used to avoid artificial fiber-end effects. <a href="/cv/#fiber-composite">View the composite mesh.</a></div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Aug 2026</div>
