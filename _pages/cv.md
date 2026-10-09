@@ -46,7 +46,7 @@ Research Interests
 Current Research
 ======
 
-- Hybrid FEM–Neural Operator Solvers based on Non-overlapping Domain Decomposition
+- Hybrid FEM–Neural Operator Solvers based on Non-Overlapping Domain Decomposition
 - Neural Operator Learning for Subdomain Stress Prediction
 - Iterative Exchange of Interface Forces and Displacements
 - Shared Neural Operators for 3D Fiber-Reinforced Composites
