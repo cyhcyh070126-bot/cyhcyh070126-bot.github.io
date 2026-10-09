@@ -49,7 +49,7 @@ if (document.querySelector("pre>code.language-plotly")) {
 
 $(document).ready(function () {
   // Give each naturally wrapped line a real box for the existing CSS scale.
-  document.querySelectorAll('.home-page > p:nth-of-type(-n+4)').forEach(paragraph => {
+  document.querySelectorAll('.home-page > p:nth-of-type(-n+5)').forEach(paragraph => {
     const links = Array.from(paragraph.querySelectorAll('a'), link => ({link, label: link.textContent}));
     if (!links.length) return;
     links.forEach(({link}) => link.classList.add('inline-wrapped-link'));

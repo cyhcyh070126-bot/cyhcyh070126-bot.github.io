@@ -62,7 +62,7 @@
       entries.push(entry);
       return entry;
     }
-    add("Navigation", "Home", data.home.url, "about biography 首页 主页 个人介绍", home.querySelector("p")?.textContent);
+    add("Navigation", "Home", data.home.url, "about biography 首页 主页 个人介绍", Array.from(home.querySelectorAll("p")).slice(0, 2).map(paragraph => paragraph.textContent).join(" "));
     var cvLink = add("Navigation", "CV", data.cv.pdf_url || data.cv.url, "resume curriculum vitae pdf view 简历 查看");
     if (cvLink && data.cv.pdf_url) cvLink.openInNewTab = true;
     if (data.projects) add("Navigation", "Projects", data.projects.url, "projects repository repositories 项目 课题 仓库");

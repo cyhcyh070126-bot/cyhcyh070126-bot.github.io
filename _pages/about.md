@@ -8,7 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-Hi! I'm Yanghao Chen. Welcome to my homepage! I'm a final-year undergraduate at **[Tongji University](https://en.tongji.edu.cn/)**, majoring in **Engineering Mechanics** at the **[School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/31828/list.htm)**. My interests center on <strong class="research-keyword">Scientific Machine Learning</strong> and <strong class="research-keyword">Computational Mechanics</strong>.
+Hi! I'm Yanghao Chen. Welcome to my homepage!
+
+I'm a final-year undergraduate at **[Tongji University](https://en.tongji.edu.cn/)**, majoring in **Engineering Mechanics** at the **[School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/31828/list.htm)**. My interests center on <strong class="research-keyword">Scientific Machine Learning</strong> and <strong class="research-keyword">Computational Mechanics</strong>.
 
 My research began with fine-tuning <strong class="research-keyword">Large Language Models</strong> using LoRA on Google Colab for question answering in mechanics of materials. I then developed separate <strong class="research-keyword">ConvLSTM</strong> models to predict future image sequences of lithium concentration and von Mises stress in battery materials using MATLAB–COMSOL simulation data. I also used <strong class="research-keyword">Physics-Informed Neural Networks (PINNs)</strong> to study shock propagation governed by the one-dimensional Burgers equation. I compared predictions from standard PINNs and PINNs with fixed artificial viscosity against the analytical inviscid solution.
 

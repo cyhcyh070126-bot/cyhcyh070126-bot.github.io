@@ -602,8 +602,8 @@ a[href] {
   max-width: 100%;
 }
 
-// Justify the four introduction paragraphs; keep the last line left aligned.
-.home-page > p:nth-of-type(-n+4) {
+// Justify the introduction paragraphs; keep the last line left aligned.
+.home-page > p:nth-of-type(-n+5) {
   text-align: justify;
   text-justify: inter-word;
   text-align-last: left;
@@ -734,7 +734,7 @@ html[data-theme="dark"] .home-network {
 @media (prefers-reduced-motion: no-preference) {
   .site-enter .main--home .sidebar,
   .site-enter .page--home .page__inner-wrap > header,
-  .site-enter .home-page > p:nth-of-type(-n+4),
+  .site-enter .home-page > p:nth-of-type(-n+5),
   .site-enter .home-page > #news,
   .site-enter .home-page > .home-news,
   .site-enter .archive > .page__title,
@@ -757,19 +757,20 @@ html[data-theme="dark"] .home-network {
     --site-entry-delay: 40ms;
   }
 
-  .site-enter .home-page > p:nth-of-type(1) {
+  .site-enter .home-page > p:nth-of-type(1),
+  .site-enter .home-page > p:nth-of-type(2) {
     --site-entry-delay: 100ms;
   }
 
-  .site-enter .home-page > p:nth-of-type(2) {
+  .site-enter .home-page > p:nth-of-type(3) {
     --site-entry-delay: 180ms;
   }
 
-  .site-enter .home-page > p:nth-of-type(3) {
+  .site-enter .home-page > p:nth-of-type(4) {
     --site-entry-delay: 260ms;
   }
 
-  .site-enter .home-page > p:nth-of-type(4) {
+  .site-enter .home-page > p:nth-of-type(5) {
     --site-entry-delay: 340ms;
   }
 
