@@ -40,7 +40,7 @@ Research Interests
 - Computational Mechanics
 - Scientific Machine Learning
 - Neural Operators and Surrogate Modeling
-- GPU-Accelerated Scientific Computing
+- GPU-accelerated Scientific Computing
 - Differentiable Computing and Simulation
 
 Current Research
