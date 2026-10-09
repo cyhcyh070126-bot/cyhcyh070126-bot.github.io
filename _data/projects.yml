@@ -1,5 +1,5 @@
 - id: fem-neural-operator
-  title: GPU-Accelerated Hybrid FEM–Neural Operator Solver
+  title: GPU-accelerated Hybrid FEM–Neural Operator Solver
   short_title: Hybrid FEM–NO
   preview: /images/research/cylinder_subdomain_supports_1234.png
   preview_alt: Cylinder FEM and neural-operator subdomains connected through a shared interface.

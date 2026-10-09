@@ -32,7 +32,7 @@ Education
 
 - Visiting Undergraduate Research Intern, Department of Civil and Systems Engineering
 - Jan. 2026 - Oct. 2026
-- Research Focus: GPU-Accelerated FEM and Hybrid FEM–Neural Operator Solvers
+- Research Focus: GPU-accelerated FEM and Hybrid FEM–Neural Operator Solvers
 
 Research Interests
 ======
