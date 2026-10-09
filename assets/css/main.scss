@@ -714,12 +714,20 @@ html[data-theme="dark"] .home-network {
 
 // Share one entrance across the introductory blocks, excluding navigation and galleries.
 @keyframes site-entry-content {
-  from { opacity: 0; translate: 0 var(--site-entry-distance, 18px); }
+  from { opacity: 0; translate: 0 var(--site-entry-distance, 24px); }
+  60% { opacity: 1; }
   to { opacity: 1; translate: 0 0; }
 }
 
+@keyframes site-entry-profile {
+  from { opacity: 0; translate: -12px 8px; scale: .985; }
+  60% { opacity: 1; }
+  to { opacity: 1; translate: 0 0; scale: 1; }
+}
+
 @keyframes site-entry-network {
-  from { opacity: 0; }
+  from { opacity: 0; scale: 1.025; }
+  to { scale: 1; }
   // The implicit end value preserves the active theme's network opacity.
 }
 
@@ -732,34 +740,42 @@ html[data-theme="dark"] .home-network {
   .site-enter .archive > .page__title,
   .site-enter .cv-page > :nth-child(n+2):nth-child(-n+11),
   .site-enter .project-list > .project-list__item:nth-child(-n+2) {
-    animation: site-entry-content 640ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation: site-entry-content 760ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
     animation-delay: var(--site-entry-delay, 0ms);
+  }
+
+  .site-enter .main--home .sidebar {
+    animation-name: site-entry-profile;
+    animation-duration: 860ms;
+    transform-origin: top left;
+    --site-entry-delay: 30ms;
   }
 
   .site-enter .page--home .page__inner-wrap > header,
   .site-enter .archive > .page__title {
-    --site-entry-delay: 60ms;
+    --site-entry-distance: 14px;
+    --site-entry-delay: 40ms;
   }
 
   .site-enter .home-page > p:nth-of-type(1) {
-    --site-entry-delay: 120ms;
+    --site-entry-delay: 100ms;
   }
 
   .site-enter .home-page > p:nth-of-type(2) {
-    --site-entry-delay: 220ms;
+    --site-entry-delay: 180ms;
   }
 
   .site-enter .home-page > p:nth-of-type(3) {
-    --site-entry-delay: 320ms;
+    --site-entry-delay: 260ms;
   }
 
   .site-enter .home-page > p:nth-of-type(4) {
-    --site-entry-delay: 420ms;
+    --site-entry-delay: 340ms;
   }
 
   .site-enter .home-page > #news,
   .site-enter .home-page > .home-news {
-    --site-entry-delay: 500ms;
+    --site-entry-delay: 420ms;
   }
 
   .site-enter .cv-page {
@@ -787,7 +803,7 @@ html[data-theme="dark"] .home-network {
   }
 
   .site-enter .home-network {
-    animation: site-entry-network 900ms ease-out;
+    animation: site-entry-network 1100ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
   }
 
   @media (max-width: 767px) {
