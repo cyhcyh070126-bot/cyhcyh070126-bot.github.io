@@ -37,19 +37,19 @@ Education
 Research Interests
 ======
 
-- Computational mechanics
-- Scientific machine learning
-- Neural operators and surrogate modeling
-- GPU-accelerated scientific computing
-- Differentiable computing and simulation
+- Computational Mechanics
+- Scientific Machine Learning
+- Neural Operators and Surrogate Modeling
+- GPU-Accelerated Scientific Computing
+- Differentiable Computing and Simulation
 
 Current Research
 ======
 
-- Hybrid FEM–neural operator solvers based on non-overlapping domain decomposition
-- Neural operator learning for subdomain stress prediction
-- Iterative exchange of interface forces and displacements
-- Shared neural operators for 3D fiber-reinforced composites
+- Hybrid FEM–Neural Operator Solvers based on Non-Overlapping Domain Decomposition
+- Neural Operator Learning for Subdomain Stress Prediction
+- Iterative Exchange of Interface Forces and Displacements
+- Shared Neural Operators for 3D Fiber-Reinforced Composites
 
 <h1 id="research-projects"><span id="research-experience">Research Projects</span></h1>
 
