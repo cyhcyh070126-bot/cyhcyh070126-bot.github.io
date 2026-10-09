@@ -8,9 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-Hi! I'm Yanghao Chen, a final-year undergraduate at **[Tongji University](https://www.tongji.edu.cn/)**, majoring in **Engineering Mechanics** in the **[School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/31828/list.htm)**. My interests center on <strong class="research-keyword">Scientific Machine Learning</strong> and <strong class="research-keyword">Computational Mechanics</strong>.
+Hi! I'm Yanghao Chen, a final-year undergraduate at **[Tongji University](https://www.tongji.edu.cn/)**, majoring in **Engineering Mechanics** at the **[School of Aerospace Engineering and Applied Mechanics](https://aero-mech.tongji.edu.cn/31828/list.htm)**. My interests center on <strong class="research-keyword">Scientific Machine Learning</strong> and <strong class="research-keyword">Computational Mechanics</strong>.
 
-My research began with fine-tuning <strong class="research-keyword">Large Language Models</strong> using LoRA on Google Colab for question answering in mechanics of materials. I then developed <strong class="research-keyword">ConvLSTM</strong> models to predict lithium concentration and von Mises stress image sequences in battery materials using MATLAB–COMSOL simulation data. I also studied shock propagation with <strong class="research-keyword">Physics-Informed Neural Networks (PINNs)</strong>, comparing standard and artificial-viscosity formulations against the analytical inviscid solution.
+My research began with fine-tuning <strong class="research-keyword">Large Language Models</strong> using LoRA on Google Colab for question answering in mechanics of materials. I then developed separate <strong class="research-keyword">ConvLSTM</strong> models to predict future image sequences of lithium concentration and von Mises stress in battery materials using MATLAB–COMSOL simulation data. I also used <strong class="research-keyword">Physics-Informed Neural Networks (PINNs)</strong> to study shock propagation governed by the one-dimensional Burgers equation. I compared predictions from standard PINNs and PINNs with fixed artificial viscosity against the analytical inviscid solution.
 
 Together, these experiences have shaped my interest in combining machine learning with numerical methods for scientific simulation. My current research focuses on <strong class="research-keyword">Neural Operators</strong>, which learn mappings between function spaces, and <strong class="research-keyword">Hybrid FEM–Neural Operator Solvers</strong> based on non-overlapping domain decomposition. I aim to combine AI-based models with <strong class="research-keyword">GPU-Accelerated Numerical Computing</strong> to make engineering simulations more efficient and scalable.
 
@@ -28,7 +28,7 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Aug 2026</div>
-      <div class="home-news__content"><strong>3D Bracket Studies:</strong> Extended the workflow to 3D bracket problems, using GRFs to sample interface displacement fields and tractions on internal surfaces. Trained neural operators to predict subdomain stress fields from these inputs.</div>
+      <div class="home-news__content"><strong>3D Bracket Studies:</strong> Extended the workflow to 3D bracket problems, using Gaussian random fields (GRFs) to sample interface displacement fields and tractions on internal surfaces. Trained neural operators to predict subdomain stress fields from these inputs.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jul 2026</div>
@@ -44,7 +44,7 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Nov 2025</div>
-      <div class="home-news__content">Developed standard and artificial-viscosity PINNs for one-dimensional Burgers shock problems, with analytical-reference comparisons of the predicted solution profiles.</div>
+      <div class="home-news__content">Developed standard and artificial-viscosity PINNs for one-dimensional Burgers shock problems, comparing the predicted solution profiles with the analytical reference solution.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jun 2025</div>
