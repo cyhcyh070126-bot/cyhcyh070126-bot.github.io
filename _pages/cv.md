@@ -64,7 +64,7 @@ Current Research
   </div>
 </div>
 
-- **Non-overlapping Domain Decomposition and Hybrid Solver:** Developed a hybrid FEM–neural operator solver based on non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
+- **Non-Overlapping Domain Decomposition and Hybrid Solver:** Developed a hybrid FEM–neural operator solver based on non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
 - **GPU-accelerated Data Generation:** Sampled interface displacement fields using Gaussian random fields (GRFs) and used GPU-accelerated JAX-FEM simulations to generate displacement and stress data for neural-operator training.
 - **Neural Operator Training:** Trained Transolver in JAX to learn mappings from interface displacement fields to stress fields within the neural-operator subdomain.
 - **Iterative Interface Coupling:** Computed interface reaction forces from predicted stresses in the neural-operator subdomain and transferred them to the FEM solver. The FEM solver used these forces to compute updated interface displacements and returned them to the neural operator for the next coupling iteration.
@@ -87,7 +87,7 @@ Current Research
       <picture><source type="image/webp" srcset="/images/research/domain_decomposition_preview.display-640.webp 640w, /images/research/domain_decomposition_preview.display-1280.webp 1280w, /images/research/domain_decomposition_preview.display-1920.webp 1920w, /images/research/domain_decomposition_preview.webp 2592w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/domain_decomposition_preview.png" alt="Full cylinder-domain mesh and its non-overlapping FEM and neural-operator subdomain meshes." loading="lazy" decoding="async" width="2592" height="749" style="background-image:url('data:image/webp;base64,UklGRqwBAABXRUJQVlA4IKABAADwCwCdASp4ACMAPt1kp06opaMiLBOcQRAbiWkACwRXCqrg+iJYTrAic8vYADZeozUwWcVnDTAvRA2/F3xCAbyJdbAy/TRmib3xJvMPpDVetJUvssl942rSeKvl1vh+muszMpfGOOl8AAD++qUowmi6zv5V+swA1Kbj9xuGMy+PZnYrx6RLDNfEmMlCcqRJAQtB8+8gpmfZEZShOFPdZZ27sTuAL2eGROeWi5f88sBd0lEzS5it9kJ0MuTR2O4KaCRqxgk3xznz1Ea0PIV2m56PZEJvTmnmhwGdQ29w1DJ3dZ9NVTj6FHQQSLrJQUTWbXNHClUZ5JG1SWMTMl6XsJCTH8L2vbVc+HjWAT4xo7cB00vgQNV7/xT6RADt0uZ91pMo42m64ddyvmRkTL9ywsRABaqCN9VhId/tBSRha6oCOJzFu86fv/LpaW3rnE4KQIP+OqIDhaGMLzcGhwCOY5UCH8UJkmeGXFh3cH7vxwYvV0DmbntIqMKO7d6Wnvt9RKAhbjTc757+rAeghO/09lJLiymUnEeAahB37vwAAAAAAA==');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
     </a>
     <figcaption>
-      <strong>Non-overlapping Domain Decomposition</strong><br>
+      <strong>Non-Overlapping Domain Decomposition</strong><br>
       The mesh is partitioned into non-overlapping FEM and neural-operator subdomains with a shared interface.
     </figcaption>
   </figure>
