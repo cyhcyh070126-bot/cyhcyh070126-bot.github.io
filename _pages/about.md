@@ -14,7 +14,7 @@ I'm a final-year undergraduate at **[Tongji University](https://en.tongji.edu.cn
 
 My research began with fine-tuning <strong class="research-keyword">Large Language Models</strong> using LoRA on Google Colab for question answering in mechanics of materials. I then developed separate <strong class="research-keyword">ConvLSTM</strong> models to predict future image sequences of lithium concentration and von Mises stress in battery materials using MATLAB–COMSOL simulation data. I also used <strong class="research-keyword">Physics-Informed Neural Networks (PINNs)</strong> to study shock propagation governed by the one-dimensional Burgers equation. I compared predictions from standard PINNs and PINNs with fixed artificial viscosity against the analytical inviscid solution.
 
-Together, these experiences have shaped my interest in combining machine learning with numerical methods for scientific simulation. My current research focuses on <strong class="research-keyword">Neural Operators</strong>, which learn mappings between function spaces, and <strong class="research-keyword">Hybrid FEM–Neural Operator Solvers</strong> based on non-overlapping domain decomposition. I aim to combine AI-based models with <strong class="research-keyword">GPU-accelerated Numerical Computing</strong> to make engineering simulations more efficient and scalable.
+Together, these experiences have shaped my interest in combining machine learning with numerical methods for scientific simulation. My current research focuses on <strong class="research-keyword">Neural Operators</strong>, which learn mappings between function spaces, and <strong class="research-keyword">Hybrid Finite Element–Neural Operator Solvers</strong> based on non-overlapping domain decomposition. I aim to combine AI-based models with <strong class="research-keyword">GPU-accelerated Numerical Computing</strong> to make engineering simulations more efficient and scalable.
 
 At Tongji, I have been fortunate to work under the guidance of **[Prof. Ying Zhao](https://aero-mech.tongji.edu.cn/3a/6b/c26961a211563/page.htm)** and **[Prof. Xianyang (Tom) Chen](https://aero-mech.tongji.edu.cn/50/cc/c22274a348364/page.htm)**. From January to October 2026, I was an undergraduate research intern in the [Department of Civil and Systems Engineering](https://engineering.jhu.edu/case/) at **[Johns Hopkins University](https://www.jhu.edu/)**, working with **[Prof. Somdatta Goswami](https://engineering.jhu.edu/case/faculty/somdatta-goswami/)** in [Centrum IntelliPhysics](https://sites.google.com/view/centrum-intelliphysics/home).
 {: .home-mentorship}
@@ -26,7 +26,7 @@ News
   <div class="home-news__list">
     <article class="home-news__item">
       <div class="home-news__date">Sep 2026</div>
-      <div class="home-news__content"><strong>3D Composite Extension:</strong> Extending the hybrid FEM–neural operator solver to a 100-fiber composite. A shared neural operator computes stress fields across all fiber subdomains, with component-specific weights shared across fibers. Periodic boundary conditions are used to avoid artificial fiber-end effects. <a href="/cv/#fiber-composite">View the composite mesh.</a></div>
+      <div class="home-news__content"><strong>3D Composite Extension:</strong> Extending the hybrid finite element–neural operator solver to a 100-fiber composite. A shared neural operator computes stress fields across all fiber subdomains, with component-specific weights shared across fibers. Periodic boundary conditions are used to avoid artificial fiber-end effects. <a href="/cv/#fiber-composite">View the composite mesh.</a></div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Aug 2026</div>
@@ -34,7 +34,7 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jul 2026</div>
-      <div class="home-news__content"><strong>Cylinder Studies:</strong> Developed a hybrid FEM–neural operator solver for a cylinder problem, using GRFs to sample displacement fields on both inner and outer arcs. Coupled the FEM and neural-operator subdomains through iterative exchange of interface forces and displacements.</div>
+      <div class="home-news__content"><strong>Cylinder Studies:</strong> Developed a hybrid finite element–neural operator solver for a cylinder problem, using GRFs to sample displacement fields on both inner and outer arcs. Coupled the FEM and neural-operator subdomains through iterative exchange of interface forces and displacements.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jul 2026</div>
@@ -42,7 +42,7 @@ News
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Jan 2026</div>
-      <div class="home-news__content">Began a remote undergraduate research internship in the <a href="https://engineering.jhu.edu/case/" target="_blank" rel="noopener noreferrer">Department of Civil and Systems Engineering</a> at Johns Hopkins University, advised by <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>, working on a GPU-accelerated hybrid FEM–neural operator solver.</div>
+      <div class="home-news__content">Began a remote undergraduate research internship in the <a href="https://engineering.jhu.edu/case/" target="_blank" rel="noopener noreferrer">Department of Civil and Systems Engineering</a> at Johns Hopkins University, advised by <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a>, working on a GPU-accelerated hybrid finite element–neural operator solver.</div>
     </article>
     <article class="home-news__item">
       <div class="home-news__date">Nov 2025</div>
@@ -66,7 +66,7 @@ News
 Current Research
 ======
 
-I am developing GPU-accelerated hybrid FEM–neural operator solvers based on non-overlapping domain decomposition. FEM and neural-operator subdomains are connected through shared interfaces. Neural operators learn mappings from interface displacement fields to subdomain stress fields. Interface reaction forces computed from predicted stresses are transferred to the FEM solver. The FEM solver uses these forces to compute updated interface displacements and returns them to the neural operators for the next coupling iteration.
+I am developing GPU-accelerated hybrid finite element–neural operator solvers based on non-overlapping domain decomposition. FEM and neural-operator subdomains are connected through shared interfaces. Neural operators learn mappings from interface displacement fields to subdomain stress fields. Interface reaction forces computed from predicted stresses are transferred to the FEM solver. The FEM solver uses these forces to compute updated interface displacements and returns them to the neural operators for the next coupling iteration.
 
 [View Research Projects in CV](/cv/#research-projects).
 

@@ -32,7 +32,7 @@ Education
 
 - Visiting Undergraduate Research Intern, Department of Civil and Systems Engineering
 - Jan. 2026 - Oct. 2026
-- Research Focus: GPU-accelerated FEM and Hybrid FEM–Neural Operator Solvers
+- Research Focus: GPU-accelerated FEM and Hybrid Finite Element–Neural Operator Solvers
 
 Research Interests
 ======
@@ -46,7 +46,7 @@ Research Interests
 Current Research
 ======
 
-- Hybrid FEM–Neural Operator Solvers based on Non-Overlapping Domain Decomposition
+- Hybrid Finite Element–Neural Operator Solvers based on Non-Overlapping Domain Decomposition
 - Neural Operator Learning for Subdomain Stress Prediction
 - Iterative Exchange of Interface Forces and Displacements
 - Shared Neural Operators for 3D Fiber-Reinforced Composites
@@ -55,7 +55,7 @@ Current Research
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title" id="fem-neural-operator">1. GPU-accelerated Hybrid FEM–Neural Operator Solver</div>
+    <div class="cv-project__title" id="fem-neural-operator">1. GPU-accelerated Hybrid Finite Element–Neural Operator Solver</div>
     <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
@@ -64,7 +64,7 @@ Current Research
   </div>
 </div>
 
-- **Non-Overlapping Domain Decomposition and Hybrid Solver:** Developed a hybrid FEM–neural operator solver based on non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
+- **Non-Overlapping Domain Decomposition and Hybrid Solver:** Developed a hybrid finite element–neural operator solver based on non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
 - **GPU-accelerated Data Generation:** Sampled interface displacement fields using Gaussian random fields (GRFs) and used GPU-accelerated JAX-FEM simulations to generate displacement and stress data for neural-operator training.
 - **Neural Operator Training:** Trained Transolver in JAX to learn mappings from interface displacement fields to stress fields within the neural-operator subdomain.
 - **Iterative Interface Coupling:** Computed interface reaction forces from predicted stresses in the neural-operator subdomain and transferred them to the FEM solver. The FEM solver used these forces to compute updated interface displacements and returned them to the neural operator for the next coupling iteration.
@@ -124,11 +124,11 @@ Current Research
 
   <figure class="research-card" id="cylinder-coupling-results">
     <a href="/files/research/cylinder_coupled_stress_comparison.pdf" target="_blank" rel="noopener noreferrer">
-      <picture><source type="image/webp" srcset="/images/research/cylinder_coupled_stress_comparison.display-640.webp 640w, /images/research/cylinder_coupled_stress_comparison.display-1280.webp 1280w, /images/research/cylinder_coupled_stress_comparison.display-1920.webp 1920w, /images/research/cylinder_coupled_stress_comparison.webp 2200w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FEM-NO solution, and absolute error. Dashed arcs mark the coupling interface." loading="lazy" decoding="async" width="2200" height="1841" style="background-image:url('data:image/webp;base64,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');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+      <picture><source type="image/webp" srcset="/images/research/cylinder_coupled_stress_comparison.display-640.webp 640w, /images/research/cylinder_coupled_stress_comparison.display-1280.webp 1280w, /images/research/cylinder_coupled_stress_comparison.display-1920.webp 1920w, /images/research/cylinder_coupled_stress_comparison.webp 2200w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/cylinder_coupled_stress_comparison.png" alt="Cylinder coupling results in nine panels: rows show sigma xx, sigma yy, and tau xy in MPa; columns compare the monolithic FEM reference, coupled FE-NO solution, and absolute error. Dashed arcs mark the coupling interface." loading="lazy" decoding="async" width="2200" height="1841" style="background-image:url('data:image/webp;base64,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');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
     </a>
     <figcaption>
-      <strong>Coupled FEM–Neural Operator Results</strong><br>
-      Compared the &sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, and &tau;<sub>xy</sub> components of the coupled FEM–neural operator solution with the full FEM reference and plotted the absolute error for each component.
+      <strong>Coupled Finite Element–Neural Operator Results</strong><br>
+      Compared the &sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, and &tau;<sub>xy</sub> components of the coupled finite element–neural operator solution with the full FEM reference and plotted the absolute error for each component.
     </figcaption>
   </figure>
 </div>
