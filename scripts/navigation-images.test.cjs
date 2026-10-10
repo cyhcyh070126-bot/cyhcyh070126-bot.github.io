@@ -95,7 +95,7 @@ test('the same figure warms both CV and Projects display sizes without discardin
 test('display copies exist, materially reduce downloads, and preserve original link destinations', () => {
   const variants = JSON.parse(fs.readFileSync(path.join(root,'_data/image_variants.json')));
   let originalBytes=0, displayBytes=0;
-  assert.equal(Object.keys(variants).length,13);
+  assert.equal(Object.keys(variants).length,16);
   for (const [src, item] of Object.entries(variants)) {
     assert.ok(fs.existsSync(path.join(root,src)));
     const sourceWidth=fs.readFileSync(path.join(root,src)).readUInt32BE(16);
@@ -111,13 +111,23 @@ test('display copies exist, materially reduce downloads, and preserve original l
   const sealBytes=fs.statSync(path.join(root,'images/schools/tongji-university-seal-128.png')).size;
   assert.ok(sealBytes<25000);
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'_data/navigation_images.json')));
-  assert.equal(manifest.length,25);
-  assert.equal(new Set(manifest.map(item=>item.src)).size,23);
+  assert.equal(manifest.length,28);
+  assert.equal(new Set(manifest.map(item=>item.src)).size,26);
   assert.equal(manifest.filter(item=>item.sizes?.endsWith('340px')).length,2);
   manifest.forEach(item=>assert.ok(fs.existsSync(path.join(root,item.src)),item.src));
   const links = text=>[...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
   for (const file of ['_pages/cv.md','_pages/projects.html','_includes/author-profile.html']) {
     const before=execFileSync('git',['show','HEAD:'+file],{cwd:root,encoding:'utf8'});
-    assert.deepEqual(links(fs.readFileSync(path.join(root,file),'utf8')),links(before),file);
+    const expected = links(before);
+    if (file === '_pages/cv.md') {
+      const bracketLinks = ['full', 'inner', 'outer'].map(part=>`/files/research/bracket_hex8_${part}_mesh.pdf`);
+      for (let i=expected.length-1;i>=0;i--) {
+        if (bracketLinks.includes(expected[i])) expected.splice(i,1);
+      }
+      const afterCoupling = expected.indexOf('/files/research/cylinder_coupled_stress_comparison.pdf') + 1;
+      assert.ok(afterCoupling > 0);
+      expected.splice(afterCoupling, 0, ...bracketLinks);
+    }
+    assert.deepEqual(links(fs.readFileSync(path.join(root,file),'utf8')),expected,file);
   }
 });

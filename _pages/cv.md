@@ -131,6 +131,36 @@ Current Research
       Compared the &sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, and &tau;<sub>xy</sub> components of the coupled finite element–neural operator solution with the full FEM reference and plotted the absolute error for each component.
     </figcaption>
   </figure>
+
+  <figure class="research-card" id="bracket-full-mesh">
+    <a href="/files/research/bracket_hex8_full_mesh.pdf" target="_blank" rel="noopener noreferrer">
+      <picture><source type="image/webp" srcset="/images/research/bracket_hex8_full_mesh.display-640.webp 640w, /images/research/bracket_hex8_full_mesh.display-1280.webp 1280w, /images/research/bracket_hex8_full_mesh.display-1920.webp 1920w, /images/research/bracket_hex8_full_mesh.webp 2592w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/bracket_hex8_full_mesh.png" alt="Complete bracket mesh showing the FEM region, annular neural-operator subdomain, and shared interface." loading="lazy" decoding="async" width="2592" height="2496" style="background-image:url('data:image/webp;base64,UklGRmACAABXRUJQVlA4IFQCAAAQFACdASp4AHQAPqlUo00mJSOiIxgKMMAVCWkADqCWhzFQehp3/DDKo1/Ckz4d5/8HZEMoZU4Zhn2Btn6QXQnLgUk+t3lXWADCh7OcrQC+hOLkrwrrUrz6qtfCDbmgCgUonvpk3Ne9pWGjc03oyCMX+2kgvgP5ANi+iRGr+ZGfSZ4OIXQSq8DzkO0uJxMYFjAU/km1fRQdXezYm0lmtQK9RI+Up+XChpAAAP74pEPO0A16Iz142VGQlFHO+r7FSMPS6czQmpsMDF9svF7tlfoz3ekoo/w1X0sD8BOrBOc3+JnZ8vHra6JkAABroAVNFlqMCKmGbhRzhX2wKMpfu+9UdA4oy/c08Ez0Mq3G2a69YWVXSLXP/3d5+u1wYTGJUQAEQKL5ftRilOKuEGbEzxxMcV9whzJ7J83x9BzI88aIhnZzsYmx+8QSdgUqeG2MlUKwXzfDX4bRlbNpGCHxv0e11hZQxoYfv5jSnqGF6767GukK3EKZ+f9/cNlYVVLWYuSUVa4qTx52lMBgX9bA2Jnh40WiMjgBlpRaRxvjJZjxSOc/JitCz1lhqLu9cMmARt1lUBxRM8Rd2y4VguThO+/UFJV9VeH1nDIOpZGiIg69L/THOoo6cpP9OueVUiyGxe7Q7HVCKAbI6QZNaontdYj218YK4che6NdxGyQxlm3XiUFfRipOwIKd/f7kBL+SETjLRjS3gnC9V2MJdjzvX7xEybPjyP87TJ+r3i+/LgsHdZxRiaECAYPdN5obk2f/rQd9Ukjifof3K4BZxZCtUb04QAAAAA==');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+    </a>
+    <figcaption>
+      <strong>Bracket Domain Decomposition</strong><br>
+      The bracket mesh is divided into FEM and neural-operator subdomains with a shared interface.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card" id="bracket-inner-mesh">
+    <a href="/files/research/bracket_hex8_inner_mesh.pdf" target="_blank" rel="noopener noreferrer">
+      <picture><source type="image/webp" srcset="/images/research/bracket_hex8_inner_mesh.display-640.webp 640w, /images/research/bracket_hex8_inner_mesh.display-1280.webp 1280w, /images/research/bracket_hex8_inner_mesh.display-1920.webp 1920w, /images/research/bracket_hex8_inner_mesh.webp 2592w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/bracket_hex8_inner_mesh.png" alt="Annular neural-operator subdomain mesh with 5,760 HEX8 elements and the interface marked in red." loading="lazy" decoding="async" width="2592" height="2496" style="background-image:url('data:image/webp;base64,UklGRsgCAABXRUJQVlA4ILwCAAAwFACdASp4AHQAPqlSokwmJSMiJhlaUMAVCWcAV//VDn/zxTllQ7OSCrjnmvAouxudnahyRL4mBcjaCtP+MAkUHa5zr3hSnq2WoQ4M2HtjtDfOLbSYwmOSx0fi21biQw/cwSWNOxM5PePu3wLp9L3JK7Y7IpB3EL6BLNwFrHgn8Sgp1YrZN3Pp5hWLlkvsPTAOMj1InlgwU5tzrHFM5T2EeVcfx0Fj/+MoAAD++PSQ6zxwtpPFFtCwn7XgFnV1ug/sWCE04mwRfQw0CRB6sN3V1O0O3HhDn6Zqbwvk36jSCvzqswa++gQfd3x97O2eriq6cSqo+ntzxqmAnAs/+xQCDtwEUSqEGRXoGAxOhYAu9JHUypdI8/j38SnzOT8hfZdQRldYBI1kbXMLbh1v1sb3SZ1o1zT42Ec5eyjhZp+DVHJWmZYC2qcxJ0+fZ0RAnLeXpDeZKPLRNtr/x7fxJyO9Ydb6IeJ/wT7cey9WJ5zZwMsjTN55lySQvYzaeuXgLkskz4gpG9HDUrm8g4fANMymOVoatvVqtKGaure46PPm6ygysSCnI1vG2pQ+IeBS0FCUgv7FocWlwpIOKBi7a3QOwEGAu9K3ZPJjM4WEeRF4AhYMEzQhGrDXok6MeQSVAgI/Hr6vRTnMWx9X5WSAxsO8kv23WxZO2dsE681anm0c9GGlyBxl6Rmglz2TdiwCXWM1tg1zyzt0reTlAgch0IvWEBjgoL5hnjz0HAEQbeLB94muLw5rztQAPYuVkHAdRwnRO7s/hWLqQyxgtloAABa37RUjT96RBNtucNoU/ngDUG30le61tPCWA2FQTH7PIQsPvy2jMxzdoOKIik6CI0A34Q/QSiDrNJaMAJVxnMIGnHFD1LSuKGkQtIdRTij5s1wLZit+mbD4znRG6z/8ETqK70eHP+vCj4AAAAAA');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+    </a>
+    <figcaption>
+      <strong>Bracket Inner Subdomain Mesh</strong><br>
+      Inner neural-operator subdomain with 5,760 HEX8 elements.
+    </figcaption>
+  </figure>
+
+  <figure class="research-card" id="bracket-outer-mesh">
+    <a href="/files/research/bracket_hex8_outer_mesh.pdf" target="_blank" rel="noopener noreferrer">
+      <picture><source type="image/webp" srcset="/images/research/bracket_hex8_outer_mesh.display-640.webp 640w, /images/research/bracket_hex8_outer_mesh.display-1280.webp 1280w, /images/research/bracket_hex8_outer_mesh.display-1920.webp 1920w, /images/research/bracket_hex8_outer_mesh.webp 2592w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/bracket_hex8_outer_mesh.png" alt="Outer bracket FEM subdomain mesh with 5,616 HEX8 elements and the interface marked in red." loading="lazy" decoding="async" width="2592" height="2496" style="background-image:url('data:image/webp;base64,UklGRj4CAABXRUJQVlA4IDICAACQEQCdASp4AHQAPqlQpEymJKOiJxbY+MAVCWkADqT2Xy6IgYhwN2Wqq7wlIHG0Co/xeeKS/XkKTJCBabot3jTb86q/oqtwgaRhYrpXjmJy/d9/SWgjkExMQFXdVLGXmwmCWEaY8/uKxI26VSUJRh1L2JYwU+JbzCsrAXF81nH5Xv8pIV8vYastsrQgyCugvQKOV6GS0AD+9qfKOj6XftgAFdjvJY2Qy0JZOyTqPv7C3pm1oNrHy85fQTWe/7kQbBq6SHCCQs5uWJjyB6MU9lqe4LwLs6Zq5ACtjXPKuuurCmQ3pYCJ2vXVJbeTwl7wx0ZoXAvcurqKT0cK2Ru9XmPtK+03tw8Gc3loVyo5qQkJvl0SnMY76cC0OOp2UspuWTw6sXt7Irb3cK+GFQq8eWeiZPTwAo4aysjRoCWZwN6OaP03xABB2KCVLryhXcZfC5fCSy+MWBGXZX8jZWYfKRymgW4Fm1KYEeJ6r187ImmxaCKA/jYMwiY+wm/BpA4COSDCVk4NvQfQ4gAjQGCK3S63E3BQZKkTcGIikPI5fo3RlCoEiPwdwyNtZVUmoPlYgZfeqDDU1y7u9ksAvvRzFHlQaAZH2vZjuaVQIfR1M62IRBPEzlYzDsUNItv6duNEs73shNzmAS/ozjk4ndgKLzYNTbiGCVeM6Ky2mkQUtf4Wj0oCA8tFIyi/AOS4E7gAqpgkkuMCeD0wh3IozJWCBIZ2Y165JhMJyj/E1z4C9aAAAAAA');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+    </a>
+    <figcaption>
+      <strong>Bracket Outer Subdomain Mesh</strong><br>
+      Outer FEM subdomain with 5,616 HEX8 elements and a shared interface.
+    </figcaption>
+  </figure>
 </div>
 
 <div class="research-gallery research-gallery--single research-gallery--composite">
