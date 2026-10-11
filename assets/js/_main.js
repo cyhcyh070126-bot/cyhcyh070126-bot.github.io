@@ -141,8 +141,17 @@ $(document).ready(function () {
 
   // Follow menu drop down
   $(".author__urls-wrapper button").on("click", function () {
-    $(".author__urls").fadeToggle("fast", function () { });
+    $(".author__urls").stop(true, true).fadeToggle("fast");
     $(".author__urls-wrapper button").toggleClass("open");
+  });
+
+  $(document).on("click", function (event) {
+    if ($(event.target).closest(".author__urls-wrapper").length) return;
+    var followButton = $(".author__urls-wrapper button");
+    if (followButton.is(":visible") && $(".author__urls").is(":visible")) {
+      $(".author__urls").stop(true, true).fadeOut("fast");
+      followButton.removeClass("open");
+    }
   });
 
   // Restore the follow menu if toggled on a window resize
