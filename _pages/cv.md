@@ -161,9 +161,7 @@ Current Research
       Outer FEM subdomain with 5,616 HEX8 elements and a shared interface.
     </figcaption>
   </figure>
-</div>
 
-<div class="research-gallery research-gallery--prototype">
   <figure class="research-card" id="fiber-cube">
     <a href="/files/research/fiber100_cube.pdf" target="_blank" rel="noopener noreferrer">
       <picture><source type="image/webp" srcset="/images/research/fiber100_cube.display-640.webp 640w, /images/research/fiber100_cube.display-1280.webp 1280w, /images/research/fiber100_cube.display-1920.webp 1920w, /images/research/fiber100_cube.webp 2400w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/fiber100_cube.png" alt="Three-dimensional geometry of 100 parallel fibers, each 0.50 mm in diameter, embedded in a 10 by 10 by 10 mm cubic matrix." loading="lazy" decoding="async" width="2400" height="2400" style="background-image:url('data:image/webp;base64,UklGRlwCAABXRUJQVlA4IFACAACwDwCdASpaAFoAPt1oq0+opiQiKBVbiRAbiWcA1Bm8P8bdNdlMsqH9yX1Yexi5F2uAO54wGVEizgwWz2+PmMKsfeP8raI4tNYn7yZYKfDmN4qFWWGk+9mgv0B4Y4Q3VFHXQNu1fTTLxuWJWXT66NGM/yTlje5VfmiEaebOF/Bshn8iPylkAAD+9ff/iwFf2XgRW/Nn0DkBvkvbqdbtwoTPgANHkv/ZwKO7na7Cm8+ElF7qoJk8B3kBeSNx/4VsPgUrPOBZEJnqUuIVmJGgKv7fr2BUZoixZUbFSI7QeBlUvtDGJ/pgJVR0xYgGCQRfU6pxoEIGuX07tvVl21FN1zSooW4XHcVMvZzS3rK7s4P9OPAjHFa3k6Cc4TTM892i3PGT35/k9Yoj8WjHxUjaKkH5GunL5fGv0eG5ARDKSIQ1Y8wRl1J7+J6B+WCMrLeNT7S2QtTIcVNNe63aNZ5sWJubA8LW9Nj85SXKZUcaZ/EbbarKHntrHaD/pDZHNyUe/YLAUCdZSrrq7QhrZfBRJX0hjKNH6Exi898eTE0GE49LVTmdmAh7tGwntmehYOHzsUTJpgkFP+6gycoutKUDTEhgV5lV58OBOy/kt5TM6z4mBYkDX5IK9XwqxIH8Otjgrex1636cAuH5Bld3naeM9GxxUvJ4WPXj1TSOtbLpVWHcu6xslHp7s7z1xR0Lvw3a/MWCQhypLzD4MicW0pkl//kw2OherEbCyT2hvdFwlK93ZPRm0KTP9jFY92sm3StCfwwfXsSTMKfzLDPNEAwyAAAA');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
