@@ -7,6 +7,9 @@
    ========================================================================== */
 
 .sidebar {
+  // Keep the compact Follow menu above the following page content.
+  position: relative;
+  z-index: 1;
   -webkit-transform: translate3d(0, 0 , 0);
           transform: translate3d(0, 0 , 0);
 
@@ -22,6 +25,7 @@
     height: auto;
     overflow: visible;
     position: static;
+    z-index: auto;
     // The navigation script still adds inline padding for the old fixed sidebar.
     padding-top: 0 !important;
     @include span(2 of 12);
