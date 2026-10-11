@@ -127,7 +127,10 @@ test('display copies exist, materially reduce downloads, and preserve original l
       const afterCoupling = expected.indexOf('/files/research/cylinder_coupled_stress_comparison.pdf') + 1;
       assert.ok(afterCoupling > 0);
       expected.splice(afterCoupling, 0, ...bracketLinks);
-      const fiberLinks = ['/files/research/fiber100_cube.pdf', '/files/research/composite_n100_mesh_overview.pdf', '/files/research/fiber100_xy_boundary_conditions.pdf'];
+      for (let i=0;i<expected.length;i++) {
+        if (expected[i] === '/files/research/fiber100_cube.pdf') expected[i] = '/files/research/fiber100_unit_cell.pdf';
+      }
+      const fiberLinks = ['/files/research/fiber100_unit_cell.pdf', '/files/research/composite_n100_mesh_overview.pdf', '/files/research/fiber100_xy_boundary_conditions.pdf'];
       const fiberIndex = expected.findIndex(link=>fiberLinks.includes(link));
       assert.ok(fiberIndex >= 0);
       const withoutFiber = expected.filter(link=>!fiberLinks.includes(link));
