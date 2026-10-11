@@ -10,8 +10,7 @@ const reuse = process.argv.includes('--reuse');
   const sources = [...new Set([...cv.matchAll(/<img\b[^>]*src="(\/images\/research\/[^\"]+\.png)"/g)].map(m => m[1]))];
   const variants = {};
   const wide = /(?:battery_prediction_summary|llm_finetuning_workflow_v2)\.png$/;
-  const sizes = src => /composite_n100_mesh_overview\.png$/.test(src) ? '(max-width: 900px) calc(100vw - 48px), 1100px' :
-    wide.test(src) ? '(max-width: 1280px) calc(100vw - 48px), 1232px' :
+  const sizes = src => wide.test(src) ? '(max-width: 1280px) calc(100vw - 48px), 1232px' :
     '(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px';
   let before = 0, after = 0;
   for (const src of sources) {

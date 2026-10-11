@@ -95,7 +95,7 @@ test('the same figure warms both CV and Projects display sizes without discardin
 test('display copies exist, materially reduce downloads, and preserve original link destinations', () => {
   const variants = JSON.parse(fs.readFileSync(path.join(root,'_data/image_variants.json')));
   let originalBytes=0, displayBytes=0;
-  assert.equal(Object.keys(variants).length,16);
+  assert.equal(Object.keys(variants).length,18);
   for (const [src, item] of Object.entries(variants)) {
     assert.ok(fs.existsSync(path.join(root,src)));
     const sourceWidth=fs.readFileSync(path.join(root,src)).readUInt32BE(16);
@@ -111,8 +111,8 @@ test('display copies exist, materially reduce downloads, and preserve original l
   const sealBytes=fs.statSync(path.join(root,'images/schools/tongji-university-seal-128.png')).size;
   assert.ok(sealBytes<25000);
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'_data/navigation_images.json')));
-  assert.equal(manifest.length,28);
-  assert.equal(new Set(manifest.map(item=>item.src)).size,26);
+  assert.equal(manifest.length,30);
+  assert.equal(new Set(manifest.map(item=>item.src)).size,28);
   assert.equal(manifest.filter(item=>item.sizes?.endsWith('340px')).length,2);
   manifest.forEach(item=>assert.ok(fs.existsSync(path.join(root,item.src)),item.src));
   const links = text=>[...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
@@ -127,6 +127,11 @@ test('display copies exist, materially reduce downloads, and preserve original l
       const afterCoupling = expected.indexOf('/files/research/cylinder_coupled_stress_comparison.pdf') + 1;
       assert.ok(afterCoupling > 0);
       expected.splice(afterCoupling, 0, ...bracketLinks);
+      const fiberLinks = ['/files/research/fiber100_cube.pdf', '/files/research/composite_n100_mesh_overview.pdf', '/files/research/fiber100_xy_boundary_conditions.pdf'];
+      const fiberIndex = expected.findIndex(link=>fiberLinks.includes(link));
+      assert.ok(fiberIndex >= 0);
+      const withoutFiber = expected.filter(link=>!fiberLinks.includes(link));
+      expected.splice(0, expected.length, ...withoutFiber.slice(0, fiberIndex), ...fiberLinks, ...withoutFiber.slice(fiberIndex));
     }
     assert.deepEqual(links(fs.readFileSync(path.join(root,file),'utf8')),expected,file);
   }
