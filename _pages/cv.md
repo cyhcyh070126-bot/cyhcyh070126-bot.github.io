@@ -65,9 +65,9 @@ Current Research
 </div>
 
 - **Non-Overlapping Domain Decomposition and Hybrid Solver:** Developed a hybrid finite element–neural operator solver based on non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
-- **GPU-accelerated Data Generation:** Sampled interface displacement fields using Gaussian random fields (GRFs) and used GPU-accelerated JAX-FEM simulations to generate displacement and stress data for neural-operator training.
+- **GPU-accelerated Data Generation:** Used actual interface displacement data to guide Gaussian random field (GRF) sampling and generated paired interface displacement and subdomain stress fields with GPU-accelerated JAX-FEM simulations for neural-operator training.
 - **Neural Operator Training:** Trained Transolver in JAX to learn mappings from interface displacement fields to stress fields within the neural-operator subdomain.
-- **Iterative Interface Coupling:** Computed interface reaction forces from predicted stresses in the neural-operator subdomain and transferred them to the FEM solver. The FEM solver used these forces to compute updated interface displacements and returned them to the neural operator for the next coupling iteration.
+- **Iterative Interface Coupling:** Computed interface reaction forces from neural-operator stress predictions and exchanged them with FEM-computed interface displacements during coupling iterations. Investigated convergence acceleration strategies and relaxation parameters for the coupled solver.
 
 **Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
 
@@ -206,8 +206,8 @@ Current Research
 
 - **Automated Simulation and Data Generation:** Generated polycrystalline NMC microstructures and automated MATLAB–COMSOL simulations to produce time-aligned image sequences of lithium concentration and von Mises stress.
 - **Concentration Field and Stress Field Prediction:** Trained separate conditional ConvLSTM models in PyTorch to predict future image sequences of lithium concentration and von Mises stress, using past image sequences, grain-orientation maps, and C-rate inputs.
-- **Model Training:** Trained the models with MSE and SSIM losses, using scheduled sampling to select reference or model-predicted frames as inputs during training.
-- **Prediction Evaluation:** Compared predicted lithium concentration and von Mises stress image sequences with COMSOL reference sequences and analyzed error accumulation during autoregressive prediction.
+- **Model Training:** Trained the models with MSE and SSIM losses, using scheduled sampling to introduce model-generated inputs during training and reduce the mismatch between training and autoregressive use.
+- **Prediction Evaluation:** Evaluated autoregressive concentration and stress predictions against COMSOL reference sequences, examining error accumulation over successive prediction steps.
 
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
@@ -298,7 +298,7 @@ Current Research
 - **Burgers Shock Problem:** Studied shock propagation in the one-dimensional inviscid Burgers equation with discontinuous initial conditions, using the analytical solution as a reference.
 - **Standard PINN:** Trained a PINN in PyTorch using PDE-residual, initial-condition, and boundary-condition losses, with automatic differentiation to compute the derivatives in the PDE residual.
 - **Artificial-Viscosity PINN:** Added an artificial-viscosity term with a fixed coefficient to the PDE residual and trained a second PINN to predict the shock profile.
-- **Prediction Comparison:** Compared standard and artificial-viscosity PINN predictions against the analytical inviscid solution, analyzing shock location, transition width, and errors near the discontinuity.
+- **Prediction Comparison:** Compared both PINNs with the analytical inviscid solution, examining shock location and transition width; observed that fixed artificial viscosity reduced the relative <i>L</i><sup>2</sup> error while increasing the maximum pointwise error.
 
 <div class="research-gallery research-gallery--pinn">
   <figure class="research-card research-card--pinn-overview" id="pinn-framework">
