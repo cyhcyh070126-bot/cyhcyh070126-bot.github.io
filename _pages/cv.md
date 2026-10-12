@@ -298,7 +298,7 @@ Current Research
 - **Burgers Shock Problem:** Studied shock propagation in the one-dimensional inviscid Burgers equation with discontinuous initial conditions, using the analytical solution as a reference.
 - **Standard PINN:** Trained a PINN in PyTorch using PDE-residual, initial-condition, and boundary-condition losses, with automatic differentiation to compute the derivatives in the PDE residual.
 - **Artificial-Viscosity PINN:** Added an artificial-viscosity term with a fixed coefficient to the PDE residual and trained a second PINN to predict the shock profile.
-- **Prediction Comparison:** Compared both PINNs with the analytical inviscid solution, examining shock location and transition width; observed that fixed artificial viscosity reduced the relative <i>L</i><sup>2</sup> error while increasing the maximum pointwise error.
+- **Prediction Comparison:** Compared standard and artificial-viscosity PINNs against the analytical inviscid solution, evaluating shock location, transition width, relative <i>L</i><sup>2</sup> error, and maximum pointwise error.
 
 <div class="research-gallery research-gallery--pinn">
   <figure class="research-card research-card--pinn-overview" id="pinn-framework">
