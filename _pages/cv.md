@@ -64,7 +64,7 @@ Current Research
   </div>
 </div>
 
-- **Non-Overlapping Domain Decomposition and Hybrid Solver:** Investigating a hybrid finite element–neural operator solver using non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
+- **Non-Overlapping Domain Decomposition and Hybrid Solver:** Developing a hybrid finite element–neural operator solver using non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
 - **GPU-accelerated Data Generation:** Generated interface displacement samples using Gaussian random fields and computed the corresponding subdomain stress fields with GPU-accelerated JAX-FEM simulations to form paired training data.
 - **Neural Operator Training:** Trained Transolver in JAX on these paired data to learn the mapping from interface displacement fields to subdomain stress fields.
 - **Iterative Interface Coupling:** Computed interface reaction forces from neural-operator stress predictions and exchanged them with FEM-computed interface displacements during coupling iterations. Investigated convergence acceleration strategies and relaxation parameters for the coupled solver.
