@@ -55,7 +55,7 @@ Current Research
 
 <div class="cv-project">
   <div class="cv-project__header">
-    <div class="cv-project__title" id="fem-neural-operator">1. GPU-accelerated Hybrid Finite Element–Neural Operator Solver</div>
+    <div class="cv-project__title" id="fem-neural-operator">1. GPU-accelerated Hybrid Finite Element–Neural Operator Solver (Ongoing)</div>
     <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
@@ -64,9 +64,9 @@ Current Research
   </div>
 </div>
 
-- **Non-Overlapping Domain Decomposition and Hybrid Solver:** Developed a hybrid finite element–neural operator solver based on non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
-- **GPU-accelerated Data Generation:** Used actual interface displacement data to guide Gaussian random field (GRF) sampling and generated paired interface displacement and subdomain stress fields with GPU-accelerated JAX-FEM simulations for neural-operator training.
-- **Neural Operator Training:** Trained Transolver in JAX to learn mappings from interface displacement fields to stress fields within the neural-operator subdomain.
+- **Non-Overlapping Domain Decomposition and Hybrid Solver:** Investigating a hybrid finite element–neural operator solver using non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
+- **GPU-accelerated Data Generation:** Generated interface displacement samples using Gaussian random fields and computed the corresponding subdomain stress fields with GPU-accelerated JAX-FEM simulations to form paired training data.
+- **Neural Operator Training:** Trained Transolver in JAX on these paired data to learn the mapping from interface displacement fields to subdomain stress fields.
 - **Iterative Interface Coupling:** Computed interface reaction forces from neural-operator stress predictions and exchanged them with FEM-computed interface displacements during coupling iterations. Investigated convergence acceleration strategies and relaxation parameters for the coupled solver.
 
 **Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
