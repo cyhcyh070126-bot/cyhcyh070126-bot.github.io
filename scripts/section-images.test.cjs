@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const script = fs.readFileSync(path.join(__dirname, '../assets/js/section-images.js'), 'utf8');
-function setup(connection) {
+function setup(connection, observe = false) {
   const idle = [], events = {}, decoded = [], cleared = [];
   const images = Array.from({ length: 6 }, (_, index) => ({
     index, loading: 'lazy', complete: false, naturalWidth: 0, listeners: {},
@@ -18,6 +18,11 @@ function setup(connection) {
     compareDocumentPosition(img) { return img.index >= index ? 4 : 2; }
   }));
   const window = { requestIdleCallback: fn => idle.push(fn) };
+  let onIntersect;
+  if (observe) window.IntersectionObserver = class {
+    constructor(fn) { onIntersect = fn; }
+    observe() {}
+  };
   vm.runInNewContext(script, {
     URL, Promise, WeakMap, navigator: { connection }, window,
     location: { href: 'https://example.com/cv/', origin: 'https://example.com', pathname: '/cv/' },
@@ -28,7 +33,7 @@ function setup(connection) {
       addEventListener: (name, fn) => { events[name] = fn; }
     }
   });
-  return { window, images, idle, events, decoded, cleared };
+  return { window, images, idle, events, decoded, cleared, intersect: indexes => onIntersect(indexes.map(i => ({ target: images[i], isIntersecting: true }))) };
 }
 test('background image preparation is bounded to two requests, seeded across projects', async () => {
   const app = setup();
@@ -63,4 +68,19 @@ test('external, other-page and malformed anchors leave this gallery untouched', 
     app.window.sitePrepareSection(href, true);
   }
   assert.ok(app.images.every(img => img.loading === 'lazy'));
+});
+
+test('nearby images load before distant background images and clear the preview', async () => {
+  const app = setup(undefined, true);
+  app.intersect([4, 5]);
+  app.idle[0]();
+  assert.deepEqual(app.images.filter(img => img.loading === 'eager').map(img => img.index), [4, 5]);
+  assert.ok(app.images[4].fetchPriority === 'high');
+  app.images[4].finish();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.ok(app.images.slice(0, 4).every(img => img.loading === 'lazy'));
+  app.images[5].finish();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.ok(app.cleared.includes(4) && app.cleared.includes(5));
+  assert.equal(app.images[0].loading, 'eager');
 });

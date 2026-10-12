@@ -23,6 +23,7 @@
   });
   var connection = navigator.connection;
   var jobs = new WeakMap();
+  var urgentJobs = new Set();
   function limited() {
     return connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType));
   }
@@ -39,7 +40,22 @@
       });
       jobs.set(img, job);
     }
-    return jobs.get(img);
+    var result = jobs.get(img);
+    if (priority === "high" && !img.complete && !urgentJobs.has(img)) {
+      urgentJobs.add(img);
+      result.finally(function () { urgentJobs.delete(img); pump(); });
+    }
+    return result;
+  }
+  // Scrolling deserves the same priority as an explicit section jump.
+  // Keep the existing responsive source and full-resolution PDF/image link.
+  if (window.IntersectionObserver) {
+    var nearby = new window.IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) prepare(entry.target, "high");
+      });
+    }, { rootMargin: "400px 0px" });
+    images.forEach(function (img) { nearby.observe(img); });
   }
   window.sitePrepareSection = function (href, urgent) {
     if (!urgent && limited()) return;
@@ -60,7 +76,7 @@
   var queue = first.concat(images.filter(function (img) { return !first.includes(img); }));
   var active = 0;
   function pump() {
-    if (limited() || document.visibilityState === "hidden") return;
+    if (limited() || document.visibilityState === "hidden" || urgentJobs.size || !queue) return;
     while (active < 2 && queue.length) {
       var img = queue.shift();
       if (img.complete && img.naturalWidth) continue;

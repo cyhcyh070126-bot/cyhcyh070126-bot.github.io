@@ -120,9 +120,10 @@ test('display copies exist, materially reduce downloads, and preserve original l
     const before=execFileSync('git',['show','HEAD:'+file],{cwd:root,encoding:'utf8'});
     const expected = links(before);
     if (file === '_pages/cv.md') {
-      const bracketLinks = ['full', 'inner', 'outer'].map(part=>`/files/research/bracket_hex8_${part}_mesh.pdf`);
+      const bracketLinks = ['full', 'inner'].map(part=>`/files/research/bracket_hex8_${part}_mesh.pdf`)
+        .concat('/files/research/bracket_grf_stress_comparison_v1.pdf');
       for (let i=expected.length-1;i>=0;i--) {
-        if (bracketLinks.includes(expected[i])) expected.splice(i,1);
+        if (bracketLinks.includes(expected[i]) || expected[i] === '/files/research/bracket_hex8_outer_mesh.pdf') expected.splice(i,1);
       }
       const afterCoupling = expected.indexOf('/files/research/cylinder_coupled_stress_comparison.pdf') + 1;
       assert.ok(afterCoupling > 0);
