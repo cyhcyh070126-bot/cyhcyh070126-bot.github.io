@@ -1,0 +1,28 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Research PDF</title>
+<link rel="icon" href="/images/favicon.svg">
+<link rel="stylesheet" href="/assets/vendor/pdfjs-5.6.205/pdf_viewer.css">
+<style>
+html,body{margin:0;width:100%;height:100%;background:#525659;font-family:Arial,sans-serif}
+#document-container{position:absolute;inset:0;overflow:auto;outline:none}
+.pdfViewer{padding:8px 0}
+#image-container{position:absolute;inset:0;overflow:auto;display:grid;place-items:center}
+#image-container[hidden],#document-container[hidden]{display:none}
+#image-container img{display:block;max-width:100%;max-height:100dvh;object-fit:contain;cursor:zoom-in}
+#image-container.enlarged{display:block}#image-container.enlarged img{max-width:none;max-height:none;cursor:zoom-out}
+#loading{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;color:white;font-size:16px}
+#loading[hidden]{display:none}#loading a{color:white;pointer-events:auto}
+@media print{html,body{background:white}#document-container{position:static;overflow:visible}.pdfViewer .page{break-after:page;margin:0;border:0}#loading{display:none}}
+</style></head><body>
+<div id="document-container" tabindex="0" aria-label="PDF document"><div class="pdfViewer" id="pdf-pages"></div></div>
+<div id="image-container" hidden></div><div id="loading" role="status">Loading PDF…</div>
+<script>
+document.addEventListener('keydown',function(event){
+ if(event.key!=='Escape'||event.ctrlKey||event.metaKey||event.altKey||event.repeat)return;
+ event.preventDefault();window.close();
+ setTimeout(function(){location.replace(document.body.dataset.returnUrl||'/cv/');},100);
+});
+</script><script type="module" src="reader.js?v={{ site.github.build_revision }}"></script></body></html>
