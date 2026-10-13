@@ -1,11 +1,34 @@
-import {collectResearchFiles} from '/assets/js/research-files.js';
-
 const container = document.getElementById('document-container');
 const imageContainer = document.getElementById('image-container');
 const message = document.getElementById('loading');
 const params = new URLSearchParams(location.search);
 let pdfApiPromise, viewerPromise, viewer, linkService;
 let task=null,revision=0,index=0,items=[];
+
+function readyImage(){
+ return !imageContainer.hidden&&document.body.dataset.ready==='true'?imageContainer.querySelector('img'):null;
+}
+function resetImageZoom(){
+ const image=readyImage();if(!image)return;
+ image.style.width='';image.style.height='';imageContainer.classList.remove('enlarged');imageContainer.scrollTo(0,0);
+}
+function setImageZoom(scale,origin){
+ const image=readyImage();if(!image||!image.naturalWidth||!Number.isFinite(scale))return;
+ const bounds=imageContainer.getBoundingClientRect(),before=image.getBoundingClientRect();
+ const fit=Math.min(1,imageContainer.clientWidth/image.naturalWidth,imageContainer.clientHeight/image.naturalHeight);
+ scale=Math.max(fit*.1,Math.min(8,scale));
+ const point=origin||[bounds.left+imageContainer.clientWidth/2,bounds.top+imageContainer.clientHeight/2];
+ const x=Math.max(0,Math.min(1,(point[0]-before.left)/before.width));
+ const y=Math.max(0,Math.min(1,(point[1]-before.top)/before.height));
+ imageContainer.classList.add('enlarged');
+ image.style.width=image.naturalWidth*scale+'px';image.style.height=image.naturalHeight*scale+'px';
+ const after=image.getBoundingClientRect();
+ imageContainer.scrollLeft+=after.left+x*after.width-point[0];
+ imageContainer.scrollTop+=after.top+y*after.height-point[1];
+}
+function zoomImage(factor,origin){
+ const image=readyImage();if(image)setImageZoom(image.getBoundingClientRect().width/image.naturalWidth*factor,origin);
+}
 
 // Images/GIFs use the original file directly, without downloading a PDF renderer.
 function loadPdfApi() {
@@ -52,13 +75,13 @@ async function show(nextIndex) {
  const url=new URL(location.href);url.searchParams.set('file',entry.file);url.searchParams.delete('figure');history.replaceState(null,'',url);
  const previousTask=task;task=null;viewer?.setDocument(null);linkService?.setDocument(null);
  if(previousTask)previousTask.destroy().catch(()=>{});
- imageContainer.replaceChildren();imageContainer.classList.remove('enlarged');
+ imageContainer.replaceChildren();imageContainer.classList.remove('enlarged');imageContainer.scrollTo(0,0);
  if(!/\.pdf$/i.test(entry.file)){
   container.hidden=true;imageContainer.hidden=false;
-  const image=new Image();image.alt=entry.title;
+  const image=new Image();image.alt=entry.title;image.fetchPriority='high';
   image.onload=()=>{if(generation===revision){message.hidden=true;document.body.dataset.ready='true';}};
   image.onerror=()=>fail(entry,generation);
-  image.onclick=()=>imageContainer.classList.toggle('enlarged');
+  image.onclick=()=>{if(imageContainer.classList.contains('enlarged'))resetImageZoom();else setImageZoom(1);};
   image.src=entry.file;imageContainer.append(image);return;
  }
  container.hidden=false;imageContainer.hidden=true;
@@ -87,6 +110,11 @@ document.addEventListener('keydown',event=>{
   else viewer.updateScale({steps:event.key==='-'?-1:1,drawingDelay:150});
   return;
  }
+ if((event.ctrlKey||event.metaKey)&&['+','=','-','0'].includes(event.key)&&readyImage()){
+  event.preventDefault();
+  if(event.key==='0')resetImageZoom();else zoomImage(event.key==='-'?1/1.2:1.2);
+  return;
+ }
  if(event.ctrlKey||event.metaKey||event.altKey||event.shiftKey)return;
  if(event.key==='ArrowLeft'||event.key==='ArrowRight'){
   event.preventDefault();show(index+(event.key==='ArrowRight'?1:-1));
@@ -95,6 +123,12 @@ document.addEventListener('keydown',event=>{
 container.addEventListener('wheel',event=>{
  if((!event.ctrlKey&&!event.metaKey)||!viewer?.pdfDocument)return;
  event.preventDefault();viewer.updateScale({scaleFactor:Math.exp(-event.deltaY*.002),origin:[event.clientX,event.clientY],drawingDelay:150});
+},{passive:false});
+imageContainer.addEventListener('wheel',event=>{
+ if((!event.ctrlKey&&!event.metaKey)||!readyImage())return;
+ event.preventDefault();
+ const pixels=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?imageContainer.clientHeight:1);
+ zoomImage(Math.exp(-Math.max(-500,Math.min(500,pixels))*.002),[event.clientX,event.clientY]);
 },{passive:false});
 window.addEventListener('resize',()=>{if(viewer?.pdfDocument)viewer.currentScaleValue='page-fit';});
 
@@ -113,13 +147,14 @@ function readContext(){
 }
 const contextItems=readContext();
 const indexRequest=contextItems?null:fetch('/search-index.json'+(params.get('v')?'?v='+encodeURIComponent(params.get('v')):''));
+const collectorRequest=contextItems?null:import('/assets/js/research-files.js'+(params.get('v')?'?v='+encodeURIComponent(params.get('v')):''));
 if(/^\/files\/research\/[^/?#]+\.pdf$/i.test(params.get('file')||'')) {
  loadPdfViewer().catch(()=>{}); // Actual display reports errors with the original-file fallback.
 }
 try{
  if(contextItems)items=contextItems;
  else{
-  const response=await indexRequest;
+  const [response,{collectResearchFiles}]=await Promise.all([indexRequest,collectorRequest]);
   if(!response.ok)throw new Error('Unable to load research index');
   const data=await response.json();
   const template=document.createElement('template');template.innerHTML=data.cv.html;

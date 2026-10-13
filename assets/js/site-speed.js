@@ -9,6 +9,7 @@
       url.hash = "";
       if (url.pathname === here.pathname && url.search === here.search) return null;
       if (["/", "/cv/", "/projects/"].includes(url.pathname)) return { url: url.href, type: "document" };
+      if (url.pathname === "/research-viewer/") return { url: url.href, type: "reader" };
       if (/^\/(images|files)\//.test(url.pathname) && /\.(png|jpe?g|gif|webp|svg|pdf)$/i.test(url.pathname)) {
         return { url: url.href, type: "asset" };
       }
@@ -33,6 +34,7 @@
   var warmed = new Set();
   var connected = new Set();
   var assetCount = 0;
+  var readerCount = 0;
   function connect(href) {
     if (constrained()) return;
     try {
@@ -50,9 +52,21 @@
     if (constrained()) return;
     var item = destination(href, location.href);
     if (!item) { connect(href); return; }
-    if (warmed.has(item.url) || (item.type === "asset" && assetCount >= 8)) return;
+    if (warmed.has(item.url) || (item.type === "asset" && assetCount >= 8) || (item.type === "reader" && readerCount >= 4)) return;
     warmed.add(item.url);
     if (item.type === "asset") assetCount++;
+    if (item.type === "reader") {
+      readerCount++;
+      var reader = new URL(item.url), script = new URL("/research-viewer/reader.js", reader);
+      if (reader.searchParams.get("v")) script.searchParams.set("v", reader.searchParams.get("v"));
+      if (!warmed.has(script.href)) {
+        warmed.add(script.href);
+        var moduleHint = document.createElement("link");
+        moduleHint.rel = "modulepreload"; moduleHint.href = script.href;
+        moduleHint.setAttribute("fetchpriority", "low");
+        document.head.appendChild(moduleHint);
+      }
+    }
     var hint = document.createElement("link");
     hint.rel = "prefetch";
     hint.href = item.url;

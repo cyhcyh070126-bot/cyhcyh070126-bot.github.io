@@ -25,15 +25,23 @@ if (Object.keys(groups).length) {
   Object.entries(groups).forEach(([project, figures]) => figures.forEach(entry => entries.set(entry.link, {...entry, project})));
   const script = Array.from(document.scripts).find(s => s.src.includes('/assets/js/research-files.js'));
   const version = script && new URL(script.src).searchParams.get('v');
-  document.addEventListener('click', event => {
-    const link = event.target.closest?.('.research-card > a[href]');
-    const entry = entries.get(link);
-    if (!entry || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+  function readerUrl(entry) {
     const url = new URL('/research-viewer/', location.origin);
     url.searchParams.set('project', entry.project);
     url.searchParams.set('file', entry.file);
     url.searchParams.set('from', 'cv');
     if (version) url.searchParams.set('v', version);
+    return url.href;
+  }
+  function prepareReader(event) {
+    const entry=entries.get(event.target.closest?.('.research-card > a[href]'));
+    if(entry&&window.siteWarmLink)window.siteWarmLink(readerUrl(entry));
+  }
+  ['pointerover','pointerdown','focusin'].forEach(name=>document.addEventListener(name,prepareReader,{passive:true}));
+  document.addEventListener('click', event => {
+    const link = event.target.closest?.('.research-card > a[href]');
+    const entry = entries.get(link);
+    if (!entry || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
     // Reuse this tab's ordered metadata; no image/PDF bytes are duplicated.
     try {
       sessionStorage.setItem('research-reader-context', JSON.stringify({project:entry.project,
@@ -42,6 +50,6 @@ if (Object.keys(groups).length) {
     // Avoid the host browser's new-tab start screen on ordinary figure clicks.
     // Modified clicks and native context-menu actions still use the original href.
     event.preventDefault();
-    location.assign(url.href);
+    location.assign(readerUrl(entry));
   });
 }

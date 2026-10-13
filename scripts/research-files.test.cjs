@@ -8,14 +8,14 @@ function setup({blockedStorage=false}={}){
   const nodes=[{classList:{contains:()=>true},querySelector:()=>({id:'project'})},...links.map((link,i)=>({
     id:'figure-'+i,classList:{contains:()=>false},querySelector:s=>s==='strong'?{textContent:'Figure '+i}:link
   }))];
-  const events={},writes=[],navigations=[];
+  const events={},writes=[],navigations=[],warm=[];
   vm.runInNewContext(source,{URL,Map,document:{querySelectorAll:()=>nodes,
     scripts:[{src:'https://example.com/assets/js/research-files.js?v=abc'}],addEventListener:(name,fn)=>events[name]=fn},
     location:{origin:'https://example.com',assign(url){navigations.push({url,writesBeforeNavigation:writes.length});}},
     sessionStorage:{setItem(k,v){if(blockedStorage)throw new Error('blocked');writes.push([k,JSON.parse(v)]);}},
-    window:{open(){throw new Error('Normal figure clicks must never create a tab');}}});
+    window:{siteWarmLink:url=>warm.push(url),open(){throw new Error('Normal figure clicks must never create a tab');}}});
   const click=extra=>{const event={target:{closest:()=>links[0]},button:0,preventDefault(){this.prevented=true;},...extra};events.click(event);return event;};
-  return {click,writes,navigations,files};
+  return {click,writes,navigations,files,events,links,warm};
 }
 test('normal figure clicks reuse the current tab and preserve ordered metadata',()=>{
   const app=setup(),event=app.click();
@@ -27,6 +27,11 @@ test('normal figure clicks reuse the current tab and preserve ordered metadata',
   assert(context.items.every(x=>!('link' in x)));
   assert.equal(new URL(app.navigations[0].url).searchParams.get('file'),app.files[0]);
   assert.equal(new URL(app.navigations[0].url).searchParams.get('from'),'cv');
+});
+test('intent prepares the exact reader URL without navigation or extra context writes',()=>{
+  const app=setup();for(const name of ['pointerover','pointerdown','focusin'])app.events[name]({target:{closest:()=>app.links[0]}});
+  assert.equal(app.warm.length,3);assert.equal(app.writes.length,0);assert.equal(app.navigations.length,0);
+  app.click();assert(app.warm.every(url=>url===app.navigations[0].url));
 });
 test('native modified clicks remain untouched and restrictions never lose the original link',()=>{
   for(const extra of [{ctrlKey:true},{metaKey:true},{altKey:true},{shiftKey:true},{button:1},{defaultPrevented:true}]){

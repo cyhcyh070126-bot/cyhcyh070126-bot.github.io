@@ -60,3 +60,14 @@ test('external connections prepare only HTTPS origins, deduplicated and bounded'
   assert.deepEqual(app.links.map(l=>l.href),['https://github.com','https://huggingface.co','https://engineering.jhu.edu','https://tongji.edu.cn']);
   assert.ok(app.links.every(l=>l.rel==='preconnect'));
 });
+
+test('reader intent warms at most four shells and a single matching module, without executing it',()=>{
+  const app=setup();
+  for(let i=0;i<12;i++)app.window.siteWarmLink('/research-viewer/?project=p&file='+i+'&from=cv&v=abc');
+  const scripts=app.links.filter(l=>l.rel==='modulepreload'),pages=app.links.filter(l=>l.rel==='prefetch');
+  assert.equal(scripts.length,1);assert.equal(scripts[0].href,origin+'/research-viewer/reader.js?v=abc');assert.equal(pages.length,4);
+  assert.equal(app.events.click,undefined);
+  for(const connection of [{saveData:true},{effectiveType:'2g'}]){
+    const limited=setup(connection);limited.window.siteWarmLink('/research-viewer/?project=p&file=a&v=abc');assert.equal(limited.links.length,0);
+  }
+});

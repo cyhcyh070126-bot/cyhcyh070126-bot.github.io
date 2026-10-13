@@ -13,8 +13,10 @@ const flush=()=>new Promise(r=>setImmediate(r));
 function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,indexOk=true,stored=null,blockedStorage=false}={}){
   const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[];
   const indexGate=deferred(),pdfGate=deferred();
-  function element(){return {hidden:false,children:[],textContent:'',events:{},dataset:{},
-    classList:{remove(){},toggle(){}},scrollTo(){},addEventListener(name,fn){this.events[name]=fn;},
+  function element(){const classes=new Set();return {hidden:false,children:[],textContent:'',events:{},eventOptions:{},dataset:{},clientWidth:800,clientHeight:600,scrollLeft:0,scrollTop:0,
+    classList:{remove:s=>classes.delete(s),add:s=>classes.add(s),contains:s=>classes.has(s)},
+    scrollTo(x,y){this.scrollLeft=x;this.scrollTop=y;},querySelector(){return this.children[0];},getBoundingClientRect(){return {left:0,top:44,width:800,height:600};},
+    addEventListener(name,fn,options){this.events[name]=fn;this.eventOptions[name]=options;},
     append(child){this.children.push(child);},replaceChildren(...children){this.children=children;},
     click(){downloads.push(this);}};}
   const nodes=Object.fromEntries(['document-container','image-container','loading','pdf-pages','reader-back'].map(id=>[id,element()]));
@@ -40,10 +42,15 @@ function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,indexOk=
     const task={options,destroyed:false,destroy(){this.destroyed=true;return Promise.resolve();},promise:holdPdf?pdfGate.promise:Promise.resolve({url:options.url})};
     tasks.push(task);return task;
   }};
-  const context={URL,URLSearchParams,Promise,Image:class {constructor(){images.push(this);}},document,window,location,history,
+  class MockImage {
+    constructor(){this.style={};this.naturalWidth=1000;this.naturalHeight=500;images.push(this);}
+    getBoundingClientRect(){const c=nodes['image-container'];const width=parseFloat(this.style.width)||Math.min(1000,c.clientWidth,c.clientHeight*2),height=width/2;
+      return {width,height,left:Math.max(0,(c.clientWidth-width)/2)-c.scrollLeft,top:44+Math.max(0,(c.clientHeight-height)/2)-c.scrollTop};}
+  }
+  const context={URL,URLSearchParams,Promise,Image:MockImage,document,window,location,history,
     sessionStorage:{getItem(){if(blockedStorage)throw new Error('Storage blocked');return stored;}},
     console:{error(){}},collectResearchFiles:()=>({p:files}),
-    loadModule(url){imports.push(url);return Promise.resolve(url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
+    loadModule(url){imports.push(url);return Promise.resolve(url.includes('/research-files.js')?{collectResearchFiles:()=>({p:files})}:url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
     fetch(url){requests.push(url);return holdIndex?indexGate.promise:Promise.resolve({ok:indexOk,json:async()=>({cv:{html:'fixture'}})});}};
   const ready=vm.runInNewContext('(async()=>{'+source+'})()',context);
   const key=(key,extra={})=>{const event={key,ctrlKey:false,metaKey:false,altKey:false,shiftKey:false,preventDefault(){this.prevented=true;},...extra};events.keydown(event);return event;};
@@ -54,7 +61,7 @@ test('opening an original GIF/image does not request PDF scripts or styles',asyn
   for(const file of [gif,png]){
     const app=setup({file});await app.ready;
     assert.equal(app.images[0].src,file);
-    assert.equal(app.imports.length,0);assert.equal(app.styles.length,0);
+    assert.equal(app.imports.filter(url=>url.includes('/pdfjs-')).length,0);assert.equal(app.styles.length,0);
     assert.equal(app.document.body.dataset.ready,'false');
     app.images[0].onload();assert.equal(app.document.body.dataset.ready,'true');
     assert.equal(app.nodes['document-container'].hidden,true);
@@ -92,7 +99,7 @@ test('direct links and stale, blocked or invalid context safely use the normal i
 test('PDF engine starts alongside the existing index instead of waiting for it',async()=>{
   const app=setup({file:pdf,holdIndex:true});await flush();
   assert.deepEqual(app.requests,['/search-index.json?v=abc']);
-  assert.equal(app.imports.length,2);assert.equal(app.styles.length,1);assert.equal(app.tasks.length,0);
+  assert.equal(app.imports.filter(url=>url.includes('/pdfjs-')).length,2);assert.equal(app.styles.length,1);assert.equal(app.tasks.length,0);
   app.indexGate.resolve({ok:true,json:async()=>({cv:{html:'fixture'}})});await app.ready;
   assert.equal(app.tasks[0].options.url,pdf);
   assert.equal(app.tasks[0].options.isEvalSupported,false);
@@ -113,7 +120,7 @@ test('left/right cross-format navigation, original saving and PDF zoom remain in
   app.key('ArrowRight');await flush();app.images.at(-1).onload();
   assert.equal(app.document.body.dataset.file,png);assert.equal(app.viewers[0].pdfDocument,null);
   app.key('ArrowLeft');await flush();
-  assert.equal(app.document.body.dataset.file,pdf);assert.equal(app.imports.length,2,'PDF engine is reused');
+  assert.equal(app.document.body.dataset.file,pdf);assert.equal(app.imports.filter(url=>url.includes('/pdfjs-')).length,2,'PDF engine is reused');
   assert.equal(app.key('Escape').prevented,undefined,'Existing inline Escape handler owns closing');
 });
 
@@ -137,6 +144,30 @@ test('only the loaded image or completed PDF page reveals content, never stale c
   const pdfApp=setup({file:pdf,holdRender:true});await pdfApp.ready;
   assert.equal(pdfApp.document.body.dataset.ready,'false');
   pdfApp.viewers[0].render();assert.equal(pdfApp.document.body.dataset.ready,'true');
+});
+
+test('image/GIF Ctrl shortcuts zoom the same original image and reset to fit',async()=>{
+  const app=setup({stored:storedContext()});await app.ready;const image=app.images[0];image.onload();
+  const initial=image.getBoundingClientRect().width;
+  assert.equal(app.key('+',{ctrlKey:true}).prevented,true);assert(image.getBoundingClientRect().width>initial);
+  assert.equal(app.key('-',{ctrlKey:true}).prevented,true);assert(Math.abs(image.getBoundingClientRect().width-initial)<.01);
+  for(let i=0;i<50;i++)app.key('+',{ctrlKey:true});assert.equal(parseFloat(image.style.width),8000);
+  app.key('0',{ctrlKey:true});assert.equal(image.style.width,'');assert.equal(app.nodes['image-container'].classList.contains('enlarged'),false);
+  image.onclick();assert.equal(parseFloat(image.style.width),image.naturalWidth);image.onclick();assert.equal(image.style.width,'');
+  assert.equal(image.src,gif);assert.deepEqual(app.requests,[]);assert.deepEqual(app.imports,[]);
+  app.key('ArrowRight');await flush();app.key('ArrowRight');await flush();app.images.at(-1).onload();
+  assert.equal(app.images.at(-1).style.width,undefined);assert.equal(app.nodes['image-container'].scrollLeft,0);
+});
+
+test('Ctrl-wheel keeps the pointer anchor, normal scrolling stays native, and PDF wheel still works',async()=>{
+  const app=setup({stored:storedContext()});await app.ready;const image=app.images[0];image.onload();const c=app.nodes['image-container'];
+  const event={ctrlKey:true,deltaY:-120,deltaMode:0,clientX:400,clientY:344,preventDefault(){this.prevented=true;}};
+  c.events.wheel(event);assert.equal(event.prevented,true);assert.equal(c.eventOptions.wheel.passive,false);
+  let rect=image.getBoundingClientRect();assert(Math.abs(rect.left+rect.width/2-400)<.01);assert(Math.abs(rect.top+rect.height/2-344)<.01);
+  const width=image.style.width;c.events.wheel({...event,ctrlKey:false,preventDefault(){throw new Error('Normal scroll must remain native');}});assert.equal(image.style.width,width);
+  c.events.wheel({...event,deltaY:-3,deltaMode:1});assert(parseFloat(image.style.width)>parseFloat(width));
+  app.key('ArrowRight');await flush();app.nodes['document-container'].events.wheel(event);
+  assert(app.viewers[0].lastScale.scaleFactor>1);assert.deepEqual(Array.from(app.viewers[0].lastScale.origin),[400,344]);
 });
 
 test('index/asset errors retain an original-file link rather than a forced download',async()=>{
