@@ -3,7 +3,7 @@ const imageContainer = document.getElementById('image-container');
 const message = document.getElementById('loading');
 const params = new URLSearchParams(location.search);
 let pdfApiPromise, viewerPromise, viewer, linkService;
-let task=null,revision=0,index=0,items=[];
+let task=null,pdfFetch=null,revision=0,index=0,items=[];
 
 function readyImage(){
  return !imageContainer.hidden&&document.body.dataset.ready==='true'?imageContainer.querySelector('img'):null;
@@ -74,6 +74,7 @@ async function show(nextIndex) {
  document.title=entry.file.split('/').pop();message.hidden=false;message.dataset.state='loading';message.textContent='Loading document…';
  const url=new URL(location.href);url.searchParams.set('file',entry.file);url.searchParams.delete('figure');history.replaceState(null,'',url);
  const previousTask=task;task=null;viewer?.setDocument(null);linkService?.setDocument(null);
+ if(pdfFetch){pdfFetch.abort();pdfFetch=null;}
  if(previousTask)previousTask.destroy().catch(()=>{});
  imageContainer.replaceChildren();imageContainer.classList.remove('enlarged');imageContainer.scrollTo(0,0);
  if(!/\.pdf$/i.test(entry.file)){
@@ -85,15 +86,22 @@ async function show(nextIndex) {
   image.src=entry.file;imageContainer.append(image);return;
  }
  container.hidden=false;imageContainer.hidden=true;
+ const controller=new AbortController();pdfFetch=controller;
  try{
-  const pdfjs=await loadPdfApi();
+  // These research-figure PDFs are small: fetch their original bytes while the engine starts.
+  const bytesRequest=fetch(entry.file,{signal:controller.signal,priority:'high'}).then(response=>{
+   if(!response.ok)throw new Error('Unable to load PDF ('+response.status+')');
+   return response.arrayBuffer();
+  });
+  const [pdfjs,bytes]=await Promise.all([loadPdfApi(),bytesRequest]);
   if(generation!==revision)return;
-  // Fetch/render preparation runs alongside viewer-module and stylesheet loading.
-  const loadingTask=pdfjs.getDocument({url:entry.file,standardFontDataUrl:'/assets/vendor/pdfjs-5.6.205/standard_fonts/',isEvalSupported:false});task=loadingTask;
+  const loadingTask=pdfjs.getDocument({data:new Uint8Array(bytes),docBaseUrl:new URL(entry.file,location.href).href,
+   standardFontDataUrl:'/assets/vendor/pdfjs-5.6.205/standard_fonts/',isEvalSupported:false});task=loadingTask;
   const [pdf]=await Promise.all([loadingTask.promise,loadPdfViewer()]);
   if(generation!==revision){await loadingTask.destroy();return;}
   viewer.setDocument(pdf);linkService.setDocument(pdf);
- }catch(error){if(generation===revision){console.error(error);fail(entry,generation);}}
+ }catch(error){controller.abort();if(generation===revision){console.error(error);fail(entry,generation);}}
+ finally{if(pdfFetch===controller)pdfFetch=null;}
 }
 function fail(entry,generation){
  if(generation!==revision)return;document.body.dataset.ready='false';message.hidden=false;message.dataset.state='error';message.replaceChildren(document.createTextNode('Unable to load. '));

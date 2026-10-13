@@ -10,9 +10,9 @@ const source=fs.readFileSync(path.join(root,'research-viewer/reader.js'),'utf8')
 const gif='/images/research/first.gif',pdf='/files/research/second.pdf',png='/images/research/third.png';
 function deferred(){let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};}
 const flush=()=>new Promise(r=>setImmediate(r));
-function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,indexOk=true,stored=null,blockedStorage=false}={}){
+function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,holdApi=false,holdBytes=false,bytesOk=true,indexOk=true,stored=null,blockedStorage=false}={}){
   const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[];
-  const indexGate=deferred(),pdfGate=deferred();
+  const indexGate=deferred(),pdfGate=deferred(),apiGate=deferred(),bytesGate=deferred(),byteRequests=[];
   function element(){const classes=new Set();return {hidden:false,children:[],textContent:'',events:{},eventOptions:{},dataset:{},clientWidth:800,clientHeight:600,scrollLeft:0,scrollTop:0,
     classList:{remove:s=>classes.delete(s),add:s=>classes.add(s),contains:s=>classes.has(s)},
     scrollTo(x,y){this.scrollLeft=x;this.scrollTop=y;},querySelector(){return this.children[0];},getBoundingClientRect(){return {left:0,top:44,width:800,height:600};},
@@ -39,7 +39,7 @@ function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,indexOk=
     updateScale(value){this.lastScale=value;}
   }
   const api={GlobalWorkerOptions:{},getDocument(options){
-    const task={options,destroyed:false,destroy(){this.destroyed=true;return Promise.resolve();},promise:holdPdf?pdfGate.promise:Promise.resolve({url:options.url})};
+    const task={options,destroyed:false,destroy(){this.destroyed=true;return Promise.resolve();},promise:holdPdf?pdfGate.promise:Promise.resolve({url:options.docBaseUrl})};
     tasks.push(task);return task;
   }};
   class MockImage {
@@ -47,14 +47,15 @@ function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,indexOk=
     getBoundingClientRect(){const c=nodes['image-container'];const width=parseFloat(this.style.width)||Math.min(1000,c.clientWidth,c.clientHeight*2),height=width/2;
       return {width,height,left:Math.max(0,(c.clientWidth-width)/2)-c.scrollLeft,top:44+Math.max(0,(c.clientHeight-height)/2)-c.scrollTop};}
   }
-  const context={URL,URLSearchParams,Promise,Image:MockImage,document,window,location,history,
+  const context={URL,URLSearchParams,Promise,AbortController,Uint8Array,Image:MockImage,document,window,location,history,
     sessionStorage:{getItem(){if(blockedStorage)throw new Error('Storage blocked');return stored;}},
     console:{error(){}},collectResearchFiles:()=>({p:files}),
-    loadModule(url){imports.push(url);return Promise.resolve(url.includes('/research-files.js')?{collectResearchFiles:()=>({p:files})}:url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
-    fetch(url){requests.push(url);return holdIndex?indexGate.promise:Promise.resolve({ok:indexOk,json:async()=>({cv:{html:'fixture'}})});}};
+    loadModule(url){imports.push(url);if(holdApi&&url.endsWith('/pdf.min.mjs'))return apiGate.promise.then(()=>api);return Promise.resolve(url.includes('/research-files.js')?{collectResearchFiles:()=>({p:files})}:url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
+    fetch(url,options){requests.push(url);if(url.endsWith('.pdf')){byteRequests.push({url,options});return Promise.resolve({ok:bytesOk,status:bytesOk?200:404,arrayBuffer:()=>holdBytes?bytesGate.promise:Promise.resolve(new Uint8Array([37,80,68,70]).buffer)});}
+      return holdIndex?indexGate.promise:Promise.resolve({ok:indexOk,json:async()=>({cv:{html:'fixture'}})});}};
   const ready=vm.runInNewContext('(async()=>{'+source+'})()',context);
   const key=(key,extra={})=>{const event={key,ctrlKey:false,metaKey:false,altKey:false,shiftKey:false,preventDefault(){this.prevented=true;},...extra};events.keydown(event);return event;};
-  return {ready,imports,styles,images,tasks,viewers,events,nodes,document,requests,key,indexGate,pdfGate,downloads};
+  return {ready,imports,styles,images,tasks,viewers,events,nodes,document,requests,key,indexGate,pdfGate,apiGate,bytesGate,byteRequests,downloads};
 }
 
 test('opening an original GIF/image does not request PDF scripts or styles',async()=>{
@@ -74,9 +75,9 @@ const storedContext=overrides=>JSON.stringify({project:'p',version:'abc',items:c
 test('CV clicks show the original file without waiting for or requesting the index',async()=>{
   for(const file of [gif,pdf,png]){
     const app=setup({file,stored:storedContext(),holdIndex:true});await app.ready;
-    assert.deepEqual(app.requests,[]);
+    assert.deepEqual(app.requests,file===pdf?[pdf]:[]);
     assert.equal(app.document.body.dataset.file,file);
-    assert.equal(file===pdf?app.tasks[0].options.url:app.images[0].src,file);
+    assert.equal(file===pdf?new URL(app.tasks[0].options.docBaseUrl).pathname:app.images[0].src,file);
     if(file!==pdf)assert.deepEqual(app.imports,[]);
     app.key('ArrowRight');await flush();
     assert.equal(app.document.body.dataset.file,cachedItems[Math.min(2,cachedItems.findIndex(x=>x.file===file)+1)].file);
@@ -101,7 +102,8 @@ test('PDF engine starts alongside the existing index instead of waiting for it',
   assert.deepEqual(app.requests,['/search-index.json?v=abc']);
   assert.equal(app.imports.filter(url=>url.includes('/pdfjs-')).length,2);assert.equal(app.styles.length,1);assert.equal(app.tasks.length,0);
   app.indexGate.resolve({ok:true,json:async()=>({cv:{html:'fixture'}})});await app.ready;
-  assert.equal(app.tasks[0].options.url,pdf);
+  assert.equal(new URL(app.tasks[0].options.docBaseUrl).pathname,pdf);
+  assert.deepEqual(Array.from(app.tasks[0].options.data),[37,80,68,70]);
   assert.equal(app.tasks[0].options.isEvalSupported,false);
   assert.equal(app.document.body.dataset.ready,'true');
   assert.equal(app.viewers[0].currentScaleValue,'page-fit');
@@ -131,6 +133,25 @@ test('a slow previous PDF cannot replace a newly selected image',async()=>{
   assert.equal(app.document.body.dataset.file,png);assert.equal(app.document.body.dataset.ready,'true');
   assert.equal(app.nodes['document-container'].hidden,true);assert.equal(app.viewers[0].pdfDocument,null);
   assert.equal(app.tasks[0].destroyed,true);
+});
+
+test('selected PDF bytes start before a delayed engine resolves and are supplied without refetching',async()=>{
+  const app=setup({file:pdf,stored:storedContext(),holdApi:true});await flush();
+  assert.deepEqual(app.requests,[pdf]);assert.equal(app.tasks.length,0);
+  assert.equal(app.byteRequests[0].options.priority,'high');
+  app.apiGate.resolve();await app.ready;
+  assert.deepEqual(Array.from(app.tasks[0].options.data),[37,80,68,70]);
+  assert.equal(app.tasks[0].options.url,undefined,'The PDF engine must use the bytes, not fetch the URL again');
+});
+
+test('switching away aborts pending PDF bytes; stale bytes and HTTP failures cannot overwrite an image',async()=>{
+  const app=setup({file:pdf,stored:storedContext(),holdBytes:true});await flush();
+  app.key('ArrowRight');await flush();app.images.at(-1).onload();
+  assert.equal(app.byteRequests[0].options.signal.aborted,true);
+  app.bytesGate.resolve(new Uint8Array([37,80,68,70]).buffer);await app.ready;
+  assert.equal(app.tasks.length,0);assert.equal(app.document.body.dataset.file,png);assert.equal(app.document.body.dataset.ready,'true');
+  const failed=setup({file:pdf,bytesOk:false});await failed.ready;
+  assert.equal(failed.nodes.loading.dataset.state,'error');assert.equal(failed.nodes.loading.children.at(-1).href,pdf);
 });
 
 test('only the loaded image or completed PDF page reveals content, never stale callbacks',async()=>{

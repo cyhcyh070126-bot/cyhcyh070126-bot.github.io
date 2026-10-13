@@ -38,6 +38,12 @@ if (Object.keys(groups).length) {
     if(entry&&window.siteWarmLink)window.siteWarmLink(readerUrl(entry));
   }
   ['pointerover','pointerdown','focusin'].forEach(name=>document.addEventListener(name,prepareReader,{passive:true}));
+  document.addEventListener('toggle',event=>{
+    const panel=event.target;
+    if(!panel.open||!panel.matches?.('details.project-figures')||!window.siteWarmLink)return;
+    const entry=entries.get(panel.querySelector('.research-card > a[href]'));
+    if(entry){window.siteWarmLink(entry.file);window.siteWarmLink(readerUrl(entry));}
+  },true);
   document.addEventListener('click', event => {
     const link = event.target.closest?.('.research-card > a[href]');
     const entry = entries.get(link);

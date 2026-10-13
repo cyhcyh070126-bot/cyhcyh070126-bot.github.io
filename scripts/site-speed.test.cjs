@@ -71,3 +71,15 @@ test('reader intent warms at most four shells and a single matching module, with
     const limited=setup(connection);limited.window.siteWarmLink('/research-viewer/?project=p&file=a&v=abc');assert.equal(limited.links.length,0);
   }
 });
+
+test('only PDF intent warms its four engine resources once, even after the shell budget is used',()=>{
+  const app=setup();
+  for(let i=0;i<4;i++)app.window.siteWarmLink('/research-viewer/?project=p&file=%2Fimages%2Fresearch%2F'+i+'.gif');
+  assert.equal(app.links.filter(l=>l.href.includes('/pdfjs-')).length,0);
+  app.window.siteWarmLink('/research-viewer/?project=p&file=%2Ffiles%2Fresearch%2Ffirst.pdf');
+  app.window.siteWarmLink('/research-viewer/?project=p&file=%2Ffiles%2Fresearch%2Fsecond.pdf');
+  const engine=app.links.filter(l=>l.href.includes('/pdfjs-'));
+  assert.equal(engine.length,4);assert(engine.every(l=>l.rel==='prefetch'));
+  assert.equal(new Set(engine.map(l=>l.href)).size,4);
+  const constrained=setup({saveData:true});constrained.window.siteWarmLink('/research-viewer/?file=%2Ffiles%2Fresearch%2Fa.pdf');assert.equal(constrained.links.length,0);
+});

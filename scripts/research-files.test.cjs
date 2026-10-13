@@ -33,6 +33,14 @@ test('intent prepares the exact reader URL without navigation or extra context w
   assert.equal(app.warm.length,3);assert.equal(app.writes.length,0);assert.equal(app.navigations.length,0);
   app.click();assert(app.warm.every(url=>url===app.navigations[0].url));
 });
+test('expanding a project prepares only its first original and reader, never the entire gallery',()=>{
+  const app=setup();const panel={open:false,matches:()=>true,querySelector:()=>app.links[0]};
+  app.events.toggle({target:panel});assert.equal(app.warm.length,0);
+  panel.open=true;app.events.toggle({target:panel});
+  assert.equal(app.warm.length,2);assert.equal(app.warm[0],app.files[0]);
+  assert.equal(new URL(app.warm[1]).searchParams.get('file'),app.files[0]);
+  assert.equal(app.navigations.length,0);assert.equal(app.writes.length,0);
+});
 test('native modified clicks remain untouched and restrictions never lose the original link',()=>{
   for(const extra of [{ctrlKey:true},{metaKey:true},{altKey:true},{shiftKey:true},{button:1},{defaultPrevented:true}]){
     const app=setup();assert.equal(app.click(extra).prevented,undefined);assert.equal(app.navigations.length,0);assert.equal(app.writes.length,0);

@@ -52,6 +52,18 @@
     if (constrained()) return;
     var item = destination(href, location.href);
     if (!item) { connect(href); return; }
+    if (item.type === "reader" && /^\/files\/research\/[^/?#]+\.pdf$/i.test(new URL(item.url).searchParams.get("file") || "")) {
+      // Only a PDF intent warms the PDF engine; GIF/PNG readers never pay this cost.
+      ["pdf.min.mjs", "pdf.worker.min.mjs", "pdf_viewer.mjs", "pdf_viewer.css"].forEach(function (file) {
+        var asset = new URL("/assets/vendor/pdfjs-5.6.205/" + file, location.href).href;
+        if (warmed.has(asset)) return;
+        warmed.add(asset);
+        var pdfHint = document.createElement("link");
+        pdfHint.rel = "prefetch"; pdfHint.href = asset;
+        pdfHint.setAttribute("fetchpriority", "low");
+        document.head.appendChild(pdfHint);
+      });
+    }
     if (warmed.has(item.url) || (item.type === "asset" && assetCount >= 8) || (item.type === "reader" && readerCount >= 4)) return;
     warmed.add(item.url);
     if (item.type === "asset") assetCount++;
