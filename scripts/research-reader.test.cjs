@@ -10,7 +10,7 @@ const source=fs.readFileSync(path.join(root,'research-viewer/reader.js'),'utf8')
 const gif='/images/research/first.gif',pdf='/files/research/second.pdf',png='/images/research/third.png';
 function deferred(){let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};}
 const flush=()=>new Promise(r=>setImmediate(r));
-function setup({file=gif,holdIndex=false,holdPdf=false,indexOk=true}={}){
+function setup({file=gif,holdIndex=false,holdPdf=false,indexOk=true,stored=null,blockedStorage=false}={}){
   const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[];
   const indexGate=deferred(),pdfGate=deferred();
   function element(){return {hidden:false,children:[],textContent:'',events:{},
@@ -40,6 +40,7 @@ function setup({file=gif,holdIndex=false,holdPdf=false,indexOk=true}={}){
     tasks.push(task);return task;
   }};
   const context={URL,URLSearchParams,Promise,Image:class {constructor(){images.push(this);}},document,window,location,history,
+    sessionStorage:{getItem(){if(blockedStorage)throw new Error('Storage blocked');return stored;}},
     console:{error(){}},collectResearchFiles:()=>({p:files}),
     loadModule(url){imports.push(url);return Promise.resolve(url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
     fetch(url){requests.push(url);return holdIndex?indexGate.promise:Promise.resolve({ok:indexOk,json:async()=>({cv:{html:'fixture'}})});}};
@@ -57,6 +58,33 @@ test('opening an original GIF/image does not request PDF scripts or styles',asyn
     app.images[0].onload();assert.equal(app.document.body.dataset.ready,'true');
     assert.equal(app.nodes['document-container'].hidden,true);
     assert.equal(typeof app.images[0].onclick,'function','Original-image zoom remains available');
+  }
+});
+
+const cachedItems=[gif,pdf,png].map((file,i)=>({file,title:'Figure '+i,anchor:'anchor-'+i}));
+const storedContext=overrides=>JSON.stringify({project:'p',version:'abc',items:cachedItems,...overrides});
+test('CV clicks show the original file without waiting for or requesting the index',async()=>{
+  for(const file of [gif,pdf,png]){
+    const app=setup({file,stored:storedContext(),holdIndex:true});await app.ready;
+    assert.deepEqual(app.requests,[]);
+    assert.equal(app.document.body.dataset.file,file);
+    assert.equal(file===pdf?app.tasks[0].options.url:app.images[0].src,file);
+    if(file!==pdf)assert.deepEqual(app.imports,[]);
+    app.key('ArrowRight');await flush();
+    assert.equal(app.document.body.dataset.file,cachedItems[Math.min(2,cachedItems.findIndex(x=>x.file===file)+1)].file);
+  }
+});
+test('direct links and stale, blocked or invalid context safely use the normal index',async()=>{
+  for(const settings of [
+    {},{blockedStorage:true},{stored:'not json'},{stored:'null'},
+    {stored:storedContext({project:'elsewhere'})},{stored:storedContext({version:'old'})},
+    {stored:storedContext({items:[]})},{stored:storedContext({items:[cachedItems[1]]})},
+    ...['https://example.org/file.gif','//example.org/file.gif','/private/file.gif','/images/research/%2e%2e%2fsecret.gif'].map(file=>({stored:storedContext({items:[cachedItems[0],{...cachedItems[1],file}]})})),
+    {stored:storedContext({items:[{...cachedItems[0],anchor:'bad#anchor'}]})}
+  ]){
+    const app=setup(settings);await app.ready;
+    assert.deepEqual(app.requests,['/search-index.json?v=abc']);
+    assert.equal(app.images[0].src,gif);
   }
 });
 

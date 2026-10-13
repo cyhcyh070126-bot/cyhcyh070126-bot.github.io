@@ -96,18 +96,34 @@ container.addEventListener('wheel',event=>{
 },{passive:false});
 window.addEventListener('resize',()=>{if(viewer?.pdfDocument)viewer.currentScaleValue='page-fit';});
 
-// Reuse the existing CV index. Start it before PDF imports, not after them.
-const indexRequest=fetch('/search-index.json'+(params.get('v')?'?v='+encodeURIComponent(params.get('v')):''));
+// A CV click already knows the ordered figures. Direct links retain the index fallback.
+function readContext(){
+ try{
+  const context=JSON.parse(sessionStorage.getItem('research-reader-context'));
+  if(!context||context.project!==params.get('project')||context.version!==(params.get('v')||''))return null;
+  if(!Array.isArray(context.items)||!context.items.length||context.items.length>250)return null;
+  if(!context.items.every(entry=>entry&&typeof entry.file==='string'&&
+    /^\/(files|images)\/research\/[^/?#%\\]+\.(pdf|png|webp|gif|jpe?g|svg)$/i.test(entry.file)&&
+    typeof entry.title==='string'&&typeof entry.anchor==='string'&&/^[\w-]+$/.test(entry.anchor)))return null;
+  if(!context.items.some(entry=>entry.file===params.get('file')))return null;
+  return context.items;
+ }catch(_){return null;}
+}
+const contextItems=readContext();
+const indexRequest=contextItems?null:fetch('/search-index.json'+(params.get('v')?'?v='+encodeURIComponent(params.get('v')):''));
 if(/^\/files\/research\/[^/?#]+\.pdf$/i.test(params.get('file')||'')) {
  loadPdfViewer().catch(()=>{}); // Actual display reports errors with the original-file fallback.
 }
 try{
- const response=await indexRequest;
- if(!response.ok)throw new Error('Unable to load research index');
- const data=await response.json();
- const template=document.createElement('template');template.innerHTML=data.cv.html;
- const groups=collectResearchFiles(template.content);
- items=groups[params.get('project')]||[];
+ if(contextItems)items=contextItems;
+ else{
+  const response=await indexRequest;
+  if(!response.ok)throw new Error('Unable to load research index');
+  const data=await response.json();
+  const template=document.createElement('template');template.innerHTML=data.cv.html;
+  const groups=collectResearchFiles(template.content);
+  items=groups[params.get('project')]||[];
+ }
  const requested=items.findIndex(entry=>entry.file===params.get('file'));
  index=requested>=0?requested:Math.max(0,Math.min(items.length-1,Number(params.get('figure')||1)-1));
  if(!items.length){message.textContent='Document not found.';}

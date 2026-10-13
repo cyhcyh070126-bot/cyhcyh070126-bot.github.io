@@ -71,6 +71,9 @@ Current Research
 
 **Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
 
+<details class="project-figures" id="fem-neural-operator-figures">
+  <summary aria-controls="fem-neural-operator-figure-content" aria-describedby="fem-neural-operator"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <div class="project-figures__body" id="fem-neural-operator-figure-content">
 <div class="research-gallery research-gallery--single research-gallery--overview">
   <figure class="research-card research-card--overview" id="cylinder-workflow-overview">
     <a href="/files/research/cylinder_workflow_overview.pdf" target="_blank" rel="noopener noreferrer">
@@ -205,6 +208,10 @@ Current Research
   </figure>
 </div>
 
+  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
+  </div>
+</details>
+
 <div class="cv-project cv-project--battery">
   <div class="cv-project__header">
     <div class="cv-project__title" id="convlstm-battery">2. ConvLSTM Prediction of Concentration and Stress Fields in Battery Materials</div>
@@ -221,6 +228,9 @@ Current Research
 - **Model Training:** Trained the models with MSE and SSIM losses, using scheduled sampling to introduce model-generated inputs during training and reduce the mismatch between training and autoregressive use.
 - **Prediction Evaluation:** Evaluated autoregressive concentration and stress predictions against COMSOL reference sequences, examining error accumulation over successive prediction steps.
 
+<details class="project-figures" id="convlstm-battery-figures">
+  <summary aria-controls="convlstm-battery-figure-content" aria-describedby="convlstm-battery"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <div class="project-figures__body" id="convlstm-battery-figure-content">
 <div class="research-gallery research-gallery--three">
   <figure class="research-card">
     <a href="/images/research/battery_concentration.gif" target="_blank" rel="noopener noreferrer">
@@ -296,6 +306,10 @@ Current Research
   </figure>
 </div>
 
+  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
+  </div>
+</details>
+
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title" id="burgers-pinn">3. PINNs for Shock Capturing in the Burgers Equation</div>
@@ -312,6 +326,9 @@ Current Research
 - **Artificial-Viscosity PINN:** Added an artificial-viscosity term with a fixed coefficient to the PDE residual and trained a second PINN to predict the shock profile.
 - **Prediction Comparison:** Compared standard and artificial-viscosity PINNs against the analytical inviscid solution, evaluating shock location, transition width, relative <i>L</i><sup>2</sup> error, and maximum pointwise error.
 
+<details class="project-figures" id="burgers-pinn-figures">
+  <summary aria-controls="burgers-pinn-figure-content" aria-describedby="burgers-pinn"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <div class="project-figures__body" id="burgers-pinn-figure-content">
 <div class="research-gallery research-gallery--pinn">
   <figure class="research-card research-card--pinn-overview" id="pinn-framework">
     <a href="/files/research/pinn_shock_problem_framework_v8.pdf" target="_blank" rel="noopener noreferrer">
@@ -366,6 +383,10 @@ Current Research
   </div>
 </div>
 
+  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
+  </div>
+</details>
+
 <div class="cv-project">
   <div class="cv-project__header">
     <div class="cv-project__title" id="mechanics-llm">4. Domain-Specific LLM Fine-Tuning for Mechanics of Materials</div>
@@ -382,6 +403,9 @@ Current Research
 - **LoRA Fine-Tuning:** Fine-tuned Qwen2.5-7B on the instruction–response datasets using LoRA on Google Colab.
 - **Public Release:** Released two instruction–response datasets ([Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge)) and two fine-tuned Qwen2.5-based model checkpoints ([AI_Material_mechanics_assistant](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and [AI_Material_mechanics_assistant_merged](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged)) on Hugging Face for question answering in mechanics of materials.
 
+<details class="project-figures" id="mechanics-llm-figures">
+  <summary aria-controls="mechanics-llm-figure-content" aria-describedby="mechanics-llm"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <div class="project-figures__body" id="mechanics-llm-figure-content">
 <div class="research-gallery research-gallery--single">
   <figure class="research-card">
     <a href="/images/research/llm_finetuning_workflow_v2.png" target="_blank" rel="noopener noreferrer">
@@ -393,6 +417,10 @@ Current Research
     </figcaption>
   </figure>
 </div>
+  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
+  </div>
+</details>
+
 
 Contact
 ======

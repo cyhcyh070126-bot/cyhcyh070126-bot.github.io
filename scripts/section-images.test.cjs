@@ -84,3 +84,23 @@ test('nearby images load before distant background images and clear the preview'
   assert.ok(app.cleared.includes(4) && app.cleared.includes(5));
   assert.equal(app.images[0].loading, 'eager');
 });
+
+test('collapsed images stay lazy and open panels can advance past them in the queue', () => {
+  const app=setup(undefined,true);let open=false;
+  app.images.slice(0,3).forEach(img=>{img.closest=()=>open?null:{};});
+  app.intersect([0,1]);app.idle[0]();
+  assert.ok(app.images.slice(0,3).every(img=>img.loading==='lazy'));
+  assert.equal(app.images[3].loading,'eager');
+  open=true;app.events.toggle({target:{open:true,matches:()=>true,querySelectorAll:()=>app.images.slice(0,3)}});
+  assert.ok(app.images.slice(0,3).every(img=>img.loading==='eager'&&img.fetchPriority==='high'));
+});
+
+test('explicit figure navigation reveals the fold before preparing images; hover does not', () => {
+  const app=setup();let open=false,calls=0;
+  app.images.slice(3).forEach(img=>{img.closest=()=>open?null:{};});
+  app.window.siteRevealFigure=()=>{open=true;calls++;};
+  app.window.sitePrepareSection('#second',false);assert.equal(calls,0);
+  assert.ok(app.images.slice(3).every(img=>img.loading==='lazy'));
+  app.window.sitePrepareSection('#second',true);assert.equal(calls,1);
+  assert.ok(app.images.slice(3).every(img=>img.loading==='eager'));
+});

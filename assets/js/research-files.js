@@ -33,6 +33,11 @@ if (Object.keys(groups).length) {
     url.searchParams.set('project', entry.project);
     url.searchParams.set('file', entry.file);
     if (version) url.searchParams.set('v', version);
+    // The new same-origin tab receives a copy; no image/PDF bytes are duplicated.
+    try {
+      sessionStorage.setItem('research-reader-context', JSON.stringify({project:entry.project,
+        version:version || '', items:groups[entry.project].map(({file,title,anchor}) => ({file,title,anchor}))}));
+    } catch (_) {} // Storage restrictions must never block the original link.
     // Open in the same new-tab style as the existing target="_blank" links.
     // If a browser blocks this, leave the native PDF/image link available.
     const reader = window.open(url.href, '_blank');
