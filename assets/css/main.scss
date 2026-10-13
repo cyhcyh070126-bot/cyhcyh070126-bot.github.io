@@ -468,6 +468,11 @@ body .page-contents__panel a:is(:hover, :focus-visible) {
 .project-list__description {
   margin: 0 0 0.45rem;
   line-height: 1.65;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
 }
 
 .project-list .project-list__repository {
