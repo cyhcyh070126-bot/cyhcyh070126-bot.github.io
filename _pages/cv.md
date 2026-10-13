@@ -69,6 +69,18 @@ Current Research
 - **Neural Operator Training:** Trained Transolver in JAX on these paired data to learn the mapping from interface displacement fields to subdomain stress fields.
 - **Iterative Interface Coupling:** Computed interface reaction forces from neural-operator stress predictions and exchanged them with FEM-computed interface displacements during coupling iterations. Investigated convergence acceleration strategies and relaxation parameters for the coupled solver.
 
+<div class="research-gallery research-gallery--single research-gallery--overview">
+  <figure class="research-card research-card--overview" id="cylinder-workflow-overview">
+    <a href="/files/research/cylinder_workflow_overview.pdf" target="_blank" rel="noopener noreferrer">
+      <picture><source type="image/webp" srcset="/images/research/cylinder_workflow_overview.display-640.webp 640w, /images/research/cylinder_workflow_overview.display-1280.webp 1280w, /images/research/cylinder_workflow_overview.display-1920.webp 1920w, /images/research/cylinder_workflow_overview.webp 3200w" sizes="(max-width: 1048px) calc(100vw - 48px), 1000px" /><img src="/images/research/cylinder_workflow_overview.png" alt="Cylinder FEM–neural operator coupling workflow: interface displacements, three frozen Transolvers, Gauss-point stresses, force assembly, and IQN-ILS acceleration." loading="lazy" decoding="async" width="3200" height="1423" style="background-image:url('data:image/webp;base64,UklGRlYCAABXRUJQVlA4IEoCAACQEQCdASp4ADUAPt1qq1EopiOipBgMkRAbiWMA0s3ESKbc+7M2zObMnC3euZPPRkLa1F5d3aa2UFGtDpDSWYDmckeCY7XF9X2ynJAmU7ZaBqPZO27gmfokbGXvxbcjn8EuQLQMRo9CMlH9HvyXf9VOsMNY9piFgwQhRjcIX8Knxlzb4gg2kCuWL3uYExinxtR+CDDaAAD++Wyt4e+GFRGL3ZVqTymPg1Zmj/aG+8b77SyUyyXNyP1Bh0JbfwkEmCQawkwbwF3bXf82jd2389Yxghzee6VVOHssEYjHMLL5E+Ydei9ex5IsZP7XfR9Z6PVQcN5iRDnUS7i+y8YQjJD1io2P2S3JXFfj/OfRpGiMWc9YRSizodO1l/a9r+Ky4jn7mNdJJ6/tUEvSGAp6IoaF2rTN1C/kuL8BQaqwhvtP/VnGSKH4UR6b4NofM4QpDGrcoSBlzz6OHjo6FqijJctTNQhWTjqoLvQs90eh8t/gr8KYpwqiHhVTmoHh9b0kDMX3gQxacf1LX0LGJ3rC1Tynxv/gUyiOyFIQ0luKLhCEvYs9k8Pk5H+urExlFDK3mOBsVCCOomv6NC2V5jCXkOQ5FXIxvt8BMMw98+HCMHZdZR9v/IfmFJbWfKXghLWFCSO/npWtnat20nKVDYUCAX+w8ZAuAdRHyay4/xAsOyAIdc3ZNyBW4mYwUNRgJF67IvxDtkpG2Ass5voD6a9Vm2XVuSN6DlrrA7mM6V1QNsFSxj54rD5gVhGl6ufhKKmzpBYvC4cJSCp5YAAA');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+    </a>
+    <figcaption>
+      <strong>Cylinder FEM–NO Coupling Workflow</strong><br>
+      Interface displacements are mapped to Gauss-point stresses; assembled reaction forces are returned to FEM through IQN-ILS acceleration.
+    </figcaption>
+  </figure>
+</div>
+
 **Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
 
 <div class="research-gallery research-gallery--prototype">

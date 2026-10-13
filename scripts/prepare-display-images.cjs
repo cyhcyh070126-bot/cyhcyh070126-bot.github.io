@@ -10,7 +10,8 @@ const reuse = process.argv.includes('--reuse');
   const sources = [...new Set([...cv.matchAll(/<img\b[^>]*src="(\/images\/research\/[^\"]+\.png)"/g)].map(m => m[1]))];
   const variants = {};
   const wide = /(?:battery_prediction_summary|llm_finetuning_workflow_v2)\.png$/;
-  const sizes = src => wide.test(src) ? '(max-width: 1280px) calc(100vw - 48px), 1232px' :
+  const sizes = src => src.endsWith('/cylinder_workflow_overview.png') ?
+    '(max-width: 1048px) calc(100vw - 48px), 1000px' : wide.test(src) ? '(max-width: 1280px) calc(100vw - 48px), 1232px' :
     '(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px';
   let before = 0, after = 0;
   for (const src of sources) {
@@ -59,13 +60,13 @@ const reuse = process.argv.includes('--reuse');
     {src:'/assets/icons/huggingface.svg'},
     ...gallery.map(src=>({src, ...(variants[src] ? {srcset:variants[src].srcset, sizes:variants[src].sizes} : {})})),
     // Projects previews select a smaller candidate than the same figure in CV.
-    ...['cylinder_subdomain_supports_1234.png', 'llm_finetuning_workflow_v2.png'].map(name=>{
+    ...['cylinder_workflow_overview.png', 'llm_finetuning_workflow_v2.png'].map(name=>{
       const src='/images/research/'+name;
       return {src,srcset:variants[src].srcset,sizes:'(max-width: 699px) min(360px, calc(100vw - 48px)), 340px'};
     })
   ];
   // Prepare each project's entry image first, then static figures, then animations.
-  const seeds = ['cylinder_subdomain_supports_1234.png', 'battery_concentration.gif', 'pinn_shock_problem_framework_v8.svg', 'llm_finetuning_workflow_v2.png'];
+  const seeds = ['cylinder_workflow_overview.png', 'battery_concentration.gif', 'pinn_shock_problem_framework_v8.svg', 'llm_finetuning_workflow_v2.png'];
   manifest.sort((a,b) => {
     const rank = item => !item.src.includes('/research/') ? 0 : seeds.some(s=>item.src.endsWith(s)) ? 1 : item.src.endsWith('.gif') ? 3 : 2;
     return rank(a)-rank(b);
