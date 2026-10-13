@@ -17,7 +17,7 @@ function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,indexOk=
     classList:{remove(){},toggle(){}},scrollTo(){},addEventListener(name,fn){this.events[name]=fn;},
     append(child){this.children.push(child);},replaceChildren(...children){this.children=children;},
     click(){downloads.push(this);}};}
-  const nodes=Object.fromEntries(['document-container','image-container','loading','pdf-pages'].map(id=>[id,element()]));
+  const nodes=Object.fromEntries(['document-container','image-container','loading','pdf-pages','reader-back'].map(id=>[id,element()]));
   const document={body:{dataset:{}},title:'',head:{append(link){styles.push(link);queueMicrotask(()=>link.onload());}},
     getElementById:id=>nodes[id],createElement:()=>element(),createTextNode:text=>({textContent:text}),
     addEventListener(name,fn){events[name]=fn;}};
@@ -105,6 +105,7 @@ test('left/right cross-format navigation, original saving and PDF zoom remain in
   app.key('ArrowRight');await flush();
   assert.equal(app.document.body.dataset.file,pdf);
   assert.equal(app.document.body.dataset.returnUrl,'/cv/#anchor-1');
+  assert.equal(app.nodes['reader-back'].href,'/cv/#anchor-1');
   assert.equal(app.document.body.dataset.ready,'true');
   app.key('+',{ctrlKey:true});assert.equal(app.viewers[0].lastScale.steps,1);
   app.key('0',{ctrlKey:true});assert.equal(app.viewers[0].currentScaleValue,'page-fit');

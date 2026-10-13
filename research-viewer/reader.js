@@ -46,6 +46,8 @@ async function show(nextIndex) {
  index=nextIndex;const entry=items[index],generation=++revision;
  document.body.dataset.ready='false';document.body.dataset.file=entry.file;
  document.body.dataset.returnUrl='/cv/#'+(entry.anchor||params.get('project'));
+ const backLink=document.getElementById('reader-back');
+ if(backLink)backLink.href=document.body.dataset.returnUrl;
  document.title=entry.file.split('/').pop();message.hidden=false;message.dataset.state='loading';message.textContent='Loading document…';
  const url=new URL(location.href);url.searchParams.set('file',entry.file);url.searchParams.delete('figure');history.replaceState(null,'',url);
  const previousTask=task;task=null;viewer?.setDocument(null);linkService?.setDocument(null);

@@ -32,18 +32,16 @@ if (Object.keys(groups).length) {
     const url = new URL('/research-viewer/', location.origin);
     url.searchParams.set('project', entry.project);
     url.searchParams.set('file', entry.file);
+    url.searchParams.set('from', 'cv');
     if (version) url.searchParams.set('v', version);
-    // The new same-origin tab receives a copy; no image/PDF bytes are duplicated.
+    // Reuse this tab's ordered metadata; no image/PDF bytes are duplicated.
     try {
       sessionStorage.setItem('research-reader-context', JSON.stringify({project:entry.project,
         version:version || '', items:groups[entry.project].map(({file,title,anchor}) => ({file,title,anchor}))}));
     } catch (_) {} // Storage restrictions must never block the original link.
-    // Open in the same new-tab style as the existing target="_blank" links.
-    // If a browser blocks this, leave the native PDF/image link available.
-    const reader = window.open(url.href, '_blank');
-    if (reader) {
-      reader.opener = null;
-      event.preventDefault();
-    }
+    // Avoid the host browser's new-tab start screen on ordinary figure clicks.
+    // Modified clicks and native context-menu actions still use the original href.
+    event.preventDefault();
+    location.assign(url.href);
   });
 }
