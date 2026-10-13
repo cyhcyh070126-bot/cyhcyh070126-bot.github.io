@@ -961,6 +961,14 @@ ul + .cv-project {
   min-width: 0;
 }
 
+/* Decorative current-research marker; keep title text and search entries unchanged. */
+.cv-project__title#fem-neural-operator::before {
+  content: "\2605" / "";
+  color: var(--cv-section-heading-color);
+  font-size: 0.85em;
+  margin-inline-end: 0.3em;
+}
+
 .cv-project__term,
 .cv-project__meta {
   font-size: 0.98rem;
