@@ -61,11 +61,13 @@ test('browser-back restores the user state; printing temporarily includes all fi
   app.events.beforeprint();assert(app.panels.every(p=>p.open));
   app.events.afterprint();assert.deepEqual(app.panels.map(p=>p.open),original);
 });
-test('wrappers preserve all original cards, image sources, links and project prose',()=>{
-  const before=execFileSync('git',['show','HEAD:_pages/cv.md'],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n');
+test('wrappers preserve cards, sources, URLs and prose apart from approved in-place targets',()=>{
+  const before=execFileSync('git',['show','HEAD:_pages/cv.md'],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n')
+    .replace(/(<a href="\/(?:files|images)\/research\/[^\"]+" target=")_blank(")/g,'$1_self$2');
   const after=fs.readFileSync(path.join(root,'_pages/cv.md'),'utf8').replace(/\r\n/g,'\n');
   const cards=s=>[...s.matchAll(/<figure class="research-card[\s\S]*?<\/figure>/g)].map(m=>m[0]);
   assert.deepEqual(cards(after),cards(before));assert.equal(cards(after).length,26);
+  assert(cards(after).every(card=>/<a href="[^\"]+" target="_self"/.test(card)),'Even pre-script/native figure clicks must stay in the same tab');
   const anchors=s=>[...s.matchAll(/<a\b[^>]+>/g)].map(m=>m[0]);assert.deepEqual(anchors(after),anchors(before));
   const folds=[...after.matchAll(/<details class="project-figures" id="([^"]+)">([\s\S]*?)<\/details>/g)];
   assert.equal(folds.length,4);
