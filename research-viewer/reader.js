@@ -46,7 +46,7 @@ async function show(nextIndex) {
  index=nextIndex;const entry=items[index],generation=++revision;
  document.body.dataset.ready='false';document.body.dataset.file=entry.file;
  document.body.dataset.returnUrl='/cv/#'+(entry.anchor||params.get('project'));
- document.title=entry.file.split('/').pop();message.hidden=false;message.textContent='Loading document…';
+ document.title=entry.file.split('/').pop();message.hidden=false;message.dataset.state='loading';message.textContent='Loading document…';
  const url=new URL(location.href);url.searchParams.set('file',entry.file);url.searchParams.delete('figure');history.replaceState(null,'',url);
  const previousTask=task;task=null;viewer?.setDocument(null);linkService?.setDocument(null);
  if(previousTask)previousTask.destroy().catch(()=>{});
@@ -71,7 +71,7 @@ async function show(nextIndex) {
  }catch(error){if(generation===revision){console.error(error);fail(entry,generation);}}
 }
 function fail(entry,generation){
- if(generation!==revision)return;message.hidden=false;message.replaceChildren(document.createTextNode('Unable to load. '));
+ if(generation!==revision)return;document.body.dataset.ready='false';message.hidden=false;message.dataset.state='error';message.replaceChildren(document.createTextNode('Unable to load. '));
  const link=document.createElement('a');link.href=entry.file;link.textContent='Open original file';message.append(link);
 }
 document.addEventListener('keydown',event=>{
@@ -126,11 +126,11 @@ try{
  }
  const requested=items.findIndex(entry=>entry.file===params.get('file'));
  index=requested>=0?requested:Math.max(0,Math.min(items.length-1,Number(params.get('figure')||1)-1));
- if(!items.length){message.textContent='Document not found.';}
+ if(!items.length){message.dataset.state='error';message.textContent='Document not found.';}
  else await show(index);
 }catch(error){
  console.error(error);
  const file=params.get('file')||'';
  if(/^\/(files|images)\/research\/[^/?#]+\.(pdf|png|webp|gif|jpe?g|svg)$/i.test(file))fail({file},revision);
- else message.textContent='Unable to load research index.';
+ else{message.dataset.state='error';message.textContent='Unable to load research index.';}
 }

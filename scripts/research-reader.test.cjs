@@ -10,10 +10,10 @@ const source=fs.readFileSync(path.join(root,'research-viewer/reader.js'),'utf8')
 const gif='/images/research/first.gif',pdf='/files/research/second.pdf',png='/images/research/third.png';
 function deferred(){let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};}
 const flush=()=>new Promise(r=>setImmediate(r));
-function setup({file=gif,holdIndex=false,holdPdf=false,indexOk=true,stored=null,blockedStorage=false}={}){
+function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,indexOk=true,stored=null,blockedStorage=false}={}){
   const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[];
   const indexGate=deferred(),pdfGate=deferred();
-  function element(){return {hidden:false,children:[],textContent:'',events:{},
+  function element(){return {hidden:false,children:[],textContent:'',events:{},dataset:{},
     classList:{remove(){},toggle(){}},scrollTo(){},addEventListener(name,fn){this.events[name]=fn;},
     append(child){this.children.push(child);},replaceChildren(...children){this.children=children;},
     click(){downloads.push(this);}};}
@@ -31,7 +31,8 @@ function setup({file=gif,holdIndex=false,holdPdf=false,indexOk=true,stored=null,
   class PDFLinkService {setViewer(v){this.viewer=v;}setDocument(doc){this.document=doc;}}
   class PDFViewer {
     constructor({eventBus}){this.bus=eventBus;this.page={};viewers.push(this);}
-    setDocument(doc){this.pdfDocument=doc;if(doc){this.bus.handlers.pagesinit();this.bus.handlers.pagerendered({pageNumber:1,source:this.page});}}
+    setDocument(doc){this.pdfDocument=doc;if(doc){this.bus.handlers.pagesinit();if(!holdRender)this.render();}}
+    render(){this.bus.handlers.pagerendered({pageNumber:1,source:this.page});}
     getPageView(){return this.pdfDocument?this.page:undefined;}
     updateScale(value){this.lastScale=value;}
   }
@@ -124,13 +125,30 @@ test('a slow previous PDF cannot replace a newly selected image',async()=>{
   assert.equal(app.tasks[0].destroyed,true);
 });
 
+test('only the loaded image or completed PDF page reveals content, never stale callbacks',async()=>{
+  const app=setup();await app.ready;
+  assert.equal(app.document.body.dataset.ready,'false');assert.equal(app.nodes.loading.dataset.state,'loading');
+  const previous=app.images[0];app.key('ArrowRight');await flush();
+  app.key('ArrowRight');await flush();
+  previous.onload();assert.equal(app.document.body.dataset.ready,'false');
+  previous.onerror();assert.equal(app.nodes.loading.dataset.state,'loading');
+  app.images.at(-1).onload();assert.equal(app.document.body.dataset.ready,'true');
+  const pdfApp=setup({file:pdf,holdRender:true});await pdfApp.ready;
+  assert.equal(pdfApp.document.body.dataset.ready,'false');
+  pdfApp.viewers[0].render();assert.equal(pdfApp.document.body.dataset.ready,'true');
+});
+
 test('index/asset errors retain an original-file link rather than a forced download',async()=>{
   const app=setup({indexOk:false});await app.ready;
   assert.equal(app.nodes.loading.children.at(-1).href,gif);
   assert.equal(app.nodes.loading.children.at(-1).download,undefined);
+  assert.equal(app.nodes.loading.dataset.state,'error');
   const image=setup();await image.ready;image.images[0].onerror();
   assert.equal(image.nodes.loading.children.at(-1).href,gif);
   assert.equal(image.nodes.loading.hidden,false);
+  assert.equal(image.nodes.loading.dataset.state,'error');assert.equal(image.document.body.dataset.ready,'false');
+  const invalid=setup({file:'/private/file.pdf',indexOk:false});await invalid.ready;
+  assert.equal(invalid.nodes.loading.dataset.state,'error');
 });
 
 test('the reader shell keeps its Escape fallback and no render-blocking PDF stylesheet',()=>{
@@ -138,4 +156,8 @@ test('the reader shell keeps its Escape fallback and no render-blocking PDF styl
   assert.doesNotMatch(html,/<link[^>]+pdf_viewer\.css/);
   assert.match(html,/window\.close\(\)/);assert.match(html,/dataset\.returnUrl\|\|'\/cv\/'/);
   assert.match(html,/image-container\.enlarged img\{max-width:none;max-height:none/);
+  assert.match(html,/<body data-ready="false">/);
+  assert.match(html,/body:not\(\[data-ready="true"\]\) #pdf-pages,body:not\(\[data-ready="true"\]\) #image-container img\{visibility:hidden;opacity:0\}/);
+  assert.match(html,/#loading\[data-state="loading"\]\{color:transparent\}/);
+  assert.match(html,/@media\(prefers-reduced-motion:reduce\)/);
 });
