@@ -9,7 +9,7 @@ function entry(title, keywords, body, order) {
   return { title, order, titleIndex: normalize(title), keywordIndex: normalize(keywords), bodyIndex: normalize(body) };
 }
 const records = [
-  entry('GPU-accelerated Hybrid FEM–Neural Operator Solver', 'FEM NO 纤维 三维 应力', 'one shared operator for all 100 fibers', 0),
+  entry('GPU-accelerated Hybrid Finite Element–Neural Operator Solver (Ongoing)', 'FEM NO 纤维 三维 应力', 'one shared operator for all 100 fibers', 0),
   entry('ConvLSTM Prediction of Concentration and Stress Fields in Battery Materials', 'battery 电池 浓度 应力', 'stress images COMSOL', 1),
   entry('PINNs for Shock Capturing in the Burgers Equation', 'PINN 人工粘性 激波', 'constant artificial viscosity', 2),
   entry('Domain-Specific LLM Fine-Tuning for Mechanics of Materials', 'LLM Qwen 大模型', 'LoRA instruction dataset', 3),
@@ -18,6 +18,7 @@ const records = [
 test('normalizes case, Unicode dashes, accents and Chinese without regex search', () => {
   assert.equal(normalize(' FEM–NO / ＦＥＭ '), 'fem no fem');
   assert.equal(normalize('应力 Café'), '应力 cafe');
+  assert.equal(normalize('sim\u00adulation'), 'simulation');
   assert.doesNotThrow(() => searchEntries(records, '[.*'));
 });
 test('blank query preserves order and never changes project titles', () => {

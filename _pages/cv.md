@@ -59,7 +59,7 @@ Current Research
     <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Lead Undergraduate Researcher<span class="cv-project__separator">|</span>Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
+    <span><em>Undergraduate Research Intern<span class="cv-project__separator">|</span>Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
     <span><em>Johns Hopkins University</em></span>
   </div>
 </div>
@@ -68,6 +68,8 @@ Current Research
 - **GPU-accelerated Data Generation:** Generated interface displacement samples using Gaussian random fields and computed the corresponding subdomain stress fields with GPU-accelerated JAX-FEM simulations to form paired training data.
 - **Neural Operator Training:** Trained Transolver in JAX on these paired data to learn the mapping from interface displacement fields to subdomain stress fields.
 - **Iterative Interface Coupling:** Computed interface reaction forces from neural-operator stress predictions and exchanged them with FEM-computed interface displacements during coupling iterations. Investigated convergence acceleration strategies and relaxation parameters for the coupled solver.
+
+**Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
 
 <div class="research-gallery research-gallery--single research-gallery--overview">
   <figure class="research-card research-card--overview" id="cylinder-workflow-overview">
@@ -80,8 +82,6 @@ Current Research
     </figcaption>
   </figure>
 </div>
-
-**Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
 
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card">

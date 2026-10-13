@@ -1157,16 +1157,6 @@ ul + .cv-project {
   margin-inline: auto;
 }
 
-// An introductory overview keeps the existing detail figures numbered 1–12.
-.research-gallery .research-card--overview {
-  counter-increment: none;
-  padding-bottom: 0.75rem;
-}
-
-.research-card--overview::after {
-  content: none;
-}
-
 .research-card a {
   display: block;
   cursor: zoom-in;

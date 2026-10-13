@@ -6,12 +6,12 @@
   preview_caption: FEM–NO coupling workflow
   status: Ongoing
   description: >-
-    A hybrid solver based on non-overlapping domain decomposition, with FEM
-    and neural-operator subdomains connected through a shared interface.
-    The two solvers exchange interface displacements and reaction forces
-    iteratively across this interface. Uses
-    GPU-accelerated JAX-FEM simulations to generate training data
-    and trains Transolver in JAX to learn mappings from interface displacement
+    A hybrid solver based on non-overlapping domain decom­po­si­tion, with FEM
+    and neural-operator sub­do­mains con­nected through a shared inter­face.
+    The two solvers exchange inter­face dis­place­ments and reac­tion forces
+    iter­a­tively across this inter­face. Uses
+    GPU-accelerated JAX-FEM sim­u­la­tions to gen­er­ate train­ing data
+    and trains Transolver in JAX to learn map­pings from inter­face dis­place­ment
     fields to local stress fields.
   research_url: /cv/#fem-neural-operator
   repository:
@@ -23,10 +23,10 @@
   preview_alt: Lithium concentration evolution in the COMSOL simulation dataset.
   preview_caption: Concentration evolution · COMSOL
   description: >-
-    Trains conditional ConvLSTM models in PyTorch to predict future sequences
-    of concentration and stress fields in polycrystalline battery materials. Separate
-    models for each field use past field images, grain-orientation maps, and
-    C-rate inputs, with MATLAB–COMSOL simulation data and a combined MSE and SSIM loss.
+    Trains con­di­tional ConvLSTM mod­els in PyTorch to pre­dict future sequences
+    of con­cen­tra­tion and stress fields in poly­crys­talline bat­tery mate­ri­als. Separate
+    mod­els for each field use past field images, grain-orientation maps, and
+    C-rate inputs, with MATLAB–COMSOL sim­u­la­tion data and a com­bined MSE and SSIM loss.
   research_url: /cv/#convlstm-battery
   repository: https://github.com/cyhcyh070126-bot/convlstm-battery-field-prediction#readme
 
@@ -51,10 +51,10 @@
   preview_alt: Mechanics dataset preparation, LoRA fine-tuning, and model release workflow.
   preview_caption: Fine-tuning and release workflow
   description: >-
-    Adapts Qwen2.5-7B for question answering and concept explanation in mechanics
-    of materials through LoRA fine-tuning on Google Colab. Uses curated
-    instruction–response examples from textbooks and technical literature,
-    with datasets and fine-tuned models released on Hugging Face.
+    Adapts Qwen2.5-7B for ques­tion answer­ing and con­cept expla­na­tion in mechan­ics
+    of mate­ri­als through LoRA fine-tuning on Google Colab. Uses curated
+    instruction–response exam­ples from text­books and tech­ni­cal lit­er­a­ture,
+    with datasets and fine-tuned mod­els released on Hugging Face.
   research_url: /cv/#mechanics-llm
   repository: https://huggingface.co/CYHcyh66
   repository_label: Hugging Face

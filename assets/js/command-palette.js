@@ -3,7 +3,7 @@
   "use strict";
 
   function normalize(value) {
-    return String(value || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    return String(value || "").normalize("NFKD").replace(/[\u00ad\u0300-\u036f]/g, "")
       .toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
   }
 
