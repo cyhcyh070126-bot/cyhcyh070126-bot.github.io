@@ -4,7 +4,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const {execFileSync}=require('node:child_process');
 const root=path.join(__dirname,'..');
 const code=fs.readFileSync(path.join(root,'assets/js/project-figures.js'),'utf8');
-function setup({stored='{}',hash='',blocked=false,nested=false,readerContext='{}'}={}){
+function setup({stored='{}',hash='',blocked=false,nested=false,readerContext='{}',noFooters=false}={}){
   const events={},documentEvents={},frames=[],writes=[];
   function makePanel(number,id,parent){
     const listeners={};
@@ -14,7 +14,7 @@ function setup({stored='{}',hash='',blocked=false,nested=false,readerContext='{}
     const body={querySelector(){return button;}};
     const panel={id,open:false,number,summary,button,count,listeners,parentElement:parent?{closest:()=>parent}:null,
       querySelector(s){return s===':scope > summary'?summary:s===':scope > .project-figures__body'?body:s==='summary'?summary:s==='.project-figures__count'?count:button;},
-      querySelectorAll(s){return s==='.project-figures__collapse'?[button]:Array(number).fill({});},addEventListener(name,fn){listeners[name]=fn;}};
+      querySelectorAll(s){return s==='.project-figures__collapse'?(noFooters&&(parent||id==='p0')?[]:[button]):Array(number).fill({});},addEventListener(name,fn){listeners[name]=fn;}};
     button.closest=()=>panel;
     return panel;
   }
@@ -91,6 +91,15 @@ test('nested figure navigation reveals every ancestor while leaving sibling grou
   assert.deepEqual(app.allPanels.map(p=>p.open),original);
   app.children[2].open=false;app.events.pageshow({persisted:true});assert.equal(app.children[2].open,false,'BFCache back preserves each inner choice');
 });
+test('native summary toggles work without redundant footer controls',()=>{
+  const app=setup({nested:true,noFooters:true});
+  assert.deepEqual([app.panels[0],...app.children].map(p=>p.count.textContent),[' (13)',' (7)',' (3)',' (3)']);
+  app.panels[0].open=true;app.children[1].open=true;
+  app.children[1].listeners.toggle({target:app.children[1]});
+  assert.equal(app.writes.at(-1)[1].bracket,true);
+  app.children[1].open=false;app.children[1].listeners.toggle({target:app.children[1]});
+  assert.equal(app.writes.at(-1)[1].bracket,false);assert.equal(app.panels[0].open,true);
+});
 test('reader return restores the captured viewport once, after folded layout and fonts settle',async()=>{
   const context={project:'p0',items:[{file:'/files/research/example.pdf'}],returnPosition:{url:'https://example.com/cv/',x:0,y:1234}};
   const app=setup({nested:true,readerContext:JSON.stringify(context)});app.events.pageshow({persisted:true});
@@ -120,7 +129,7 @@ test('wrappers preserve cards, sources, URLs and prose apart from approved in-pl
   assert.deepEqual(folds.filter(f=>f.group).map(f=>cards(f.body).length),[7,3,3]);
   for(const fold of folds)assert.doesNotMatch(fold.body,/class="cv-project(?: |")/,'Project text must remain outside the fold');
   const outsideNoFigures=s=>{
-    const start=s.indexOf('<details class="project-figures" id="fem-neural-operator-figures">');
+    const start=s.search(/<details class="project-figures(?: project-figures--nested)?" id="fem-neural-operator-figures">/);
     let depth=0;
     for(const match of s.slice(start).matchAll(/<details\b[^>]*>|<\/details>/g)){
       depth+=match[0].startsWith('</')?-1:1;

@@ -1064,11 +1064,31 @@ ul + .cv-project {
   .project-figures__collapse { display: none; }
 }
 // Nested case groups share the existing disclosure controls and image styles.
-.project-figures--group {
-  margin: 0.8rem 0 1rem;
+.project-figures--nested > .project-figures__body {
+  margin: 0.6rem 0 0 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--cv-section-rule-color);
 }
-.project-figures__label { font-weight: 700; }
+.project-figures--group {
+  margin: 0.25rem 0;
+}
+.project-figures--group > summary {
+  border: 0;
+  background: transparent;
+  border-radius: 5px;
+  padding: 0.5rem;
+  color: var(--global-text-color);
+  font-weight: 400;
+}
+.project-figures--group > summary:is(:hover, :focus-visible) {
+  color: var(--cv-section-heading-color);
+  background: rgba(154, 100, 30, 0.08);
+}
+.project-figures__label { font-weight: 400; }
 .project-figures--group > .project-figures__body {
+  // Keep the existing figure widths while the disclosure headings are indented.
+  margin-left: calc(-1.25rem - 1px);
+  width: calc(100% + 1.25rem + 1px);
   counter-reset: research-figure var(--research-figure-start, 0);
 }
 /* End project figure disclosure. */

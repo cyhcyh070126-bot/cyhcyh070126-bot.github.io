@@ -23,12 +23,14 @@
     var close = Array.from(panel.querySelectorAll(".project-figures__collapse")).find(function (button) {
       return button.closest("details.project-figures") === panel;
     });
-    close.hidden = false;
-    close.addEventListener("click", function () {
-      panel.open = false;
-      summary.focus({ preventScroll: true });
-      summary.scrollIntoView({ block: "start", behavior: "instant" });
-    });
+    if (close) {
+      close.hidden = false;
+      close.addEventListener("click", function () {
+        panel.open = false;
+        summary.focus({ preventScroll: true });
+        summary.scrollIntoView({ block: "start", behavior: "instant" });
+      });
+    }
   });
 
   function reveal(href, alignOpenPanel) {

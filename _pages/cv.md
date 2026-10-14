@@ -71,11 +71,11 @@ Current Research
 
 **Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
 
-<details class="project-figures" id="fem-neural-operator-figures">
+<details class="project-figures project-figures--nested" id="fem-neural-operator-figures">
   <summary aria-controls="fem-neural-operator-figure-content" aria-describedby="fem-neural-operator"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
   <div class="project-figures__body" id="fem-neural-operator-figure-content">
 <details class="project-figures project-figures--group" id="fem-neural-operator-cylinder-figures">
-  <summary aria-controls="fem-neural-operator-cylinder-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Cylinder</span> &mdash; <span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <summary aria-controls="fem-neural-operator-cylinder-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Cylinder</span><span class="project-figures__count"></span></summary>
   <div class="project-figures__body" id="fem-neural-operator-cylinder-figures-content" style="--research-figure-start:0">
 <div class="research-gallery research-gallery--single research-gallery--overview">
   <figure class="research-card research-card--overview" id="cylinder-workflow-overview">
@@ -151,12 +151,11 @@ Current Research
   </figure>
 </div>
 
-  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
   </div>
 </details>
 
 <details class="project-figures project-figures--group" id="fem-neural-operator-bracket-figures">
-  <summary aria-controls="fem-neural-operator-bracket-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Bracket</span> &mdash; <span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <summary aria-controls="fem-neural-operator-bracket-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Bracket</span><span class="project-figures__count"></span></summary>
   <div class="project-figures__body" id="fem-neural-operator-bracket-figures-content" style="--research-figure-start:7">
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card" id="bracket-full-mesh">
@@ -190,12 +189,11 @@ Current Research
   </figure>
 </div>
 
-  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
   </div>
 </details>
 
 <details class="project-figures project-figures--group" id="fem-neural-operator-fiber-figures">
-  <summary aria-controls="fem-neural-operator-fiber-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Fiber-reinforced Composites &middot; Ongoing</span> &mdash; <span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <summary aria-controls="fem-neural-operator-fiber-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Fiber-reinforced Composites &middot; Ongoing</span><span class="project-figures__count"></span></summary>
   <div class="project-figures__body" id="fem-neural-operator-fiber-figures-content" style="--research-figure-start:10">
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card" id="fiber-cube">
@@ -229,11 +227,9 @@ Current Research
   </figure>
 </div>
 
-  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
   </div>
 </details>
 
-  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
   </div>
 </details>
 
