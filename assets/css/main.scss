@@ -1050,6 +1050,8 @@ ul + .cv-project {
 .project-figures > summary {
   display: list-item;
   list-style-position: inside;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .project-figures__count { color: var(--global-text-color); font-weight: 400; }
