@@ -15,10 +15,12 @@ sitemap: false
     "url": {{ '/cv/' | relative_url | jsonify }},
     "pdf_url": {{ cv_pdf_url | jsonify }},
     "research_statement_pdf_url": {{ '/files/Yanghao_Chen_Research_Statement.pdf' | relative_url | append: '?v=' | append: cv_pdf_version | jsonify }},
+    "personal_statement_pdf_url": {{ '/files/Yanghao_Chen_Personal_Statement.pdf' | relative_url | append: '?v=' | append: cv_pdf_version | jsonify }},
     "html": {{ search_cv.content | markdownify | jsonify }}
   },
   "projects": {
     "url": {{ '/projects/' | relative_url | jsonify }},
+    "presentation_url": {{ '/slides/previous-research/' | relative_url | jsonify }},
     "items": {{ site.data.projects | jsonify }}
   },
   "contact": {

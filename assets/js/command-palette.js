@@ -106,6 +106,16 @@
         if (repository.url) seen.add(repository.url);
       }
       project.nodes.forEach(function (node) {
+        node.querySelectorAll("details.project-figures--group[id]").forEach(function (panel) {
+          var label = panel.querySelector(":scope > summary .project-figures__label");
+          if (!label || !panel.id) return;
+          var url = data.cv.url + "#" + panel.id;
+          if (seen.has(url)) return;
+          children.push({group:"Figures", title:label.textContent.trim(), url:url,
+            keywords:"FEM NO JAX Transolver GPU figures images pdf mesh stress 图组 图片 网格 应力",
+            body:panel.textContent});
+          seen.add(url);
+        });
         node.querySelectorAll("a[href]").forEach(function (link) {
           var url = link.getAttribute("href");
           if (seen.has(url) || !/^https:\/\/huggingface\.co\/(datasets\/)?[^/]+\/.+/.test(url)) return;
@@ -138,6 +148,11 @@
     var researchStatement = add("Resources", "Research Statement PDF", data.cv.research_statement_pdf_url,
       "RS research statement pdf download 研究陈述 科研陈述 下载");
     if (researchStatement) researchStatement.openInNewTab = true;
+    var personalStatement = add("Resources", "Personal Statement PDF", data.cv.personal_statement_pdf_url,
+      "PS personal statement pdf download 个人陈述 下载");
+    if (personalStatement) personalStatement.openInNewTab = true;
+    add("Resources", "Previous Research (Online Slides)", data.projects?.presentation_url,
+      "previous research presentation ppt slides talk online 研究 演示 幻灯片 在线");
     var contact = data.contact || {};
     if (contact.email) add("Contact & Links", "Tongji Email", "mailto:" + contact.email, "email contact mail 同济 邮箱 邮件 联系 " + contact.email);
     home.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
