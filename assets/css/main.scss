@@ -616,10 +616,21 @@ a[href] {
   hyphenate-limit-chars: 6 3 3;
 }
 
+// Native dictionary break hints are limited to the existing phone breakpoint.
+.home-page .home-mobile-hyphen {
+  display: inline;
+  @include breakpoint($small) {
+    display: none;
+  }
+}
+
 // Introduction links wrap as text; their line boxes retain the shared interaction.
 #main .home-page a.inline-wrapped-link {
   display: inline;
   hyphens: manual;
+  @include breakpoint(max-width ($small - 1px)) {
+    word-spacing: -0.05em;
+  }
 }
 
 // Inherit the same scale and timing as the link; no duplicated hover text.
