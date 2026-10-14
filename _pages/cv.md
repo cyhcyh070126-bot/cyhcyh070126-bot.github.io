@@ -100,6 +100,15 @@ Current Research
     </figcaption>
   </figure>
 
+  <figure class="research-card" id="cylinder-quad4-mesh">
+    <a href="/files/research/cylinder_quad4_current_mesh.pdf" target="_self" rel="noopener noreferrer">
+      <picture><source type="image/webp" srcset="/images/research/cylinder_quad4_current_mesh.display-640.webp 640w, /images/research/cylinder_quad4_current_mesh.display-1280.webp 1280w, /images/research/cylinder_quad4_current_mesh.display-1920.webp 1920w, /images/research/cylinder_quad4_current_mesh.webp 3200w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/cylinder_quad4_current_mesh.png" alt="Cylinder QUAD4 meshes showing the full domain, outer FEM subdomain, and inner neural-operator subdomain, with 107 shared interface points." loading="lazy" decoding="async" width="3200" height="925" style="background-image:url('data:image/webp;base64,UklGRjwBAABXRUJQVlA4IDABAADwCgCdASp4ACMAPt1iqE4opaOiLrRqcRAbiWkADqKocWHIVq0SU6nr9KbqSgr+Yd9ARsMpMepKYLJxnKrXEutUd69yycAyDQtTBoDNMObP/4AiiFdlJ+sJss87jS7tdLAA/voQhvIE8jfaIoW+gKSuk3+6KpUEH5wc6+ay18MzCRB6I0AcgI7f4VN9lmV0aMl1HUXbNfFgwNE9obWdhO25BZ8FSkOF/fkvHQXBx6mIfNZknJFam7uViep3sKY7elE5XugXZJaIaFFtDXuvuy/yBilaNQLnebfjpY5CRQ+swS5tz9YI9yO+CysRC+7yUO4VMY8cfy+41tiJ8x7rd3q/wBKPM1FjgNA49LCnsVenX7WMdsWOiFoPtTcRAdx2bA/et/ptjdrfwGUtHv8AAAAA');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+    </a>
+    <figcaption>
+      <strong>Cylinder QUAD4 Meshes</strong><br>
+      Full-domain, FEM, and neural-operator meshes with a shared interface of 107 points.
+    </figcaption>
+  </figure>
 
   <figure class="research-card">
     <a href="/files/research/cylinder_boundary_conditions.pdf" target="_self" rel="noopener noreferrer">
@@ -147,7 +156,7 @@ Current Research
 
 <details class="project-figures project-figures--group" id="fem-neural-operator-bracket-figures">
   <summary aria-controls="fem-neural-operator-bracket-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Bracket</span><span class="project-figures__count"></span></summary>
-  <div class="project-figures__body" id="fem-neural-operator-bracket-figures-content" style="--research-figure-start:6">
+  <div class="project-figures__body" id="fem-neural-operator-bracket-figures-content" style="--research-figure-start:7">
 <div class="research-gallery research-gallery--single research-gallery--overview">
   <figure class="research-card" id="bracket-coupling-workflow">
     <a href="/files/research/bracket_workflow_overview.pdf" target="_self" rel="noopener noreferrer">
@@ -230,7 +239,7 @@ Current Research
 
 <details class="project-figures project-figures--group" id="fem-neural-operator-fiber-figures">
   <summary aria-controls="fem-neural-operator-fiber-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Fiber-reinforced Composites &middot; Ongoing</span><span class="project-figures__count"></span></summary>
-  <div class="project-figures__body" id="fem-neural-operator-fiber-figures-content" style="--research-figure-start:13">
+  <div class="project-figures__body" id="fem-neural-operator-fiber-figures-content" style="--research-figure-start:14">
 <div class="research-gallery research-gallery--single research-gallery--overview">
   <figure class="research-card" id="fiber-coupling-workflow">
     <a href="/files/research/fiber100_workflow_overview_v2.pdf" target="_self" rel="noopener noreferrer">

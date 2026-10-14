@@ -105,7 +105,7 @@ test('a closed ancestor blocks alternate cross-page sizes of its hidden figure',
 test('display copies exist, materially reduce downloads, and preserve original link destinations', () => {
   const variants = JSON.parse(fs.readFileSync(path.join(root,'_data/image_variants.json')));
   let originalBytes=0, displayBytes=0;
-  assert.equal(Object.keys(variants).length,24);
+  assert.equal(Object.keys(variants).length,25);
   for (const [src, item] of Object.entries(variants)) {
     assert.ok(fs.existsSync(path.join(root,src)));
     const sourceWidth=fs.readFileSync(path.join(root,src)).readUInt32BE(16);
@@ -121,8 +121,8 @@ test('display copies exist, materially reduce downloads, and preserve original l
   const sealBytes=fs.statSync(path.join(root,'images/schools/tongji-university-seal-128.png')).size;
   assert.ok(sealBytes<25000);
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'_data/navigation_images.json')));
-  assert.equal(manifest.length,36);
-  assert.equal(new Set(manifest.map(item=>item.src)).size,34);
+  assert.equal(manifest.length,37);
+  assert.equal(new Set(manifest.map(item=>item.src)).size,35);
   assert.equal(manifest.filter(item=>item.sizes?.endsWith('340px')).length,2);
   manifest.forEach(item=>assert.ok(fs.existsSync(path.join(root,item.src)),item.src));
   const links = text=>[...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
@@ -132,6 +132,9 @@ test('display copies exist, materially reduce downloads, and preserve original l
     if (file === '_pages/cv.md') {
       for(let i=expected.length-1;i>=0;i--)if(expected[i]==='/files/research/domain_decomposition_preview.pdf')expected.splice(i,1);
       for(let i=0;i<expected.length;i++)if(expected[i]==='/files/research/subdomain_point_cloud_preview.pdf')expected[i]='/files/research/cylinder_pointcloud_inputs.pdf';
+      const cylinderMesh='/files/research/cylinder_quad4_current_mesh.pdf';
+      for(let i=expected.length-1;i>=0;i--)if(expected[i]===cylinderMesh)expected.splice(i,1);
+      expected.splice(expected.indexOf('/files/research/cylinder_subdomain_supports_1234.pdf')+1,0,cylinderMesh);
       const overview = '/files/research/cylinder_workflow_overview_v2.pdf';
       for (let i=expected.length-1;i>=0;i--) {
         if (expected[i] === overview || expected[i] === '/files/research/cylinder_workflow_overview.pdf') expected.splice(i,1);

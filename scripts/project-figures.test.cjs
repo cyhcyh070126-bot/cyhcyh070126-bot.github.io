@@ -116,13 +116,13 @@ test('case overviews are large first figures and preserve the remaining cards an
     .replace(/(<a href="\/(?:files|images)\/research\/[^\"]+" target=")_blank(")/g,'$1_self$2');
   const after=fs.readFileSync(path.join(root,'_pages/cv.md'),'utf8').replace(/\r\n/g,'\n');
   const cards=s=>[...s.matchAll(/<figure class="research-card[\s\S]*?<\/figure>/g)].map(m=>m[0]);
-  const approved=/\/(?:domain_decomposition_preview|subdomain_point_cloud_preview|(?:cylinder|bracket|fiber100)_pointcloud_inputs)\.pdf/;
+  const approved=/\/(?:domain_decomposition_preview|subdomain_point_cloud_preview|cylinder_quad4_current_mesh|(?:cylinder|bracket|fiber100)_pointcloud_inputs)\.pdf/;
   const existingCards=s=>cards(s).filter(card=>!/_workflow_overview(?:_v\d+)?\.pdf/.test(card)&&!approved.test(card)).map(card=>{
     if(card.includes('/cylinder_subdomain_supports_1234.pdf'))card=card.replace('<strong>Non-Overlapping Domain Decomposition</strong>','<strong>Cylinder Subdomain Layout</strong>');
     if(/\/(?:bracket_grf_stress_comparison_v1|bracket_coupled_displacement_comparison|bracket_coupled_stress_comparison)\.pdf/.test(card))card=card.replace(/ sizes="[^"]*"/g,'');
     return card;
   });
-  assert.deepEqual(existingCards(after),existingCards(before));assert.equal(cards(after).length,31);
+  assert.deepEqual(existingCards(after),existingCards(before));assert.equal(cards(after).length,32);
   assert(cards(after).every(card=>/<a href="[^\"]+" target="_self"/.test(card)),'Even pre-script/native figure clicks must stay in the same tab');
   const anchors=s=>[...s.matchAll(/<a\b[^>]+>/g)].map(m=>m[0]).filter(tag=>!/_workflow_overview(?:_v\d+)?\.pdf/.test(tag)&&!approved.test(tag));assert.deepEqual(anchors(after),anchors(before));
   const folds=[],stack=[];
@@ -131,8 +131,8 @@ test('case overviews are large first figures and preserve the remaining cards an
     else stack.push({start:match.index+match[0].length,group:match[0].includes('project-figures--group')});
   }
   assert.equal(folds.length,7);
-  assert.deepEqual(folds.filter(f=>!f.group).map(f=>cards(f.body).length),[18,7,5,1]);
-  assert.deepEqual(folds.filter(f=>f.group).map(f=>cards(f.body).length),[6,7,5]);
+  assert.deepEqual(folds.filter(f=>!f.group).map(f=>cards(f.body).length),[19,7,5,1]);
+  assert.deepEqual(folds.filter(f=>f.group).map(f=>cards(f.body).length),[7,7,5]);
   for(const [fold,name] of folds.filter(f=>f.group).map((fold,i)=>[fold,['cylinder','bracket','fiber100'][i]])){
     assert(cards(fold.body)[0].includes('/'+name+'_workflow_overview'+(['cylinder','fiber100'].includes(name)?'_v2':'')+'.pdf'));
     assert.equal(fold.body.match(/<div class="research-gallery[^\"]*">/)[0],'<div class="research-gallery research-gallery--single research-gallery--overview">');
