@@ -52,7 +52,8 @@
     if (constrained()) return;
     var item = destination(href, location.href);
     if (!item) { connect(href); return; }
-    if (item.type === "reader" && /^\/files\/research\/[^/?#]+\.pdf$/i.test(new URL(item.url).searchParams.get("file") || "")) {
+    var readerFile = item.type === "reader" && new URL(new URL(item.url).searchParams.get("file") || "", location.href);
+    if (readerFile && readerFile.origin === new URL(location.href).origin && /^\/files\/(?:research\/[^/]+|Yanghao_Chen_(?:CV|Research_Statement|Personal_Statement))\.pdf$/i.test(readerFile.pathname)) {
       // Only a PDF intent warms the PDF engine; GIF/PNG readers never pay this cost.
       ["pdf.min.mjs", "pdf.worker.min.mjs", "pdf_viewer.mjs", "pdf_viewer.css"].forEach(function (file) {
         var asset = new URL("/assets/vendor/pdfjs-5.6.205/" + file, location.href).href;

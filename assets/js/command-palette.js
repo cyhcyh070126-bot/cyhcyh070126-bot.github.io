@@ -16,6 +16,7 @@
       reader.searchParams.set("document", names[file.pathname]);
       reader.searchParams.set("file", file.pathname + file.search + file.hash);
       reader.searchParams.set("from", "site");
+      if (file.searchParams.get("v")) reader.searchParams.set("v", file.searchParams.get("v"));
       return reader.href;
     } catch (_) { return null; }
   }

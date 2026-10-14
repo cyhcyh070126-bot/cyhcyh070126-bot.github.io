@@ -32,6 +32,7 @@ test('all application PDF links share the reader route while unrelated and exter
       assert.equal(reader.searchParams.get('file'),path);
       assert.equal(reader.searchParams.get('document'),key);
       assert.equal(reader.searchParams.get('from'),'site');
+      assert.equal(reader.searchParams.get('v'),'release');
     }
   }
   for (const href of ['https://other.com/files/Yanghao_Chen_CV.pdf','/files/research/a.pdf','/cv/','mailto:a@example.com','javascript:void(0)']) {

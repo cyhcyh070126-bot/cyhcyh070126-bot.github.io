@@ -84,6 +84,17 @@ test('only PDF intent warms its four engine resources once, even after the shell
   const constrained=setup({saveData:true});constrained.window.siteWarmLink('/research-viewer/?file=%2Ffiles%2Fresearch%2Fa.pdf');assert.equal(constrained.links.length,0);
 });
 
+test('versioned application PDF readers warm the same engine and the versioned reader module',()=>{
+  const app=setup();
+  for(const name of ['CV','Research_Statement','Personal_Statement']){
+    app.window.siteWarmLink('/research-viewer/?document=cv&file='+encodeURIComponent('/files/Yanghao_Chen_'+name+'.pdf?v=release')+'&from=site&v=release');
+  }
+  assert.equal(app.links.filter(l=>l.href.includes('/pdfjs-')).length,4);
+  assert.equal(app.links.find(l=>l.rel==='modulepreload').href,origin+'/research-viewer/reader.js?v=release');
+  const external=setup();external.window.siteWarmLink('/research-viewer/?file='+encodeURIComponent('https://other.test/files/Yanghao_Chen_CV.pdf'));
+  assert.equal(external.links.filter(l=>l.href.includes('/pdfjs-')).length,0);
+});
+
 test('link intent inside an open inner group stays cold while an outer group is closed',()=>{
   const app=setup();const outer={open:false},inner={open:true};
   const link={href:origin+'/files/research/nested.pdf',hasAttribute:()=>false,

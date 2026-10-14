@@ -9,7 +9,9 @@ test('Projects lists the same four titles and stable anchors as the CV', () => {
   const cv = [...read('_pages/cv.md').matchAll(/class="cv-project__title" id="([^"]+)">\d+\. ([^<]+)</g)];
   assert.equal(cv.length, 4);
   assert.deepEqual([...projects.matchAll(/^- id: (.+)$/gm)].map(m => m[1]), cv.map(m => m[1]));
-  assert.deepEqual([...projects.matchAll(/^  title: (.+)$/gm)].map(m => m[1]), cv.map(m => m[2]));
+  const titles=[...projects.matchAll(/^  title: (.+)$/gm)].map(m=>m[1]);
+  const blocks=projects.split(/(?=^- id: )/m).filter(Boolean);
+  assert.deepEqual(titles.map((title,i)=>title+(blocks[i].match(/^  status: (.+)$/m)?' ('+blocks[i].match(/^  status: (.+)$/m)[1]+')':'')),cv.map(m=>m[2]));
   assert.deepEqual([...projects.matchAll(/^  research_url: (.+)$/gm)].map(m => m[1]), cv.map(m => '/cv/#' + m[1]));
 });
 

@@ -154,6 +154,15 @@ $(document).ready(function () {
     }
   });
 
+  $(document).on("keydown", function (event) {
+    if (event.key !== "Escape" || event.defaultPrevented || document.querySelector("dialog[open]")) return;
+    var followButton = $(".author__urls-wrapper button");
+    if (followButton.is(":visible") && $(".author__urls").is(":visible")) {
+      $(".author__urls").stop(true, true).fadeOut("fast");
+      followButton.removeClass("open").trigger("focus");
+    }
+  });
+
   // Restore the follow menu if toggled on a window resize
   jQuery(window).on('resize', function () {
     if ($('.author__urls.social-icons').css('display') == 'none' && $(window).width() >= scssLarge) {
