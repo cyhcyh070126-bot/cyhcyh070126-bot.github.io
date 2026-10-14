@@ -105,7 +105,7 @@ test('a closed ancestor blocks alternate cross-page sizes of its hidden figure',
 test('display copies exist, materially reduce downloads, and preserve original link destinations', () => {
   const variants = JSON.parse(fs.readFileSync(path.join(root,'_data/image_variants.json')));
   let originalBytes=0, displayBytes=0;
-  assert.equal(Object.keys(variants).length,19);
+  assert.equal(Object.keys(variants).length,21);
   for (const [src, item] of Object.entries(variants)) {
     assert.ok(fs.existsSync(path.join(root,src)));
     const sourceWidth=fs.readFileSync(path.join(root,src)).readUInt32BE(16);
@@ -121,8 +121,8 @@ test('display copies exist, materially reduce downloads, and preserve original l
   const sealBytes=fs.statSync(path.join(root,'images/schools/tongji-university-seal-128.png')).size;
   assert.ok(sealBytes<25000);
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'_data/navigation_images.json')));
-  assert.equal(manifest.length,31);
-  assert.equal(new Set(manifest.map(item=>item.src)).size,29);
+  assert.equal(manifest.length,33);
+  assert.equal(new Set(manifest.map(item=>item.src)).size,31);
   assert.equal(manifest.filter(item=>item.sizes?.endsWith('340px')).length,2);
   manifest.forEach(item=>assert.ok(fs.existsSync(path.join(root,item.src)),item.src));
   const links = text=>[...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
@@ -145,6 +145,11 @@ test('display copies exist, materially reduce downloads, and preserve original l
       const afterCoupling = expected.indexOf('/files/research/cylinder_coupled_stress_comparison.pdf') + 1;
       assert.ok(afterCoupling > 0);
       expected.splice(afterCoupling, 0, ...bracketLinks);
+      const bracketResults = ['/files/research/bracket_coupled_displacement_comparison.pdf', '/files/research/bracket_coupled_stress_comparison.pdf'];
+      for (let i=expected.length-1;i>=0;i--) {
+        if (bracketResults.includes(expected[i])) expected.splice(i,1);
+      }
+      expected.splice(expected.indexOf(bracketLinks.at(-1))+1,0,...bracketResults);
       for (let i=0;i<expected.length;i++) {
         if (expected[i] === '/files/research/fiber100_cube.pdf') expected[i] = '/files/research/fiber100_unit_cell.pdf';
       }

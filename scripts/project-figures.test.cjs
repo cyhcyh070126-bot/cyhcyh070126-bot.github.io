@@ -111,22 +111,23 @@ test('reader return restores the captured viewport once, after folded layout and
     const invalid=setup({readerContext:JSON.stringify({returnPosition:point})});invalid.events.pageshow({persisted:true});await Promise.resolve();assert.equal(invalid.scrolls.length,0);
   }
 });
-test('wrappers preserve cards, sources, URLs and prose apart from approved in-place targets',()=>{
+test('wrappers preserve existing cards, sources, URLs and prose around new bracket results',()=>{
   const before=execFileSync('git',['show','HEAD:_pages/cv.md'],{cwd:root,encoding:'utf8'}).replace(/\r\n/g,'\n')
     .replace(/(<a href="\/(?:files|images)\/research\/[^\"]+" target=")_blank(")/g,'$1_self$2');
   const after=fs.readFileSync(path.join(root,'_pages/cv.md'),'utf8').replace(/\r\n/g,'\n');
   const cards=s=>[...s.matchAll(/<figure class="research-card[\s\S]*?<\/figure>/g)].map(m=>m[0]);
-  assert.deepEqual(cards(after),cards(before));assert.equal(cards(after).length,26);
+  const existingCards=s=>cards(s).filter(card=>!card.includes('id="bracket-coupled-displacement-results"')&&!card.includes('id="bracket-coupled-stress-results"'));
+  assert.deepEqual(existingCards(after),existingCards(before));assert.equal(cards(after).length,28);
   assert(cards(after).every(card=>/<a href="[^\"]+" target="_self"/.test(card)),'Even pre-script/native figure clicks must stay in the same tab');
-  const anchors=s=>[...s.matchAll(/<a\b[^>]+>/g)].map(m=>m[0]);assert.deepEqual(anchors(after),anchors(before));
+  const anchors=s=>[...s.matchAll(/<a\b[^>]+>/g)].map(m=>m[0]).filter(tag=>!tag.includes('/bracket_coupled_displacement_comparison.pdf')&&!tag.includes('/bracket_coupled_stress_comparison.pdf'));assert.deepEqual(anchors(after),anchors(before));
   const folds=[],stack=[];
   for(const match of after.matchAll(/<details\b[^>]*>|<\/details>/g)){
     if(match[0].startsWith('</')){const fold=stack.pop();fold.body=after.slice(fold.start,match.index);folds.push(fold);}
     else stack.push({start:match.index+match[0].length,group:match[0].includes('project-figures--group')});
   }
   assert.equal(folds.length,7);
-  assert.deepEqual(folds.filter(f=>!f.group).map(f=>cards(f.body).length),[13,7,5,1]);
-  assert.deepEqual(folds.filter(f=>f.group).map(f=>cards(f.body).length),[7,3,3]);
+  assert.deepEqual(folds.filter(f=>!f.group).map(f=>cards(f.body).length),[15,7,5,1]);
+  assert.deepEqual(folds.filter(f=>f.group).map(f=>cards(f.body).length),[7,5,3]);
   for(const fold of folds)assert.doesNotMatch(fold.body,/class="cv-project(?: |")/,'Project text must remain outside the fold');
   const outsideNoFigures=s=>{
     const start=s.search(/<details class="project-figures(?: project-figures--nested)?" id="fem-neural-operator-figures">/);
