@@ -10,9 +10,9 @@ const source=fs.readFileSync(path.join(root,'research-viewer/reader.js'),'utf8')
 const gif='/images/research/first.gif',pdf='/files/research/second.pdf',png='/images/research/third.png';
 function deferred(){let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};}
 const flush=()=>new Promise(r=>setImmediate(r));
-function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,holdApi=false,holdBytes=false,bytesOk=true,indexOk=true,stored=null,blockedStorage=false}={}){
-  const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[];
-  const indexGate=deferred(),pdfGate=deferred(),apiGate=deferred(),bytesGate=deferred(),byteRequests=[];
+function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,holdApi=false,holdBytes=false,holdWorker=false,failWorkers=0,bytesOk=true,indexOk=true,stored=null,blockedStorage=false}={}){
+  const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[],workers=[];
+  const indexGate=deferred(),pdfGate=deferred(),apiGate=deferred(),bytesGate=deferred(),workerGate=deferred(),byteRequests=[];
   function element(){const classes=new Set();return {hidden:false,children:[],textContent:'',events:{},eventOptions:{},dataset:{},clientWidth:800,clientHeight:600,scrollLeft:0,scrollTop:0,
     classList:{remove:s=>classes.delete(s),add:s=>classes.add(s),contains:s=>classes.has(s)},
     scrollTo(x,y){this.scrollLeft=x;this.scrollTop=y;},querySelector(){return this.children[0];},getBoundingClientRect(){return {left:0,top:44,width:800,height:600};},
@@ -38,7 +38,13 @@ function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,holdApi=
     getPageView(){return this.pdfDocument?this.page:undefined;}
     updateScale(value){this.lastScale=value;}
   }
-  const api={GlobalWorkerOptions:{},getDocument(options){
+  class PDFWorker {
+    constructor(){this.destroyed=false;workers.push(this);const fail=failWorkers>0;if(fail)failWorkers--;
+      this.promise=fail?Promise.reject(new Error('Worker startup failed')):holdWorker?workerGate.promise:Promise.resolve();}
+    destroy(){this.destroyed=true;}
+  }
+  const api={GlobalWorkerOptions:{},PDFWorker,getDocument(options){
+    assert.equal(options.worker.destroyed,false,'Do not pass a terminated worker to a new document');
     const task={options,destroyed:false,destroy(){this.destroyed=true;return Promise.resolve();},promise:holdPdf?pdfGate.promise:Promise.resolve({url:options.docBaseUrl})};
     tasks.push(task);return task;
   }};
@@ -55,7 +61,7 @@ function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,holdApi=
       return holdIndex?indexGate.promise:Promise.resolve({ok:indexOk,json:async()=>({cv:{html:'fixture'}})});}};
   const ready=vm.runInNewContext('(async()=>{'+source+'})()',context);
   const key=(key,extra={})=>{const event={key,ctrlKey:false,metaKey:false,altKey:false,shiftKey:false,preventDefault(){this.prevented=true;},...extra};events.keydown(event);return event;};
-  return {ready,imports,styles,images,tasks,viewers,events,nodes,document,requests,key,indexGate,pdfGate,apiGate,bytesGate,byteRequests,downloads};
+  return {ready,imports,styles,images,tasks,viewers,events,nodes,document,requests,key,indexGate,pdfGate,apiGate,bytesGate,workerGate,byteRequests,downloads,workers};
 }
 
 test('opening an original GIF/image does not request PDF scripts or styles',async()=>{
@@ -63,6 +69,7 @@ test('opening an original GIF/image does not request PDF scripts or styles',asyn
     const app=setup({file});await app.ready;
     assert.equal(app.images[0].src,file);
     assert.equal(app.imports.filter(url=>url.includes('/pdfjs-')).length,0);assert.equal(app.styles.length,0);
+    assert.equal(app.workers.length,0);
     assert.equal(app.document.body.dataset.ready,'false');
     app.images[0].onload();assert.equal(app.document.body.dataset.ready,'true');
     assert.equal(app.nodes['document-container'].hidden,true);
@@ -152,6 +159,29 @@ test('switching away aborts pending PDF bytes; stale bytes and HTTP failures can
   assert.equal(app.tasks.length,0);assert.equal(app.document.body.dataset.file,png);assert.equal(app.document.body.dataset.ready,'true');
   const failed=setup({file:pdf,bytesOk:false});await failed.ready;
   assert.equal(failed.nodes.loading.dataset.state,'error');assert.equal(failed.nodes.loading.children.at(-1).href,pdf);
+});
+
+test('successive PDFs reuse one worker while old document tasks are released',async()=>{
+  const app=setup({file:pdf});await app.ready;const worker=app.workers[0],old=app.tasks[0];
+  app.key('ArrowRight');await flush();app.images.at(-1).onload();
+  app.key('ArrowLeft');await flush();
+  assert.equal(app.workers.length,1);assert.equal(worker.destroyed,false);assert.equal(old.destroyed,true);
+  assert.equal(app.tasks.at(-1).options.worker,worker);assert.equal(app.document.body.dataset.ready,'true');
+});
+
+test('worker initialization overlaps file transfer, and a stale startup never replaces the selected image',async()=>{
+  const app=setup({file:pdf,holdBytes:true,holdWorker:true});await flush();
+  assert.equal(app.workers.length,1);assert.equal(app.byteRequests.length,1);assert.equal(app.tasks.length,0);
+  app.key('ArrowRight');await flush();app.images.at(-1).onload();
+  app.workerGate.resolve();app.bytesGate.resolve(new Uint8Array([37,80,68,70]).buffer);await app.ready;
+  assert.equal(app.tasks.length,0);assert.equal(app.document.body.dataset.file,png);assert.equal(app.document.body.dataset.ready,'true');
+});
+
+test('failed worker initialization is cleaned up and a later PDF can retry',async()=>{
+  const app=setup({file:pdf,failWorkers:1});await app.ready;
+  assert.equal(app.workers[0].destroyed,true);assert.equal(app.nodes.loading.dataset.state,'error');
+  app.key('ArrowRight');await flush();app.key('ArrowLeft');await flush();
+  assert.equal(app.workers.length,2);assert.equal(app.workers[1].destroyed,false);assert.equal(app.document.body.dataset.ready,'true');
 });
 
 test('only the loaded image or completed PDF page reveals content, never stale callbacks',async()=>{

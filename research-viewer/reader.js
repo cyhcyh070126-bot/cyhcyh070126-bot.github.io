@@ -2,7 +2,7 @@ const container = document.getElementById('document-container');
 const imageContainer = document.getElementById('image-container');
 const message = document.getElementById('loading');
 const params = new URLSearchParams(location.search);
-let pdfApiPromise, viewerPromise, viewer, linkService;
+let pdfApiPromise, pdfWorkerPromise, viewerPromise, viewer, linkService;
 let task=null,pdfFetch=null,revision=0,index=0,items=[];
 
 function readyImage(){
@@ -38,6 +38,15 @@ function loadPdfApi() {
   return pdfjs;
  });
  return pdfApiPromise;
+}
+function loadPdfWorker() {
+ if(!pdfWorkerPromise)pdfWorkerPromise=loadPdfApi().then(async pdfjs=>{
+  // Explicit ownership keeps document cleanup from destroying the shared worker.
+  const worker=new pdfjs.PDFWorker();
+  try{await worker.promise;return worker;}
+  catch(error){worker.destroy();throw error;}
+ }).catch(error=>{pdfWorkerPromise=null;throw error;});
+ return pdfWorkerPromise;
 }
 function loadPdfViewer() {
  if (!viewerPromise) viewerPromise=(async()=>{
@@ -93,9 +102,9 @@ async function show(nextIndex) {
    if(!response.ok)throw new Error('Unable to load PDF ('+response.status+')');
    return response.arrayBuffer();
   });
-  const [pdfjs,bytes]=await Promise.all([loadPdfApi(),bytesRequest]);
+  const [pdfjs,bytes,worker]=await Promise.all([loadPdfApi(),bytesRequest,loadPdfWorker()]);
   if(generation!==revision)return;
-  const loadingTask=pdfjs.getDocument({data:new Uint8Array(bytes),docBaseUrl:new URL(entry.file,location.href).href,
+  const loadingTask=pdfjs.getDocument({data:new Uint8Array(bytes),worker,docBaseUrl:new URL(entry.file,location.href).href,
    standardFontDataUrl:'/assets/vendor/pdfjs-5.6.205/standard_fonts/',isEvalSupported:false});task=loadingTask;
   const [pdf]=await Promise.all([loadingTask.promise,loadPdfViewer()]);
   if(generation!==revision){await loadingTask.destroy();return;}
