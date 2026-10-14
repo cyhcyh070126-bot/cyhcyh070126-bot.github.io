@@ -31,7 +31,7 @@ Education
 </div>
 
 - Visiting Undergraduate Research Intern, Department of Civil and Systems Engineering
-- Remote: Jan.–Jul. 2026 · On-site: Jul.–Oct. 2026
+- Jan. 2026 – Oct. 2026 (Remote: Jan.–Jul. 2026; On-site: Jul.–Oct. 2026)
 - Research Focus: GPU-accelerated FEM and Hybrid Finite Element–Neural Operator Solvers
 
 Research Interests
