@@ -74,6 +74,9 @@ Current Research
 <details class="project-figures" id="fem-neural-operator-figures">
   <summary aria-controls="fem-neural-operator-figure-content" aria-describedby="fem-neural-operator"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
   <div class="project-figures__body" id="fem-neural-operator-figure-content">
+<details class="project-figures project-figures--group" id="fem-neural-operator-cylinder-figures">
+  <summary aria-controls="fem-neural-operator-cylinder-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Cylinder</span> &mdash; <span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <div class="project-figures__body" id="fem-neural-operator-cylinder-figures-content" style="--research-figure-start:0">
 <div class="research-gallery research-gallery--single research-gallery--overview">
   <figure class="research-card research-card--overview" id="cylinder-workflow-overview">
     <a href="/files/research/cylinder_workflow_overview.pdf" target="_self" rel="noopener noreferrer">
@@ -146,7 +149,16 @@ Current Research
       Compared the &sigma;<sub>xx</sub>, &sigma;<sub>yy</sub>, and &tau;<sub>xy</sub> components of the coupled finite element–neural operator solution with the full FEM reference and plotted the absolute error for each component.
     </figcaption>
   </figure>
+</div>
 
+  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
+  </div>
+</details>
+
+<details class="project-figures project-figures--group" id="fem-neural-operator-bracket-figures">
+  <summary aria-controls="fem-neural-operator-bracket-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Bracket</span> &mdash; <span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <div class="project-figures__body" id="fem-neural-operator-bracket-figures-content" style="--research-figure-start:7">
+<div class="research-gallery research-gallery--prototype">
   <figure class="research-card" id="bracket-full-mesh">
     <a href="/files/research/bracket_hex8_full_mesh.pdf" target="_self" rel="noopener noreferrer">
       <picture><source type="image/webp" srcset="/images/research/bracket_hex8_full_mesh.display-640.webp 640w, /images/research/bracket_hex8_full_mesh.display-1280.webp 1280w, /images/research/bracket_hex8_full_mesh.display-1920.webp 1920w, /images/research/bracket_hex8_full_mesh.webp 2592w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/bracket_hex8_full_mesh.png" alt="Complete bracket mesh showing the FEM region, annular neural-operator subdomain, and shared interface." loading="lazy" decoding="async" width="2592" height="2496" style="background-image:url('data:image/webp;base64,UklGRmACAABXRUJQVlA4IFQCAAAQFACdASp4AHQAPqlUo00mJSOiIxgKMMAVCWkADqCWhzFQehp3/DDKo1/Ckz4d5/8HZEMoZU4Zhn2Btn6QXQnLgUk+t3lXWADCh7OcrQC+hOLkrwrrUrz6qtfCDbmgCgUonvpk3Ne9pWGjc03oyCMX+2kgvgP5ANi+iRGr+ZGfSZ4OIXQSq8DzkO0uJxMYFjAU/km1fRQdXezYm0lmtQK9RI+Up+XChpAAAP74pEPO0A16Iz142VGQlFHO+r7FSMPS6czQmpsMDF9svF7tlfoz3ekoo/w1X0sD8BOrBOc3+JnZ8vHra6JkAABroAVNFlqMCKmGbhRzhX2wKMpfu+9UdA4oy/c08Ez0Mq3G2a69YWVXSLXP/3d5+u1wYTGJUQAEQKL5ftRilOKuEGbEzxxMcV9whzJ7J83x9BzI88aIhnZzsYmx+8QSdgUqeG2MlUKwXzfDX4bRlbNpGCHxv0e11hZQxoYfv5jSnqGF6767GukK3EKZ+f9/cNlYVVLWYuSUVa4qTx52lMBgX9bA2Jnh40WiMjgBlpRaRxvjJZjxSOc/JitCz1lhqLu9cMmARt1lUBxRM8Rd2y4VguThO+/UFJV9VeH1nDIOpZGiIg69L/THOoo6cpP9OueVUiyGxe7Q7HVCKAbI6QZNaontdYj218YK4che6NdxGyQxlm3XiUFfRipOwIKd/f7kBL+SETjLRjS3gnC9V2MJdjzvX7xEybPjyP87TJ+r3i+/LgsHdZxRiaECAYPdN5obk2f/rQd9Ukjifof3K4BZxZCtUb04QAAAAA==');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
@@ -176,7 +188,16 @@ Current Research
       Ground-truth and predicted <i>σ</i><sub>xx</sub> stress fields in the bracket subdomain, with pointwise absolute error, for a GRF displacement input.
     </figcaption>
   </figure>
+</div>
 
+  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
+  </div>
+</details>
+
+<details class="project-figures project-figures--group" id="fem-neural-operator-fiber-figures">
+  <summary aria-controls="fem-neural-operator-fiber-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Fiber-reinforced Composites &middot; Ongoing</span> &mdash; <span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
+  <div class="project-figures__body" id="fem-neural-operator-fiber-figures-content" style="--research-figure-start:10">
+<div class="research-gallery research-gallery--prototype">
   <figure class="research-card" id="fiber-cube">
     <a href="/files/research/fiber100_unit_cell_v4.pdf" target="_self" rel="noopener noreferrer">
       <picture><source type="image/webp" srcset="/images/research/fiber100_unit_cell_v4.display-640.webp 640w, /images/research/fiber100_unit_cell_v4.display-1280.webp 1280w, /images/research/fiber100_unit_cell_v4.display-1920.webp 1920w, /images/research/fiber100_unit_cell_v4.webp 2400w" sizes="(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px" /><img src="/images/research/fiber100_unit_cell_v4.png" alt="100-fiber composite in a 10 mm cubic matrix, with a close-up of a 1 × 1 × 1 mm region showing a fiber of radius 0.25 mm." loading="lazy" decoding="async" width="2400" height="1139" style="background-image:url('data:image/webp;base64,UklGRr4BAABXRUJQVlA4ILIBAAAwDgCdASp4ADkAPtVYpUyoJSOiMfVdsQAaiWkA1b5SyhIwwC5BANUx2o9nyl5o77bA9cn5dlFYXBcPszRLaYlq9Q0vJMQxjnESweinh2CQj6awOlNdF/b56L0u1+gVCr3xyMkFoiZ1Rs9AyIrCDQSUbXxSJQGHqSmuAAD+9Wsh4n0yava6TGjGsfWmQ9mrdkqDT3PY9LvBJYtUMC9KyeJEHzG9eDcyjU9JQogttMi3Ho6Aq+/yQAmzybV8YuhKTFQG7d8OGatvT54hbQHI/4DYcLtM1rgY6lm7Nog8sDpT4VrBgUjUQPnZU4VbIoPz+rZqO5jqjZ+fqywhXSEn1QBtLQpsASeIzlfXVVjeqhLQw87DKTl91aguIoqg/ikQeB4zHumHM1zZYhkZetK9N5E66WQ/+gmTA0jhsyKiAiZYyMvgRYcgAAStXsWmbdKRhjCW6pGNnqA2TdKHBcF9s4WuBhs/ZNizqsq85BipUB8FvnzkWE8Am1el3tLLtS1UUvQwKKs8g1Beo1OICEr9oIGXuOzFUcVk2JJBF2wMCBPZZdLLZ9kS9irtxeqa7aigAAAAAA==');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
@@ -207,6 +228,10 @@ Current Research
     </figcaption>
   </figure>
 </div>
+
+  <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
+  </div>
+</details>
 
   <button class="project-figures__collapse" type="button" hidden>Hide figures</button>
   </div>

@@ -83,3 +83,13 @@ test('only PDF intent warms its four engine resources once, even after the shell
   assert.equal(new Set(engine.map(l=>l.href)).size,4);
   const constrained=setup({saveData:true});constrained.window.siteWarmLink('/research-viewer/?file=%2Ffiles%2Fresearch%2Fa.pdf');assert.equal(constrained.links.length,0);
 });
+
+test('link intent inside an open inner group stays cold while an outer group is closed',()=>{
+  const app=setup();const outer={open:false},inner={open:true};
+  const link={href:origin+'/files/research/nested.pdf',hasAttribute:()=>false,
+    closest:()=>!inner.open?inner:!outer.open?outer:null};
+  for(const name of ['pointerover','pointerdown','focusin'])app.events[name]({target:{closest:()=>link}});
+  assert.equal(app.links.length,0);
+  outer.open=true;app.events.pointerover({target:{closest:()=>link}});
+  assert.deepEqual(app.links.map(l=>l.href),[link.href]);
+});

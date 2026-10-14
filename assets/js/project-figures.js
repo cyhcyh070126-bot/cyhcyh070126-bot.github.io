@@ -10,16 +10,19 @@
   if (!saved || typeof saved !== "object" || Array.isArray(saved)) saved = {};
   var printing = false;
   panels.forEach(function (panel) {
-    var summary = panel.querySelector("summary");
-    var count = panel.querySelector(".project-figures__count");
+    var summary = panel.querySelector(":scope > summary");
+    var count = summary.querySelector(".project-figures__count");
     count.textContent = " (" + panel.querySelectorAll(".research-card").length + ")";
     if (typeof saved[panel.id] === "boolean") panel.open = saved[panel.id];
-    panel.addEventListener("toggle", function () {
-      if (printing) return;
+    panel.addEventListener("toggle", function (event) {
+      if (printing || event.target !== panel) return;
       saved[panel.id] = panel.open;
       try { sessionStorage.setItem(key, JSON.stringify(saved)); } catch (_) {}
     });
-    var close = panel.querySelector(".project-figures__collapse");
+    // Markdown may wrap a button in a paragraph; match its owning disclosure.
+    var close = Array.from(panel.querySelectorAll(".project-figures__collapse")).find(function (button) {
+      return button.closest("details.project-figures") === panel;
+    });
     close.hidden = false;
     close.addEventListener("click", function () {
       panel.open = false;
@@ -34,9 +37,14 @@
       if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return null;
       var target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
       var panel = target && target.closest("details.project-figures");
-      if (!panel || (panel.open && !alignOpenPanel)) return null;
-      panel.open = true;
-      return target;
+      var ancestors = [];
+      while (panel) {
+        ancestors.unshift(panel);
+        panel = panel.parentElement && panel.parentElement.closest("details.project-figures");
+      }
+      var changed = ancestors.some(function (item) { return !item.open; });
+      ancestors.forEach(function (item) { item.open = true; });
+      return ancestors.length && (changed || alignOpenPanel) ? target : null;
     } catch (_) { return null; }
   }
   window.siteRevealFigure = reveal;
@@ -57,7 +65,25 @@
     window.addEventListener(name, function () { interacted = true; }, { once: true, passive: true });
   });
   window.addEventListener("hashchange", revealHash);
+  function restoreReaderPosition() {
+    try {
+      var context = JSON.parse(sessionStorage.getItem("research-reader-context") || "{}");
+      var point = context.returnPosition;
+      if (!point || point.url !== location.href || !Number.isFinite(point.x) || !Number.isFinite(point.y) || point.y < 0) return false;
+      delete context.returnPosition;
+      sessionStorage.setItem("research-reader-context", JSON.stringify(context));
+      // Open panels change the layout before native history restoration settles.
+      var ready = document.fonts ? document.fonts.ready : Promise.resolve();
+      ready.then(function () {
+        window.requestAnimationFrame(function () {
+          window.requestAnimationFrame(function () { window.scrollTo({ left: point.x, top: point.y, behavior: "instant" }); });
+        });
+      });
+      return true;
+    } catch (_) { return false; }
+  }
   window.addEventListener("pageshow", function (event) {
+    if (restoreReaderPosition()) return;
     if (!event.persisted && !interacted) revealHash();
   });
   revealHash();

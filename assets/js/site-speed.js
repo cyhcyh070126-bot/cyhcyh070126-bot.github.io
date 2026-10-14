@@ -88,7 +88,7 @@
   window.siteWarmLink = warm;
   function intent(event) {
     var link = event.target.closest && event.target.closest("a[href]");
-    if (link && !link.hasAttribute("download")) warm(link.href);
+    if (link && !(link.closest && link.closest("details.project-figures:not([open])")) && !link.hasAttribute("download")) warm(link.href);
   }
   document.addEventListener("pointerover", intent, { passive: true });
   document.addEventListener("pointerdown", intent, { passive: true });
@@ -109,7 +109,11 @@
   try { queue = JSON.parse(manifest.textContent).map(function (item) { return imageDestination(item, location.href); }).filter(Boolean); }
   catch (_) { return; }
   function imageKey(item) { return item.src + "|" + item.srcset + "|" + item.sizes; }
-  var current = new Set(Array.from(document.querySelectorAll("img[src]")).map(function (img) {
+  var currentImages = Array.from(document.querySelectorAll("img[src]"));
+  var foldedSources = new Set(currentImages.filter(function (img) {
+    return img.closest && img.closest("details.project-figures:not([open])");
+  }).map(function (img) { return img.src; }));
+  var current = new Set(currentImages.map(function (img) {
     var picture = img.closest && img.closest("picture");
     var source = picture && picture.querySelector('source[type="image/webp"]');
     var responsive = source || img;
@@ -118,7 +122,9 @@
   var seen = new Set();
   queue = queue.filter(function (item) {
     var key = imageKey(item);
-    if (current.has(key) || seen.has(key)) return false;
+    // Visible images are handled by section-images; alternate sizes must not
+    // bypass a closed ancestor just because they came from another page.
+    if (current.has(key) || foldedSources.has(item.src) || seen.has(key)) return false;
     seen.add(key);
     return true;
   });

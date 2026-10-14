@@ -34,14 +34,18 @@ if (Object.keys(groups).length) {
     return url.href;
   }
   function prepareReader(event) {
-    const entry=entries.get(event.target.closest?.('.research-card > a[href]'));
+    const link=event.target.closest?.('.research-card > a[href]');
+    if(link?.closest('details.project-figures:not([open])'))return;
+    const entry=entries.get(link);
     if(entry&&window.siteWarmLink)window.siteWarmLink(readerUrl(entry));
   }
   ['pointerover','pointerdown','focusin'].forEach(name=>document.addEventListener(name,prepareReader,{passive:true}));
   document.addEventListener('toggle',event=>{
     const panel=event.target;
     if(!panel.open||!panel.matches?.('details.project-figures')||!window.siteWarmLink)return;
-    const entry=entries.get(panel.querySelector('.research-card > a[href]'));
+    const link=Array.from(panel.querySelectorAll('.research-card > a[href]'))
+      .find(candidate=>!candidate.closest('details.project-figures:not([open])'));
+    const entry=entries.get(link);
     if(entry){window.siteWarmLink(entry.file);window.siteWarmLink(readerUrl(entry));}
   },true);
   document.addEventListener('click', event => {
@@ -51,7 +55,8 @@ if (Object.keys(groups).length) {
     // Reuse this tab's ordered metadata; no image/PDF bytes are duplicated.
     try {
       sessionStorage.setItem('research-reader-context', JSON.stringify({project:entry.project,
-        version:version || '', items:groups[entry.project].map(({file,title,anchor}) => ({file,title,anchor}))}));
+        version:version || '', items:groups[entry.project].map(({file,title,anchor}) => ({file,title,anchor})),
+        returnPosition:{url:location.href,x:window.scrollX || 0,y:window.scrollY || 0}}));
     } catch (_) {} // Storage restrictions must never block the original link.
     // Avoid the host browser's new-tab start screen on ordinary figure clicks.
     // Modified clicks and native context-menu actions still use the original href.

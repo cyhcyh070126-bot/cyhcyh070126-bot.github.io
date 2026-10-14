@@ -9,7 +9,7 @@ const script = fs.readFileSync(path.join(root, 'assets/js/site-speed.js'), 'utf8
 const {imageDestination} = require('../assets/js/site-speed.js');
 const origin = 'https://example.com';
 
-function setup({connection, hidden = false, complete = false, previewVariant = false} = {}) {
+function setup({connection, hidden = false, complete = false, previewVariant = false, foldedPreview = false} = {}) {
   const images = [], idle = [], events = {}, windowEvents = {};
   const src = i => '/images/research/' + i + '.png';
   const manifest = [{src:src(0)}, {src:src(0)}, ...[1,2,3,4].map(i=>({src:src(i)})),
@@ -20,7 +20,9 @@ function setup({connection, hidden = false, complete = false, previewVariant = f
     readyState: complete ? 'complete' : 'loading',
     visibilityState: hidden ? 'hidden' : 'visible',
     getElementById: () => ({textContent:JSON.stringify(manifest)}),
-    querySelectorAll: () => [{src:origin + src(0)}],
+    querySelectorAll: () => [{src:origin + src(0)}].concat(foldedPreview ? [{src:origin+src(1),
+      closest(selector){return selector==='picture'?{querySelector:()=>({getAttribute:name=>name==='srcset'?src(1)+' 640w':'600px'})}:{open:false};}
+    }] : []),
     head: {appendChild() {}},
     createElement: () => ({setAttribute() {}}),
     addEventListener: (name, handler) => {events[name] = handler;}
@@ -90,6 +92,14 @@ test('the same figure warms both CV and Projects display sizes without discardin
   for (let i=0;i<app.images.length;i++) app.images[i].finish();
   const selected=app.images.filter(image=>image.src===origin+'/images/research/1.png');
   assert.deepEqual(selected.map(image=>image.sizes),['320px','600px']);
+});
+
+test('a closed ancestor blocks alternate cross-page sizes of its hidden figure', () => {
+  const app=setup({complete:true,previewVariant:true,foldedPreview:true});
+  app.idle.at(-1)();
+  for(let i=0;i<app.images.length;i++)app.images[i].finish();
+  assert.equal(app.images.filter(image=>image.src===origin+'/images/research/1.png').length,0);
+  assert.ok(app.images.some(image=>image.src===origin+'/images/research/2.png'),'Unrelated page-image warming remains enabled');
 });
 
 test('display copies exist, materially reduce downloads, and preserve original link destinations', () => {
