@@ -129,7 +129,7 @@ test('case overviews are large first figures and preserve the remaining cards an
   assert.deepEqual(folds.filter(f=>!f.group).map(f=>cards(f.body).length),[17,7,5,1]);
   assert.deepEqual(folds.filter(f=>f.group).map(f=>cards(f.body).length),[7,6,4]);
   for(const [fold,name] of folds.filter(f=>f.group).map((fold,i)=>[fold,['cylinder','bracket','fiber100'][i]])){
-    assert(cards(fold.body)[0].includes('/'+name+'_workflow_overview'+(name==='cylinder'?'_v2':'')+'.pdf'));
+    assert(cards(fold.body)[0].includes('/'+name+'_workflow_overview'+(['cylinder','fiber100'].includes(name)?'_v2':'')+'.pdf'));
     assert.equal(fold.body.match(/<div class="research-gallery[^\"]*">/)[0],'<div class="research-gallery research-gallery--single research-gallery--overview">');
   }
   for(const fold of folds)assert.doesNotMatch(fold.body,/class="cv-project(?: |")/,'Project text must remain outside the fold');

@@ -165,8 +165,9 @@ test('display copies exist, materially reduce downloads, and preserve original l
       const withoutFiber = expected.filter(link=>!fiberLinks.includes(link));
       expected.splice(0, expected.length, ...withoutFiber.slice(0, fiberIndex), ...fiberLinks, ...withoutFiber.slice(fiberIndex));
       for(const [name,firstDetail] of [['bracket',bracketLinks[0]],['fiber100',fiberLinks[0]]]){
-        const overview='/files/research/'+name+'_workflow_overview.pdf';
-        for(let i=expected.length-1;i>=0;i--)if(expected[i]===overview)expected.splice(i,1);
+        const legacy='/files/research/'+name+'_workflow_overview.pdf';
+        const overview='/files/research/'+name+'_workflow_overview'+(name==='fiber100'?'_v2':'')+'.pdf';
+        for(let i=expected.length-1;i>=0;i--)if(expected[i]===overview||expected[i]===legacy)expected.splice(i,1);
         expected.splice(expected.indexOf(firstDetail),0,overview);
       }
     }
