@@ -1376,6 +1376,12 @@ ul + .cv-project {
   }
 }
 
+@media (min-width: 901px) {
+  .research-gallery--bracket {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 900px) {
   .cv-project__header {
     grid-template-columns: 1fr;

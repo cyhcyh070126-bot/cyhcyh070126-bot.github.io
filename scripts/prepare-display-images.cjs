@@ -10,9 +10,11 @@ const only = process.argv.find(arg => arg.startsWith('--only='))?.slice(7).split
   let cv = fs.readFileSync(cvPath, 'utf8');
   const sources = [...new Set([...cv.matchAll(/<img\b[^>]*src="(\/images\/research\/[^\"]+\.png)"/g)].map(m => m[1]))].filter(src => !only || only.includes(path.basename(src)));
   const variants = only ? JSON.parse(fs.readFileSync(path.join(root, '_data/image_variants.json'), 'utf8')) : {};
-  const wide = /(?:battery_prediction_summary|llm_finetuning_workflow_v2)\.png$/;
+  const wide = /(?:battery_prediction_summary|llm_finetuning_workflow_v2|fiber100_pointcloud_inputs)\.png$/;
+  const bracket = /(?:bracket_pointcloud_inputs|bracket_grf_stress_comparison_v1|bracket_coupled_displacement_comparison|bracket_coupled_stress_comparison)\.png$/;
   const sizes = src => /\/(?:cylinder|bracket|fiber100)_workflow_overview(?:_v\d+)?\.png$/.test(src) ?
     '(max-width: 1048px) calc(100vw - 48px), 1000px' : wide.test(src) ? '(max-width: 1280px) calc(100vw - 48px), 1232px' :
+    bracket.test(src) ? '(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) calc((100vw - 144px) / 3), 400px' :
     '(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px';
   let before = 0, after = 0;
   for (const src of sources) {

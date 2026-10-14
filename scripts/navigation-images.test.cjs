@@ -105,7 +105,7 @@ test('a closed ancestor blocks alternate cross-page sizes of its hidden figure',
 test('display copies exist, materially reduce downloads, and preserve original link destinations', () => {
   const variants = JSON.parse(fs.readFileSync(path.join(root,'_data/image_variants.json')));
   let originalBytes=0, displayBytes=0;
-  assert.equal(Object.keys(variants).length,23);
+  assert.equal(Object.keys(variants).length,24);
   for (const [src, item] of Object.entries(variants)) {
     assert.ok(fs.existsSync(path.join(root,src)));
     const sourceWidth=fs.readFileSync(path.join(root,src)).readUInt32BE(16);
@@ -121,8 +121,8 @@ test('display copies exist, materially reduce downloads, and preserve original l
   const sealBytes=fs.statSync(path.join(root,'images/schools/tongji-university-seal-128.png')).size;
   assert.ok(sealBytes<25000);
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'_data/navigation_images.json')));
-  assert.equal(manifest.length,35);
-  assert.equal(new Set(manifest.map(item=>item.src)).size,33);
+  assert.equal(manifest.length,36);
+  assert.equal(new Set(manifest.map(item=>item.src)).size,34);
   assert.equal(manifest.filter(item=>item.sizes?.endsWith('340px')).length,2);
   manifest.forEach(item=>assert.ok(fs.existsSync(path.join(root,item.src)),item.src));
   const links = text=>[...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
@@ -130,6 +130,8 @@ test('display copies exist, materially reduce downloads, and preserve original l
     const before=execFileSync('git',['show','HEAD:'+file],{cwd:root,encoding:'utf8'});
     const expected = links(before);
     if (file === '_pages/cv.md') {
+      for(let i=expected.length-1;i>=0;i--)if(expected[i]==='/files/research/domain_decomposition_preview.pdf')expected.splice(i,1);
+      for(let i=0;i<expected.length;i++)if(expected[i]==='/files/research/subdomain_point_cloud_preview.pdf')expected[i]='/files/research/cylinder_pointcloud_inputs.pdf';
       const overview = '/files/research/cylinder_workflow_overview_v2.pdf';
       for (let i=expected.length-1;i>=0;i--) {
         if (expected[i] === overview || expected[i] === '/files/research/cylinder_workflow_overview.pdf') expected.splice(i,1);
@@ -138,7 +140,7 @@ test('display copies exist, materially reduce downloads, and preserve original l
       assert.ok(firstDetail >= 0);
       expected.splice(firstDetail,0,overview);
       const bracketLinks = ['full', 'inner'].map(part=>`/files/research/bracket_hex8_${part}_mesh.pdf`)
-        .concat('/files/research/bracket_grf_stress_comparison_v1.pdf');
+        .concat('/files/research/bracket_pointcloud_inputs.pdf','/files/research/bracket_grf_stress_comparison_v1.pdf');
       for (let i=expected.length-1;i>=0;i--) {
         if (bracketLinks.includes(expected[i]) || expected[i] === '/files/research/bracket_hex8_outer_mesh.pdf') expected.splice(i,1);
       }
@@ -164,6 +166,9 @@ test('display copies exist, materially reduce downloads, and preserve original l
       assert.ok(fiberIndex >= 0);
       const withoutFiber = expected.filter(link=>!fiberLinks.includes(link));
       expected.splice(0, expected.length, ...withoutFiber.slice(0, fiberIndex), ...fiberLinks, ...withoutFiber.slice(fiberIndex));
+      const fiberPointcloud='/files/research/fiber100_pointcloud_inputs.pdf';
+      for(let i=expected.length-1;i>=0;i--)if(expected[i]===fiberPointcloud)expected.splice(i,1);
+      expected.splice(expected.indexOf(fiberLinks.at(-1))+1,0,fiberPointcloud);
       for(const [name,firstDetail] of [['bracket',bracketLinks[0]],['fiber100',fiberLinks[0]]]){
         const legacy='/files/research/'+name+'_workflow_overview.pdf';
         const overview='/files/research/'+name+'_workflow_overview'+(name==='fiber100'?'_v2':'')+'.pdf';
