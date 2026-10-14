@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const fs = require('node:fs');
 const path = require('node:path');
-const { normalize, searchEntries, indexEntries, repositoryEntry, buildEntries } = require('../assets/js/command-palette.js');
+const { normalize, searchEntries, indexEntries, repositoryEntry, buildEntries, applicationPdfReader } = require('../assets/js/command-palette.js');
 const root = path.join(__dirname, '..');
 
 function entry(title, keywords, body, order) {
@@ -20,6 +20,23 @@ test('normalizes case, Unicode dashes, accents and Chinese without regex search'
   assert.equal(normalize('应力 Café'), '应力 cafe');
   assert.equal(normalize('sim\u00adulation'), 'simulation');
   assert.doesNotThrow(() => searchEntries(records, '[.*'));
+});
+
+test('all application PDF links share the reader route while unrelated and external files stay native', () => {
+  const current='https://example.com/cv/?v=current#education';
+  for (const [name,key] of [['CV','cv'],['Research_Statement','rs'],['Personal_Statement','ps']]) {
+    const path='/files/Yanghao_Chen_'+name+'.pdf?v=release';
+    for (const href of [path,'https://example.com'+path]) {
+      const reader=new URL(applicationPdfReader(href,current));
+      assert.equal(reader.pathname,'/research-viewer/');
+      assert.equal(reader.searchParams.get('file'),path);
+      assert.equal(reader.searchParams.get('document'),key);
+      assert.equal(reader.searchParams.get('from'),'site');
+    }
+  }
+  for (const href of ['https://other.com/files/Yanghao_Chen_CV.pdf','/files/research/a.pdf','/cv/','mailto:a@example.com','javascript:void(0)']) {
+    assert.equal(applicationPdfReader(href,current),null);
+  }
 });
 test('blank query preserves order and never changes project titles', () => {
   assert.deepEqual(searchEntries(records, '').map(e => e.title), records.map(e => e.title));

@@ -7,6 +7,19 @@
       .toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
   }
 
+  function applicationPdfReader(href, current) {
+    try {
+      var here = new URL(current), file = new URL(href, here);
+      var names = {"/files/Yanghao_Chen_CV.pdf":"cv", "/files/Yanghao_Chen_Research_Statement.pdf":"rs", "/files/Yanghao_Chen_Personal_Statement.pdf":"ps"};
+      if (file.origin !== here.origin || !names[file.pathname]) return null;
+      var reader = new URL("/research-viewer/", here);
+      reader.searchParams.set("document", names[file.pathname]);
+      reader.searchParams.set("file", file.pathname + file.search + file.hash);
+      reader.searchParams.set("from", "site");
+      return reader.href;
+    } catch (_) { return null; }
+  }
+
   function indexEntries(entries) {
     return entries.map(function (entry, order) {
       var children = entry.children ? indexEntries(entry.children) : undefined;
@@ -200,8 +213,32 @@
   }
 
   // Keep the indexing/ranking functions testable without a browser or live service.
-  if (typeof module !== "undefined" && module.exports) module.exports = { buildEntries: buildEntries, searchEntries: searchEntries, normalize: normalize, indexEntries: indexEntries, repositoryEntry: repositoryEntry };
+  if (typeof module !== "undefined" && module.exports) module.exports = { buildEntries: buildEntries, searchEntries: searchEntries, normalize: normalize, indexEntries: indexEntries, repositoryEntry: repositoryEntry, applicationPdfReader: applicationPdfReader };
   if (typeof document === "undefined") return;
+  // All site links, including dynamically rendered search results, share this route.
+  function openApplicationPdf(event, link) {
+    if (!link || link.hasAttribute("download") || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return false;
+    var destination = applicationPdfReader(link.href, location.href);
+    if (!destination) return false;
+    event.preventDefault();
+    var reader = new URL(destination);
+    reader.searchParams.set("return", location.pathname + location.search + location.hash);
+    try {
+      sessionStorage.setItem("research-reader-context", JSON.stringify({returnPosition:{url:location.href,x:window.scrollX || 0,y:window.scrollY || 0}}));
+    } catch (_) {}
+    location.assign(reader.href);
+    return true;
+  }
+  document.addEventListener("click", function (event) {
+    openApplicationPdf(event, event.target.closest && event.target.closest("a[href]"));
+  });
+  function prepareApplicationPdf(event) {
+    var link = event.target.closest && event.target.closest("a[href]");
+    if (!link || link.hasAttribute("download") || !window.siteWarmLink) return;
+    var reader = applicationPdfReader(link.href, location.href);
+    if (reader) window.siteWarmLink(reader);
+  }
+  ["pointerover", "pointerdown", "focusin"].forEach(function (name) { document.addEventListener(name, prepareApplicationPdf, {passive:true}); });
   var dialog = document.getElementById("site-search");
   var trigger = document.querySelector(".site-search-toggle");
   if (!dialog || !trigger || typeof dialog.showModal !== "function") return;
@@ -362,15 +399,8 @@
           if (isDisabled) return;
           if (isCollection) enterCollection(entry);
           else {
-            if (entry.readerUrl && event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
-              event.preventDefault();
-              var reader = new URL(entry.readerUrl, location.origin);
-              reader.searchParams.set("return", location.pathname + location.search + location.hash);
-              try {
-                sessionStorage.setItem("research-reader-context", JSON.stringify({returnPosition:{url:location.href,x:window.scrollX || 0,y:window.scrollY || 0}}));
-              } catch (_) {}
+            if (openApplicationPdf(event, link)) {
               dialog.close();
-              location.assign(reader.href);
               return;
             }
             if (window.sitePrepareSection) window.sitePrepareSection(link.href, true);

@@ -15,7 +15,7 @@ if(documentFile){
 function documentReturnUrl(){
  try{
   const url=new URL(params.get('return')||'/cv/',location.href);
-  if(url.origin===location.origin&&['/','/cv/','/projects/'].includes(url.pathname))return url.pathname+url.search+url.hash;
+  if(url.origin===location.origin&&url.pathname!=='/research-viewer/')return url.pathname+url.search+url.hash;
  }catch(_){}
  return '/cv/';
 }

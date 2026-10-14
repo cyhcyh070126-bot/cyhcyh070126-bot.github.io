@@ -32,7 +32,7 @@ body:not([data-ready="true"]) #pdf-pages,body:not([data-ready="true"]) #image-co
 var readerFrom=new URLSearchParams(location.search).get('from');
 var inlineReader=readerFrom==='cv'||readerFrom==='site';
 var fromCv=false;
-try{var sourcePage=new URL(document.referrer);fromCv=sourcePage.origin===location.origin&&(readerFrom==='site'?['/','/cv/','/projects/'].includes(sourcePage.pathname):sourcePage.pathname==='/cv/');}catch(_){}
+try{var sourcePage=new URL(document.referrer);fromCv=sourcePage.origin===location.origin&&(readerFrom==='site'?sourcePage.pathname!=='/research-viewer/':sourcePage.pathname==='/cv/');}catch(_){}
 function returnToProject(){
  if(inlineReader&&fromCv&&history.length>1){history.back();return;}
  location.replace(document.body.dataset.returnUrl||'/cv/');
