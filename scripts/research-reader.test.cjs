@@ -10,7 +10,7 @@ const source=fs.readFileSync(path.join(root,'research-viewer/reader.js'),'utf8')
 const gif='/images/research/first.gif',pdf='/files/research/second.pdf',png='/images/research/third.png';
 function deferred(){let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};}
 const flush=()=>new Promise(r=>setImmediate(r));
-function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,holdApi=false,holdBytes=false,holdWorker=false,failWorkers=0,bytesOk=true,indexOk=true,stored=null,blockedStorage=false}={}){
+function setup({file=gif,documentName='',holdIndex=false,holdPdf=false,holdRender=false,holdApi=false,holdBytes=false,holdWorker=false,failWorkers=0,bytesOk=true,indexOk=true,stored=null,blockedStorage=false}={}){
   const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[],workers=[];
   const indexGate=deferred(),pdfGate=deferred(),apiGate=deferred(),bytesGate=deferred(),workerGate=deferred(),byteRequests=[];
   function element(){const classes=new Set();return {hidden:false,children:[],textContent:'',events:{},eventOptions:{},dataset:{},clientWidth:800,clientHeight:600,scrollLeft:0,scrollTop:0,
@@ -24,7 +24,8 @@ function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,holdApi=
     getElementById:id=>nodes[id],createElement:()=>element(),createTextNode:text=>({textContent:text}),
     addEventListener(name,fn){events[name]=fn;}};
   const window={addEventListener(name,fn){events[name]=fn;}};
-  const location={href:'https://example.com/research-viewer/?project=p&file='+encodeURIComponent(file)+'&v=abc'};
+  const location={href:'https://example.com/research-viewer/?project=p&file='+encodeURIComponent(file)+'&v=abc'+(documentName?'&document='+documentName+'&return=%2Fcv%2F%23research-projects':'')};
+  location.origin=new URL(location.href).origin;
   location.search=new URL(location.href).search;
   const history={replaceState(_a,_b,url){location.href=String(url);}};
   const files=[gif,pdf,png].map((file,i)=>({file,title:'Figure '+i,anchor:'anchor-'+i}));
@@ -57,7 +58,7 @@ function setup({file=gif,holdIndex=false,holdPdf=false,holdRender=false,holdApi=
     sessionStorage:{getItem(){if(blockedStorage)throw new Error('Storage blocked');return stored;}},
     console:{error(){}},collectResearchFiles:()=>({p:files}),
     loadModule(url){imports.push(url);if(holdApi&&url.endsWith('/pdf.min.mjs'))return apiGate.promise.then(()=>api);return Promise.resolve(url.includes('/research-files.js')?{collectResearchFiles:()=>({p:files})}:url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
-    fetch(url,options){requests.push(url);if(url.endsWith('.pdf')){byteRequests.push({url,options});return Promise.resolve({ok:bytesOk,status:bytesOk?200:404,arrayBuffer:()=>holdBytes?bytesGate.promise:Promise.resolve(new Uint8Array([37,80,68,70]).buffer)});}
+    fetch(url,options){requests.push(url);if(/\.pdf(?:[?#]|$)/i.test(url)){byteRequests.push({url,options});return Promise.resolve({ok:bytesOk,status:bytesOk?200:404,arrayBuffer:()=>holdBytes?bytesGate.promise:Promise.resolve(new Uint8Array([37,80,68,70]).buffer)});}
       return holdIndex?indexGate.promise:Promise.resolve({ok:indexOk,json:async()=>({cv:{html:'fixture'}})});}};
   const ready=vm.runInNewContext('(async()=>{'+source+'})()',context);
   const key=(key,extra={})=>{const event={key,ctrlKey:false,metaKey:false,altKey:false,shiftKey:false,preventDefault(){this.prevented=true;},...extra};events.keydown(event);return event;};
@@ -78,6 +79,18 @@ test('opening an original GIF/image does not request PDF scripts or styles',asyn
 });
 
 const cachedItems=[gif,pdf,png].map((file,i)=>({file,title:'Figure '+i,anchor:'anchor-'+i}));
+test('application PDFs keep the versioned original, skip the figure index and save the original filename',async()=>{
+  for(const [documentName,name] of [['cv','CV'],['rs','Research_Statement'],['ps','Personal_Statement']]){
+    const file='/files/Yanghao_Chen_'+name+'.pdf?v=current';
+    const app=setup({file,documentName,holdIndex:true});await app.ready;
+    assert.deepEqual(app.requests,[file]);assert.equal(app.workers.length,1);
+    assert.equal(app.document.body.dataset.returnUrl,'/cv/#research-projects');
+    assert.equal(app.document.body.dataset.ready,'true');
+    app.key('Control');app.key('s',{ctrlKey:true});
+    assert.equal(app.downloads[0].href,file);assert.equal(app.downloads[0].download,'Yanghao_Chen_'+name+'.pdf');
+    app.key('ArrowRight');await flush();assert.equal(app.tasks.length,1);
+  }
+});
 const storedContext=overrides=>JSON.stringify({project:'p',version:'abc',items:cachedItems,...overrides});
 test('CV clicks show the original file without waiting for or requesting the index',async()=>{
   for(const file of [gif,pdf,png]){

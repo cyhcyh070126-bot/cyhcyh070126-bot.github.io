@@ -2,6 +2,23 @@ const container = document.getElementById('document-container');
 const imageContainer = document.getElementById('image-container');
 const message = document.getElementById('loading');
 const params = new URLSearchParams(location.search);
+const documentFiles = {cv:'/files/Yanghao_Chen_CV.pdf',rs:'/files/Yanghao_Chen_Research_Statement.pdf',ps:'/files/Yanghao_Chen_Personal_Statement.pdf'};
+const documentFile = documentFiles[params.get('document')];
+let documentEntry=null;
+if(documentFile){
+ const file=params.get('file')||documentFile;
+ const url=new URL(file,location.href);
+ if(file.startsWith('/')&&!file.startsWith('//')&&url.origin===location.origin&&url.pathname===documentFile){
+  documentEntry={file,title:params.get('document').toUpperCase(),anchor:''};
+ }
+}
+function documentReturnUrl(){
+ try{
+  const url=new URL(params.get('return')||'/cv/',location.href);
+  if(url.origin===location.origin&&['/','/cv/','/projects/'].includes(url.pathname))return url.pathname+url.search+url.hash;
+ }catch(_){}
+ return '/cv/';
+}
 let pdfApiPromise, pdfWorkerPromise, viewerPromise, viewer, linkService;
 let task=null,pdfFetch=null,revision=0,index=0,items=[];
 
@@ -77,16 +94,16 @@ async function show(nextIndex) {
  if(nextIndex<0||nextIndex>=items.length)return;
  index=nextIndex;const entry=items[index],generation=++revision;
  document.body.dataset.ready='false';document.body.dataset.file=entry.file;
- document.body.dataset.returnUrl='/cv/#'+(entry.anchor||params.get('project'));
+ document.body.dataset.returnUrl=documentEntry?documentReturnUrl():'/cv/#'+(entry.anchor||params.get('project'));
  const backLink=document.getElementById('reader-back');
- if(backLink)backLink.href=document.body.dataset.returnUrl;
- document.title=entry.file.split('/').pop();message.hidden=false;message.dataset.state='loading';message.textContent='Loading document…';
+ if(backLink){backLink.href=document.body.dataset.returnUrl;if(documentEntry){backLink.textContent='← Back';backLink.title='Back (Esc)';}}
+ document.title=entry.file.split('/').pop().split(/[?#]/)[0];message.hidden=false;message.dataset.state='loading';message.textContent='Loading document…';
  const url=new URL(location.href);url.searchParams.set('file',entry.file);url.searchParams.delete('figure');history.replaceState(null,'',url);
  const previousTask=task;task=null;viewer?.setDocument(null);linkService?.setDocument(null);
  if(pdfFetch){pdfFetch.abort();pdfFetch=null;}
  if(previousTask)previousTask.destroy().catch(()=>{});
  imageContainer.replaceChildren();imageContainer.classList.remove('enlarged');imageContainer.scrollTo(0,0);
- if(!/\.pdf$/i.test(entry.file)){
+ if(!/\.pdf(?:[?#]|$)/i.test(entry.file)){
   container.hidden=true;imageContainer.hidden=false;
   const image=new Image();image.alt=entry.title;image.fetchPriority='high';
   image.onload=()=>{if(generation===revision){message.hidden=true;document.body.dataset.ready='true';}};
@@ -119,7 +136,7 @@ function fail(entry,generation){
 document.addEventListener('keydown',event=>{
  if(event.key==='Escape'||!items.length)return;
  if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='s'){
-  event.preventDefault();const link=document.createElement('a');link.href=items[index].file;link.download=items[index].file.split('/').pop();link.click();return;
+  event.preventDefault();const link=document.createElement('a');link.href=items[index].file;link.download=items[index].file.split('/').pop().split(/[?#]/)[0];link.click();return;
  }
  if((event.ctrlKey||event.metaKey)&&['+','=','-','0'].includes(event.key)&&viewer?.pdfDocument){
   event.preventDefault();
@@ -162,10 +179,10 @@ function readContext(){
   return context.items;
  }catch(_){return null;}
 }
-const contextItems=readContext();
+const contextItems=documentEntry?[documentEntry]:readContext();
 const indexRequest=contextItems?null:fetch('/search-index.json'+(params.get('v')?'?v='+encodeURIComponent(params.get('v')):''));
 const collectorRequest=contextItems?null:import('/assets/js/research-files.js'+(params.get('v')?'?v='+encodeURIComponent(params.get('v')):''));
-if(/^\/files\/research\/[^/?#]+\.pdf$/i.test(params.get('file')||'')) {
+if(documentEntry||/^\/files\/research\/[^/?#]+\.pdf$/i.test(params.get('file')||'')) {
  loadPdfViewer().catch(()=>{}); // Actual display reports errors with the original-file fallback.
 }
 try{

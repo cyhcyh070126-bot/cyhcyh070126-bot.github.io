@@ -28,10 +28,11 @@ body:not([data-ready="true"]) #pdf-pages,body:not([data-ready="true"]) #image-co
 <div id="document-container" tabindex="0" aria-label="PDF document"><div class="pdfViewer" id="pdf-pages"></div></div>
 <div id="image-container" hidden></div><div id="loading" role="status" data-state="loading">Loading document…</div>
 <script>
-// Only return through history when this reader was opened in place by the CV.
-var inlineReader=new URLSearchParams(location.search).get('from')==='cv';
+// Only return through history when this reader was opened in place by the site.
+var readerFrom=new URLSearchParams(location.search).get('from');
+var inlineReader=readerFrom==='cv'||readerFrom==='site';
 var fromCv=false;
-try{var sourcePage=new URL(document.referrer);fromCv=sourcePage.origin===location.origin&&sourcePage.pathname==='/cv/';}catch(_){}
+try{var sourcePage=new URL(document.referrer);fromCv=sourcePage.origin===location.origin&&(readerFrom==='site'?['/','/cv/','/projects/'].includes(sourcePage.pathname):sourcePage.pathname==='/cv/');}catch(_){}
 function returnToProject(){
  if(inlineReader&&fromCv&&history.length>1){history.back();return;}
  location.replace(document.body.dataset.returnUrl||'/cv/');

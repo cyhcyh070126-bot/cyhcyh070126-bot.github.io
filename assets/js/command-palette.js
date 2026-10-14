@@ -62,9 +62,14 @@
       entries.push(entry);
       return entry;
     }
+    function usePdfReader(entry, documentName) {
+      if (!entry) return;
+      entry.readerUrl = "/research-viewer/?document=" + documentName + "&file=" + encodeURIComponent(entry.url) + "&from=site";
+    }
     add("Navigation", "Home", data.home.url, "about biography 首页 主页 个人介绍", Array.from(home.querySelectorAll("p")).slice(0, 2).map(paragraph => paragraph.textContent).join(" "));
     var cvLink = add("Navigation", "CV", data.cv.pdf_url || data.cv.url, "resume curriculum vitae pdf view 简历 查看");
     if (cvLink && data.cv.pdf_url) cvLink.openInNewTab = true;
+    if (data.cv.pdf_url) usePdfReader(cvLink, "cv");
     if (data.projects) add("Navigation", "Projects", data.projects.url, "projects repository repositories 项目 课题 仓库");
     add("Navigation", "News", data.home.url + "#news", "updates timeline 新闻 动态", home.querySelector(".home-news")?.textContent);
     add("Navigation", "Education", data.cv.url + "#education", "university tongji jhu 教育 同济 约翰霍普金斯");
@@ -106,13 +111,17 @@
         if (repository.url) seen.add(repository.url);
       }
       project.nodes.forEach(function (node) {
-        node.querySelectorAll("details.project-figures--group[id]").forEach(function (panel) {
+        var panels = Array.from(node.querySelectorAll("details.project-figures[id]"));
+        if (node.matches("details.project-figures[id]")) panels.unshift(node);
+        panels.forEach(function (panel) {
+          // A subdivided gallery exposes its groups; a single gallery exposes itself.
+          if (panel.querySelector("details.project-figures--group[id]")) return;
           var label = panel.querySelector(":scope > summary .project-figures__label");
-          if (!label || !panel.id) return;
+          var title = label ? label.textContent.trim() : metadata?.short_title || project.entry.title;
           var url = data.cv.url + "#" + panel.id;
           if (seen.has(url)) return;
-          children.push({group:"Figures", title:label.textContent.trim(), url:url,
-            keywords:"FEM NO JAX Transolver GPU figures images pdf mesh stress 图组 图片 网格 应力",
+          children.push({group:"Figures", title:title, url:url,
+            keywords:"figures images pdf gallery 图组 图片 图表",
             body:panel.textContent});
           seen.add(url);
         });
@@ -142,15 +151,18 @@
       if (/\.pdf(?:[?#].*)?$/i.test(url) && /\b(cv|resume)\b/i.test(link.textContent)) {
         var pdfEntry = add("Resources", "CV PDF", data.cv.pdf_url || url, "download resume 简历 下载");
         if (pdfEntry) pdfEntry.openInNewTab = true;
+        usePdfReader(pdfEntry, "cv");
         released.add(url);
       }
     });
     var researchStatement = add("Resources", "Research Statement PDF", data.cv.research_statement_pdf_url,
       "RS research statement pdf download 研究陈述 科研陈述 下载");
     if (researchStatement) researchStatement.openInNewTab = true;
+    usePdfReader(researchStatement, "rs");
     var personalStatement = add("Resources", "Personal Statement PDF", data.cv.personal_statement_pdf_url,
       "PS personal statement pdf download 个人陈述 下载");
     if (personalStatement) personalStatement.openInNewTab = true;
+    usePdfReader(personalStatement, "ps");
     add("Resources", "Previous Research (Online Slides)", data.projects?.presentation_url,
       "previous research presentation ppt slides talk online 研究 演示 幻灯片 在线");
     var contact = data.contact || {};
@@ -340,7 +352,7 @@
           if (!isCollection) {
             link.target = "_blank";
             link.rel = "noopener noreferrer";
-            link.setAttribute("aria-label", entry.title + " (opens in a new tab)");
+            if (!entry.readerUrl) link.setAttribute("aria-label", entry.title + " (opens in a new tab)");
           }
           link.append(indicator);
         }
@@ -350,6 +362,17 @@
           if (isDisabled) return;
           if (isCollection) enterCollection(entry);
           else {
+            if (entry.readerUrl && event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+              event.preventDefault();
+              var reader = new URL(entry.readerUrl, location.origin);
+              reader.searchParams.set("return", location.pathname + location.search + location.hash);
+              try {
+                sessionStorage.setItem("research-reader-context", JSON.stringify({returnPosition:{url:location.href,x:window.scrollX || 0,y:window.scrollY || 0}}));
+              } catch (_) {}
+              dialog.close();
+              location.assign(reader.href);
+              return;
+            }
             if (window.sitePrepareSection) window.sitePrepareSection(link.href, true);
             // Search results are dynamic, so the legacy anchor listener misses them.
             // Navigate same-page sections immediately without reloading the document.

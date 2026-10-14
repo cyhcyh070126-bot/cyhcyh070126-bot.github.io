@@ -50,8 +50,8 @@ test('no clipboard action; no remote search provider; inert index parsing', () =
   assert.match(js, /fetch\(dialog\.dataset\.indexUrl/);
 });
 
-test('both CV search entries open the canonical versioned PDF in a new tab', () => {
-  const project = { textContent: 'PINN project', nextElementSibling: null, querySelectorAll: () => [] };
+test('both CV search entries retain the versioned original and use the reader on normal clicks', () => {
+  const project = { textContent: 'PINN project', nextElementSibling: null, matches: () => false, querySelectorAll: () => [] };
   const heading = { id: 'burgers-pinn', textContent: '1. PINN project', closest: () => project };
   const pdfLink = { textContent: 'View CV (PDF)', getAttribute: () => '/files/Yanghao_Chen_CV.pdf?v=old' };
   const home = { querySelector: () => null, querySelectorAll: () => [] };
@@ -66,6 +66,9 @@ test('both CV search entries open the canonical versioned PDF in a new tab', () 
     const entry = entries.find(item => item.title === title);
     assert.equal(entry.url, canonical);
     assert.equal(entry.openInNewTab, true);
+    const reader = new URL(entry.readerUrl, 'https://example.com');
+    assert.equal(reader.searchParams.get('file'), canonical);
+    assert.equal(reader.searchParams.get('document'), 'cv');
   }
 });
 
