@@ -4,13 +4,14 @@ const path = require('node:path');
 const sharp = require(process.argv[2] || 'sharp');
 const root = path.join(__dirname, '..');
 const reuse = process.argv.includes('--reuse');
+const only = process.argv.find(arg => arg.startsWith('--only='))?.slice(7).split(',');
 (async () => {
   const cvPath = path.join(root, '_pages/cv.md');
   let cv = fs.readFileSync(cvPath, 'utf8');
-  const sources = [...new Set([...cv.matchAll(/<img\b[^>]*src="(\/images\/research\/[^\"]+\.png)"/g)].map(m => m[1]))];
-  const variants = {};
+  const sources = [...new Set([...cv.matchAll(/<img\b[^>]*src="(\/images\/research\/[^\"]+\.png)"/g)].map(m => m[1]))].filter(src => !only || only.includes(path.basename(src)));
+  const variants = only ? JSON.parse(fs.readFileSync(path.join(root, '_data/image_variants.json'), 'utf8')) : {};
   const wide = /(?:battery_prediction_summary|llm_finetuning_workflow_v2)\.png$/;
-  const sizes = src => src.endsWith('/cylinder_workflow_overview.png') ?
+  const sizes = src => /\/(?:cylinder|bracket|fiber100)_workflow_overview(?:_v\d+)?\.png$/.test(src) ?
     '(max-width: 1048px) calc(100vw - 48px), 1000px' : wide.test(src) ? '(max-width: 1280px) calc(100vw - 48px), 1232px' :
     '(max-width: 900px) calc(100vw - 48px), (max-width: 1280px) 50vw, 640px';
   let before = 0, after = 0;
@@ -29,7 +30,7 @@ const reuse = process.argv.includes('--reuse');
     if (metadata.width > 1920) {
       const full = src.replace(/\.png$/, '.webp');
       const target = path.join(root, full);
-      if (!fs.existsSync(target)) fs.writeFileSync(target, await sharp(input).webp({lossless:true,effort:6}).toBuffer());
+      if (!reuse || !fs.existsSync(target)) fs.writeFileSync(target, await sharp(input).webp({lossless:true,effort:6}).toBuffer());
       candidates.push({src:full,width:metadata.width,bytes:fs.statSync(target).size});
     }
     variants[src] = {srcset:candidates.map(c=>`${c.src} ${c.width}w`).join(', '), sizes:sizes(src), candidates};
@@ -60,13 +61,13 @@ const reuse = process.argv.includes('--reuse');
     {src:'/assets/icons/huggingface.svg'},
     ...gallery.map(src=>({src, ...(variants[src] ? {srcset:variants[src].srcset, sizes:variants[src].sizes} : {})})),
     // Projects previews select a smaller candidate than the same figure in CV.
-    ...['cylinder_workflow_overview.png', 'llm_finetuning_workflow_v2.png'].map(name=>{
+    ...['cylinder_workflow_overview_v2.png', 'llm_finetuning_workflow_v2.png'].map(name=>{
       const src='/images/research/'+name;
       return {src,srcset:variants[src].srcset,sizes:'(max-width: 699px) min(360px, calc(100vw - 48px)), 340px'};
     })
   ];
   // Prepare each project's entry image first, then static figures, then animations.
-  const seeds = ['cylinder_workflow_overview.png', 'battery_concentration.gif', 'pinn_shock_problem_framework_v8.svg', 'llm_finetuning_workflow_v2.png'];
+  const seeds = ['cylinder_workflow_overview_v2.png', 'battery_concentration.gif', 'pinn_shock_problem_framework_v8.svg', 'llm_finetuning_workflow_v2.png'];
   manifest.sort((a,b) => {
     const rank = item => !item.src.includes('/research/') ? 0 : seeds.some(s=>item.src.endsWith(s)) ? 1 : item.src.endsWith('.gif') ? 3 : 2;
     return rank(a)-rank(b);

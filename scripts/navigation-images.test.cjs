@@ -105,7 +105,7 @@ test('a closed ancestor blocks alternate cross-page sizes of its hidden figure',
 test('display copies exist, materially reduce downloads, and preserve original link destinations', () => {
   const variants = JSON.parse(fs.readFileSync(path.join(root,'_data/image_variants.json')));
   let originalBytes=0, displayBytes=0;
-  assert.equal(Object.keys(variants).length,21);
+  assert.equal(Object.keys(variants).length,23);
   for (const [src, item] of Object.entries(variants)) {
     assert.ok(fs.existsSync(path.join(root,src)));
     const sourceWidth=fs.readFileSync(path.join(root,src)).readUInt32BE(16);
@@ -121,8 +121,8 @@ test('display copies exist, materially reduce downloads, and preserve original l
   const sealBytes=fs.statSync(path.join(root,'images/schools/tongji-university-seal-128.png')).size;
   assert.ok(sealBytes<25000);
   const manifest=JSON.parse(fs.readFileSync(path.join(root,'_data/navigation_images.json')));
-  assert.equal(manifest.length,33);
-  assert.equal(new Set(manifest.map(item=>item.src)).size,31);
+  assert.equal(manifest.length,35);
+  assert.equal(new Set(manifest.map(item=>item.src)).size,33);
   assert.equal(manifest.filter(item=>item.sizes?.endsWith('340px')).length,2);
   manifest.forEach(item=>assert.ok(fs.existsSync(path.join(root,item.src)),item.src));
   const links = text=>[...text.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
@@ -130,9 +130,9 @@ test('display copies exist, materially reduce downloads, and preserve original l
     const before=execFileSync('git',['show','HEAD:'+file],{cwd:root,encoding:'utf8'});
     const expected = links(before);
     if (file === '_pages/cv.md') {
-      const overview = '/files/research/cylinder_workflow_overview.pdf';
+      const overview = '/files/research/cylinder_workflow_overview_v2.pdf';
       for (let i=expected.length-1;i>=0;i--) {
-        if (expected[i] === overview) expected.splice(i,1);
+        if (expected[i] === overview || expected[i] === '/files/research/cylinder_workflow_overview.pdf') expected.splice(i,1);
       }
       const firstDetail = expected.indexOf('/files/research/cylinder_subdomain_supports_1234.pdf');
       assert.ok(firstDetail >= 0);
@@ -164,6 +164,11 @@ test('display copies exist, materially reduce downloads, and preserve original l
       assert.ok(fiberIndex >= 0);
       const withoutFiber = expected.filter(link=>!fiberLinks.includes(link));
       expected.splice(0, expected.length, ...withoutFiber.slice(0, fiberIndex), ...fiberLinks, ...withoutFiber.slice(fiberIndex));
+      for(const [name,firstDetail] of [['bracket',bracketLinks[0]],['fiber100',fiberLinks[0]]]){
+        const overview='/files/research/'+name+'_workflow_overview.pdf';
+        for(let i=expected.length-1;i>=0;i--)if(expected[i]===overview)expected.splice(i,1);
+        expected.splice(expected.indexOf(firstDetail),0,overview);
+      }
     }
     assert.deepEqual(links(fs.readFileSync(path.join(root,file),'utf8')),expected,file);
   }

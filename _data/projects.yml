@@ -1,7 +1,7 @@
 - id: fem-neural-operator
   title: GPU-accelerated Hybrid Finite Element–Neural Operator Solver
   short_title: Hybrid FE–NO Solver
-  preview: /images/research/cylinder_workflow_overview.png
+  preview: /images/research/cylinder_workflow_overview_v2.png
   preview_alt: Cylinder FEM–neural operator coupling workflow with stress prediction, force assembly, and IQN-ILS acceleration.
   preview_caption: FEM–NO coupling workflow
   status: Ongoing

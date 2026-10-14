@@ -79,8 +79,8 @@ Current Research
   <div class="project-figures__body" id="fem-neural-operator-cylinder-figures-content" style="--research-figure-start:0">
 <div class="research-gallery research-gallery--single research-gallery--overview">
   <figure class="research-card research-card--overview" id="cylinder-workflow-overview">
-    <a href="/files/research/cylinder_workflow_overview.pdf" target="_self" rel="noopener noreferrer">
-      <picture><source type="image/webp" srcset="/images/research/cylinder_workflow_overview.display-640.webp 640w, /images/research/cylinder_workflow_overview.display-1280.webp 1280w, /images/research/cylinder_workflow_overview.display-1920.webp 1920w, /images/research/cylinder_workflow_overview.webp 3200w" sizes="(max-width: 1048px) calc(100vw - 48px), 1000px" /><img src="/images/research/cylinder_workflow_overview.png" alt="Cylinder FEM–neural operator coupling workflow: interface displacements, three frozen Transolvers, Gauss-point stresses, force assembly, and IQN-ILS acceleration." loading="lazy" decoding="async" width="3200" height="1423" style="background-image:url('data:image/webp;base64,UklGRlYCAABXRUJQVlA4IEoCAACQEQCdASp4ADUAPt1qq1EopiOipBgMkRAbiWMA0s3ESKbc+7M2zObMnC3euZPPRkLa1F5d3aa2UFGtDpDSWYDmckeCY7XF9X2ynJAmU7ZaBqPZO27gmfokbGXvxbcjn8EuQLQMRo9CMlH9HvyXf9VOsMNY9piFgwQhRjcIX8Knxlzb4gg2kCuWL3uYExinxtR+CDDaAAD++Wyt4e+GFRGL3ZVqTymPg1Zmj/aG+8b77SyUyyXNyP1Bh0JbfwkEmCQawkwbwF3bXf82jd2389Yxghzee6VVOHssEYjHMLL5E+Ydei9ex5IsZP7XfR9Z6PVQcN5iRDnUS7i+y8YQjJD1io2P2S3JXFfj/OfRpGiMWc9YRSizodO1l/a9r+Ky4jn7mNdJJ6/tUEvSGAp6IoaF2rTN1C/kuL8BQaqwhvtP/VnGSKH4UR6b4NofM4QpDGrcoSBlzz6OHjo6FqijJctTNQhWTjqoLvQs90eh8t/gr8KYpwqiHhVTmoHh9b0kDMX3gQxacf1LX0LGJ3rC1Tynxv/gUyiOyFIQ0luKLhCEvYs9k8Pk5H+urExlFDK3mOBsVCCOomv6NC2V5jCXkOQ5FXIxvt8BMMw98+HCMHZdZR9v/IfmFJbWfKXghLWFCSO/npWtnat20nKVDYUCAX+w8ZAuAdRHyay4/xAsOyAIdc3ZNyBW4mYwUNRgJF67IvxDtkpG2Ass5voD6a9Vm2XVuSN6DlrrA7mM6V1QNsFSxj54rD5gVhGl6ufhKKmzpBYvC4cJSCp5YAAA');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+    <a href="/files/research/cylinder_workflow_overview_v2.pdf" target="_self" rel="noopener noreferrer">
+      <picture><source type="image/webp" srcset="/images/research/cylinder_workflow_overview_v2.display-640.webp 640w, /images/research/cylinder_workflow_overview_v2.display-1280.webp 1280w, /images/research/cylinder_workflow_overview_v2.display-1920.webp 1920w, /images/research/cylinder_workflow_overview_v2.webp 3200w" sizes="(max-width: 1048px) calc(100vw - 48px), 1000px" /><img src="/images/research/cylinder_workflow_overview_v2.png" alt="Cylinder FEM–neural operator coupling workflow: interface displacements, three frozen Transolvers, Gauss-point stresses, force assembly, and IQN-ILS acceleration." loading="lazy" decoding="async" width="3200" height="1362" style="background-image:url('data:image/webp;base64,UklGRigCAABXRUJQVlA4IBwCAAAwEACdASp4ADMAPt1gqE+opSOiKRccgRAbiWUA03mgNtebvcwGH1IVQwdpQZDU5tAaUW/R5Das8iDfJ5ECIK+yKEwFjjg/FecwRir7dfliy0Yf2mPs+6WThytOqYWo8Ik+7O32vqj9rxx6yfG187pYzcOV1H3MEZd0+epNKBnhSee/aIoemDEvWwAA/vcG5MOQfHncw4cWTZpGVumCSOQhw+mHCtRmaWwepJgo7VwPSwKtzuopOdo97IC8sRGuUxJU698Pa62noJd+w7tVCh9YJ3rywnoCc9thX6MI1hVo9XmnaGofeCPQCvuVPGaAiEfH+/JvgFrQbkjzNINdQuRDuLTzx3wd2cOux0bRs/PF+wzQkfl87D5FzBh+0v2znnYrdXMTO3ZqXoXO6ZhRf+E3CdftGgjFfbFo4HwjzBad4rSozL8/VNtnua80vq8S02C/jeDD19iGvX76bIDNYkPjzNZHwAwQuqYfCy7OO2uztLKtvzddGMMemTp9EePicPIu7mPBgCPlBjqUVlIxJYfnxJRpzL0MHTahAPQVNWKcY8nwhRyxDEeiM2q7+lX70J4dcR+tKd4JR8Ijh4Z6nTLTeHfoqsrrWWj8he69CQ39aEzrXCnOnTYIi+mH2lfITJqlyuxDQiviZMrv8zggrUdNK2KGMlb30eIXbUyP0LxXt64lyAvjKImodaLmeeJb8QSqe5XM/F6BLm4AAAA=');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
     </a>
     <figcaption>
       <strong>Cylinder FEM–NO Coupling Workflow</strong><br>
@@ -157,6 +157,18 @@ Current Research
 <details class="project-figures project-figures--group" id="fem-neural-operator-bracket-figures">
   <summary aria-controls="fem-neural-operator-bracket-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Bracket</span><span class="project-figures__count"></span></summary>
   <div class="project-figures__body" id="fem-neural-operator-bracket-figures-content" style="--research-figure-start:7">
+<div class="research-gallery research-gallery--single research-gallery--overview">
+  <figure class="research-card" id="bracket-coupling-workflow">
+    <a href="/files/research/bracket_workflow_overview.pdf" target="_self" rel="noopener noreferrer">
+      <picture><source type="image/webp" srcset="/images/research/bracket_workflow_overview.display-640.webp 640w, /images/research/bracket_workflow_overview.display-1280.webp 1280w, /images/research/bracket_workflow_overview.display-1920.webp 1920w, /images/research/bracket_workflow_overview.webp 3200w" sizes="(max-width: 1048px) calc(100vw - 48px), 1000px" /><img src="/images/research/bracket_workflow_overview.png" alt="Interface displacements are mapped to six Gauss-point stress components; assembled interface reaction forces are returned to FEM through IQN-ILS acceleration." loading="lazy" decoding="async" width="3200" height="1624" style="background-image:url('data:image/webp;base64,UklGRoACAABXRUJQVlA4IHQCAABwEgCdASp4AD0APt1eqVCopKOiqhM8ARAbiWUfjImrqEHPtqco+Wv7ez2asEmNgiRtZrbmvezncuPRUvMX9HzmlincbfHIjjVc8v+hdaUsuU4Ty/O7MU9Dku5LvFcioIsYE+G8mnDPBO7UUm7PPRSp+p+5naFTMdgopUMOBt5hC3t3MY0s9QkqJGpEExQC3q+b9APFkYEWjdnloIAA/voRCCtABZF4qh872WkU7URUNCdMX1cO7f5EL4P3/ZLA4YBNnodSLVq1Jphm3LDbZ8yS7GNwnSNdp6AGm3FX1VbGtyS68FJu9+2ly88GmVTkstPVQr3ZBDG3AL9CvourBQCR1xYOsa15Fh6XpYSmKN3CweuHa4tHmpVmg4BVfPUGMT8Nqkc8kpRv2f44c4rk8i4sCNwQOwCk2er+bOYu26DUE40SrSYYz8BigxiXC2lpWK1pIi/o4d79TzZ0dZpzOAo/4O8dFbzXz7GNhzs/BB0tPhTT3eg8TJiZyy4L4XX7ZnGoH5fDeNaaOzPWPzqeCfp7T8EunStObNliPMg10Hyz3eyuhJoJHcDGJ4KXzTdrJdbWAA891RVAE+8BqNugTre0uIxgxpEVdfqIL8NUffRox61dCOMPBCA4+SY0tLa7oYNd9UqKC/XPh/ZPLW1ADjKEe++HOLWLOqOkTE95DuK4LoCKDcUHTe8hL0D+2KMAot7pitdJjCAa0X3Iuap/Tr2q66n7d1/4moPIFQ+XAdKzKUlT+qn9LK98FQ371xxhkqEEUYXfwzk/9+IzBcqAbu50KmtqGRCoJunxcKfsJRpPAM+aukiYdPHcupUV0nga8J9ZQAAA');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+    </a>
+    <figcaption>
+      <strong>Bracket FEM–NO Coupling Workflow</strong><br>
+      Interface displacements are mapped to six Gauss-point stress components; assembled interface reaction forces are returned to FEM through IQN-ILS acceleration.
+    </figcaption>
+  </figure>
+</div>
+
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card" id="bracket-full-mesh">
     <a href="/files/research/bracket_hex8_full_mesh.pdf" target="_self" rel="noopener noreferrer">
@@ -216,7 +228,19 @@ Current Research
 
 <details class="project-figures project-figures--group" id="fem-neural-operator-fiber-figures">
   <summary aria-controls="fem-neural-operator-fiber-figures-content" aria-describedby="fem-neural-operator"><span class="project-figures__label">Fiber-reinforced Composites &middot; Ongoing</span><span class="project-figures__count"></span></summary>
-  <div class="project-figures__body" id="fem-neural-operator-fiber-figures-content" style="--research-figure-start:12">
+  <div class="project-figures__body" id="fem-neural-operator-fiber-figures-content" style="--research-figure-start:13">
+<div class="research-gallery research-gallery--single research-gallery--overview">
+  <figure class="research-card" id="fiber-coupling-workflow">
+    <a href="/files/research/fiber100_workflow_overview.pdf" target="_self" rel="noopener noreferrer">
+      <picture><source type="image/webp" srcset="/images/research/fiber100_workflow_overview.display-640.webp 640w, /images/research/fiber100_workflow_overview.display-1280.webp 1280w, /images/research/fiber100_workflow_overview.display-1920.webp 1920w, /images/research/fiber100_workflow_overview.webp 3200w" sizes="(max-width: 1048px) calc(100vw - 48px), 1000px" /><img src="/images/research/fiber100_workflow_overview.png" alt="Six stress-component operators are shared across 100 fiber subdomains; assembled interface reaction forces are returned to the FEM matrix through IQN-ILS acceleration." loading="lazy" decoding="async" width="3200" height="1624" style="background-image:url('data:image/webp;base64,UklGRlICAABXRUJQVlA4IEYCAADQEQCdASp4AD0APtFapEyoJaOiM/gMAQAaCWdrT10Cf/qgHWeP4feBDv7ioqFX+GB+cyR5WKQ80tC7IqMH/tjfBvx/TIocBqWzvyj6LFnlBAm77xIoyc8bLtXWatP6eERqsN0UrrDoxFHeLx3OYOj5g7m2EujnwGp8IB8ebE46rxED3UPK1nPQb7LFuqYCVuACC7I9cVPAAP72BypEx36Ujwp4h5mowsh26YPCm6aKF5Mez2BJRFJF77hgnqW0kh5v5G7BLJQt9Ke6/4bbESTfUuZ0UGVirRwy45HnEJ2FDO2yiT9QWFWiaSDa3aaVxr6FrHJgNeDb2JCd1Eg8PGY2gU33JtZ6eS6iSIJ5AnH6HFdg82uY1+jW9BdJpqx5tdWhpT6HgINIH53eYRlLO7LNrbIkDddCI8PirFdCAAO3/IwShc000Jf4QYd7kr/ivOmyYzrPu9y1GVNX9DNwMUaHOC5N8/b8dJ3i2mduApTveS3+t0nXo8h6DV13AiGR9adq/D1B2Tki5mt0Us6sPSibzIiTm37/s8fzXSLEwGqrgsWq2uSqjtSAciryAyGy6SdwUQp5r6O26nmEJ+XxHf8YippCKOD8+9VS3VSx3OCLB4NmB02dfN9B2QyHt2L9/oaIHQNM5Gy65monkECD4zbX/9BmYFepauyAp0dFTd8HAyn3b7kOQ1keAkLVD/Ny6iAuDkrEc3I9TVKPpu7aD7IF003b2E5+1Y9fCoOAd1FpG4gaj81sdn//xPSLzymfjyTqGwGgAAA=');background-size:contain;background-position:center;background-repeat:no-repeat" /></picture>
+    </a>
+    <figcaption>
+      <strong>Fiber–Matrix FEM–NO Coupling Workflow</strong><br>
+      Six stress-component operators are shared across 100 fiber subdomains; assembled interface reaction forces are returned to the FEM matrix through IQN-ILS acceleration.
+    </figcaption>
+  </figure>
+</div>
+
 <div class="research-gallery research-gallery--prototype">
   <figure class="research-card" id="fiber-cube">
     <a href="/files/research/fiber100_unit_cell_v4.pdf" target="_self" rel="noopener noreferrer">
