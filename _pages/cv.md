@@ -13,8 +13,9 @@ redirect_from:
 
 <p><a href="{{ cv_pdf_url }}" target="_blank" rel="noopener noreferrer">View CV (PDF)</a> <span class="cv-links__separator">|</span> <a href="{{ '/files/Yanghao_Chen_Research_Statement.pdf' | relative_url | append: '?v=' | append: cv_pdf_version }}" target="_blank" rel="noopener noreferrer">Research Statement (PDF)</a> <span class="cv-links__separator">|</span> <a href="{{ '/files/Yanghao_Chen_Personal_Statement.pdf' | relative_url | append: '?v=' | append: cv_pdf_version }}" target="_blank" rel="noopener noreferrer">Personal Statement (PDF)</a> <span class="cv-links__separator">|</span> <a href="{{ '/projects/' | relative_url }}">Project repositories</a></p>
 
-Education
+Academic Background
 ======
+{: #education}
 
 <div class="cv-school">
   <img class="cv-school__seal" src="{{ '/images/schools/tongji-university-seal-128.png' | relative_url }}" alt="Tongji University seal" width="128" height="128" decoding="async" fetchpriority="high" srcset="/images/schools/tongji-university-seal-128.png 128w, /images/schools/tongji-university-seal-256.png 256w, /images/schools/tongji-university-seal.png 1280w" sizes="40px">
