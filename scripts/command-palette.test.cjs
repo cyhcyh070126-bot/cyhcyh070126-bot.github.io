@@ -5,6 +5,20 @@ const path = require('node:path');
 const { normalize, searchEntries, indexEntries, repositoryEntry, buildEntries, applicationPdfReader } = require('../assets/js/command-palette.js');
 const root = path.join(__dirname, '..');
 
+test('academic background naming and anchors agree across page, navigation, search and styling', () => {
+  const read = file => fs.readFileSync(path.join(root, file), 'utf8');
+  const cv = read('_pages/cv.md');
+  const contents = read('_includes/page-contents.html');
+  const search = read('assets/js/command-palette.js');
+  const css = read('assets/css/main.scss');
+  assert.match(cv, /Academic Background\r?\n=+\r?\n\{: #academic-background\}/);
+  assert.match(contents, /href="#academic-background">Academic Background<\/a>/);
+  assert.match(search, /"Academic Background", data\.cv\.url \+ "#academic-background"/);
+  assert.match(css, /\.cv-page > #academic-background/);
+  for (const source of [cv, contents, search, css]) assert.ok(!source.includes('#education'));
+  assert.match(read('_includes/cv-template.html'), /<h2>Academic Background<\/h2>/);
+});
+
 function entry(title, keywords, body, order) {
   return { title, order, titleIndex: normalize(title), keywordIndex: normalize(keywords), bodyIndex: normalize(body) };
 }
@@ -23,7 +37,7 @@ test('normalizes case, Unicode dashes, accents and Chinese without regex search'
 });
 
 test('all application PDF links share the reader route while unrelated and external files stay native', () => {
-  const current='https://example.com/cv/?v=current#education';
+  const current='https://example.com/cv/?v=current#academic-background';
   for (const [name,key] of [['CV','cv'],['Research_Statement','rs'],['Personal_Statement','ps']]) {
     const path='/files/Yanghao_Chen_'+name+'.pdf?v=release';
     for (const href of [path,'https://example.com'+path]) {

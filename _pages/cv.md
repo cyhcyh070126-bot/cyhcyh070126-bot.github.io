@@ -15,7 +15,7 @@ redirect_from:
 
 Academic Background
 ======
-{: #education}
+{: #academic-background}
 
 <div class="cv-school">
   <img class="cv-school__seal" src="{{ '/images/schools/tongji-university-seal-128.png' | relative_url }}" alt="Tongji University seal" width="128" height="128" decoding="async" fetchpriority="high" srcset="/images/schools/tongji-university-seal-128.png 128w, /images/schools/tongji-university-seal-256.png 256w, /images/schools/tongji-university-seal.png 1280w" sizes="40px">

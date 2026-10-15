@@ -29,7 +29,7 @@ background, illustrated projects, code and model releases, and CV.
 | --- | --- |
 | Research background, current work, and updates | [Homepage](https://cyhcyh070126-bot.github.io/) |
 | Project summaries and available code | [Research projects](https://cyhcyh070126-bot.github.io/projects/) |
-| Education, research experience, figures, and animations | [Web CV](https://cyhcyh070126-bot.github.io/cv/) |
+| Academic background, research experience, figures, and animations | [Web CV](https://cyhcyh070126-bot.github.io/cv/) |
 | Download a concise CV | [CV PDF](https://cyhcyh070126-bot.github.io/files/Yanghao_Chen_CV.pdf) |
 | Run the website locally | [Local preview](#local-development) |
 

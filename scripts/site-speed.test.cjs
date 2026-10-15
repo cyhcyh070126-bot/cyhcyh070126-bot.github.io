@@ -7,7 +7,7 @@ const { destination } = require('../assets/js/site-speed.js');
 const origin = 'https://example.com';
 
 test('prefetch keeps document routes and file URLs while excluding external and current-page links', () => {
-  assert.equal(destination('/cv/#education', origin + '/').url, origin + '/cv/');
+  assert.equal(destination('/cv/#academic-background', origin + '/').url, origin + '/cv/');
   assert.equal(destination('/files/CV.pdf?v=2', origin + '/').url, origin + '/files/CV.pdf?v=2');
   for (const url of ['#news', '/', 'https://elsewhere.com/cv/', 'mailto:a@example.com', '/logout', 'javascript:alert(1)']) {
     assert.equal(destination(url, origin + '/'), null, url);
@@ -33,7 +33,7 @@ test('idle warming only downloads the two other documents and deduplicates secti
   const app = setup();
   app.idle[0]();
   assert.deepEqual(app.links.map(l => l.href), [origin + '/cv/', origin + '/projects/']);
-  app.window.siteWarmLink('/cv/#education');
+  app.window.siteWarmLink('/cv/#academic-background');
   app.window.siteWarmLink('/cv/#burgers-pinn');
   assert.equal(app.links.length, 2);
   assert.ok(app.links.every(l => l.rel === 'prefetch'));

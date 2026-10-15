@@ -379,7 +379,7 @@ def create_cv_json(md_file, config_file, repo_root, output_file):
     cv_json = {
         "basics": author_info,
         "work": parse_work_experience(sections.get('Work experience', '')),
-        "education": parse_education(sections.get('Academic Background', sections.get('Education', ''))),
+        "education": parse_education(sections.get('Academic Background', '')),
         "skills": parse_skills(sections.get('Skills', '')),
         "languages": [],
         "interests": [],
