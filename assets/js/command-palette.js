@@ -86,7 +86,7 @@
     if (data.cv.pdf_url) usePdfReader(cvLink, "cv");
     if (data.projects) add("Navigation", "Projects", data.projects.url, "projects repository repositories 项目 课题 仓库");
     add("Navigation", "News", data.home.url + "#news", "updates timeline 新闻 动态", home.querySelector(".home-news")?.textContent);
-    add("Navigation", "Education", data.cv.url + "#education", "university tongji jhu 教育 同济 约翰霍普金斯");
+    add("Navigation", "Academic Background", data.cv.url + "#education", "education university tongji jhu 学术背景 教育 同济 约翰霍普金斯");
 
     var aliases = {
       "fem-neural-operator": "FEM NO FEM-NO JAX Transolver GPU cylinder bracket fiber fibre composite 3D 三维 纤维 复合材料 有限元 神经算子 应力 耦合",
