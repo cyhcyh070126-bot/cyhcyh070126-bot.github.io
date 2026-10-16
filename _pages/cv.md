@@ -22,7 +22,7 @@ Academic Background
   <span>Tongji University, Shanghai, China</span>
 </div>
 
-- Bachelor of Engineering in Engineering Mechanics, School of Aerospace Engineering and Applied Mechanics
+- B.Eng. in Engineering Mechanics
 - Sep. 2023 - Present (Expected Jun. 2027)
 - GPA: 87/100
 
