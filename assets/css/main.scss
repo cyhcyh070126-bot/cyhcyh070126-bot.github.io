@@ -665,6 +665,10 @@ body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summa
   transform-origin: center center;
 }
 
+#main .cv-page > ul:not(.quick-links) > li a[href^="https://huggingface.co/"] {
+  --link-hover-scale: 1.005;
+}
+
 // Keep the project title and its status together, without scaling the link twice.
 #main .project-list__title a {
   display: inline;
