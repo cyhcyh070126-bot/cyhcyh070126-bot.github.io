@@ -65,10 +65,10 @@ Current Research
   </div>
 </div>
 
-- **Non-Overlapping Domain Decomposition and Hybrid Solver:** Developing a hybrid finite element–neural operator solver using non-overlapping domain decomposition, with FEM and neural-operator subdomains connected through a shared interface.
-- **GPU-accelerated Data Generation:** Generated interface displacement samples using Gaussian random fields and computed the corresponding subdomain stress fields with GPU-accelerated JAX-FEM simulations to form paired training data.
-- **Neural Operator Training:** Trained Transolver in JAX on these paired data to learn the mapping from interface displacement fields to subdomain stress fields.
-- **Iterative Interface Coupling:** Computed interface reaction forces from neural-operator stress predictions and exchanged them with FEM-computed interface displacements during coupling iterations. Investigated convergence acceleration strategies and relaxation parameters for the coupled solver.
+- **Non-Overlapping Domain Decomposition:** Used FEM to solve the outer subdomain and a neural operator to predict stress fields in the inner subdomain, coupling the two through a shared interface.
+- **GPU-accelerated Data Generation:** Generated paired training data by sampling interface displacement fields with Gaussian random fields and computing the corresponding subdomain stress fields using JAX-FEM.
+- **Neural Operator Training:** Trained Transolver in JAX on the paired data to learn the mapping from interface displacement fields to subdomain stress fields.
+- **Iterative Interface Coupling:** Assembled interface reaction forces from neural-operator stress predictions and applied them to the outer FEM subdomain. The FEM solve updated interface displacements, which were returned to the neural operator for the next iteration. Investigated convergence acceleration and relaxation strategies.
 
 **Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
 
@@ -314,10 +314,10 @@ Current Research
   </div>
 </div>
 
-- **Automated Simulation and Data Generation:** Generated polycrystalline NMC microstructures and automated MATLAB–COMSOL simulations to produce time-aligned image sequences of lithium concentration and von Mises stress.
-- **Concentration Field and Stress Field Prediction:** Trained separate conditional ConvLSTM models in PyTorch to predict future image sequences of lithium concentration and von Mises stress, using past image sequences, grain-orientation maps, and C-rate inputs.
-- **Model Training:** Trained the models with MSE and SSIM losses, using scheduled sampling to introduce model-generated inputs during training and reduce the mismatch between training and autoregressive use.
-- **Prediction Evaluation:** Evaluated autoregressive concentration and stress predictions against COMSOL reference sequences, examining error accumulation over successive prediction steps.
+- **Automated Simulation and Data Generation:** Generated polycrystalline NMC microstructures and automated MATLAB–COMSOL simulations to produce time-aligned image sequences of lithium concentration and von Mises stress, with 25 frames per field.
+- **Conditional ConvLSTM Prediction:** Trained separate conditional ConvLSTM models in PyTorch for concentration and stress prediction, using five consecutive field images together with grain-orientation and C-rate maps to predict the next frame.
+- **Autoregressive Training:** Used combined MSE–SSIM losses and scheduled sampling, gradually incorporating model-generated frames into training inputs to reduce the mismatch between training and autoregressive prediction.
+- **Multi-step Evaluation:** Compared multi-step autoregressive predictions of concentration and stress with COMSOL reference sequences, evaluating image errors and their accumulation over successive prediction steps.
 
 <details class="project-figures" id="convlstm-battery-figures">
   <summary aria-controls="convlstm-battery-figure-content" aria-describedby="convlstm-battery"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
@@ -412,10 +412,10 @@ Current Research
   </div>
 </div>
 
-- **Burgers Shock Problem:** Studied shock propagation in the one-dimensional inviscid Burgers equation with discontinuous initial conditions, using the analytical solution as a reference.
-- **Standard PINN:** Trained a PINN in PyTorch using PDE-residual, initial-condition, and boundary-condition losses, with automatic differentiation to compute the derivatives in the PDE residual.
+- **Burgers Shock Problem:** Studied shock capturing for the one-dimensional inviscid Burgers equation with discontinuous initial conditions, using the analytical inviscid solution as a reference.
+- **Standard PINN:** Used automatic differentiation in PyTorch to compute the PDE residual and trained a physics-informed neural network with residual, initial-condition, and boundary-condition losses, without precomputed solution labels.
 - **Artificial-Viscosity PINN:** Added an artificial-viscosity term with a fixed coefficient to the PDE residual and trained a second PINN to predict the shock profile.
-- **Prediction Comparison:** Compared standard and artificial-viscosity PINNs against the analytical inviscid solution, evaluating shock location, transition width, relative <i>L</i><sup>2</sup> error, and maximum pointwise error.
+- **Prediction Comparison:** Compared both PINNs against the analytical inviscid solution, assessing shock location, transition width, relative <i>L</i><sup>2</sup> error, and maximum pointwise error.
 
 <details class="project-figures" id="burgers-pinn-figures">
   <summary aria-controls="burgers-pinn-figure-content" aria-describedby="burgers-pinn"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
@@ -489,10 +489,10 @@ Current Research
   </div>
 </div>
 
-- **Mechanics Question Answering:** Adapted Qwen2.5-7B for question answering and concept explanation in mechanics of materials.
-- **Instruction Dataset Construction:** Built instruction–response datasets from textbooks and technical literature, covering stress analysis, constitutive laws, and failure theories in mechanics of materials.
-- **LoRA Fine-Tuning:** Fine-tuned Qwen2.5-7B on the instruction–response datasets using LoRA on Google Colab.
-- **Public Release:** Released two instruction–response datasets ([Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge)) and two fine-tuned Qwen2.5-based model checkpoints ([AI_Material_mechanics_assistant](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and [AI_Material_mechanics_assistant_merged](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged)) on Hugging Face for question answering in mechanics of materials.
+- **Instruction Dataset Construction:** Built instruction–response datasets from textbooks and technical literature, covering stress analysis, constitutive relations, and failure theories in mechanics of materials.
+- **Instruction Fine-Tuning:** Fine-tuned Qwen2.5-7B using low-rank adaptation (LoRA) on Google Colab, adapting the data loading code to the instruction datasets for question answering and concept explanation in mechanics of materials.
+- **Local Model Deployment:** Reduced numerical precision and adjusted checkpoint saving and loading procedures to enable local inference on hardware with limited GPU memory.
+- **Public Release:** Published two instruction–response datasets, [Material-mechanics](https://huggingface.co/datasets/CYHcyh66/Material-mechanics) and [Material-mechanics-merge](https://huggingface.co/datasets/CYHcyh66/Material-mechanics-merge), together with the [fine-tuned model](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant) and its [merged version](https://huggingface.co/CYHcyh66/AI_Material_mechanics_assistant_merged) on Hugging Face.
 
 <details class="project-figures" id="mechanics-llm-figures">
   <summary aria-controls="mechanics-llm-figure-content" aria-describedby="mechanics-llm"><span class="project-figures__show">Show figures</span><span class="project-figures__hide">Hide figures</span><span class="project-figures__count"></span></summary>
