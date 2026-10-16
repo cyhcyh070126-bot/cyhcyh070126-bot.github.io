@@ -651,7 +651,7 @@ a[href] {
   text-decoration-line: underline;
 }
 
-// Apply the same scale to every link and control, independently of existing transforms.
+// Use two hover scales: 1.02 for inline links and figures, 1.04 for standalone controls.
 body :is(a[href], button:not(:disabled), [role="button"], [role="option"], summary, input[type="submit"], input[type="button"]),
 #main .project-list__title {
   transform-origin: left center;
@@ -1287,7 +1287,7 @@ ul + .cv-project {
 
 @media (hover: hover) and (pointer: fine) {
   #main .project-list__preview > a:is(:hover, :focus-visible) {
-    transform: translateY(-3px) scale(1.012);
+    transform: translateY(-3px) scale(1.02);
     border-color: var(--research-card-hover-border);
     box-shadow: var(--research-image-hover-shadow);
   }
@@ -1300,7 +1300,7 @@ ul + .cv-project {
 
   .research-card:hover img,
   .research-card:has(a:focus-visible) img {
-    transform: translateY(-3px) scale(1.012);
+    transform: translateY(-3px) scale(1.02);
     border-color: var(--research-card-hover-border);
     box-shadow: var(--research-image-hover-shadow);
   }
