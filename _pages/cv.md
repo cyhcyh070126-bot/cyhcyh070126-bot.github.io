@@ -22,7 +22,7 @@ Academic Background
   <span>Tongji University, Shanghai, China</span>
 </div>
 
-- B.Eng. in Engineering Mechanics
+- B.Eng. in Engineering Mechanics, School of Aerospace Engineering and Applied Mechanics
 - Sep. 2023 - Present (Expected Jun. 2027)
 - GPA: 87/100
 
@@ -31,7 +31,7 @@ Academic Background
   <span>Johns Hopkins University, Baltimore, MD, USA</span>
 </div>
 
-- Visiting Undergraduate Research Intern, Department of Civil and Systems Engineering
+- Visiting Research Intern, Department of Civil and Systems Engineering
 - Jan. 2026 – Oct. 2026 (Remote: Jan.–Jul. 2026; On-site: Jul.–Oct. 2026)
 - Research Focus: GPU-accelerated FEM and Hybrid Finite Element–Neural Operator Solvers
 
@@ -60,7 +60,7 @@ Current Research
     <div class="cv-project__term">Jan. 2026 - Present</div>
   </div>
   <div class="cv-project__meta">
-    <span><em>Undergraduate Research Intern<span class="cv-project__separator">|</span>Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
+    <span><em>Research Intern<span class="cv-project__separator">|</span>Advisor: <a href="https://engineering.jhu.edu/case/faculty/somdatta-goswami/" target="_blank" rel="noopener noreferrer">Prof. Somdatta Goswami</a></em></span>
     <span><em>Johns Hopkins University</em></span>
   </div>
 </div>
