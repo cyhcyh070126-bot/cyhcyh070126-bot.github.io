@@ -947,6 +947,12 @@ ul + .cv-project {
   overflow-wrap: break-word;
   font-size: 0.95em;
   letter-spacing: -0.01em;
+
+  @include breakpoint($large) {
+    // Use the existing gutter and half-column inset, keeping 1rem before the body.
+    width: max-content;
+    max-width: calc(#{span(2.5 wide of 2)} - 1rem);
+  }
 }
 
 @media (max-width: 480px) {
