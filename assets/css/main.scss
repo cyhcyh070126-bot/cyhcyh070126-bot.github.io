@@ -58,13 +58,13 @@
   scroll-margin-top: var(--site-scroll-offset, 100px);
 }
 
-// A brief arrival cue for project links; no movement or layout changes.
+// Keep the existing ::before stars/dividers separate from the arrival cue.
 #main :is(.cv-project__title, .project-list__title).project-arrival {
   position: relative;
   isolation: isolate;
 }
 
-#main :is(.cv-project__title, .project-list__title).project-arrival::before {
+#main :is(.cv-project__title, .project-list__title).project-arrival::after {
   content: "";
   position: absolute;
   inset: -0.25rem -0.45rem;
@@ -78,18 +78,19 @@
 
 @keyframes project-arrival {
   0% { opacity: 0; }
-  7%, 65% { opacity: 1; }
+  6%, 16%, 44%, 65% { opacity: 1; }
+  30% { opacity: 0.15; }
   100% { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #main :is(.cv-project__title, .project-list__title).project-arrival::before {
+  #main :is(.cv-project__title, .project-list__title).project-arrival::after {
     animation: none;
   }
 }
 
 @media print {
-  #main .project-arrival::before { display: none; }
+  #main .project-arrival::after { display: none; }
 }
 
 .home-page .research-keyword {
