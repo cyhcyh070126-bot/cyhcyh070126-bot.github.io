@@ -70,13 +70,11 @@ I am developing GPU-accelerated hybrid finite element–neural operator solvers 
 
 [View Research Projects in CV](/cv/#research-projects).
 
-Skills
-======
+<h1 id="skills">Technical Skills</h1>
 
-- **Scientific Machine Learning:** PyTorch, JAX, Neural Operators (Transolver, DeepONet), PINNs, ConvLSTM
-- **Computational Mechanics:** JAX-FEM, FEniCSx, Abaqus, COMSOL Multiphysics (LiveLink for MATLAB), Gmsh
-- **Programming & Tools:** Python, MATLAB, Linux, Git/GitHub, Matplotlib, Origin
-- **LLM Fine-Tuning:** Qwen2.5, LoRA, Instruction Dataset Curation
+- **Scientific Machine Learning:** PyTorch, JAX, Neural Operators, PINNs, ConvLSTM, Fine-tuning (LoRA)
+- **Numerical Simulation:** JAX-FEM, FEniCSx, Abaqus, COMSOL Multiphysics
+- **Programming & Tools:** Python, C/C++, MATLAB, Linux, Git, Matplotlib, Origin
 - **Languages:** Mandarin Chinese (native), Cantonese, English
 
 Quick Links
