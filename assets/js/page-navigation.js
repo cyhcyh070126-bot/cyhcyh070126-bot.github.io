@@ -1,5 +1,46 @@
 (function () {
   "use strict";
+  // Mark the project reached by a real anchor jump, without changing navigation.
+  var arrivalTitle;
+  var arrivalTimer;
+  var arrivalFrame;
+  function clearArrival() {
+    window.clearTimeout(arrivalTimer);
+    if (arrivalTitle) arrivalTitle.classList.remove("project-arrival");
+    arrivalTitle = null;
+  }
+  function markArrival(href) {
+    var target;
+    try {
+      var url = new URL(href, location.href);
+      if (url.origin !== location.origin || url.pathname !== location.pathname || url.search !== location.search) return;
+      window.cancelAnimationFrame(arrivalFrame);
+      clearArrival();
+      if (!url.hash) return;
+      target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+      if (!target) return;
+      if (target.matches(".project-list__item")) target = target.querySelector(".project-list__title");
+      if (!target || !target.matches(".cv-project__title, .project-list__title")) return;
+    } catch (_) { return; }
+    arrivalFrame = window.requestAnimationFrame(function () {
+      arrivalTitle = target;
+      target.classList.add("project-arrival");
+      arrivalTimer = window.setTimeout(clearArrival, 2600);
+    });
+  }
+  document.addEventListener("click", function (event) {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    var link = event.target.closest && event.target.closest("a[href]");
+    if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
+    markArrival(link.href);
+  }, true);
+  window.addEventListener("hashchange", function () { markArrival(location.href); });
+  window.addEventListener("pagehide", function () {
+    window.cancelAnimationFrame(arrivalFrame);
+    clearArrival();
+  });
+  markArrival(location.href);
+
   var button = document.querySelector(".back-to-top");
   if (!button) return;
   var contents = document.querySelector(".page-contents");
