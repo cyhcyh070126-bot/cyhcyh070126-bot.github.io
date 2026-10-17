@@ -67,7 +67,7 @@ Current Research
 
 - **Non-Overlapping Domain Decomposition:** Used FEM to solve the outer subdomain and a neural operator to predict stress fields in the inner subdomain, coupling the two through a shared interface.
 - **GPU-accelerated Data Generation:** Generated paired training data by sampling interface displacement fields with Gaussian random fields and computing the corresponding subdomain stress fields using JAX-FEM.
-- **Neural Operator Training:** Trained Transolver in JAX on the paired data to learn the mapping from interface displacement fields to subdomain stress fields.
+- **Neural Operator Training:** Trained Transolver models in JAX on the paired data to map interface displacement fields to subdomain stress fields, using a separate model with independently trained weights for each stress component.
 - **Iterative Interface Coupling:** Assembled interface reaction forces from neural-operator stress predictions and applied them to the outer FEM subdomain. The FEM solve updated interface displacements, which were returned to the neural operator for the next iteration. Investigated convergence acceleration and relaxation strategies.
 
 **Ongoing 3D Composite Extension:** We are extending the hybrid solver to a 100-fiber composite with non-overlapping fiber and matrix subdomains. FEM solves the matrix subdomain, while a shared neural operator computes stress fields in all fiber subdomains, using component-specific weights shared across all fibers. The two solvers exchange interface forces and displacements iteratively. We apply periodic boundary conditions to eliminate fiber-end effects.
