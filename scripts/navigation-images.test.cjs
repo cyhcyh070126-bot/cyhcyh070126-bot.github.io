@@ -130,6 +130,7 @@ test('display copies exist, materially reduce downloads, and preserve original l
     const before=execFileSync('git',['show','HEAD:'+file],{cwd:root,encoding:'utf8'});
     const expected = links(before);
     if (file === '_pages/cv.md') {
+      for(let i=0;i<expected.length;i++)if(expected[i]==='/files/research/fiber100_workflow_overview_v2.pdf')expected[i]='/files/research/fiber100_workflow_overview_v3.pdf';
       for(let i=expected.length-1;i>=0;i--)if(expected[i]==='/files/research/domain_decomposition_preview.pdf')expected.splice(i,1);
       for(let i=0;i<expected.length;i++)if(expected[i]==='/files/research/subdomain_point_cloud_preview.pdf')expected[i]='/files/research/cylinder_pointcloud_inputs.pdf';
       const cylinderMesh='/files/research/cylinder_quad4_current_mesh.pdf';
@@ -174,7 +175,7 @@ test('display copies exist, materially reduce downloads, and preserve original l
       expected.splice(expected.indexOf(fiberLinks.at(-1))+1,0,fiberPointcloud);
       for(const [name,firstDetail] of [['bracket',bracketLinks[0]],['fiber100',fiberLinks[0]]]){
         const legacy='/files/research/'+name+'_workflow_overview.pdf';
-        const overview='/files/research/'+name+'_workflow_overview'+(name==='fiber100'?'_v2':'')+'.pdf';
+        const overview='/files/research/'+name+'_workflow_overview'+(name==='fiber100'?'_v3':'')+'.pdf';
         for(let i=expected.length-1;i>=0;i--)if(expected[i]===overview||expected[i]===legacy)expected.splice(i,1);
         expected.splice(expected.indexOf(firstDetail),0,overview);
       }
