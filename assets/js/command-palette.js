@@ -169,8 +169,8 @@
         released.add(url);
       }
     });
-    var researchStatement = add("Resources", "Research Statement PDF", data.cv.research_statement_pdf_url,
-      "RS research statement pdf download 研究陈述 科研陈述 下载");
+    var researchStatement = add("Resources", "Research Overview PDF", data.cv.research_statement_pdf_url,
+      "RS research overview research statement pdf download 研究概述 研究陈述 科研陈述 下载");
     if (researchStatement) researchStatement.openInNewTab = true;
     usePdfReader(researchStatement, "rs");
     var personalStatement = add("Resources", "Personal Statement PDF", data.cv.personal_statement_pdf_url,
