@@ -6,6 +6,7 @@ const vm=require('node:vm');
 const root=path.join(__dirname,'..');
 const source=fs.readFileSync(path.join(root,'research-viewer/reader.js'),'utf8')
   .replace(/^import \{(?:collectResearchFiles|createFigureCopyMenu)\} from [^;]+;/gm,'')
+  .replace(/\bimport\.meta\.url/g,JSON.stringify('https://example.com/research-viewer/reader.js?v=build-456'))
   .replace(/\bimport\(/g,'loadModule(');
 const gif='/images/research/first.gif',pdf='/files/research/second.pdf',png='/images/research/third.png';
 function deferred(){let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};}
@@ -58,7 +59,7 @@ function setup({file=gif,documentName='',holdIndex=false,holdPdf=false,holdRende
     createFigureCopyMenu(options){const menu={...options,resets:0,reset(){this.resets++;}};copyMenus.push(menu);return menu;},
     sessionStorage:{getItem(){if(blockedStorage)throw new Error('Storage blocked');return stored;}},
     console:{error(){}},collectResearchFiles:()=>({p:files}),
-    loadModule(url){imports.push(url);if(holdApi&&url.endsWith('/pdf.min.mjs'))return apiGate.promise.then(()=>api);return Promise.resolve(url.includes('/research-files.js')?{collectResearchFiles:()=>({p:files})}:url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
+    loadModule(url){imports.push(url);if(url.startsWith('./figure-copy.js'))return Promise.resolve({createFigureCopyMenu:context.createFigureCopyMenu});if(holdApi&&url.endsWith('/pdf.min.mjs'))return apiGate.promise.then(()=>api);return Promise.resolve(url.includes('/research-files.js')?{collectResearchFiles:()=>({p:files})}:url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
     fetch(url,options){requests.push(url);if(/\.pdf(?:[?#]|$)/i.test(url)){byteRequests.push({url,options});return Promise.resolve({ok:bytesOk,status:bytesOk?200:404,arrayBuffer:()=>holdBytes?bytesGate.promise:Promise.resolve(new Uint8Array([37,80,68,70]).buffer)});}
       return holdIndex?indexGate.promise:Promise.resolve({ok:indexOk,json:async()=>({cv:{html:'fixture'}})});}};
   const ready=vm.runInNewContext('(async()=>{'+source+'})()',context);
@@ -99,7 +100,7 @@ test('CV clicks show the original file without waiting for or requesting the ind
     assert.deepEqual(app.requests,file===pdf?[pdf]:[]);
     assert.equal(app.document.body.dataset.file,file);
     assert.equal(file===pdf?new URL(app.tasks[0].options.docBaseUrl).pathname:app.images[0].src,file);
-    if(file!==pdf)assert.deepEqual(app.imports,[]);
+    if(file!==pdf)assert.deepEqual(app.imports,['./figure-copy.js?v=build-456']);
     app.key('ArrowRight');await flush();
     assert.equal(app.document.body.dataset.file,cachedItems[Math.min(2,cachedItems.findIndex(x=>x.file===file)+1)].file);
   }
@@ -112,6 +113,9 @@ test('copy metadata uses validated original images and resets whenever the figur
   assert.equal(state.ready,true);assert.equal(state.documentMode,false);assert.equal(menu.resets,1);
   app.key('ArrowRight');await flush();assert.equal(menu.resets,2);assert.equal(menu.getState().entry.file,png);
   assert(menu.getState().revision>state.revision);
+  assert.equal(menu.imageContainer,app.nodes['image-container']);assert.equal(state.image,null);
+  app.images.at(-1).onload();assert.equal(menu.getState().image,app.images.at(-1));
+  assert(app.imports.includes('./figure-copy.js?v=build-456'),'Copy module follows the deployed reader version, not a stale navigation URL');
   const document=setup({file:'/files/Yanghao_Chen_CV.pdf',documentName:'cv'});await document.ready;
   assert.equal(document.copyMenus[0].getState().documentMode,true);
 });
@@ -231,7 +235,7 @@ test('image/GIF Ctrl shortcuts zoom the same original image and reset to fit',as
   for(let i=0;i<50;i++)app.key('+',{ctrlKey:true});assert.equal(parseFloat(image.style.width),8000);
   app.key('0',{ctrlKey:true});assert.equal(image.style.width,'');assert.equal(app.nodes['image-container'].classList.contains('enlarged'),false);
   image.onclick();assert.equal(parseFloat(image.style.width),image.naturalWidth);image.onclick();assert.equal(image.style.width,'');
-  assert.equal(image.src,gif);assert.deepEqual(app.requests,[]);assert.deepEqual(app.imports,[]);
+  assert.equal(image.src,gif);assert.deepEqual(app.requests,[]);assert.deepEqual(app.imports,['./figure-copy.js?v=build-456']);
   app.key('ArrowRight');await flush();app.key('ArrowRight');await flush();app.images.at(-1).onload();
   assert.equal(app.images.at(-1).style.width,undefined);assert.equal(app.nodes['image-container'].scrollLeft,0);
 });

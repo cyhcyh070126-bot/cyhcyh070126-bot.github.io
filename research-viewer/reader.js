@@ -1,4 +1,5 @@
-import {createFigureCopyMenu} from './figure-copy.js';
+const copyVersion=new URL(import.meta.url).searchParams.get('v');
+const {createFigureCopyMenu}=await import('./figure-copy.js'+(copyVersion?'?v='+encodeURIComponent(copyVersion):''));
 
 const container = document.getElementById('document-container');
 const imageContainer = document.getElementById('image-container');
@@ -23,8 +24,8 @@ function documentReturnUrl(){
 }
 let pdfApiPromise, pdfWorkerPromise, viewerPromise, viewer, linkService;
 let task=null,pdfFetch=null,revision=0,index=0,items=[];
-const figureCopy=createFigureCopyMenu({container,getState:()=>({
- entry:items[index],revision,pdfDocument:viewer?.pdfDocument,
+const figureCopy=createFigureCopyMenu({container,imageContainer,getState:()=>({
+ entry:items[index],revision,pdfDocument:viewer?.pdfDocument,image:readyImage(),
  ready:document.body.dataset.ready==='true',documentMode:!!documentEntry
 })});
 

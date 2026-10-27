@@ -22,8 +22,8 @@ body:not([data-ready="true"]) #pdf-pages,body:not([data-ready="true"]) #image-co
 #loading[data-state="loading"]::before{content:"";position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-12px;border:2px solid #ffffff40;border-top-color:#fff;border-radius:50%;animation:reader-spin .8s linear infinite}
 #figure-menu{position:fixed;z-index:10;padding:4px;background:#fff;border:1px solid #aaa;border-radius:4px;box-shadow:0 2px 8px #0003}
 #figure-menu[hidden],#figure-copy-status[hidden]{display:none}
-#figure-copy{display:block;padding:8px 18px;border:0;border-radius:2px;background:transparent;color:#222;font:14px Arial,sans-serif;cursor:pointer}
-#figure-copy:hover,#figure-copy:focus-visible{background:#e9eef4;outline:2px solid #35689a;outline-offset:-2px}
+#figure-menu button{display:block;width:100%;text-align:left;padding:8px 18px;border:0;border-radius:2px;background:transparent;color:#222;font:14px Arial,sans-serif;cursor:pointer}
+#figure-menu button:hover,#figure-menu button:focus-visible{background:#e9eef4;outline:2px solid #35689a;outline-offset:-2px}
 #figure-copy-status{position:fixed;z-index:11;right:12px;top:54px;max-width:calc(100vw - 48px);padding:10px 12px;border-radius:4px;background:#fff;color:#222;font-size:14px;box-shadow:0 2px 8px #0003}
 #figure-copy-status a{color:#245c94;text-decoration:underline}
 @keyframes reader-spin{to{transform:rotate(360deg)}}
@@ -32,8 +32,8 @@ body:not([data-ready="true"]) #pdf-pages,body:not([data-ready="true"]) #image-co
 </style></head><body data-ready="false">
 <nav id="reader-toolbar" aria-label="Research navigation"><a id="reader-back" href="/cv/" title="Back to project (Esc)">← Back to project</a></nav>
 <div id="document-container" tabindex="0" aria-label="PDF document"><div class="pdfViewer" id="pdf-pages"></div></div>
-<div id="image-container" hidden></div><div id="loading" role="status" data-state="loading">Loading document…</div>
-<div id="figure-menu" role="menu" aria-label="Figure actions" hidden><button id="figure-copy" type="button" role="menuitem">Copy image</button></div>
+<div id="image-container" tabindex="0" aria-label="Research image" hidden></div><div id="loading" role="status" data-state="loading">Loading document…</div>
+<div id="figure-menu" role="menu" aria-label="Figure actions" hidden><button id="figure-copy" type="button" role="menuitem">Copy image</button><button id="figure-download" type="button" role="menuitem">Save original file</button></div>
 <div id="figure-copy-status" role="status" aria-live="polite" hidden></div>
 <script>
 // Only return through history when this reader was opened in place by the site.
