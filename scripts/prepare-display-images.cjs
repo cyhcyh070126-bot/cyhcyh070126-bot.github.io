@@ -63,7 +63,7 @@ const only = process.argv.find(arg => arg.startsWith('--only='))?.slice(7).split
     {src:'/assets/icons/huggingface.svg'},
     ...gallery.map(src=>({src, ...(variants[src] ? {srcset:variants[src].srcset, sizes:variants[src].sizes} : {})})),
     // Projects previews select a smaller candidate than the same figure in CV.
-    ...['cylinder_workflow_overview_v2.png', 'llm_finetuning_workflow_v2.png'].map(name=>{
+    ...['fiber100_workflow_overview_v3.png', 'llm_finetuning_workflow_v2.png'].map(name=>{
       const src='/images/research/'+name;
       return {src,srcset:variants[src].srcset,sizes:'(max-width: 699px) min(360px, calc(100vw - 48px)), 340px'};
     })

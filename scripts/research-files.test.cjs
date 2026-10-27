@@ -5,7 +5,7 @@ const source=fs.readFileSync(path.join(__dirname,'../assets/js/research-files.js
 function setup({blockedStorage=false,nested=false}={}){
   const files=nested?Array.from({length:13},(_,i)=>'/files/research/figure-'+i+'.pdf'):['/images/research/first.gif','/files/research/second.pdf'];
   const outer={open:false,matches:()=>true},groups=[{open:false,matches:()=>true},{open:false,matches:()=>true},{open:false,matches:()=>true}];
-  const links=files.map((file,i)=>({getAttribute:()=>file,querySelector:()=>({alt:'Original image'}),closest(){
+  const links=files.map((file,i)=>({getAttribute:()=>file,querySelector:()=>({alt:'Original image',currentSrc:'/images/research/thumbnail.webp',getAttribute:name=>name==='src'?file.replace('/files/','/images/').replace(/\.pdf$/,'.png'):null}),closest(){
     if(!nested)return null;
     const group=groups[i<7?0:i<10?1:2];return !group.open?group:!outer.open?outer:null;
   }}));
@@ -30,6 +30,7 @@ test('normal figure clicks reuse the current tab and preserve ordered metadata',
   const [key,context]=app.writes[0];assert.equal(key,'research-reader-context');
   assert.equal(context.project,'project');assert.equal(context.version,'abc');
   assert.deepEqual(context.items.map(x=>x.file),app.files);
+  assert.deepEqual(context.items.map(x=>x.image),app.files.map(file=>file.replace('/files/','/images/').replace(/\.pdf$/,'.png')),'Copy uses each original image, never a responsive thumbnail or the first figure');
   assert(context.items.every(x=>!('link' in x)));
   assert.equal(new URL(app.navigations[0].url).searchParams.get('file'),app.files[0]);
   assert.equal(new URL(app.navigations[0].url).searchParams.get('from'),'cv');

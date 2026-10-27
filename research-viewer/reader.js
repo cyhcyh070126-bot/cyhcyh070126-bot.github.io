@@ -1,3 +1,5 @@
+import {createFigureCopyMenu} from './figure-copy.js';
+
 const container = document.getElementById('document-container');
 const imageContainer = document.getElementById('image-container');
 const message = document.getElementById('loading');
@@ -21,6 +23,10 @@ function documentReturnUrl(){
 }
 let pdfApiPromise, pdfWorkerPromise, viewerPromise, viewer, linkService;
 let task=null,pdfFetch=null,revision=0,index=0,items=[];
+const figureCopy=createFigureCopyMenu({container,getState:()=>({
+ entry:items[index],revision,pdfDocument:viewer?.pdfDocument,
+ ready:document.body.dataset.ready==='true',documentMode:!!documentEntry
+})});
 
 function readyImage(){
  return !imageContainer.hidden&&document.body.dataset.ready==='true'?imageContainer.querySelector('img'):null;
@@ -93,6 +99,7 @@ function loadPdfViewer() {
 async function show(nextIndex) {
  if(nextIndex<0||nextIndex>=items.length)return;
  index=nextIndex;const entry=items[index],generation=++revision;
+ figureCopy.reset();
  document.body.dataset.ready='false';document.body.dataset.file=entry.file;
  document.body.dataset.returnUrl=documentEntry?documentReturnUrl():'/cv/#'+(entry.anchor||params.get('project'));
  const backLink=document.getElementById('reader-back');
@@ -174,6 +181,7 @@ function readContext(){
   if(!Array.isArray(context.items)||!context.items.length||context.items.length>250)return null;
   if(!context.items.every(entry=>entry&&typeof entry.file==='string'&&
     /^\/(files|images)\/research\/[^/?#%\\]+\.(pdf|png|webp|gif|jpe?g|svg)$/i.test(entry.file)&&
+    (entry.image===undefined||(typeof entry.image==='string'&&/^\/images\/research\/[^/?#%\\]+\.(png|webp|gif|jpe?g|svg)$/i.test(entry.image)))&&
     typeof entry.title==='string'&&typeof entry.anchor==='string'&&/^[\w-]+$/.test(entry.anchor)))return null;
   if(!context.items.some(entry=>entry.file===params.get('file')))return null;
   return context.items;

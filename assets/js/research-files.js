@@ -13,7 +13,7 @@ export function collectResearchFiles(root) {
     if (!project || !link || !image) return;
     const file = link.getAttribute('href');
     if (!/^\/(files|images)\/research\/[^?#]+\.(pdf|png|webp|gif|jpe?g|svg)$/i.test(file)) return;
-    groups[project].push({file, title:node.querySelector('strong')?.textContent || image.alt,
+    groups[project].push({file, image:image.getAttribute('src'), title:node.querySelector('strong')?.textContent || image.alt,
       anchor:node.id || project, link});
   });
   return groups;
@@ -55,7 +55,7 @@ if (Object.keys(groups).length) {
     // Reuse this tab's ordered metadata; no image/PDF bytes are duplicated.
     try {
       sessionStorage.setItem('research-reader-context', JSON.stringify({project:entry.project,
-        version:version || '', items:groups[entry.project].map(({file,title,anchor}) => ({file,title,anchor})),
+        version:version || '', items:groups[entry.project].map(({file,image,title,anchor}) => ({file,image,title,anchor})),
         returnPosition:{url:location.href,x:window.scrollX || 0,y:window.scrollY || 0}}));
     } catch (_) {} // Storage restrictions must never block the original link.
     // Avoid the host browser's new-tab start screen on ordinary figure clicks.

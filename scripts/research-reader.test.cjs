@@ -5,13 +5,13 @@ const path=require('node:path');
 const vm=require('node:vm');
 const root=path.join(__dirname,'..');
 const source=fs.readFileSync(path.join(root,'research-viewer/reader.js'),'utf8')
-  .replace(/^import \{collectResearchFiles\} from [^;]+;/,'')
+  .replace(/^import \{(?:collectResearchFiles|createFigureCopyMenu)\} from [^;]+;/gm,'')
   .replace(/\bimport\(/g,'loadModule(');
 const gif='/images/research/first.gif',pdf='/files/research/second.pdf',png='/images/research/third.png';
 function deferred(){let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};}
 const flush=()=>new Promise(r=>setImmediate(r));
 function setup({file=gif,documentName='',holdIndex=false,holdPdf=false,holdRender=false,holdApi=false,holdBytes=false,holdWorker=false,failWorkers=0,bytesOk=true,indexOk=true,stored=null,blockedStorage=false}={}){
-  const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[],workers=[];
+  const imports=[],styles=[],images=[],tasks=[],viewers=[],events={},downloads=[],workers=[],copyMenus=[];
   const indexGate=deferred(),pdfGate=deferred(),apiGate=deferred(),bytesGate=deferred(),workerGate=deferred(),byteRequests=[];
   function element(){const classes=new Set();return {hidden:false,children:[],textContent:'',events:{},eventOptions:{},dataset:{},clientWidth:800,clientHeight:600,scrollLeft:0,scrollTop:0,
     classList:{remove:s=>classes.delete(s),add:s=>classes.add(s),contains:s=>classes.has(s)},
@@ -55,6 +55,7 @@ function setup({file=gif,documentName='',holdIndex=false,holdPdf=false,holdRende
       return {width,height,left:Math.max(0,(c.clientWidth-width)/2)-c.scrollLeft,top:44+Math.max(0,(c.clientHeight-height)/2)-c.scrollTop};}
   }
   const context={URL,URLSearchParams,Promise,AbortController,Uint8Array,Image:MockImage,document,window,location,history,
+    createFigureCopyMenu(options){const menu={...options,resets:0,reset(){this.resets++;}};copyMenus.push(menu);return menu;},
     sessionStorage:{getItem(){if(blockedStorage)throw new Error('Storage blocked');return stored;}},
     console:{error(){}},collectResearchFiles:()=>({p:files}),
     loadModule(url){imports.push(url);if(holdApi&&url.endsWith('/pdf.min.mjs'))return apiGate.promise.then(()=>api);return Promise.resolve(url.includes('/research-files.js')?{collectResearchFiles:()=>({p:files})}:url.endsWith('/pdf.min.mjs')?api:{EventBus,PDFViewer,PDFLinkService});},
@@ -62,7 +63,7 @@ function setup({file=gif,documentName='',holdIndex=false,holdPdf=false,holdRende
       return holdIndex?indexGate.promise:Promise.resolve({ok:indexOk,json:async()=>({cv:{html:'fixture'}})});}};
   const ready=vm.runInNewContext('(async()=>{'+source+'})()',context);
   const key=(key,extra={})=>{const event={key,ctrlKey:false,metaKey:false,altKey:false,shiftKey:false,preventDefault(){this.prevented=true;},...extra};events.keydown(event);return event;};
-  return {ready,imports,styles,images,tasks,viewers,events,nodes,document,requests,key,indexGate,pdfGate,apiGate,bytesGate,workerGate,byteRequests,downloads,workers};
+  return {ready,imports,styles,images,tasks,viewers,events,nodes,document,requests,key,indexGate,pdfGate,apiGate,bytesGate,workerGate,byteRequests,downloads,workers,copyMenus};
 }
 
 test('opening an original GIF/image does not request PDF scripts or styles',async()=>{
@@ -103,12 +104,24 @@ test('CV clicks show the original file without waiting for or requesting the ind
     assert.equal(app.document.body.dataset.file,cachedItems[Math.min(2,cachedItems.findIndex(x=>x.file===file)+1)].file);
   }
 });
+test('copy metadata uses validated original images and resets whenever the figure changes',async()=>{
+  const items=cachedItems.map(entry=>({...entry,image:entry.file===pdf?'/images/research/second.png':entry.file}));
+  const app=setup({file:pdf,stored:storedContext({items})});await app.ready;
+  const menu=app.copyMenus[0],state=menu.getState();
+  assert.equal(state.entry.image,'/images/research/second.png');assert.equal(state.pdfDocument,app.viewers[0].pdfDocument);
+  assert.equal(state.ready,true);assert.equal(state.documentMode,false);assert.equal(menu.resets,1);
+  app.key('ArrowRight');await flush();assert.equal(menu.resets,2);assert.equal(menu.getState().entry.file,png);
+  assert(menu.getState().revision>state.revision);
+  const document=setup({file:'/files/Yanghao_Chen_CV.pdf',documentName:'cv'});await document.ready;
+  assert.equal(document.copyMenus[0].getState().documentMode,true);
+});
 test('direct links and stale, blocked or invalid context safely use the normal index',async()=>{
   for(const settings of [
     {},{blockedStorage:true},{stored:'not json'},{stored:'null'},
     {stored:storedContext({project:'elsewhere'})},{stored:storedContext({version:'old'})},
     {stored:storedContext({items:[]})},{stored:storedContext({items:[cachedItems[1]]})},
     ...['https://example.org/file.gif','//example.org/file.gif','/private/file.gif','/images/research/%2e%2e%2fsecret.gif'].map(file=>({stored:storedContext({items:[cachedItems[0],{...cachedItems[1],file}]})})),
+    ...['https://example.org/image.png','//example.org/image.png','/private/image.png','/images/research/%2e%2e%2fimage.png','/files/research/second.pdf'].map(image=>({stored:storedContext({items:[cachedItems[0],{...cachedItems[1],image}]})})),
     {stored:storedContext({items:[{...cachedItems[0],anchor:'bad#anchor'}]})}
   ]){
     const app=setup(settings);await app.ready;
