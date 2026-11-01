@@ -174,7 +174,7 @@ test('phone, landscape and desktop resizing keep particles bounded with one loop
   }
 });
 
-test('reduced motion starts static, drawing frequency and pixel ratio are bounded', () => {
+test('reduced motion starts static and drawing follows refresh callbacks with bounded pixel ratio', () => {
   const app = setup(true);
   app.visible(true);
   assert.equal(app.callbacks.size, 0);
@@ -187,11 +187,24 @@ test('reduced motion starts static, drawing frequency and pixel ratio are bounde
   app.frame(100);
   const count = app.draws();
   app.frame(116);
-  assert.equal(app.draws(), count);
-  app.frame(140);
   assert.equal(app.draws(), count + 1);
+  app.frame(140);
+  assert.equal(app.draws(), count + 2);
   app.events.pagehide();
   assert.equal(app.callbacks.size, 0);
+});
+
+test('60, 120 and 144 Hz displays receive a drawing on every refresh without extra loops', () => {
+  for (const rate of [60, 120, 144]) {
+    const app = setup();
+    app.visible(true);
+    const before = app.draws();
+    for (let i = 0; i < rate; i++) {
+      app.frame(100 + i * 1000 / rate);
+      assert.equal(app.callbacks.size, 1);
+    }
+    assert.equal(app.draws() - before, rate);
+  }
 });
 
 function pointNearCenter(app) {

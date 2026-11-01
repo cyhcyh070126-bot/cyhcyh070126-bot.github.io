@@ -184,8 +184,8 @@
   }
   function tick(time) {
     frame = requestAnimationFrame(tick);
-    // Cap drawing at 30 fps; do no layout reads inside the animation loop.
-    if (time - previous < 1000 / 30) return;
+    // Follow the display refresh rate; elapsed time keeps particle speed consistent.
+    // Do no layout reads inside the animation loop.
     paint(previous ? Math.min((time - previous) / 1000, 0.1) : 0);
     previous = time;
   }
