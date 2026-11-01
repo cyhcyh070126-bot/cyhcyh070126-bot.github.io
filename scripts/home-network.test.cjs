@@ -45,6 +45,7 @@ function setup(reduce = false, random = Math.random) {
     draws: () => draws,
     positions: () => positions.map(p => [...p]),
     radii: () => [...radii],
+    segments: () => segments.map(([a, b]) => [[...a], [...b]]),
     topology: () => {
       const key = p => p.join(',');
       const neighbors = new Map(positions.map(p => [key(p), []]));
@@ -191,4 +192,74 @@ test('reduced motion starts static, drawing frequency and pixel ratio are bounde
   assert.equal(app.draws(), count + 1);
   app.events.pagehide();
   assert.equal(app.callbacks.size, 0);
+});
+
+function pointNearCenter(app) {
+  return app.positions().reduce((a, b) => Math.hypot(a[0] - 640, a[1] - 328) < Math.hypot(b[0] - 640, b[1] - 328) ? a : b);
+}
+
+function linksTo(app, [x, y]) {
+  return app.segments().filter(([, end]) => end[0] === x && end[1] === y);
+}
+
+test('mouse links follow the current cursor below the masthead with one animation loop', () => {
+  const app = setup();
+  app.visible(true);
+  const first = pointNearCenter(app).map(n => n + 10);
+  app.events.pointermove({ pointerType: 'mouse', clientX: first[0], clientY: first[1] + 64 });
+  app.frame(40);
+  assert.ok(linksTo(app, first).length > 0);
+  assert.ok(linksTo(app, first).length <= 6);
+  const second = [first[0] + 45, first[1] + 25];
+  app.events.pointermove({ pointerType: 'mouse', clientX: second[0], clientY: second[1] + 64 });
+  app.frame(80);
+  assert.ok(linksTo(app, second).length > 0);
+  assert.equal(linksTo(app, first).length, 0);
+  assert.equal(app.callbacks.size, 1);
+  app.events.pointermove({ pointerType: 'mouse', clientX: second[0], clientY: 30 });
+  app.frame(120);
+  assert.equal(linksTo(app, second).length, 0);
+});
+
+test('cursor links clear on exit, blur, cancellation, resize, hidden tabs and reduced motion', () => {
+  for (const clear of [
+    app => app.events.pointerout({ relatedTarget: null }),
+    app => app.events.blur(),
+    app => app.events.pointercancel(),
+    app => app.events.resize(),
+    app => { app.document.hidden = true; app.events.visibilitychange(); },
+    app => { app.media.matches = true; app.events.motion(); },
+    app => app.events.pagehide()
+  ]) {
+    const app = setup();
+    app.visible(true);
+    const target = pointNearCenter(app).map(n => n + 10);
+    app.events.pointermove({ pointerType: 'mouse', clientX: target[0], clientY: target[1] + 64 });
+    app.frame(40);
+    assert.ok(linksTo(app, target).length > 0);
+    app.events.pointerout({ relatedTarget: {} });
+    app.frame(80);
+    assert.ok(linksTo(app, target).length > 0, 'Crossing page elements must keep the mouse connections');
+    clear(app);
+    assert.equal(linksTo(app, target).length, 0);
+    if (app.callbacks.size) assert.equal(app.callbacks.size, 1);
+    app.events.pageshow();
+    if (app.callbacks.size) app.frame(120);
+    assert.equal(linksTo(app, target).length, 0, 'Returning to a page must not restore a stale cursor');
+  }
+});
+
+test('touch and pen input do not create or retain mouse connections', () => {
+  const app = setup();
+  app.visible(true);
+  const target = pointNearCenter(app).map(n => n + 10);
+  let time = 0;
+  for (const pointerType of ['touch', 'pen']) {
+    app.events.pointermove({ pointerType: 'mouse', clientX: target[0], clientY: target[1] + 64 });
+    app.frame(time += 40);
+    assert.ok(linksTo(app, target).length > 0);
+    app.events.pointermove({ pointerType, clientX: target[0], clientY: target[1] + 64 });
+    app.frame(time += 40);
+    assert.equal(linksTo(app, target).length, 0);
+  }
 });

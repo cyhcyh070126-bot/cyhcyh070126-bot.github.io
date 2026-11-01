@@ -1,4 +1,4 @@
-/* A quiet, site-wide background. No pointer handlers or third-party dependencies. */
+/* A quiet, site-wide background with nearby mouse connections. No dependencies. */
 (() => {
   const canvas = document.querySelector('.home-network');
   const masthead = document.querySelector('.masthead');
@@ -13,8 +13,10 @@
   let previous = 0;
   let width = 0;
   let height = 0;
+  let canvasTop = 0;
   let elapsed = 0;
   let points = [];
+  const pointer = { x: 0, y: 0, active: false };
   // No fixed seed or repeating choreography: every load is a fresh arrangement.
   const random = Math.random;
   const cameraPhase = random() * Math.PI * 2;
@@ -157,6 +159,21 @@
       context.lineTo(points[j].px, points[j].py);
       context.stroke();
     }
+    if (pointer.active) {
+      const nearby = points.map(point => ({ point, distance: Math.hypot(point.px - pointer.x, point.py - pointer.y) }))
+        .filter(({ distance }) => distance < reach)
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 6);
+      for (const { point, distance } of nearby) {
+        const proximity = 1 - distance / reach;
+        context.lineWidth = 0.8 + point.depth * 0.4;
+        context.strokeStyle = `rgba(215, 184, 108, ${(0.36 + point.depth * 0.14) * proximity * intensity})`;
+        context.beginPath();
+        context.moveTo(point.px, point.py);
+        context.lineTo(pointer.x, pointer.y);
+        context.stroke();
+      }
+    }
     for (const point of points) {
       const distantLift = 0.02 * (1 - point.depth);
       context.fillStyle = `rgba(220, 193, 127, ${(0.14 + point.depth * 0.14 + distantLift) * intensity})`;
@@ -176,12 +193,29 @@
     cancelAnimationFrame(frame);
     frame = 0;
     previous = 0;
+    if (paused || !visible || document.hidden) clearPointer();
     if (!paused && visible && !document.hidden) frame = requestAnimationFrame(tick);
+  }
+  function clearPointer() {
+    if (!pointer.active) return;
+    pointer.active = false;
+    paint();
+  }
+  function trackPointer(event) {
+    if (paused || !visible || document.hidden || event.pointerType !== 'mouse') {
+      clearPointer();
+      return;
+    }
+    pointer.x = event.clientX;
+    pointer.y = event.clientY - canvasTop;
+    pointer.active = pointer.x >= 0 && pointer.x <= width && pointer.y >= 0 && pointer.y <= height;
   }
   function resize() {
     // One viewport-sized canvas follows the whole page without allocating
     // a canvas as tall as the document. The fixed masthead remains clear.
     const top = masthead.getBoundingClientRect().height;
+    canvasTop = top;
+    clearPointer();
     const nextWidth = document.documentElement.clientWidth;
     const nextHeight = Math.max(0, Math.round(window.innerHeight - top));
     canvas.style.top = `${top}px`;
@@ -206,6 +240,11 @@
   reducedMotion.addEventListener('change', () => { paused = reducedMotion.matches; sync(); });
   document.addEventListener('visibilitychange', sync);
   window.addEventListener('resize', resize, { passive: true });
+  // Listen on the window: the decorative canvas must never intercept links or images.
+  window.addEventListener('pointermove', trackPointer, { passive: true });
+  window.addEventListener('pointerout', event => { if (!event.relatedTarget) clearPointer(); }, { passive: true });
+  window.addEventListener('pointercancel', clearPointer, { passive: true });
+  window.addEventListener('blur', clearPointer);
   window.addEventListener('pagehide', () => { visible = false; sync(); });
   window.addEventListener('pageshow', () => {
     const rect = canvas.getBoundingClientRect();
