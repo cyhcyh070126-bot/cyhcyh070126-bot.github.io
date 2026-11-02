@@ -37,10 +37,10 @@
   preview_alt: Standard PINN prediction compared with the analytical Burgers shock solution.
   preview_caption: Standard PINN prediction
   description: >-
-    Trains PINNs in PyTorch to predict shock propagation in the one-dimensional
-    Burgers equation, using PDE-residual, initial-condition, and boundary-condition
-    losses. Compares standard and constant-artificial-viscosity PINNs against
-    the analytical inviscid solution to assess the predicted shock profiles.
+    Trains PINNs in PyTorch for the one-dimensional Burgers shock problem using
+    PDE-residual, initial-condition, and boundary-condition losses. Compares models
+    with and without a fixed artificial-viscosity coefficient against the analytical
+    inviscid solution.
   research_url: /cv/#burgers-pinn
   repository: https://github.com/cyhcyh070126-bot/burgers-pinn#readme
 
