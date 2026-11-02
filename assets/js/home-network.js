@@ -5,6 +5,7 @@
   if (!canvas || !masthead) return;
   const context = canvas.getContext('2d');
   if (!context) return;
+  const formulas = window.createHomeFormulas?.({ context, repaint: () => paint() });
   const host = canvas.parentElement;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let paused = reducedMotion.matches;
@@ -181,6 +182,8 @@
       context.arc(point.px, point.py, 0.9 + point.depth * 1.1, 0, Math.PI * 2);
       context.fill();
     }
+    formulas?.draw(seconds, lightTheme, paused, points, pointer,
+      { cy, sy, cp, sp, depthRange, focalLength, elapsed });
   }
   function tick(time) {
     frame = requestAnimationFrame(tick);
@@ -235,6 +238,7 @@
     canvas.style.height = `${height}px`;
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     populate();
+    formulas?.resize(width, height, canvasTop);
     paint();
   }
   reducedMotion.addEventListener('change', () => { paused = reducedMotion.matches; sync(); });

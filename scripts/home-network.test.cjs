@@ -4,7 +4,7 @@ const { readFileSync } = require('node:fs');
 const { join } = require('node:path');
 const { runInNewContext } = require('node:vm');
 
-function setup(reduce = false, random = Math.random) {
+function setup(reduce = false, random = Math.random, withFormulas = false) {
   const events = {};
   const callbacks = new Map();
   let id = 0;
@@ -15,6 +15,7 @@ function setup(reduce = false, random = Math.random) {
   let radii = [];
   let start;
   const drawing = {
+    measureText: text => ({ width: text.length * 7, actualBoundingBoxAscent: 12, actualBoundingBoxDescent: 3 }),
     clearRect: () => { draws++; segments = []; positions = []; radii = []; },
     moveTo: (x, y) => { start = [x, y]; },
     lineTo: (x, y) => segments.push([start, [x, y]]),
@@ -26,20 +27,27 @@ function setup(reduce = false, random = Math.random) {
   const media = { matches: reduce, addEventListener: (_, cb) => events.motion = cb };
   const document = {
     hidden: false,
+    body: {},
     documentElement: { clientWidth: 1280 },
+    querySelectorAll: () => [],
     querySelector: selector => selector === '.home-network' ? canvas : selector === '.masthead' ? { getBoundingClientRect: () => ({ height: 64 }) } : null,
     addEventListener: (name, cb) => events[name] = cb
   };
-  const window = { matchMedia: () => media, devicePixelRatio: 3, innerHeight: 720, scrollY: 0, addEventListener: (name, cb) => events[name] = cb };
-  runInNewContext(readFileSync(join(__dirname, '../assets/js/home-network.js'), 'utf8'), {
+  const window = { crypto: { getRandomValues: seed => { seed[0] = 42; } },
+    matchMedia: () => media, devicePixelRatio: 3, innerHeight: 720, scrollY: 0, addEventListener: (name, cb) => events[name] = cb };
+  const runtime = {
     Math: Object.assign(Object.create(Math), { random }),
     document,
     window,
     ResizeObserver: class { observe() {} },
+    MutationObserver: class { observe() {} },
     IntersectionObserver: class { constructor(cb) { intersect = cb; } observe() {} },
     requestAnimationFrame: cb => { callbacks.set(++id, cb); return id; },
     cancelAnimationFrame: n => callbacks.delete(n)
-  });
+  };
+  const source = (withFormulas ? readFileSync(join(__dirname, '../assets/js/home-formulas.js'), 'utf8') + '\n' : '') +
+    readFileSync(join(__dirname, '../assets/js/home-network.js'), 'utf8');
+  runInNewContext(source, runtime);
   return { events, canvas, document, window, media, callbacks,
     visible: value => intersect([{ isIntersecting: value }]),
     draws: () => draws,
@@ -74,6 +82,20 @@ function setup(reduce = false, random = Math.random) {
     frame: time => { const [key, cb] = callbacks.entries().next().value; callbacks.delete(key); cb(time); }
   };
 }
+
+test('adding notation preserves the exact particle trajectories, sizes and existing edges', () => {
+  const seeded = () => { let s = 123; return () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; }; };
+  const plain = setup(false, seeded()), decorated = setup(false, seeded(), true);
+  plain.visible(true); decorated.visible(true);
+  for (let i = 0; i < 360; i++) {
+    plain.frame(100 + i * 1000 / 120); decorated.frame(100 + i * 1000 / 120);
+    assert.deepEqual(decorated.positions(), plain.positions());
+    assert.deepEqual(decorated.radii(), plain.radii());
+    const positions = new Set(plain.positions().map(p => p.join(',')));
+    const originalEdges = decorated.segments().filter(([a, b]) => positions.has(a.join(',')) && positions.has(b.join(',')));
+    assert.deepEqual(originalEdges, plain.segments());
+  }
+});
 
 test('background stops offscreen, in hidden tabs and for reduced motion', () => {
   const app = setup();
@@ -212,7 +234,7 @@ function pointNearCenter(app) {
 }
 
 function linksTo(app, [x, y]) {
-  return app.segments().filter(([, end]) => end[0] === x && end[1] === y);
+  return app.segments().filter(([, end]) => Math.abs(end[0] - x) < 1e-9 && Math.abs(end[1] - y) < 1e-9);
 }
 
 test('mouse links follow the current cursor below the masthead with one animation loop', () => {
