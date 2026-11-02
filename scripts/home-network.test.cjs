@@ -276,3 +276,100 @@ test('touch and pen input do not create or retain mouse connections', () => {
     assert.equal(linksTo(app, target).length, 0);
   }
 });
+
+function seededRandom() {
+  let value = 12345;
+  return () => { value = (Math.imul(value, 1664525) + 1013904223) >>> 0; return value / 4294967296; };
+}
+
+function clickNearPoint(app) {
+  const chosen = pointNearCenter(app);
+  return { pointIndex: app.positions().findIndex(p => p[0] === chosen[0] && p[1] === chosen[1]),
+    event: { pointerType: 'mouse', button: 0, clientX: chosen[0] - 30, clientY: chosen[1] + 64 } };
+}
+
+test('particle count uses the requested 36–80 range without changing dot radii', () => {
+  const app = setup(true, seededRandom());
+  for (const [width, height, expected] of [[390, 700, 36], [1920, 1000, 80]]) {
+    app.document.documentElement.clientWidth = width;
+    app.window.innerHeight = height + 64;
+    app.events.resize();
+    assert.equal(app.positions().length, expected);
+    assert(app.radii().every(r => r >= 0.9 && r <= 2));
+  }
+});
+
+test('primary mouse click pushes nearby points outward without teleporting, resizing or starting another loop', () => {
+  const baseline = setup(false, seededRandom()), burst = setup(false, seededRandom());
+  baseline.visible(true); burst.visible(true);
+  baseline.frame(100); burst.frame(100);
+  const before = burst.positions(), { pointIndex, event } = clickNearPoint(burst);
+  baseline.frame(200);
+  const dx = baseline.positions()[pointIndex][0] - before[pointIndex][0];
+  const dy = baseline.positions()[pointIndex][1] - before[pointIndex][1];
+  const length = Math.hypot(dx, dy);
+  event.clientX = before[pointIndex][0] + 30 * dx / length;
+  event.clientY = before[pointIndex][1] + 64 + 30 * dy / length;
+  burst.events.click(event);
+  assert.deepEqual(burst.positions(), before, 'An impulse must not teleport positions in the input handler');
+  assert.equal(burst.callbacks.size, 1);
+  burst.frame(200);
+  const shift = burst.positions()[pointIndex].map((n, i) => n - baseline.positions()[pointIndex][i]);
+  assert((-shift[0] * dx - shift[1] * dy) / length > 4, 'Clicking ahead of a moving point should visibly turn it outward');
+  assert.equal(burst.positions().length, baseline.positions().length);
+  const far = before.findIndex(p => Math.hypot(p[0] - event.clientX, p[1] + 64 - event.clientY) > 240);
+  assert.deepEqual(burst.positions()[far], baseline.positions()[far], 'Distant points should be unaffected by the initial impulse');
+});
+
+test('rapid repeated clicks remain bounded and near-edge points rebound inside the canvas', () => {
+  const baseline = setup(false, seededRandom()), burst = setup(false, seededRandom());
+  baseline.visible(true); burst.visible(true); baseline.frame(100); burst.frame(100);
+  const { event } = clickNearPoint(burst);
+  for (let i = 0; i < 100; i++) burst.events.click(event);
+  baseline.frame(200); burst.frame(200);
+  const maxExtra = Math.max(...burst.positions().map((p, i) => Math.hypot(p[0] - baseline.positions()[i][0], p[1] - baseline.positions()[i][1])));
+  assert(maxExtra < 35, `Repeated impulses must be capped (${maxExtra})`);
+  for (let i = 0; i < 240; i++) {
+    if (i % 20 === 0) burst.events.click({ ...event, clientX: 10, clientY: 74 });
+    burst.frame(220 + i * 1000 / 120);
+    assert(burst.positions().every(([x, y]) => Number.isFinite(x) && Number.isFinite(y) && x >= 4 && x <= 1276 && y >= 4 && y <= 652));
+    assert.equal(burst.callbacks.size, 1);
+  }
+});
+
+test('interactive controls, prevented/right clicks, touch, pen and positions outside the canvas do not create a burst', () => {
+  for (const change of [
+    { target: { closest: () => ({}) } }, { button: 2 }, { pointerType: 'touch' },
+    { pointerType: 'pen' }, { sourceCapabilities: { firesTouchEvents: true } },
+    { defaultPrevented: true }, { clientY: 30 }, { clientX: 2000 }
+  ]) {
+    const baseline = setup(false, seededRandom()), other = setup(false, seededRandom());
+    baseline.visible(true); other.visible(true); baseline.frame(100); other.frame(100);
+    other.events.click({ ...clickNearPoint(other).event, ...change });
+    baseline.frame(200); other.frame(200);
+    assert.deepEqual(other.positions(), baseline.positions());
+  }
+});
+
+test('clicks remain disabled offscreen, in hidden tabs and during reduced motion', () => {
+  for (const stop of [app => { app.document.hidden = true; app.events.visibilitychange(); },
+    app => { app.media.matches = true; app.events.motion(); }, app => app.visible(false)]) {
+    const a = setup(false, seededRandom()), b = setup(false, seededRandom());
+    a.visible(true); b.visible(true); a.frame(100); b.frame(100);
+    stop(a); stop(b);
+    a.events.click(clickNearPoint(a).event);
+    assert.equal(a.callbacks.size, 0);
+    for (const app of [a, b]) { app.document.hidden = false; app.media.matches = false; app.events.motion(); app.visible(true); app.frame(200); app.frame(220); }
+    assert.deepEqual(a.positions(), b.positions(), 'Returning must not replay an ignored click');
+  }
+});
+
+test('clicking exactly on a point avoids division by zero', () => {
+  const baseline = setup(false, seededRandom()), other = setup(false, seededRandom());
+  baseline.visible(true); other.visible(true); baseline.frame(100); other.frame(100);
+  const index = clickNearPoint(other).pointIndex, [x, y] = other.positions()[index];
+  other.events.click({ pointerType: 'mouse', button: 0, clientX: x, clientY: y + 64 });
+  baseline.frame(200); other.frame(200);
+  assert.deepEqual(other.positions()[index], baseline.positions()[index]);
+  assert(other.positions().every(p => p.every(Number.isFinite)));
+});

@@ -24,7 +24,7 @@
   const cameraPhase = random() * Math.PI * 2;
   const edges = new Set();
   function populate() {
-    const count = Math.min(76, Math.max(33, Math.round(width * height / 19000)));
+    const count = Math.min(80, Math.max(36, Math.round(width * height / 19000)));
     // Retain existing particles on resize (including mobile browser chrome).
     // Only add or remove the number needed for the new visible area.
     points.length = Math.min(points.length, count);
@@ -212,6 +212,25 @@
     pointer.y = event.clientY - canvasTop;
     pointer.active = pointer.x >= 0 && pointer.x <= width && pointer.y >= 0 && pointer.y <= height;
   }
+  function repelFromClick(event) {
+    if (paused || !visible || document.hidden || event.button !== 0 || event.defaultPrevented ||
+      (event.pointerType && event.pointerType !== 'mouse') || event.sourceCapabilities?.firesTouchEvents) return;
+    // Leave links, images, controls and text editing to their existing handlers.
+    if (event.target?.closest?.('a, img, picture, button, input, textarea, select, summary, [role="button"], [contenteditable="true"]')) return;
+    const x = event.clientX, y = event.clientY - canvasTop;
+    if (x < 0 || x > width || y < 0 || y > height) return;
+    const radius = 170;
+    for (const point of points) {
+      const dx = point.px - x, dy = point.py - y;
+      const distance = Math.hypot(dx, dy);
+      if (distance >= radius || distance <= 0.001) continue;
+      // Reference radial impulse: 3 px/frame at 60 Hz becomes 180 px/s.
+      // The existing speed limit and cruising blend handle the return to normal.
+      const strength = 180 * (1 - distance / radius);
+      point.vx += dx / distance * strength;
+      point.vy += dy / distance * strength;
+    }
+  }
   function resize() {
     // One viewport-sized canvas follows the whole page without allocating
     // a canvas as tall as the document. The fixed masthead remains clear.
@@ -244,6 +263,7 @@
   window.addEventListener('resize', resize, { passive: true });
   // Listen on the window: the decorative canvas must never intercept links or images.
   window.addEventListener('pointermove', trackPointer, { passive: true });
+  window.addEventListener('click', repelFromClick, { passive: true });
   window.addEventListener('pointerout', event => { if (!event.relatedTarget) clearPointer(); }, { passive: true });
   window.addEventListener('pointercancel', clearPointer, { passive: true });
   window.addEventListener('blur', clearPointer);
