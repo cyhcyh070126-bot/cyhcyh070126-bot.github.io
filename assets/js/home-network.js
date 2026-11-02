@@ -5,7 +5,6 @@
   if (!canvas || !masthead) return;
   const context = canvas.getContext('2d');
   if (!context) return;
-  const formulas = window.createHomeFormulas?.({ context, repaint: () => paint() });
   const host = canvas.parentElement;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let paused = reducedMotion.matches;
@@ -20,7 +19,7 @@
   const pointer = { x: 0, y: 0, active: false };
   // No fixed seed or repeating choreography: every load is a fresh arrangement.
   const random = Math.random;
-  // A modest, user-requested lift; camera and turning cadence stay unchanged.
+  // Retain the current particle speed independently of removed notation.
   const motionScale = 1.2;
   const cameraPhase = random() * Math.PI * 2;
   const edges = new Set();
@@ -184,8 +183,6 @@
       context.arc(point.px, point.py, 0.9 + point.depth * 1.1, 0, Math.PI * 2);
       context.fill();
     }
-    formulas?.draw(seconds, lightTheme, paused, points, pointer,
-      { cy, sy, cp, sp, depthRange, focalLength, elapsed });
   }
   function tick(time) {
     frame = requestAnimationFrame(tick);
@@ -240,7 +237,6 @@
     canvas.style.height = `${height}px`;
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     populate();
-    formulas?.resize(width, height, canvasTop);
     paint();
   }
   reducedMotion.addEventListener('change', () => { paused = reducedMotion.matches; sync(); });
