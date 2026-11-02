@@ -16,6 +16,7 @@
   let canvasTop = 0;
   let elapsed = 0;
   let points = [];
+  const ripples = [];
   const pointer = { x: 0, y: 0, active: false };
   // No fixed seed or repeating choreography: every load is a fresh arrangement.
   const random = Math.random;
@@ -183,6 +184,19 @@
       context.arc(point.px, point.py, 0.9 + point.depth * 1.1, 0, Math.PI * 2);
       context.fill();
     }
+    // Reference expanding ring: radius 130, width 1.5, fading from alpha 0.5.
+    // 0.045 per 60 Hz frame becomes 2.7 per second; rAF stays uncapped.
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      const ripple = ripples[i];
+      ripple.progress += seconds * 2.7;
+      if (ripple.progress >= 1) { ripples.splice(i, 1); continue; }
+      if (ripple.progress <= 0) continue;
+      context.lineWidth = 1.5;
+      context.strokeStyle = `rgba(215, 184, 108, ${0.5 * (1 - ripple.progress)})`;
+      context.beginPath();
+      context.arc(ripple.x, ripple.y, 130 * ripple.progress, 0, Math.PI * 2);
+      context.stroke();
+    }
   }
   function tick(time) {
     frame = requestAnimationFrame(tick);
@@ -195,13 +209,19 @@
     cancelAnimationFrame(frame);
     frame = 0;
     previous = 0;
-    if (paused || !visible || document.hidden) clearPointer();
+    if (paused || !visible || document.hidden) clearInteraction();
     if (!paused && visible && !document.hidden) frame = requestAnimationFrame(tick);
   }
   function clearPointer() {
     if (!pointer.active) return;
     pointer.active = false;
     paint();
+  }
+  function clearInteraction() {
+    const redraw = pointer.active || ripples.length > 0;
+    pointer.active = false;
+    ripples.length = 0;
+    if (redraw) paint();
   }
   function trackPointer(event) {
     if (paused || !visible || document.hidden || event.pointerType !== 'mouse') {
@@ -219,6 +239,7 @@
     if (event.target?.closest?.('a, img, picture, button, input, textarea, select, summary, [role="button"], [contenteditable="true"]')) return;
     const x = event.clientX, y = event.clientY - canvasTop;
     if (x < 0 || x > width || y < 0 || y > height) return;
+    ripples.push({ x, y, progress: 0 });
     const radius = 170;
     for (const point of points) {
       const dx = point.px - x, dy = point.py - y;
@@ -236,7 +257,7 @@
     // a canvas as tall as the document. The fixed masthead remains clear.
     const top = masthead.getBoundingClientRect().height;
     canvasTop = top;
-    clearPointer();
+    clearInteraction();
     const nextWidth = document.documentElement.clientWidth;
     const nextHeight = Math.max(0, Math.round(window.innerHeight - top));
     canvas.style.top = `${top}px`;

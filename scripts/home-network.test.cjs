@@ -13,14 +13,19 @@ function setup(reduce = false, random = Math.random) {
   let segments = [];
   let positions = [];
   let radii = [];
+  let rings = [];
+  let pendingArc;
   let start;
   const drawing = {
-    clearRect: () => { draws++; segments = []; positions = []; radii = []; },
+    clearRect: () => { draws++; segments = []; positions = []; radii = []; rings = []; pendingArc = null; },
+    beginPath: () => { pendingArc = null; },
     moveTo: (x, y) => { start = [x, y]; },
     lineTo: (x, y) => segments.push([start, [x, y]]),
-    arc: (x, y, radius) => { positions.push([x, y]); radii.push(radius); }
+    arc: (x, y, radius) => { pendingArc = { x, y, radius }; },
+    fill: () => { if (pendingArc) { positions.push([pendingArc.x, pendingArc.y]); radii.push(pendingArc.radius); pendingArc = null; } },
+    stroke: () => { if (pendingArc) { rings.push({ ...pendingArc, style: context.strokeStyle, lineWidth: context.lineWidth }); pendingArc = null; } }
   };
-  const context = new Proxy({}, { get: (_, name) => drawing[name] || (() => {}) });
+  const context = new Proxy({}, { get: (target, name) => drawing[name] || target[name] || (() => {}) });
   const host = { getBoundingClientRect: () => ({ width: 1000, top: 100, left: 120 }) };
   const canvas = { parentElement: host, style: {}, getContext: () => context, getBoundingClientRect: () => ({ top: 100, bottom: 900 }) };
   const media = { matches: reduce, addEventListener: (_, cb) => events.motion = cb };
@@ -45,6 +50,7 @@ function setup(reduce = false, random = Math.random) {
     draws: () => draws,
     positions: () => positions.map(p => [...p]),
     radii: () => [...radii],
+    rings: () => rings.map(r => ({ ...r })),
     segments: () => segments.map(([a, b]) => [[...a], [...b]]),
     topology: () => {
       const key = p => p.join(',');
@@ -348,6 +354,7 @@ test('interactive controls, prevented/right clicks, touch, pen and positions out
     other.events.click({ ...clickNearPoint(other).event, ...change });
     baseline.frame(200); other.frame(200);
     assert.deepEqual(other.positions(), baseline.positions());
+    assert.equal(other.rings().length, 0);
   }
 });
 
@@ -372,4 +379,54 @@ test('clicking exactly on a point avoids division by zero', () => {
   baseline.frame(200); other.frame(200);
   assert.deepEqual(other.positions()[index], baseline.positions()[index]);
   assert(other.positions().every(p => p.every(Number.isFinite)));
+});
+
+test('a click draws an expanding fading circle at the correct canvas position without changing point count', () => {
+  const app = setup(false, seededRandom()); app.visible(true); app.frame(100);
+  const count = app.positions().length, { event } = clickNearPoint(app);
+  app.events.click(event); app.frame(200);
+  const first = app.rings()[0];
+  assert.equal(app.rings().length, 1);
+  assert.equal(first.x, event.clientX);
+  assert(Math.abs(first.y - (event.clientY - 64)) < 1e-9);
+  assert(Math.abs(first.radius - 35.1) < 1e-9);
+  assert.equal(first.lineWidth, 1.5);
+  assert.equal(app.positions().length, count, 'A stroked circle must not count as another particle');
+  app.frame(300);
+  const second = app.rings()[0];
+  assert(second.radius > first.radius);
+  const alpha = ring => parseFloat(ring.style.split(',').at(-1));
+  assert(alpha(second) < alpha(first));
+  app.frame(400); app.frame(500);
+  assert.equal(app.rings().length, 0);
+  assert(app.radii().every(radius => radius >= 0.9 && radius <= 2));
+});
+
+test('circle expansion and lifetime use elapsed seconds at 60, 120 and 144 Hz', () => {
+  for (const rate of [60, 120, 144]) {
+    const app = setup(false, seededRandom()); app.visible(true); app.frame(100);
+    app.events.click(clickNearPoint(app).event);
+    for (let i = 1; i <= rate / 2; i++) {
+      app.frame(100 + i * 1000 / rate);
+      if (i === rate / 4) {
+        assert.equal(app.rings().length, 1);
+        assert(Math.abs(app.rings()[0].radius - 87.75) < 1e-7);
+      }
+      assert.equal(app.callbacks.size, 1);
+    }
+    assert.equal(app.rings().length, 0);
+  }
+});
+
+test('circles clear on pause, page exit and resize instead of lingering or replaying', () => {
+  for (const stop of [app => { app.document.hidden = true; app.events.visibilitychange(); },
+    app => { app.media.matches = true; app.events.motion(); }, app => app.visible(false),
+    app => app.events.pagehide(), app => app.events.resize()]) {
+    const app = setup(false, seededRandom()); app.visible(true); app.frame(100);
+    app.events.click(clickNearPoint(app).event); app.frame(200);
+    assert.equal(app.rings().length, 1);
+    stop(app);
+    assert.equal(app.rings().length, 0);
+    assert(app.callbacks.size <= 1);
+  }
 });
