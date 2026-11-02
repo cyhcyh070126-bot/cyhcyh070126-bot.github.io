@@ -20,6 +20,8 @@
   const pointer = { x: 0, y: 0, active: false };
   // No fixed seed or repeating choreography: every load is a fresh arrangement.
   const random = Math.random;
+  // A modest, user-requested lift; camera and turning cadence stay unchanged.
+  const motionScale = 1.2;
   const cameraPhase = random() * Math.PI * 2;
   const edges = new Set();
   function populate() {
@@ -36,7 +38,7 @@
         if (points.every(p => Math.hypot(p.x - x, p.y - y) > spacing)) break;
       }
       const angle = random() * Math.PI * 2;
-      const speed = 20 + random() * 20;
+      const speed = (20 + random() * 20) * motionScale;
       points.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
         angle, speed, turnAt: elapsed + 2 + random() * 5,
         depthPhase: random() * Math.PI * 2, depthRate: 0.22 + random() * 0.2 });
@@ -76,7 +78,7 @@
       point.vx += (Math.cos(point.angle) * point.speed - point.vx) * blend + forces[i].x * seconds;
       point.vy += (Math.sin(point.angle) * point.speed - point.vy) * blend + forces[i].y * seconds;
       const speed = Math.hypot(point.vx, point.vy);
-      if (speed > 42) { point.vx *= 42 / speed; point.vy *= 42 / speed; }
+      if (speed > 42 * motionScale) { point.vx *= 42 * motionScale / speed; point.vy *= 42 * motionScale / speed; }
       point.x += point.vx * seconds;
       point.y += point.vy * seconds;
       // Perspective projection and slow camera rotation provide actual depth;
@@ -99,7 +101,7 @@
       if (hitX || hitY) {
         // Give grazing contacts a clear inward impulse instead of reflecting
         // a nearly zero normal velocity and leaving the particle on the edge.
-        const reboundSpeed = 40;
+        const reboundSpeed = 40 * motionScale;
         if (hitX) point.vx = (point.px < insetX ? 1 : -1) * Math.max(reboundSpeed, Math.abs(point.vx));
         if (hitY) point.vy = (point.py < insetY ? 1 : -1) * Math.max(reboundSpeed, Math.abs(point.vy));
         point.angle = Math.atan2(point.vy, point.vx);

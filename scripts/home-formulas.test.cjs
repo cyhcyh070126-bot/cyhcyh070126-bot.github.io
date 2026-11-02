@@ -14,7 +14,7 @@ function setup(rectangles = []) {
     fillText(text, x, y) { labels.push({ text, x, y, color: this.fillStyle }); }
   };
   const document = { body: {},
-    querySelectorAll(selector) { return selector.includes('.sidebar, .page__title') ? selected.map(rect => ({ getBoundingClientRect: () => rect })) : []; },
+    querySelectorAll(selector) { return selector.startsWith('img, figure') ? selected.map(rect => ({ getBoundingClientRect: () => rect })) : []; },
     addEventListener(name, cb) { events[name] = cb; }
   };
   let mathRandomCalls = 0;
@@ -53,6 +53,14 @@ test('short notation is varied, unique in a frame and uses no particle randomnes
   assert.equal(app.frames.length, 0);
 });
 
+test('a typical desktop has eight or more complete expressions instead of a four-formula limit', () => {
+  const app = setup(); app.layer.resize(1440, 935, 65);
+  const labels = app.draw(0, true);
+  const expressions = labels.filter(item => item.text.length > 1);
+  assert(expressions.length >= 8 && expressions.length <= 11);
+  assert(labels.length >= 24);
+});
+
 test('entire label boxes avoid protected content with canvas offset after scrolling and layout changes', () => {
   const rect = { left: 300, right: 1100, top: 150, bottom: 750, width: 800, height: 600 };
   const app = setup([rect]); app.layer.resize(1440, 900, 64);
@@ -70,7 +78,7 @@ test('entire label boxes avoid protected content with canvas offset after scroll
 test('reduced motion can show static notation; narrow screens stay bounded and sparse', () => {
   const app = setup(); app.layer.resize(390, 740, 64);
   const initial = app.draw(0, true);
-  assert(initial.length > 0 && initial.length <= 6);
+  assert(initial.length > 0 && initial.length <= 14);
   assert(initial.every(x => !x.color.endsWith(', 0)')));
   const before = JSON.stringify(initial);
   assert.equal(JSON.stringify(app.draw(0, true)), before);

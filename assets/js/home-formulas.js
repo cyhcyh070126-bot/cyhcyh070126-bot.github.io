@@ -24,12 +24,9 @@
     'X ∼ N(μ,Σ)', 'E[X]', 'Var[X]', 'minθ L', '∇f = 0', '∇²f', '∂f/∂x', '‖r‖₂'
   ];
   const protectedSelector = [
-    '.sidebar', '.page__title', '#main p', '#main h1', '#main h2', '#main h3',
-    '#main h4', '#main h5', '#main h6', '#main li', '#main a', '#main summary',
-    '#main dt', '#main dd', '.cv-school', '.cv-project__header', '.cv-project__term', '.cv-project__meta',
-    '.research-card', '.project-list__item', 'figcaption',
     'img', 'figure', 'table', 'pre', 'video', 'iframe',
-    '.home-news', '.page__footer', '.page-contents__panel', 'button', 'input', 'select', 'textarea',
+    '.research-card', '.home-news', '.page__footer', '.page-contents__panel',
+    '.sidebar i', 'svg', 'button', 'input', 'select', 'textarea',
     '[role="dialog"]', 'dialog[open]'
   ].join(', ');
   const overlaps = (a, b, padding = 0) => a.left < b.right + padding &&
@@ -62,6 +59,7 @@
     const items = [];
     let width = 0, height = 0, top = 0, masks = [], dirty = true, pending = false;
     let view, staticDrawing = false;
+    const projections = new Map();
     const padding = 18;
     const font = size => `${size}px "Cambria Math", "STIX Two Math", Georgia, serif`;
     function project(item, x = item.x, y = item.y) {
@@ -91,7 +89,13 @@
       const det = a * d - b * c;
       return { x: width / 2 + (e * d - b * f) / det, y: height / 2 + (a * f - e * c) / det };
     }
-    const bounds = (item, x = item.x, y = item.y) => project(item, x, y).box;
+    const currentProjection = item => {
+      if (!projections.has(item)) projections.set(item, project(item));
+      return projections.get(item);
+    };
+    const bounds = (item, x = item.x, y = item.y) =>
+      (x === item.x && y === item.y ? currentProjection(item) : project(item, x, y)).box;
+    const moveTo = (item, x, y) => { item.x = x; item.y = y; projections.delete(item); };
     const separation = (a, b) => a.kind === 'expressions' || b.kind === 'expressions' ? 30 : 24;
     function clear(box, except) {
       return box.left >= 12 && box.right <= width - 12 && box.top >= 12 && box.bottom <= height - 12 &&
@@ -112,9 +116,10 @@
         if (style.display === 'none' || style.visibility === 'hidden') continue;
         addRect(rect);
       }
-      // Custom CV rows can contain bare div/span text instead of paragraphs.
-      // Protect their rendered lines too, so coverage does not depend on tag names.
+      // Protect rendered text lines, not entire paragraph/heading layout boxes.
+      // This frees genuine white space without letting labels cross any text.
       if (document.createTreeWalker) {
+        const lines = [];
         const walker = document.createTreeWalker(document.body, 4);
         for (let node; (node = walker.nextNode());) {
           const parent = node.parentElement;
@@ -124,9 +129,23 @@
           if (style.visibility === 'hidden' || style.display === 'none') continue;
           const range = document.createRange();
           range.selectNodeContents(node);
-          for (const rect of range.getClientRects()) addRect(rect);
+          for (const rect of range.getClientRects()) {
+            if (!rect.width || !rect.height || rect.bottom < top || rect.top > top + height) continue;
+            const existing = lines.find(line => Math.abs(line.top - rect.top) < 3 &&
+              Math.abs(line.bottom - rect.bottom) < 3 && rect.left <= line.right + 12 && rect.right >= line.left - 12);
+            if (existing) {
+              existing.left = Math.min(existing.left, rect.left); existing.right = Math.max(existing.right, rect.right);
+              existing.top = Math.min(existing.top, rect.top); existing.bottom = Math.max(existing.bottom, rect.bottom);
+            } else lines.push({ left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom });
+          }
         }
+        for (const line of lines) addRect({ ...line, width: line.right - line.left, height: line.bottom - line.top });
       }
+      // Nested image/card and text rectangles often cover the same area. Remove
+      // contained copies so collision forces do not accumulate on one boundary.
+      masks.sort((a, b) => (b.right - b.left) * (b.bottom - b.top) - (a.right - a.left) * (a.bottom - a.top));
+      masks = masks.filter((box, i, all) => !all.slice(0, i).some(other =>
+        box.left >= other.left && box.right <= other.right && box.top >= other.top && box.bottom <= other.bottom));
       dirty = false;
       if (staticDrawing) repaint();
     }
@@ -150,6 +169,7 @@
       return index < 0 ? null : decks[kind].splice(index, 1)[0];
     }
     function measure(item) {
+      projections.delete(item);
       context.save();
       context.font = font(item.size);
       const metrics = context.measureText(item.text);
@@ -165,7 +185,7 @@
           12 + random() * Math.max(0, height - 24));
         const { x, y } = position;
         if (!clear(bounds(item, x, y), item)) continue;
-        item.x = x; item.y = y; item.placed = true;
+        moveTo(item, x, y); item.placed = true;
         return true;
       }
       return false; // A crowded viewport stays readable instead of forcing text into it.
@@ -182,18 +202,23 @@
         measure(item);
       }
       const angle = random() * Math.PI * 2;
-      const speed = item.kind === 'symbols' ? 6 + random() * 5 : 4 + random() * 4;
+      const speed = item.kind === 'symbols' ? 16 + random() * 8 : 12 + random() * 8;
       item.vx = Math.cos(angle) * speed; item.vy = Math.sin(angle) * speed;
+      item.cruise = speed; item.heading = angle;
       item.age = 0; item.life = 24 + random() * 14; item.retry = 0;
       item.phase = random() * Math.PI * 2; item.depthRate = 0.10 + random() * 0.06;
+      projections.delete(item);
       item.connections = [];
       place(item);
     }
     function resize(w, h, offset) {
       width = w; height = h; top = offset;
+      projections.clear();
       refresh();
-      const symbolCount = width < 600 ? 5 : width < 1000 ? 8 : 11;
-      const formulaCount = width < 600 ? 1 : width < 1000 ? 2 : 4;
+      const area = width * height;
+      const symbolCount = Math.min(24, Math.max(8, Math.round(area / 70000)));
+      const referenceCount = Math.round(Math.min(64, Math.max(20, area / 26000)));
+      const formulaCount = Math.min(11, Math.max(6, Math.round(referenceCount / 6)));
       const wanted = [...Array(symbolCount).fill('symbols'), ...Array(formulaCount).fill('expressions')];
       // Keep existing choices through resizes; move only labels that no longer fit.
       for (let i = items.length - 1; i >= 0; i--) {
@@ -211,7 +236,7 @@
       }
     }
     function recoverContact(item) {
-      const current = project(item), box = current.box, options = [];
+      const current = currentProjection(item), box = current.box, options = [];
       const add = (dx, dy) => {
         // Small contact corrections remain continuous; major reflows use a fresh free area.
         if (Math.hypot(dx, dy) <= 48) options.push({ dx, dy });
@@ -234,7 +259,7 @@
       for (const { dx, dy } of options) {
         const position = unproject(item, current.x + dx, current.y + dy);
         if (!clear(bounds(item, position.x, position.y), item)) continue;
-        item.x = position.x; item.y = position.y;
+        moveTo(item, position.x, position.y);
         // Damped outward motion makes contact visible without a sudden, fast kick.
         if (dx) item.vx = Math.sign(dx) * Math.max(4, Math.abs(item.vx) * 0.7);
         if (dy) item.vy = Math.sign(dy) * Math.max(4, Math.abs(item.vy) * 0.7);
@@ -243,7 +268,7 @@
       return false;
     }
     function steer(item, seconds, points) {
-      const projected = project(item), box = projected.box;
+      const projected = currentProjection(item), box = projected.box;
       let fx = 0, fy = 0;
       const buffer = 42;
       const repel = obstacle => {
@@ -273,10 +298,19 @@
         if (distance < 24) { fx += dx / distance * (24 - distance) * 0.15; fy += dy / distance * (24 - distance) * 0.15; }
       }
       item.vx += fx * seconds; item.vy += fy * seconds;
-      const speed = Math.hypot(item.vx, item.vy);
-      if (speed > 14) { item.vx *= 14 / speed; item.vy *= 14 / speed; }
+      let speed = Math.hypot(item.vx, item.vy);
+      // Gradually recover cruising speed after a damped contact, instead of
+      // spending the rest of a label's lifetime almost stationary.
+      if (speed < item.cruise) {
+        const recovered = speed + (item.cruise - speed) * (1 - Math.exp(-seconds * 0.8));
+        const angle = speed > 0.1 ? Math.atan2(item.vy, item.vx) : item.heading;
+        item.vx = Math.cos(angle) * recovered; item.vy = Math.sin(angle) * recovered;
+        speed = recovered;
+      }
+      if (speed > 0.1) item.heading = Math.atan2(item.vy, item.vx);
+      if (speed > 28) { item.vx *= 28 / speed; item.vy *= 28 / speed; }
       const x = item.x + item.vx * seconds, y = item.y + item.vy * seconds;
-      if (clear(bounds(item, x, y), item)) { item.x = x; item.y = y; }
+      if (clear(bounds(item, x, y), item)) moveTo(item, x, y);
       else {
         // Stop before contact; turn into the free direction without an elastic kick.
         if (!clear(bounds(item, x, item.y), item)) item.vx *= -0.5;
@@ -300,6 +334,7 @@
     function draw(seconds, lightTheme, staticFrame = false, points = [], pointer = {}, camera) {
       staticDrawing = staticFrame;
       if (camera) view = camera;
+      projections.clear();
       // Hide labels during the site's moving entrance, then measure its settled content.
       if (dirty || document.documentElement?.classList?.contains('site-enter')) return;
       const active = [];
@@ -315,7 +350,7 @@
           item.placed = false; item.retry = 0; continue;
         }
         if (seconds) steer(item, seconds, points);
-        const projected = project(item);
+        const projected = currentProjection(item);
         const fade = staticFrame ? 1 : Math.max(0, Math.min(1, item.age / 1.6, (item.life - item.age) / 1.6));
         active.push({ ...projected, item, fade });
       }
