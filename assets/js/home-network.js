@@ -22,6 +22,11 @@
   const random = Math.random;
   // Retain the current particle speed independently of removed notation.
   const motionScale = 1.2;
+  const speedLimit = 42 * motionScale;
+  const reboundSpeed = 40 * motionScale;
+  const clickRadius = 170;
+  const rippleDuration = 0.48;
+  const maxRipples = 6;
   const cameraPhase = random() * Math.PI * 2;
   const edges = new Set();
   function populate() {
@@ -57,14 +62,16 @@
     const cy = Math.cos(yaw), sy = Math.sin(yaw);
     const cp = Math.cos(pitch), sp = Math.sin(pitch);
     const forces = points.map(() => ({ x: 0, y: 0 }));
-    // Gentle separation prevents crowding; there are no attraction centers.
+    // Keep the wide separation gentle and add a firmer response on close approach.
     for (let i = 0; i < points.length; i++) {
       for (let j = i + 1; j < points.length; j++) {
         const dx = points[i].x - points[j].x;
         const dy = points[i].y - points[j].y;
-        const distance = Math.max(0.1, Math.hypot(dx, dy));
-        if (distance >= 75) continue;
-        const push = (75 - distance) * 1.4 / distance;
+        const distanceSquared = dx * dx + dy * dy;
+        if (distanceSquared >= 75 * 75 || distanceSquared === 0) continue;
+        const distance = Math.sqrt(Math.max(0.01, distanceSquared));
+        const contact = Math.max(0, 28 - distance);
+        const push = ((75 - distance) * 1.4 + contact * contact * 0.35) / distance;
         forces[i].x += dx * push; forces[i].y += dy * push;
         forces[j].x -= dx * push; forces[j].y -= dy * push;
       }
@@ -78,7 +85,7 @@
       point.vx += (Math.cos(point.angle) * point.speed - point.vx) * blend + forces[i].x * seconds;
       point.vy += (Math.sin(point.angle) * point.speed - point.vy) * blend + forces[i].y * seconds;
       const speed = Math.hypot(point.vx, point.vy);
-      if (speed > 42 * motionScale) { point.vx *= 42 * motionScale / speed; point.vy *= 42 * motionScale / speed; }
+      if (speed > speedLimit) { point.vx *= speedLimit / speed; point.vy *= speedLimit / speed; }
       point.x += point.vx * seconds;
       point.y += point.vy * seconds;
       // Perspective projection and slow camera rotation provide actual depth;
@@ -101,9 +108,13 @@
       if (hitX || hitY) {
         // Give grazing contacts a clear inward impulse instead of reflecting
         // a nearly zero normal velocity and leaving the particle on the edge.
-        const reboundSpeed = 40 * motionScale;
         if (hitX) point.vx = (point.px < insetX ? 1 : -1) * Math.max(reboundSpeed, Math.abs(point.vx));
         if (hitY) point.vy = (point.py < insetY ? 1 : -1) * Math.max(reboundSpeed, Math.abs(point.vy));
+        const reflectedSpeed = Math.hypot(point.vx, point.vy);
+        if (reflectedSpeed > speedLimit) {
+          point.vx *= speedLimit / reflectedSpeed;
+          point.vy *= speedLimit / reflectedSpeed;
+        }
         point.angle = Math.atan2(point.vy, point.vx);
         point.px = Math.max(insetX, Math.min(width - insetX, point.px));
         point.py = Math.max(insetY, Math.min(height - insetY, point.py));
@@ -131,10 +142,14 @@
     const candidates = [];
     for (let i = 0; i < points.length; i++) {
       for (let j = i + 1; j < points.length; j++) {
-        const distance = Math.hypot(points[i].px - points[j].px, points[i].py - points[j].py,
-          (points[i].z - points[j].z) * 0.35);
+        const dx = points[i].px - points[j].px;
+        const dy = points[i].py - points[j].py;
+        const dz = (points[i].z - points[j].z) * 0.35;
+        const distanceSquared = dx * dx + dy * dy + dz * dz;
         const pairReach = Math.max(points[i].reach, points[j].reach);
-        if (distance < pairReach) candidates.push({ i, j, distance, reach: pairReach, key: `${i}:${j}` });
+        if (distanceSquared < pairReach * pairReach) {
+          candidates.push({ i, j, distance: Math.sqrt(distanceSquared), reach: pairReach, key: `${i}:${j}` });
+        }
       }
     }
     // Prefer existing edges to avoid flicker. Six connections per point at most.
@@ -184,17 +199,23 @@
       context.arc(point.px, point.py, 0.9 + point.depth * 1.1, 0, Math.PI * 2);
       context.fill();
     }
-    // Reference expanding ring: radius 130, width 1.5, fading from alpha 0.5.
-    // 0.045 per 60 Hz frame becomes 2.7 per second; rAF stays uncapped.
+    // One wavefront with a soft rim. Radius and fade depend on elapsed time.
     for (let i = ripples.length - 1; i >= 0; i--) {
       const ripple = ripples[i];
-      ripple.progress += seconds * 2.7;
-      if (ripple.progress >= 1) { ripples.splice(i, 1); continue; }
-      if (ripple.progress <= 0) continue;
-      context.lineWidth = 1.5;
-      context.strokeStyle = `rgba(215, 184, 108, ${0.5 * (1 - ripple.progress)})`;
+      ripple.age += seconds;
+      if (ripple.age >= rippleDuration) { ripples.splice(i, 1); continue; }
+      const progress = ripple.age / rippleDuration;
+      const remaining = 1 - progress;
+      const radius = 8 + (clickRadius - 8) * progress * (2 - progress);
+      const opacity = remaining * remaining;
+      const color = lightTheme ? '184, 140, 54' : '240, 201, 112';
       context.beginPath();
-      context.arc(ripple.x, ripple.y, 130 * ripple.progress, 0, Math.PI * 2);
+      context.arc(ripple.x, ripple.y, radius, 0, Math.PI * 2);
+      context.lineWidth = 7 - 3 * progress;
+      context.strokeStyle = `rgba(${color}, ${0.16 * opacity})`;
+      context.stroke();
+      context.lineWidth = 2.1 - progress;
+      context.strokeStyle = `rgba(${color}, ${0.72 * opacity})`;
       context.stroke();
     }
   }
@@ -239,15 +260,15 @@
     if (event.target?.closest?.('a, img, picture, button, input, textarea, select, summary, [role="button"], [contenteditable="true"]')) return;
     const x = event.clientX, y = event.clientY - canvasTop;
     if (x < 0 || x > width || y < 0 || y > height) return;
-    ripples.push({ x, y, progress: 0 });
-    const radius = 170;
+    if (ripples.length >= maxRipples) ripples.shift();
+    ripples.push({ x, y, age: 0 });
     for (const point of points) {
       const dx = point.px - x, dy = point.py - y;
       const distance = Math.hypot(dx, dy);
-      if (distance >= radius || distance <= 0.001) continue;
+      if (distance >= clickRadius || distance <= 0.001) continue;
       // Reference radial impulse: 3 px/frame at 60 Hz becomes 180 px/s.
       // The existing speed limit and cruising blend handle the return to normal.
-      const strength = 180 * (1 - distance / radius);
+      const strength = 180 * (1 - distance / clickRadius);
       point.vx += dx / distance * strength;
       point.vy += dy / distance * strength;
     }

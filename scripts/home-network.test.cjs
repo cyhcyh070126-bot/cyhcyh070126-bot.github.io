@@ -23,7 +23,7 @@ function setup(reduce = false, random = Math.random) {
     lineTo: (x, y) => segments.push([start, [x, y]]),
     arc: (x, y, radius) => { pendingArc = { x, y, radius }; },
     fill: () => { if (pendingArc) { positions.push([pendingArc.x, pendingArc.y]); radii.push(pendingArc.radius); pendingArc = null; } },
-    stroke: () => { if (pendingArc) { rings.push({ ...pendingArc, style: context.strokeStyle, lineWidth: context.lineWidth }); pendingArc = null; } }
+    stroke: () => { if (pendingArc) rings.push({ ...pendingArc, style: context.strokeStyle, lineWidth: context.lineWidth }); }
   };
   const context = new Proxy({}, { get: (target, name) => drawing[name] || target[name] || (() => {}) });
   const host = { getBoundingClientRect: () => ({ width: 1000, top: 100, left: 120 }) };
@@ -335,6 +335,7 @@ test('rapid repeated clicks remain bounded and near-edge points rebound inside t
   baseline.frame(200); burst.frame(200);
   const maxExtra = Math.max(...burst.positions().map((p, i) => Math.hypot(p[0] - baseline.positions()[i][0], p[1] - baseline.positions()[i][1])));
   assert(maxExtra < 35, `Repeated impulses must be capped (${maxExtra})`);
+  assert(burst.rings().length > 0 && burst.rings().length <= 12, 'Rapid clicks must keep the number of strokes bounded');
   for (let i = 0; i < 240; i++) {
     if (i % 20 === 0) burst.events.click({ ...event, clientX: 10, clientY: 74 });
     burst.frame(220 + i * 1000 / 120);
@@ -385,32 +386,40 @@ test('a click draws an expanding fading circle at the correct canvas position wi
   const app = setup(false, seededRandom()); app.visible(true); app.frame(100);
   const count = app.positions().length, { event } = clickNearPoint(app);
   app.events.click(event); app.frame(200);
-  const first = app.rings()[0];
-  assert.equal(app.rings().length, 1);
+  const [rim, first] = app.rings();
+  assert.equal(app.rings().length, 2);
   assert.equal(first.x, event.clientX);
   assert(Math.abs(first.y - (event.clientY - 64)) < 1e-9);
-  assert(Math.abs(first.radius - 35.1) < 1e-9);
-  assert.equal(first.lineWidth, 1.5);
+  assert.deepEqual([rim.x, rim.y, rim.radius], [first.x, first.y, first.radius]);
+  assert(rim.lineWidth > first.lineWidth);
+  assert(first.radius > 8 && first.radius < 170);
+  const alpha = ring => parseFloat(ring.style.split(',').at(-1));
+  assert(alpha(rim) < alpha(first));
   assert.equal(app.positions().length, count, 'A stroked circle must not count as another particle');
   app.frame(300);
-  const second = app.rings()[0];
+  const second = app.rings()[1];
   assert(second.radius > first.radius);
-  const alpha = ring => parseFloat(ring.style.split(',').at(-1));
   assert(alpha(second) < alpha(first));
-  app.frame(400); app.frame(500);
+  app.frame(400);
+  const third = app.rings()[1];
+  assert(third.radius > second.radius && third.radius - second.radius < second.radius - first.radius);
+  app.frame(500); app.frame(600);
   assert.equal(app.rings().length, 0);
   assert(app.radii().every(radius => radius >= 0.9 && radius <= 2));
 });
 
 test('circle expansion and lifetime use elapsed seconds at 60, 120 and 144 Hz', () => {
+  let radiusAtQuarterSecond;
   for (const rate of [60, 120, 144]) {
     const app = setup(false, seededRandom()); app.visible(true); app.frame(100);
     app.events.click(clickNearPoint(app).event);
     for (let i = 1; i <= rate / 2; i++) {
       app.frame(100 + i * 1000 / rate);
       if (i === rate / 4) {
-        assert.equal(app.rings().length, 1);
-        assert(Math.abs(app.rings()[0].radius - 87.75) < 1e-7);
+        assert.equal(app.rings().length, 2);
+        const radius = app.rings()[1].radius;
+        radiusAtQuarterSecond ??= radius;
+        assert(Math.abs(radius - radiusAtQuarterSecond) < 1e-7);
       }
       assert.equal(app.callbacks.size, 1);
     }
@@ -424,7 +433,7 @@ test('circles clear on pause, page exit and resize instead of lingering or repla
     app => app.events.pagehide(), app => app.events.resize()]) {
     const app = setup(false, seededRandom()); app.visible(true); app.frame(100);
     app.events.click(clickNearPoint(app).event); app.frame(200);
-    assert.equal(app.rings().length, 1);
+    assert.equal(app.rings().length, 2);
     stop(app);
     assert.equal(app.rings().length, 0);
     assert(app.callbacks.size <= 1);
