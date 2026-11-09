@@ -23,9 +23,15 @@
   // Retain the current particle speed independently of removed notation.
   const motionScale = 1.2;
   const cameraPhase = random() * Math.PI * 2;
+  const maxPoints = 80;
   const edges = new Set();
+  // Reuse the per-frame working data so high refresh rates create less garbage.
+  const forces = Array.from({ length: maxPoints }, () => ({ x: 0, y: 0 }));
+  const degree = new Uint8Array(maxPoints);
+  const candidates = [];
+  const candidatePool = [];
   function populate() {
-    const count = Math.min(80, Math.max(36, Math.round(width * height / 19000)));
+    const count = Math.min(maxPoints, Math.max(36, Math.round(width * height / 19000)));
     // Retain existing particles on resize (including mobile browser chrome).
     // Only add or remove the number needed for the new visible area.
     points.length = Math.min(points.length, count);
@@ -56,7 +62,10 @@
     const pitch = Math.cos(elapsed * 0.15 + cameraPhase) * 0.065;
     const cy = Math.cos(yaw), sy = Math.sin(yaw);
     const cp = Math.cos(pitch), sp = Math.sin(pitch);
-    const forces = points.map(() => ({ x: 0, y: 0 }));
+    for (let i = 0; i < points.length; i++) {
+      forces[i].x = 0;
+      forces[i].y = 0;
+    }
     // Gentle separation prevents crowding; there are no attraction centers.
     for (let i = 0; i < points.length; i++) {
       for (let j = i + 1; j < points.length; j++) {
@@ -70,12 +79,13 @@
         forces[j].x -= dx * push; forces[j].y -= dy * push;
       }
     }
+    const blend = 1 - Math.exp(-seconds * 0.6);
+    const insetX = Math.min(4, width / 2), insetY = Math.min(4, height / 2);
     points.forEach((point, i) => {
       if (elapsed > point.turnAt) {
         point.angle += (random() - 0.5) * 1.6;
         point.turnAt = elapsed + 3 + random() * 5;
       }
-      const blend = 1 - Math.exp(-seconds * 0.6);
       point.vx += (Math.cos(point.angle) * point.speed - point.vx) * blend + forces[i].x * seconds;
       point.vy += (Math.sin(point.angle) * point.speed - point.vy) * blend + forces[i].y * seconds;
       const speed = Math.hypot(point.vx, point.vy);
@@ -96,7 +106,6 @@
       point.py = height / 2 + rotatedY * perspective;
       // Bounce at the visible canvas edges, after perspective, so near points
       // cannot drift beyond the screen before their underlying position turns.
-      const insetX = Math.min(4, width / 2), insetY = Math.min(4, height / 2);
       const hitX = point.px < insetX || point.px > width - insetX;
       const hitY = point.py < insetY || point.py > height - insetY;
       if (hitX || hitY) {
@@ -129,7 +138,7 @@
       const edgeDistance = Math.min(point.px, width - point.px, point.py, height - point.py);
       point.reach = reach * (1 + 0.35 * Math.max(0, 1 - edgeDistance / reach));
     });
-    const candidates = [];
+    candidates.length = 0;
     for (let i = 0; i < points.length; i++) {
       for (let j = i + 1; j < points.length; j++) {
         const dx = points[i].px - points[j].px;
@@ -138,14 +147,24 @@
         const distanceSquared = dx * dx + dy * dy + dz * dz;
         const pairReach = Math.max(points[i].reach, points[j].reach);
         if (distanceSquared < pairReach * pairReach) {
-          candidates.push({ i, j, distance: Math.sqrt(distanceSquared), reach: pairReach, key: `${i}:${j}` });
+          const slot = candidates.length;
+          const candidate = candidatePool[slot] || (candidatePool[slot] = {});
+          const key = i * maxPoints + j;
+          const distance = Math.sqrt(distanceSquared);
+          candidate.i = i;
+          candidate.j = j;
+          candidate.distance = distance;
+          candidate.reach = pairReach;
+          candidate.key = key;
+          candidate.sortDistance = distance * (edges.has(key) ? 0.8 : 1);
+          candidates.push(candidate);
         }
       }
     }
     // Prefer existing edges to avoid flicker. Six connections per point at most.
-    candidates.sort((a, b) => a.distance * (edges.has(a.key) ? 0.8 : 1) - b.distance * (edges.has(b.key) ? 0.8 : 1));
+    candidates.sort((a, b) => a.sortDistance - b.sortDistance);
     edges.clear();
-    const degree = points.map(() => 0);
+    degree.fill(0);
     // Give sparsely connected points a turn before filling denser clusters.
     for (const minimum of [2, 6]) {
       for (const { i, j, key } of candidates) {
