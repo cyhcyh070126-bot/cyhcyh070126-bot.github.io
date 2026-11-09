@@ -25,7 +25,6 @@
   const speedLimit = 42 * motionScale;
   const reboundSpeed = 40 * motionScale;
   const clickRadius = 170;
-  const rippleDuration = 0.48;
   const maxRipples = 6;
   const cameraPhase = random() * Math.PI * 2;
   const edges = new Set();
@@ -199,23 +198,17 @@
       context.arc(point.px, point.py, 0.9 + point.depth * 1.1, 0, Math.PI * 2);
       context.fill();
     }
-    // One wavefront with a soft rim. Radius and fade depend on elapsed time.
+    // Reference expanding ring: radius 130, width 1.5, fading from alpha 0.5.
+    // 0.045 per 60 Hz frame becomes 2.7 per second; rAF stays uncapped.
     for (let i = ripples.length - 1; i >= 0; i--) {
       const ripple = ripples[i];
-      ripple.age += seconds;
-      if (ripple.age >= rippleDuration) { ripples.splice(i, 1); continue; }
-      const progress = ripple.age / rippleDuration;
-      const remaining = 1 - progress;
-      const radius = 8 + (clickRadius - 8) * progress * (2 - progress);
-      const opacity = remaining * remaining;
-      const color = lightTheme ? '184, 140, 54' : '240, 201, 112';
+      ripple.progress += seconds * 2.7;
+      if (ripple.progress >= 1) { ripples.splice(i, 1); continue; }
+      if (ripple.progress <= 0) continue;
+      context.lineWidth = 1.5;
+      context.strokeStyle = `rgba(215, 184, 108, ${0.5 * (1 - ripple.progress)})`;
       context.beginPath();
-      context.arc(ripple.x, ripple.y, radius, 0, Math.PI * 2);
-      context.lineWidth = 7 - 3 * progress;
-      context.strokeStyle = `rgba(${color}, ${0.16 * opacity})`;
-      context.stroke();
-      context.lineWidth = 2.1 - progress;
-      context.strokeStyle = `rgba(${color}, ${0.72 * opacity})`;
+      context.arc(ripple.x, ripple.y, 130 * ripple.progress, 0, Math.PI * 2);
       context.stroke();
     }
   }
@@ -261,7 +254,7 @@
     const x = event.clientX, y = event.clientY - canvasTop;
     if (x < 0 || x > width || y < 0 || y > height) return;
     if (ripples.length >= maxRipples) ripples.shift();
-    ripples.push({ x, y, age: 0 });
+    ripples.push({ x, y, progress: 0 });
     for (const point of points) {
       const dx = point.px - x, dy = point.py - y;
       const distance = Math.hypot(dx, dy);
