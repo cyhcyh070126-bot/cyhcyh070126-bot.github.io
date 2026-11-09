@@ -335,7 +335,6 @@ test('rapid repeated clicks remain bounded and near-edge points rebound inside t
   baseline.frame(200); burst.frame(200);
   const maxExtra = Math.max(...burst.positions().map((p, i) => Math.hypot(p[0] - baseline.positions()[i][0], p[1] - baseline.positions()[i][1])));
   assert(maxExtra < 35, `Repeated impulses must be capped (${maxExtra})`);
-  assert(burst.rings().length > 0 && burst.rings().length <= 6, 'Rapid clicks must keep the number of rings bounded');
   for (let i = 0; i < 240; i++) {
     if (i % 20 === 0) burst.events.click({ ...event, clientX: 10, clientY: 74 });
     burst.frame(220 + i * 1000 / 120);

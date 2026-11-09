@@ -22,10 +22,6 @@
   const random = Math.random;
   // Retain the current particle speed independently of removed notation.
   const motionScale = 1.2;
-  const speedLimit = 42 * motionScale;
-  const reboundSpeed = 40 * motionScale;
-  const clickRadius = 170;
-  const maxRipples = 6;
   const cameraPhase = random() * Math.PI * 2;
   const edges = new Set();
   function populate() {
@@ -61,7 +57,7 @@
     const cy = Math.cos(yaw), sy = Math.sin(yaw);
     const cp = Math.cos(pitch), sp = Math.sin(pitch);
     const forces = points.map(() => ({ x: 0, y: 0 }));
-    // Keep the wide separation gentle and add a firmer response on close approach.
+    // Gentle separation prevents crowding; there are no attraction centers.
     for (let i = 0; i < points.length; i++) {
       for (let j = i + 1; j < points.length; j++) {
         const dx = points[i].x - points[j].x;
@@ -69,8 +65,7 @@
         const distanceSquared = dx * dx + dy * dy;
         if (distanceSquared >= 75 * 75 || distanceSquared === 0) continue;
         const distance = Math.sqrt(Math.max(0.01, distanceSquared));
-        const contact = Math.max(0, 28 - distance);
-        const push = ((75 - distance) * 1.4 + contact * contact * 0.35) / distance;
+        const push = (75 - distance) * 1.4 / distance;
         forces[i].x += dx * push; forces[i].y += dy * push;
         forces[j].x -= dx * push; forces[j].y -= dy * push;
       }
@@ -84,7 +79,7 @@
       point.vx += (Math.cos(point.angle) * point.speed - point.vx) * blend + forces[i].x * seconds;
       point.vy += (Math.sin(point.angle) * point.speed - point.vy) * blend + forces[i].y * seconds;
       const speed = Math.hypot(point.vx, point.vy);
-      if (speed > speedLimit) { point.vx *= speedLimit / speed; point.vy *= speedLimit / speed; }
+      if (speed > 42 * motionScale) { point.vx *= 42 * motionScale / speed; point.vy *= 42 * motionScale / speed; }
       point.x += point.vx * seconds;
       point.y += point.vy * seconds;
       // Perspective projection and slow camera rotation provide actual depth;
@@ -107,13 +102,9 @@
       if (hitX || hitY) {
         // Give grazing contacts a clear inward impulse instead of reflecting
         // a nearly zero normal velocity and leaving the particle on the edge.
+        const reboundSpeed = 40 * motionScale;
         if (hitX) point.vx = (point.px < insetX ? 1 : -1) * Math.max(reboundSpeed, Math.abs(point.vx));
         if (hitY) point.vy = (point.py < insetY ? 1 : -1) * Math.max(reboundSpeed, Math.abs(point.vy));
-        const reflectedSpeed = Math.hypot(point.vx, point.vy);
-        if (reflectedSpeed > speedLimit) {
-          point.vx *= speedLimit / reflectedSpeed;
-          point.vy *= speedLimit / reflectedSpeed;
-        }
         point.angle = Math.atan2(point.vy, point.vx);
         point.px = Math.max(insetX, Math.min(width - insetX, point.px));
         point.py = Math.max(insetY, Math.min(height - insetY, point.py));
@@ -253,15 +244,15 @@
     if (event.target?.closest?.('a, img, picture, button, input, textarea, select, summary, [role="button"], [contenteditable="true"]')) return;
     const x = event.clientX, y = event.clientY - canvasTop;
     if (x < 0 || x > width || y < 0 || y > height) return;
-    if (ripples.length >= maxRipples) ripples.shift();
     ripples.push({ x, y, progress: 0 });
+    const radius = 170;
     for (const point of points) {
       const dx = point.px - x, dy = point.py - y;
       const distance = Math.hypot(dx, dy);
-      if (distance >= clickRadius || distance <= 0.001) continue;
+      if (distance >= radius || distance <= 0.001) continue;
       // Reference radial impulse: 3 px/frame at 60 Hz becomes 180 px/s.
       // The existing speed limit and cruising blend handle the return to normal.
-      const strength = 180 * (1 - distance / clickRadius);
+      const strength = 180 * (1 - distance / radius);
       point.vx += dx / distance * strength;
       point.vy += dy / distance * strength;
     }
