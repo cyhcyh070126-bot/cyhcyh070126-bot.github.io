@@ -5,7 +5,7 @@
 .page__footer {
   @include clearfix;
   background-color: var(--global-footer-bg-color);
-  color: var(--global-text-color-light);
+  color: var(--global-text-color);
 
   float: left;
   margin-left: 0;
@@ -50,13 +50,24 @@
   .fab,
   .far,
   .fal {
-    color: var(--global-text-color-light);
+    color: inherit;
   }
 }
 
 .page__footer-copyright {
   font-family: $global-font-family;
   font-size: $type-size-7;
+  line-height: 1.65;
+}
+
+.page__footer-updated {
+  display: inline-block;
+  margin-top: 0.25em;
+
+  time {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 .page__footer-follow {
