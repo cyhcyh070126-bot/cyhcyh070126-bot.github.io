@@ -7,13 +7,11 @@
   status: Ongoing
   description: >-
     Develops a hybrid FEM–neural operator solver for solid mechanics using
-    non-overlapping domain decomposition. In the offline training stage,
-    GPU-accelerated JAX-FEM simulations generate training data for separate
-    Transolver models in JAX, one for each stress component. During coupled
-    simulations, the trained models predict subdomain stress fields from the
-    current interface displacements. The predicted stresses are used to compute
-    interface reaction forces for the FEM solver, which updates the interface
-    displacements and passes them back to the neural operators for the next iteration.
+    non-overlapping domain decomposition. Trains Transolver models in JAX on
+    GPU-accelerated JAX-FEM simulation data to predict subdomain stresses from
+    interface displacements. During coupling, the FEM solver receives interface
+    reaction forces computed from the predicted stresses and returns updated
+    interface displacements to the neural operators for the next iteration.
   research_url: /cv/#fem-neural-operator
   repository:
 
