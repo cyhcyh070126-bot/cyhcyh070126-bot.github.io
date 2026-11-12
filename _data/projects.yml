@@ -6,13 +6,14 @@
   preview_caption: Fiber–Matrix FEM–NO coupling workflow
   status: Ongoing
   description: >-
-    A hybrid solver based on non-overlapping domain decom­po­si­tion, with FEM
-    and neural-operator sub­do­mains con­nected through a shared inter­face.
-    The two solvers exchange inter­face dis­place­ments and reac­tion forces
-    iter­a­tively across this inter­face. Uses
-    GPU-accelerated JAX-FEM sim­u­la­tions to gen­er­ate train­ing data
-    and trains Transolver in JAX to learn map­pings from inter­face dis­place­ment
-    fields to local stress fields.
+    Develops a hybrid FEM–neural operator solver for solid mechanics using
+    non-overlapping domain decomposition. In the offline training stage,
+    GPU-accelerated JAX-FEM simulations generate training data for separate
+    Transolver models in JAX, one for each stress component. During coupled
+    simulations, the trained models predict subdomain stress fields from the
+    current interface displacements. The predicted stresses are used to compute
+    interface reaction forces for the FEM solver, which updates the interface
+    displacements and passes them back to the neural operators for the next iteration.
   research_url: /cv/#fem-neural-operator
   repository:
 
